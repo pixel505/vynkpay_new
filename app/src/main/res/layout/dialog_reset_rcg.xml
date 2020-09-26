@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:background="@drawable/round_corner_white_all"
+    android:orientation="vertical">
+
+    <com.vynkpay.custom.NormalTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Change Password"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/round_corner_strokes">
+
+                <com.vynkpay.custom.NormalEditText
+                    android:id="@+id/oldPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="Old Password"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_text"
+                    android:textColorHint="@color/semi_black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end|center_vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/showHideImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_view" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/round_corner_strokes">
+
+                <com.vynkpay.custom.NormalEditText
+                    android:id="@+id/newPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="New Password"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_text"
+                    android:textColorHint="@color/semi_black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end|center_vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/showHideImage1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_view" />
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:background="@drawable/round_corner_strokes">
+
+                <com.vynkpay.custom.NormalEditText
+                    android:id="@+id/confirmNewPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="20dp"
+                    android:singleLine="true"
+                    android:textColor="@color/color_text"
+                    android:textColorHint="@color/semi_black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end|center_vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/showHideImage2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_view" />
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <com.vynkpay.custom.NormalButton
+                android:id="@+id/okButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/round_blue_some_one"
+                android:text="Change"
+                android:textColor="@color/buttonText" />
+
+            <TextView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/color_text" />
+
+            <com.vynkpay.custom.NormalButton
+                android:id="@+id/cancelButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/round_blue_some_two"
+                android:text="Cancel"
+                android:textColor="@color/buttonText" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

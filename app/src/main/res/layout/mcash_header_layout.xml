@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="@dimen/_100sdp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.vynkpay.custom.NormalBoldTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="@string/mCashWallet"
+                            android:textColor="@color/color_text"/>
+
+                        <com.vynkpay.custom.NormalBoldTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/availableBalanceTV"
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="@color/colorPrimary"/>
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_10sdp"
+                            android:text="@string/availableAmount"
+                            android:textColor="@color/color_text"/>
+                        <FrameLayout
+                            android:id="@+id/affilitiateFrame"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/buttonbg">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/affiliateActive"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:textColor="@color/white"
+                                android:text="Affiliate Activation"/>
+
+                        </FrameLayout>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/graycolor"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
+                        android:text="@string/transferWallet"
+                        android:textColor="@color/color_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="5dp"
+                        android:weightSum="1">
+
+
+
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:focusable="false"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/color_text"
+                            android:hint="@string/searchUsername"
+                            android:singleLine="true"
+                            android:id="@+id/serachNewEdt"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:layout_height="@dimen/_22sdp"
+                            android:background="@drawable/stroke_new_light"/>
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:id="@+id/amEdt"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:textSize="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:textColor="@color/color_text"
+                            android:hint="@string/enterAmount"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:layout_height="@dimen/_22sdp"
+                            android:background="@drawable/stroke_new_light"/>
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/remarknew"
+                               android:singleLine="true"
+                            android:hint="@string/enterRemarks"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:textSize="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:textColor="@color/color_text"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:layout_height="@dimen/_22sdp"
+                            android:background="@drawable/stroke_new_light"
+                            />
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="0.1"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/buttonbg">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/send_icon"
+                                android:id="@+id/sendIV"
+                                android:padding="@dimen/_5sdp"/>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content">
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text"
+                    android:textSize="@dimen/_12sdp"
+                    android:text="@string/transaction"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center|end"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:id="@+id/filterLinear">
+
+                    <ImageView
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:src="@drawable/filter"/>
+
+                    <Space
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="match_parent"/>
+
+                    <com.vynkpay.custom.NormalLightTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/color_text"
+                        android:text="@string/filter"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/viewAll"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="match_parent"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black"/>
+
+                    <Space
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="match_parent"/>
+
+                    <com.vynkpay.custom.NormalLightTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/colorPrimary"
+                        android:text="@string/viewAll"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/graycolor"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</layout>

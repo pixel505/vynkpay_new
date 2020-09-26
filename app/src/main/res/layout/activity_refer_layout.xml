@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activity.activities.ReferAndEarnActivity">
+
+        <include layout="@layout/toolbar_new_rcg"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:id="@+id/topLinear"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:id="@+id/availableBalanceTV"
+                        android:padding="5dp"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:text="Available Balance"
+                        android:layout_gravity="center_horizontal"/>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"/>
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/green_status"
+                        android:text="Summary"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="16dp"
+                        android:paddingLeft="16dp"
+                        android:id="@+id/summaryTV"
+                        android:background="@drawable/round_corner_yellow"
+                        android:layout_gravity="center_horizontal"/>
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/colorPrimary"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="@color/white"
+                        android:layout_below="@+id/topLinear"
+                        android:layout_margin="20dp"
+                        app:cardCornerRadius="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="20dp"
+                            android:orientation="vertical">
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="Share With Your Friends"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/color_text"
+                                android:padding="10dp"
+                                android:gravity="center"
+                                android:text="Share your referral code with your friends and you will get reward on their first transaction"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="3"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/refer_one"/>
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/refer_two"/>
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/refer_three"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <com.vynkpay.custom.NormalBoldTextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="11sp"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/color_text"
+                                    android:gravity="center"
+                                    android:text="Invite Your \nFriends"
+                                    android:layout_gravity="center_horizontal"/>
+
+                                <com.vynkpay.custom.NormalBoldTextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="11sp"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/color_text"
+                                    android:gravity="center"
+                                    android:text="Your Friends get \nproduct from us"
+                                    android:layout_gravity="center_horizontal"/>
+
+                                <com.vynkpay.custom.NormalBoldTextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="11sp"
+                                    android:layout_marginTop="5dp"
+                                    android:textColor="@color/color_text"
+                                    android:gravity="center"
+                                    android:text="You get \nrewarded"
+                                    android:layout_gravity="center_horizontal"/>
+
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="16dp"/>
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="@color/color_text"
+                                android:gravity="center"
+                                android:textAllCaps="true"
+                                android:text="Your referral code"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:textColor="@color/colorPrimary"
+                                android:background="@drawable/round_corner_strokes_gray"
+                                android:textAllCaps="true"
+                                android:paddingRight="16dp"
+                                android:paddingStart="16dp"
+                                android:paddingTop="5dp"
+                                android:id="@+id/codeTV"
+                                android:paddingBottom="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="@color/color_text"
+                                android:gravity="center"
+                                android:textAllCaps="true"
+                                android:layout_marginTop="10dp"
+                                android:padding="5dp"
+                                android:id="@+id/tapToCopyTV"
+                                android:text="Tap to copy"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"/>
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="12sp"
+                                android:textColor="@color/white"
+                                android:text="Share now"
+                                android:paddingTop="8dp"
+                                android:textAllCaps="true"
+                                android:paddingBottom="8dp"
+                                android:id="@+id/shareTV"
+                                android:paddingRight="16dp"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="16dp"
+                                android:drawablePadding="10dp"
+                                android:drawableLeft="@drawable/ic_share_white"
+                                android:background="@drawable/round_corner_blue"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>

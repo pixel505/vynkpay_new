@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#B10D25</color>
+    <color name="colorPrimaryDark">#B10D25</color>
+    <color name="colorAccent">#B10D25</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="grey">#DDDFDF</color>
+    <color name="semi_black">#212121</color>
+    <color name="semi_white">#f7f7f7</color>
+    <color name="mainBackColor">#ebebeb</color>
+    <color name="buttonText">#FFFFFF</color>
+    <color name="buttonOffer">#e50000</color>
+    <color name="green_status">#B10D25</color>
+    <color name="color_one">#B10D25</color>
+    <color name="color_two">#B10D25</color>
+    <color name="color_radio">#4bb4f6</color>
+    <color name="color_text">#FF535050</color>
+    <color name="color_textN">#338fd8</color>
+    <color name="color_shadow">#FFFAF8F8</color>
+    <color name="color_select_notify">#404040</color>
+    <color name="color_red">#B10D25</color>
+    <color name="hintColor">#cacaca</color>
+    <color name="hintColortr">#907f7f7f</color>
+    <color name="transfer_bg">#B10D25</color>
+    <color name="noDataText">#d0d7df</color>
+    <color name="bgcolor">#E9E9E9</color>
+    <color name="graycolor">#7f7f7f</color>
+    <color name="colorLightBlue">#d9eafc</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorLightOrange">#ffeed2</color>
+    <color name="colorLightSkyBlue">#e6f5fc</color>
+    <color name="colorLightPink">#ffe7e7</color>
+    <color name="colorGreen">#5EB161</color>
+    <color name="colorYellow">#E4D760</color>
+
+    <color name="green1">#c8e6c9</color>
+    <color name="green2">#a5d6a7</color>
+    <color name="green3">#81c784</color>
+    <color name="green4">#66bb6a</color>
+    <color name="white1">#F8F8F8</color>
+</resources>

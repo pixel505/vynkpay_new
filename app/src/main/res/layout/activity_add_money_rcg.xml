@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackColor"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/colorPrimary"
+                android:padding="16dp">
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/walletBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="18dp"
+                        android:text="Wallet Balance"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:orientation="horizontal">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:id="@+id/currencyTV"
+                            android:text=" (₹)"
+                            android:textSize="18sp" />
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="Enter Amount"
+                            android:inputType="number"
+                            android:digits="0123456789"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/add100"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/round_corner_strokes"
+                            android:gravity="center"
+                            android:padding="5dp">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:textSize="16sp"
+                                android:id="@+id/hundredAmountTV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ (₹)100" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/add500"
+                            android:background="@drawable/round_corner_strokes"
+                            android:gravity="center"
+                            android:padding="5dp">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+ (₹)500"
+                                android:id="@+id/fiveHundredAmountTV"
+                                android:textSize="16sp"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/add1000"
+                            android:background="@drawable/round_corner_strokes"
+                            android:gravity="center"
+                            android:padding="5dp">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:textSize="16sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/thousandAmountTV"
+                                android:text="+ (₹)1000" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.vynkpay.custom.NormalButton
+                        android:id="@+id/addMoneyButton"
+                        android:layout_width="150dp"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/round_all"
+                        android:gravity="center"
+                        android:text="Add Money"
+                        android:textColor="@color/buttonText" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

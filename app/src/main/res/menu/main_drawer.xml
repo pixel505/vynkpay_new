@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android = "http://schemas.android.com/apk/res/android"
+    xmlns:tools = "http://schemas.android.com/tools"
+    tools:showIn= "navigation_view" >
+    <group android:checkableBehavior= "single" >
+        <item
+            android:id= "@+id/nav_home"
+            android:icon= "@drawable/homenew"
+            android:title= "HOME" />
+
+        <item
+            android:id= "@+id/nav_login"
+            android:icon= "@drawable/loginnew"
+            android:title= "LOGIN" />
+        <item
+            android:id= "@+id/nav_shop"
+            android:icon= "@drawable/shopnew"
+            android:title= "SHOP" />
+        <item
+            android:id= "@+id/nav_notifications"
+            android:icon= "@drawable/notification"
+            android:title= "NOTIFICATIONS" />
+        <item
+            android:id= "@+id/nav_transactions"
+            android:icon= "@drawable/transactionnew"
+            android:title= "ALL TRANSACTIONS" />
+
+        <item
+            android:id= "@+id/nav_account"
+            android:icon= "@drawable/accountnew"
+            android:title= "ACCESS VYNKPAY ACCOUNT" />
+
+        <item
+            android:id= "@+id/nav_profile"
+            android:icon= "@drawable/profilenew"
+            android:title= "PROFILE" />
+
+        <item
+            android:id= "@+id/nav_ticket"
+            android:icon= "@drawable/supportnew"
+            android:title= "SUPPORT TICKET" />
+
+
+        <item
+            android:id= "@+id/nav_about"
+            android:icon= "@drawable/aboutusnew"
+            android:title= "ABOUT US" />
+
+
+        <item
+            android:id= "@+id/nav_logout"
+            android:icon= "@drawable/logoutnew"
+            android:title= "LOGOUT" />
+
+    </group>
+
+</menu>

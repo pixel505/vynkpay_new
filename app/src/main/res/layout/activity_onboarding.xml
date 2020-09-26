@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewPager"
+            android:layout_above="@+id/relBottom">
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:id="@+id/relBottom"
+            android:layout_alignParentBottom="true">
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:gravity="center"
+                android:id="@+id/btnSkip"
+                android:textStyle="bold"
+                android:layout_centerVertical="true"
+                android:text="@string/skip"
+                android:textSize="@dimen/_15sdp" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                app:tabBackground="@drawable/tab_indicater"
+                app:tabGravity="center"
+                android:id="@+id/tabIndicator"
+                app:tabIndicatorHeight="0dp"
+                android:layout_centerInParent="true"/>
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/next"
+                android:id="@+id/btnNext"
+                android:textStyle="bold"
+                android:textSize="@dimen/_15sdp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

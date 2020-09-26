@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardCornerRadius="@dimen/_16sdp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/_20sdp"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:src="@drawable/reques_icon"
+                    android:tint="@color/colorPrimary"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_10sdp"/>
+
+                <com.vynkpay.custom.NormalBoldTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_text"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="@dimen/_14sdp"
+                    android:textAllCaps="true"
+                    android:text="@string/selectPaymentModes"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/graycolor"
+                    android:textSize="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Please select payment mode, you want to use to withdraw your amount"/>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/custom_bg">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_height="wrap_content">
+
+                        <com.vynkpay.custom.CustomRadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_text"
+                            android:textSize="@dimen/_12sdp"
+                            android:id="@+id/impsRadio"
+                            android:text="@string/imps"
+                            android:paddingStart="@dimen/_10sdp"/>
+
+                    </FrameLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:background="@color/color_text"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:padding="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+
+                        <com.vynkpay.custom.CustomRadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_text"
+                            android:textSize="@dimen/_12sdp"
+                            android:id="@+id/neftRadio"
+                            android:enabled="false"
+                            android:text="@string/neft"
+                            android:paddingStart="@dimen/_10sdp"/>
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/graycolor"
+                            android:layout_marginStart="@dimen/_35sdp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/submitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/round_corner_red"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/withdraw"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_16sdp"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <ProgressBar
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center"
+        android:id="@+id/progress"
+        android:visibility="gone"/>
+
+</FrameLayout>

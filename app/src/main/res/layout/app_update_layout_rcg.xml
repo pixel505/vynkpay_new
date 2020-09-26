@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+    <com.vynkpay.custom.BoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@color/color_text"
+        android:id="@+id/titleTV"
+        android:textSize="16sp"
+        android:text="New version available"/>
+
+    <com.vynkpay.custom.NormalLightTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/messageTV"
+        android:textColor="@color/color_text"
+        android:textSize="14sp"
+        android:text="Please, update app to new version to continue."/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <com.vynkpay.custom.BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:id="@+id/noThanksButtonTV"
+                android:padding="10dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:text="no, thanks"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <com.vynkpay.custom.BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/updateButtonTV"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/colorPrimaryDark"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:text="update"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

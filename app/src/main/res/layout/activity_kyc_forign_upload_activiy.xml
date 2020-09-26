@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar_new" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <com.vynkpay.custom.NormalBoldTextView
+                android:id="@+id/kycText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="National Id"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+
+
+            <LinearLayout
+                android:id="@+id/uploadPanLn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/stroke_ln"
+                android:gravity="center"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/panImage"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+                    android:orientation="vertical"
+                    />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/upload" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Upload National ID Image"
+                    android:textSize="@dimen/_10sdp" />
+
+
+            </LinearLayout>
+
+            <com.vynkpay.custom.NormalBoldTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Address Proof"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+            <LinearLayout
+                android:id="@+id/uploadAdharLn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_140sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/stroke_ln"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/aadharImage"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_140sdp"
+
+                    android:orientation="vertical"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/upload" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Upload Address Proof Image"
+                    android:textSize="@dimen/_10sdp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/round_corner_red"
+                android:gravity="center">
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/nextLn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="Next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/buttonText"
+                    android:textSize="@dimen/_14sdp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
+
+
+

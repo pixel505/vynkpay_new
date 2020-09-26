@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/itemLinear"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/item_bg_round_corner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="@dimen/_8sdp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <com.vynkpay.custom.NormalLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/graycolor"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/date"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:id="@+id/dateTV"
+                    android:textColor="@color/color_text" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:gravity="end"
+                android:layout_height="wrap_content">
+
+                <com.vynkpay.custom.NormalLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/graycolor"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/transactionID"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:textAllCaps="true"
+                    android:id="@+id/transactionTV"
+                    android:textColor="@color/color_text" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color_text"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="@dimen/_8sdp"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <com.vynkpay.custom.NormalLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/graycolor"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/remark"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/remarkTV"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/color_text"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:orientation="vertical"
+                android:gravity="center|end"
+                android:layout_height="wrap_content">
+
+                <com.vynkpay.custom.NormalLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/graycolor"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/amount"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_12sdp"
+                    android:id="@+id/amountTV"
+                    android:textColor="@color/color_text" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"/>
+
+
+</LinearLayout>

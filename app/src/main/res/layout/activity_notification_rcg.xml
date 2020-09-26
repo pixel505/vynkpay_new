@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/mainNotiLn"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/notificationRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/noLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_gravity="center"
+                android:alpha="0.5"
+                android:background="@drawable/logo" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="No notifications"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

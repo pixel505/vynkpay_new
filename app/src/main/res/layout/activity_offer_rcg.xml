@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:attrs="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false"
+                    android:paddingBottom="10dp">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="15dp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="5dp" />
+                </FrameLayout>
+
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    attrs:piv_padding="2dp"
+                    attrs:piv_radius="1dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Recharge &amp; Bills"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/round_corner_blue"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="5dp">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="See All"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/rechargeBill"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="45dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Shopping"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/round_corner_blue"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="5dp">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="See All"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/shoppingBill"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="45dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Food offers"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/round_corner_blue"
+                        android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:paddingTop="5dp">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="See All"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:clipToPadding="false">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/FoodBill"
+                        android:layout_width="match_parent"
+                        android:layout_height="210dp"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:clipToPadding="false"
+                        android:paddingBottom="5dp"
+                        android:paddingRight="45dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

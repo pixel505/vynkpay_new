@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/openCard"
+        app:contentPadding="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:cardBackgroundColor="#F8F8F8"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="@dimen/_3sdp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:id="@+id/topLn"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/ry1"
+                        android:orientation="vertical">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Ticket Id :"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/ticketidtext"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="jhvjcujfuttcjgcjgc"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_12sdp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_1sdp"
+                            android:background="#C8C4C4" />
+
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Subject :"
+                                android:textColor="#8E8F8F"
+                                android:textSize="@dimen/_10sdp" />
+
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/subjectText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="jhvjcujfuttcjgcjgc"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/descText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:text="frf fdx f srgg gggggggggg g   jbjbjbb,jb,jbjbjggggggg ggggggss s sssssssssssssss"
+                                android:textSize="@dimen/_10sdp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+
+
+                    <View
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_below="@+id/topLn"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="#C8C4C4" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_ryt"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Department"
+                        android:textColor="#8E8F8F"
+
+                        android:textSize="@dimen/_10sdp" />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/departText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="General"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_ryt"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="#8E8F8F"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Date"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/dateText"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="19 June 2020"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="#8E8F8F"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="Status"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/statusText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:text="closed"
+                        android:textColor="@color/color_red"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

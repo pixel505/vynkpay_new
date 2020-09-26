@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <com.vynkpay.custom.NormalTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Pin"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black"/>
+        <com.vynkpay.custom.NormalEditText
+            android:id="@+id/pinEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_10sdp"
+            android:gravity="center"
+            android:inputType="number"
+            android:layout_marginTop="@dimen/_10sdp" />
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/round_corner_red"
+            android:gravity="center">
+
+            <com.vynkpay.custom.NormalButton
+                android:id="@+id/addPinBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="Add"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="@color/buttonText" />
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+

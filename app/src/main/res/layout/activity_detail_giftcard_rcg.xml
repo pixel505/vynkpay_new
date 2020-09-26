@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.vynkpay.custom.NormalButton
+            android:id="@+id/continueButton"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:text="Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/buttonText" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/continueButton"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <include layout="@layout/toolbar_new_rcg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="-30dp"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-20dp"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:id="@+id/giftImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:alpha=".5"
+                            android:background="@color/black" />
+
+                        <com.vynkpay.custom.NormalButton
+                            android:id="@+id/readDescriptionButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="26dp"
+                            android:layout_weight="1.5"
+                            android:background="@drawable/stroke_all"
+                            android:text="Read description"
+                            android:textAllCaps="false"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_weight="2.2"
+                            android:alpha=".5"
+                            android:background="@color/black" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp">
+
+                    <LinearLayout
+                        android:id="@+id/slabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select gift card amount"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="80dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="3dp"
+                            android:alpha=".5"
+                            android:background="@color/black" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/slabRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:nestedScrollingEnabled="false" />
+                    </LinearLayout>
+
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Enter Details"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="Enter first name of recipient"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="Enter last name of recipient"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="center_vertical"
+                            android:hint="Enter email of recipient"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etMobileNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:digits="0123456789"
+                            android:gravity="center_vertical"
+                            android:hint="Enter mobile number of recipient"
+                            android:inputType="number"
+                            android:paddingLeft="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etMessage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="top|center_vertical"
+                            android:hint="Enter personal message (Optional)"
+                            android:paddingLeft="20dp"
+                            android:paddingTop="20dp"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="66dp"
+                        android:background="@drawable/box_bg">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/symbole_rs"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="7dp" />
+
+                        <com.vynkpay.custom.NormalEditText
+                            android:id="@+id/etAmount"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:digits="0123456789"
+                            android:gravity="center_vertical"
+                            android:hint="Gift Card Value"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textColor="@color/color_text"
+                            android:textColorHint="@color/hintColor"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

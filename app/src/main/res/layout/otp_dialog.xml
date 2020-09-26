@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_200sdp"
+    android:layout_height="@dimen/_150sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:paddingBottom="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_25sdp"
+    android:layout_marginBottom="@dimen/_25sdp"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_5sdp">
+
+
+
+        <LinearLayout
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.vynkpay.custom.NormalTextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enterOTP"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/black"/>
+
+
+            <com.vynkpay.custom.NormalEditText
+                android:id="@+id/otpEditText"
+                android:paddingRight="@dimen/_10sdp"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/custom_rectangle"
+                android:hint="Enter Otp"
+                android:inputType="number"
+                android:layout_marginTop="@dimen/_15sdp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/round_corner_red"
+                android:gravity="center">
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/submitLn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/submit"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/buttonText" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

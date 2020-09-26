@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layTop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/container_toolbar"
+        android:background="@color/white"
+        android:layout_above="@+id/layHome"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp">
+
+                        <ImageView
+                            android:id="@+id/imgSucess"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp" />
+                        <ImageView
+                            android:id="@+id/imgFail"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/txtSucessFail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:layout_marginTop="32dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#FF6B6A6A"
+                    android:id="@+id/dateText"
+                    android:textSize="18sp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/txnIdText"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="4dp"
+                    android:textColor="#FF6B6A6A"
+                    android:textSize="18sp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mobileText"
+                    android:text=""
+                    android:layout_marginTop="4dp"
+                    android:textColor="#FF6B6A6A"
+                    android:singleLine="true"
+                    android:textSize="18sp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:id="@+id/amountText"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="4dp"
+                    android:textColor="#FF6B6A6A"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_payment_rcg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layHome"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/logo"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_shop"
+        android:enabled="true"
+        android:icon="@drawable/shop"
+        android:title="Shop"
+        app:showAsAction="ifRoom" />
+    <item
+        android:visible="false"
+        android:id="@+id/action_trans"
+        android:enabled="true"
+        android:icon="@drawable/transaction"
+        android:title="Transactions"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_wallets"
+        android:enabled="true"
+        android:icon="@drawable/wallet"
+        android:title="Wallet"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_team"
+        android:enabled="true"
+        android:icon="@drawable/vynkstore"
+        android:title="Vynk Store"
+        app:showAsAction="ifRoom" />
+
+</menu>

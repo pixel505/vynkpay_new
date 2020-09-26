@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="NormalTextSize">15sp</dimen>
+    <dimen name="TitleTextSize">18sp</dimen>
+    <dimen name="ButtonSize">40dp</dimen>
+    <dimen name="SmallTextSize">13dp</dimen>
+</resources>

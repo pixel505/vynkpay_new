@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+    <com.vynkpay.custom.NormalBoldTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@color/semi_black"
+        android:id="@+id/titleTV"
+        android:textSize="16sp"
+        android:text="Privacy Settings"/>
+
+    <com.vynkpay.custom.NormalLightTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/messageTV"
+        android:textColor="@color/color_text"
+        android:textSize="14sp"
+        android:text="@string/privacySettingContent"
+        android:maxLines="20"/>
+
+    <com.vynkpay.custom.NormalLightTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:id="@+id/privacyPolicyTV"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="@color/color_radio"
+        android:textSize="14sp"
+        android:text="@string/viewPrivacyPolicy"
+        android:maxLines="20"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bottomFrame"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <com.vynkpay.custom.NormalBoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:id="@+id/noThanksButtonTV"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/semi_black"
+                android:textSize="16sp"
+                android:text="@string/disagree"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+
+            <com.vynkpay.custom.NormalBoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:id="@+id/okButtonTV"
+                android:background="?android:attr/selectableItemBackground"
+                android:textColor="@color/semi_black"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:text="@string/ok"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+</LinearLayout>
+

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_400sdp"
+        android:padding="@dimen/_10sdp">
+
+
+        <LinearLayout
+            android:id="@+id/lnBg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:orientation="vertical">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_80sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text="Package Price"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <com.vynkpay.custom.NormalBoldTextView
+                            android:id="@+id/packageprice"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="2135"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.vynkpay.custom.NormalTextView
+
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:gravity="center"
+                    android:text="Cashback"
+                    android:textSize="@dimen/_12sdp" />
+
+                <com.vynkpay.custom.NormalBoldTextView
+                    android:id="@+id/cashback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="2135"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:gravity="center"
+                    android:text="Points"
+                    android:textSize="@dimen/_12sdp" />
+
+                <com.vynkpay.custom.NormalBoldTextView
+                    android:id="@+id/points"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="2135"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+
+            <ImageView
+                android:id="@+id/uperIcon"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:src="@drawable/packageneww" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center">
+
+            <com.vynkpay.custom.NormalButton
+                android:id="@+id/bynow"
+
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/round_corner_red"
+                android:gravity="center"
+                android:text="Buy Now"
+                android:textAllCaps="false"
+                android:textColor="@color/buttonText"
+                android:textSize="@dimen/_14sdp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

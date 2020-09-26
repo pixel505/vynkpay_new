@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delhi Airport"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/right_arrow_yellow" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chandigarh Airport"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="20 Jan 2019"
+            android:textSize="@dimen/SmallTextSize" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

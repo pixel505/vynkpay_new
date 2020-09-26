@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLayout"
+
+            layout="@layout/toolbar_new" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="@dimen/_5sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="4"
+                android:orientation="horizontal">
+                <com.vynkpay.custom.NormalTextView
+                    android:id="@+id/openText"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent"
+                    android:background="@color/black"
+                    android:text="OPEN"
+                    android:textColor="@color/white"
+                    android:gravity="center" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:id="@+id/closeText"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:text="CLOSED"
+                    android:textColor="@color/black"
+                    android:gravity="center" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+<!-- // new ticket layout-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_20sdp"
+                    android:id="@+id/ticketLn"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/kycImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/support"/>
+
+                    <com.vynkpay.custom.NormalBoldTextView
+                        android:id="@+id/kycText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_13sdp"
+                        android:gravity="center"
+                        android:text="No Open Ticket"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/kyctext"
+                        android:textSize="@dimen/_9sdp" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_32sdp"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:background="@drawable/round_corner_red"
+                        android:gravity="center">
+
+                        <com.vynkpay.custom.NormalButton
+                            android:id="@+id/requestTicket"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:text="REQUEST TICKET"
+                            android:textAllCaps="false"
+                            android:textColor="@color/buttonText"
+                            android:textSize="@dimen/_14sdp" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+  <!--// opne ticket layout-->
+
+            <LinearLayout
+                android:background="@color/white"
+                android:id="@+id/openLn"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_40sdp"
+
+                android:padding="@dimen/_10sdp"
+                android:visibility="gone">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/openRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+
+            <!--// close ticket layout-->
+
+            <LinearLayout
+                android:background="@color/white"
+                android:id="@+id/closeLn"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:padding="@dimen/_10sdp"
+
+                android:visibility="gone">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/closeRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

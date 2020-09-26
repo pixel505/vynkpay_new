@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar_new" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@color/color_red" />
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:id="@+id/scrollView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/directRefCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:contentPadding="@dimen/_10sdp">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/rytLn"
+                            android:orientation="horizontal">
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/directreferrals" />
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/kycText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:gravity="center"
+                                android:text="Direct Refrrals"
+                                android:textColor="@color/color_text"
+                                android:textSize="@dimen/_14sdp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/rytLn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/arrowcommunity" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/communityRefCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:contentPadding="@dimen/_10sdp">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/rytLn1"
+                            android:orientation="horizontal">
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/teamcommunity" />
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:gravity="center"
+                                android:text="Community Summary"
+                                android:textColor="@color/color_text"
+                                android:textSize="@dimen/_14sdp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/rytLn1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/arrowcommunity" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:id="@+id/networkExplorerCard"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:contentPadding="@dimen/_10sdp">
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/rytLn2"
+                            android:orientation="horizontal">
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/networkexplorer" />
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:gravity="center"
+                                android:text="Network Explorer"
+                                android:textColor="@color/color_text"
+                                android:textSize="@dimen/_14sdp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/rytLn2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/arrowcommunity" />
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
+
+
+

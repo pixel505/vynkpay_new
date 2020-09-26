@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.vynkpay.custom.NormalTextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>
+
+

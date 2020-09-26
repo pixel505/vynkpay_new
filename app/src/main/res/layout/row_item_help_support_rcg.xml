@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:id="@+id/tap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="26dp"
+        android:paddingBottom="26dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/catImage"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:id="@+id/catTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/ic_down"
+                android:rotation="-90" />
+
+        </FrameLayout>
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="80dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:alpha=".5"
+            android:background="@color/black" />
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="wrap_content"
+            android:id="@+id/desc"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

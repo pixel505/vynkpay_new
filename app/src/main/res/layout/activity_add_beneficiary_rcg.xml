@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@color/colorPrimary"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/round_tranfer_bg"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/llAddNewLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:background="@drawable/round_corner_yellow"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:paddingTop="5dp">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Add New"
+                                android:id="@+id/addNewTV"
+                                android:textColor="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llSeeAllBeneficiaryLayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:paddingTop="5dp">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="See All Beneficiary"
+                                android:id="@+id/seeAllTV"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-55dp">
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

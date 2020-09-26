@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/notification"
+        android:title="Delete"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:id="@+id/markread"
+        android:icon="@drawable/notification"
+        android:title="Mark as Read"
+        app:showAsAction="always"/>
+
+
+    <item
+        android:icon="@drawable/notification"
+        android:title="Detail"
+        app:showAsAction="always"/>
+</menu>

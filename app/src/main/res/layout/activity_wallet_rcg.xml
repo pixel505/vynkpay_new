@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/colorPrimary" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:color/transparent"
+                android:clipToPadding="false">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/walletBalance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Available Balance"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <com.vynkpay.custom.NormalButton
+                            android:id="@+id/addMoneyButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:background="@drawable/round_corner_blue"
+                            android:gravity="center"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="Add Money"
+                            android:textColor="@color/white" />
+                    </FrameLayout>
+                </FrameLayout>
+            </androidx.cardview.widget.CardView>
+
+        </FrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:visibility="gone"
+            android:layout_marginRight="16dp"
+            app:cardBackgroundColor="@color/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Complete your KYC"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="To enjoy more offers and cashback on your each transaction complete your kyc"
+                    android:textColor="@color/white" />
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/startNowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/round_corner_yellow"
+                    android:gravity="center"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="Start Now"
+                    android:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="gone">
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saved Cards"
+                android:textColor="@color/colorPrimary" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/addNewCardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:drawableLeft="@drawable/ic_plus"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="Add New"
+                android:textColor="@color/colorPrimary" />
+
+
+        </FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/existingCardRecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:nestedScrollingEnabled="false">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="@android:color/transparent"
+                android:divider="@android:color/transparent"
+                android:id="@+id/transactionsListView"/>
+
+            <LinearLayout
+                android:id="@+id/noLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bgcolor"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_gravity="center"
+                    android:alpha="0.5"
+                    android:background="@drawable/logo" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/noDataTV"
+                    android:text="Transactions are not found"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

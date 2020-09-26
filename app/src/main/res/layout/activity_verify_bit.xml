@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_35sdp"
+        android:layout_marginEnd="@dimen/_35sdp"        >
+
+        <ImageView
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo" />
+
+        <com.vynkpay.custom.NormalTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/otp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:text="@string/onetimepassward"
+            android:textSize="@dimen/_10sdp" />
+
+        <com.vynkpay.custom.NormalEditText
+            android:singleLine="true"
+            android:id="@+id/otpEdt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/custom_rectangle"
+            android:hint="Enter OTP"
+            android:inputType="number"
+            android:textSize="@dimen/_12sdp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/round_corner_red"
+            android:gravity="center">
+
+            <com.vynkpay.custom.NormalButton
+                android:id="@+id/verifyLnNew"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="Verify"
+                android:textColor="@color/buttonText"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+</layout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:id="@+id/linMainTuto"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.65"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:weightSum="1">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75"
+            android:id="@+id/imageAd"
+            android:src="@mipmap/ic_launcher"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:orientation="vertical">
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/tvTitleText"
+            android:padding="10dp"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/black"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+           />
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="search"
+            android:gravity="center"
+            android:id="@+id/tvText"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+         />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vynkpay.custom.NormalTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="10dp"
+    android:textSize="14sp"
+    android:id="@+id/textView"
+    android:textColor="@color/black"
+    android:drawableRight="@drawable/ic_down"
+    android:layout_height="wrap_content">
+
+</com.vynkpay.custom.NormalTextView>

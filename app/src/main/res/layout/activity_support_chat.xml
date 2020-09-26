@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLayout"
+
+            layout="@layout/toolbar_new" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/markLn"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:gravity="end"
+
+                android:layout_height="@dimen/_30sdp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/markCard"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_30sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+
+                app:cardBackgroundColor="#1A2771">
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="MARK AS RESOLVE"
+                    android:gravity="center"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white"/>
+            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/markLn"
+                android:id="@+id/chat_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btmLn"
+                android:padding="@dimen/_10sdp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btmLn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="@dimen/_5sdp"
+                app:contentPadding="@dimen/_5sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:visibility="gone"
+                        android:id="@+id/sendImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:scaleType="fitXY"
+                        android:text="hvhvh"/>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/msgEdt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:background="@null"
+                        android:hint="Write a Message..." />
+
+                    <LinearLayout
+                        android:id="@+id/attachment"
+
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:src="@drawable/attach" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/sendattachment"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_weight="0.5"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:src="@drawable/send" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

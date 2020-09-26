@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        tools:context=".fragment.BonusWalletFragment">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar_new" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/transactionsListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:listSelector="@android:color/transparent" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true">
+
+                <!-- put your views here -->
+
+
+                <LinearLayout
+                    android:layout_marginEnd="@dimen/_10sdp"
+                android:id="@+id/lnn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                   android:gravity="end"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:orientation="horizontal">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    android:layout_margin="0dp"
+                    android:id="@+id/newMcashReq1"
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:cardBackgroundColor="#d40017">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/pluss"/>
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:gravity="center"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Request MCash"
+                            android:textSize="@dimen/_8sdp"
+                            android:textColor="@color/white"/>
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:visibility="gone"
+                    android:id="@+id/newMcashReq"
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:cardElevation="@dimen/_3sdp"
+                    app:cardBackgroundColor="#d40017">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:src="@drawable/pluss"/>
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </LinearLayout>
+
+            </FrameLayout>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/noLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_gravity="center"
+                android:alpha="0.5"
+                android:background="@drawable/logo" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="No transactions"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end|center"
+        android:visibility="gone"
+        android:padding="10dp">
+
+        <com.vynkpay.custom.NormalTextView
+            android:id="@+id/sortBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort by : Price"
+            android:textColor="@color/black"
+            android:drawablePadding="8dp"
+            android:drawableRight="@mipmap/sort_by_price"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/planRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/noLayoutData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/mainBackColor"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:alpha=".5"
+            android:background="@drawable/logo" />
+
+        <com.vynkpay.custom.NormalTextView
+            android:id="@+id/noDataText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="No Wallet History Found" />
+
+    </LinearLayout>
+
+</LinearLayout>

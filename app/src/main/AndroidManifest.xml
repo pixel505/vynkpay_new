@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.vynkpay">
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.RECEIVE_SMS"
+        tools:node="remove" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:name=".utils.MySingleton"
+        android:allowBackup="false"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/WhiteTheme"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup,android:usesCleartextTraffic">
+        <activity android:name=".newregistration.OnboardingActivity"></activity>
+        <activity android:name=".newregistration.Register4Activity" />
+        <activity android:name=".newregistration.Register3Activity" />
+        <activity android:name=".newregistration.Register2Activity" />
+        <activity
+            android:name=".newregistration.Register1Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.activities.ConversionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.StatementActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.CommunityDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".activity.Demo" />
+        <activity
+            android:name=".activity.activities.RequestSuccess"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WalletNewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.InvoiceDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment.BonusWalletFragment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment.VCashWalletFragment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment.MCashWalletFragment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".fragment.ECashWalletFragment"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AffiliateActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WebviewActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ChoosePaymentActivityC"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.PackageAActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ChoosePaymentActivityB"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ChoosePaymentActivityD"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ChoosePaymentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.InvoiceActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.homefolder.example.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- ressource file to create -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".activity.PdfViewerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.GenerationBonusDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WithdrawRequestListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AllTransactionsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WatchPdfActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WatchFileActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.SupportChatActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.GenerateTicketActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.SupportTicketActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.VerifyBitActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycForeignSuccessActiviy"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycForeignRejectedActiviy"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.BtcActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycForeignBankActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycForignUploadActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycSuccessActiviy"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycBankRejectedActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycRejectedActiviy"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.CommunitySummaryActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.DirectRefralsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.Community"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AccountAccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycBankActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycUploadActiviy"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.KycActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.PinActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.RechargeSuccess"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.OtpActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.AccountNewActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.Signupnew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="vynkpay.page.link"
+                    android:scheme="https" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MoreActivityNew"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.Splash"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.activities.VerifyAccountActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ReferAndEarnSummary"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ReferAndEarnActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.CashbackRewardActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.SearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeDark2"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.Dashboard"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteTheme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".onboard.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.NotificationDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AddMoneyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.SignUpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.OtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.DmtBeneficiaryDeleteOtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.HelpAndSupportQuestions"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.HelpAndSupportActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WebViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.NotificationActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.TransferPreviewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.OfferActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.electricity.activity.ElectricityActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.electricity.activity.SelectElectricityOperator"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.DashBoardActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AddBeneficiaryActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.DmtOtpActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.PayActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.WalletActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.MoreActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.history.AllRechargeHistoryActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AccountActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.LoginActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteTheme"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.MoneyTransferActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.PrepaidActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.PostPaidActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.RechargeConfirmationActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.SeePlanActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.SelectOperatorActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.PaymentMethodActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.datacard.activity.DataCardActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.mobile.activity.SelectCircleActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.datacard.activity.DataCardPaymentMethodActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.datacard.activity.DataRechargeConfirmationActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.datacard.activity.SeePlanDataCardActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.dth.activity.DthActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.dth.activity.SelectDthOperatorActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.dth.activity.SeeDthPlansActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.dth.activity.DthRechargeConfirmationActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.dth.activity.DthPaymentMethodActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.landline.activity.LandLineActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.landline.activity.SelectLandLineOperatorActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.landline.activity.BillFetchActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.landline.activity.LandlineRechargeConfirmationActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.landline.activity.LandlinePaymentMethodActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.broadband.activity.BroadbandActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.water.WaterActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.insurance.InsuranceActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.history.HistoryDetailActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.recharge.gas.GasActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ForgotPasswordActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.giftcards.activity.GiftCardActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.giftcards.activity.SingleGiftCardActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.giftcards.activity.GiftCardDetailActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.giftcards.activity.GiftCardDescription"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.giftcards.activity.GiftCardPayConfirmation"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.themepark.activity.ThemeParkCategoryActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.themepark.activity.ThemeParkSingleActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.themepark.activity.ThemeParkDetailActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.themepark.activity.ThemeParkTicketSelection"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.themepark.activity.ThemeParkFillInfoActivity"
+            android:label=""
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" /> <!-- end of theme park module -->
+        <service
+            android:name=".fcm.MyFireBaseInstanceIDService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".fcm.MyFireBaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/app_icon" />
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="eSamapertNotification" />
+
+        <activity
+            android:name=".activity.bustickets.activity.BusActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.bustickets.activity.TicketSearchActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.bustickets.activity.SeatsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.activities.DmtCustVerifiOtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.CheckoutActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.RePinActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.AboutUsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.BonusActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.ReferalBonusActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+    </application>
+
+</manifest>

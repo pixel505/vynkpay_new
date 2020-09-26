@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:background="?android:attr/selectableItemBackground"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="5dp"
+    android:paddingStart="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:id="@+id/iconIV"
+        android:src="@drawable/water_icon"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moreFrame"
+        android:visibility="gone"
+        android:background="@drawable/round_white_circle">
+
+        <com.vynkpay.utils.RoundishImageView
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:padding="15dp"
+            android:src="@drawable/services_icon"
+            android:tint="@color/colorPrimary"/>
+
+
+    </FrameLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <com.vynkpay.custom.NormalTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:id="@+id/nameTV"
+        android:textColor="@color/color_text"
+        android:text="@string/water"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

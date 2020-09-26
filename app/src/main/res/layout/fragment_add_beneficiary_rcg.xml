@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="Enter First Name"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="Enter Last Name"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etMobileNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center_vertical"
+                        android:hint="Enter Mobile Number"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etAccountNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center_vertical"
+                        android:hint="Enter Account Number"
+                        android:inputType="number"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etReAccountNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center_vertical"
+                        android:hint="Re-enter Account Number"
+                        android:inputType="number"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="66dp"
+                    android:background="@drawable/box_bg">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:id="@+id/etIFSC"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:hint="Enter IFSC Code"
+                        android:paddingLeft="20dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingRight="20dp"
+                        android:singleLine="true"
+                        android:textColor="@color/color_text"
+                        android:textColorHint="@color/hintColor"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.vynkpay.custom.NormalButton
+            android:id="@+id/addBeneficiaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_all"
+            android:gravity="center"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Add Beneficiary"
+            android:textColor="@color/buttonText" />
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:text="OR" />
+
+        <com.vynkpay.custom.NormalButton
+            android:id="@+id/addWithVerify"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corner_strokes"
+            android:gravity="center"
+            android:visibility="gone"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Verify &amp; Add"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
