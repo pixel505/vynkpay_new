@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.adapter.PackageAdapter;
 import com.vynkpay.databinding.ActivityPackageABinding;
@@ -20,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PackageAActivity extends AppCompatActivity {
+
     ActivityPackageABinding binding;
     PackageAActivity ac;
 
@@ -46,12 +48,16 @@ public class PackageAActivity extends AppCompatActivity {
 
 
     public void getPackageByServer() {
+        Log.d("investmentData","call");
         MainApplication.getApiService().getPackage(Prefes.getAccessToken(ac)).enqueue(new Callback<GetPackageResponse>() {
             @Override
             public void onResponse(Call<GetPackageResponse> call, Response<GetPackageResponse> response) {
                 if (response.isSuccessful()) {
 
+
                     if (response.body().getStatus().equals("true")) {
+                        Log.d("investmentDataF",new Gson().toJson(response.body()));
+                        Log.d("investmentData",new Gson().toJson(response.body().getData().getPackages()));
                         binding.viewPager.setAdapter(new PackageAdapter(ac, response.body().getData().getPackages()));
                         Log.e("data", "" + response.body().getData().getPackages());
                         binding.tabLayout.setViewPager(binding.viewPager);

@@ -20,7 +20,7 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_65sdp"
                 android:orientation="vertical">
 
 
@@ -35,6 +35,16 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical">
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:text=""
+                            android:visibility="gone"
+                            android:id="@+id/tvTitleDisp"
+                            android:textSize="@dimen/_12sdp" />
 
 
                         <com.vynkpay.custom.NormalTextView
@@ -111,8 +121,8 @@
 
             <ImageView
                 android:id="@+id/uperIcon"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:src="@drawable/packageneww" />
         </LinearLayout>
 
@@ -126,7 +136,6 @@
 
             <com.vynkpay.custom.NormalButton
                 android:id="@+id/bynow"
-
                 android:layout_width="@dimen/_80sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:background="@drawable/round_corner_red"

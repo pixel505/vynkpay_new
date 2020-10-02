@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.ChoosePaymentActivity;
 import com.vynkpay.custom.NormalBoldTextView;
 import com.vynkpay.custom.NormalButton;
+import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.retrofit.model.GetPackageResponse;
 import com.vynkpay.utils.Functions;
 
@@ -44,6 +46,7 @@ public class PackageAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.viewpager_package_item_layout, container, false);
+        NormalTextView tvTitleDisp = itemView.findViewById(R.id.tvTitleDisp);
         NormalBoldTextView packageprice=itemView.findViewById(R.id.packageprice);
         NormalBoldTextView cashback=itemView.findViewById(R.id.cashback);
         NormalBoldTextView points=itemView.findViewById(R.id.points);
@@ -87,44 +90,54 @@ public class PackageAdapter extends PagerAdapter {
 
         if(position%8==0){
             ln.setBackgroundResource(R.drawable.onebg);
-            uperImage.setImageResource(R.drawable.packageneww);
+            //uperImage.setImageResource(R.drawable.packageneww);
         }
 
         if(position%8==1){
             ln.setBackgroundResource(R.drawable.twobg);
-            uperImage.setImageResource(R.drawable.twoicon);
+            //uperImage.setImageResource(R.drawable.twoicon);
 
         }
         if(position%8==2){
             ln.setBackgroundResource(R.drawable.threebg);
-            uperImage.setImageResource(R.drawable.threeicon);
+            //uperImage.setImageResource(R.drawable.threeicon);
 
         }
         if(position%8==3){
             ln.setBackgroundResource(R.drawable.fourbg);
-            uperImage.setImageResource(R.drawable.fouricon);
+            //uperImage.setImageResource(R.drawable.fouricon);
 
         }
         if(position%8==4){
             ln.setBackgroundResource(R.drawable.fifthbg);
-            uperImage.setImageResource(R.drawable.fifthicon);
+            //uperImage.setImageResource(R.drawable.fifthicon);
 
         }
         if(position%8==5){
             ln.setBackgroundResource(R.drawable.sixthbg);
-            uperImage.setImageResource(R.drawable.sixthicon);
+            //uperImage.setImageResource(R.drawable.sixthicon);
 
         }
         if(position%8==6){
             ln.setBackgroundResource(R.drawable.seventhbg);
-            uperImage.setImageResource(R.drawable.seventhicon);
+            //uperImage.setImageResource(R.drawable.seventhicon);
 
         }
         if(position%8==7){
             ln.setBackgroundResource(R.drawable.eightbg);
-            uperImage.setImageResource(R.drawable.eighticon);
+            //uperImage.setImageResource(R.drawable.eighticon);
 
         }
+
+        try {
+            Glide.with(context).load(data.getImg()).fitCenter().into(uperImage);
+            tvTitleDisp.setText(data.getTitle());
+            tvTitleDisp.setSelected(true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         container.addView(itemView);
         return itemView;
     }

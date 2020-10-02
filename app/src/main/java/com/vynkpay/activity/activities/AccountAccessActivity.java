@@ -16,6 +16,7 @@ import com.vynkpay.utils.CallActivity;
 public class AccountAccessActivity extends AppCompatActivity {
     ActivityAccountAccessBinding binding;
     AccountAccessActivity ac;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class AccountAccessActivity extends AppCompatActivity {
         binding.toolbarLayout.toolbarTitlenew.setText(R.string.myaccount);
 
         MyAccount[] myAccount = new MyAccount[] {
+
                 new MyAccount("Purchase",R.drawable.packages),
                 new MyAccount("Invoice",R.drawable.invoice_icon),
                 new MyAccount("Community",R.drawable.mynetwork),

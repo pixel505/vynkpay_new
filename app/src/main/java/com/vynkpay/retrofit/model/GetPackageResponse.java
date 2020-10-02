@@ -542,7 +542,7 @@ public class GetPackageResponse {
             private String daily_rent;
             private String setup;
             private String duration;
-            private Object img;
+            private String img;
             private String ditribution_b;
             private String daily_amount_b;
             private String binary_percentage_b;
@@ -776,11 +776,11 @@ public class GetPackageResponse {
                 this.duration = duration;
             }
 
-            public Object getImg() {
+            public String getImg() {
                 return img;
             }
 
-            public void setImg(Object img) {
+            public void setImg(String img) {
                 this.img = img;
             }
 

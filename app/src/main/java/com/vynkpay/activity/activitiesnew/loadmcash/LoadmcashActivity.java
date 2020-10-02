@@ -48,6 +48,7 @@ public class LoadmcashActivity extends AppCompatActivity implements View.OnClick
             }else {
                 String amount = binding.amountET.getText().toString();
                 startActivity(new Intent(LoadmcashActivity.this, PaymentMethodMcashActivity.class).putExtra("amount",amount));
+                LoadmcashActivity.this.finish();
             }
         }
     }

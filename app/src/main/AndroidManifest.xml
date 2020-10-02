@@ -31,10 +31,16 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".activity.activitiesnew.conversion.ConversionOtpActivity"
+        <activity android:name=".activity.activitiesnew.loadmcash.CoinbaseActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash.Theme"></activity>
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity"></activity>
+        <activity
+            android:name=".activity.activitiesnew.conversion.ConversionOtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.LoadMcashSuccessActivity"
             android:launchMode="singleTop"
