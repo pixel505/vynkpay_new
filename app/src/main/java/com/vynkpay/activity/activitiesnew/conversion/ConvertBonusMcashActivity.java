@@ -9,9 +9,11 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.activitiesnew.RequestWithdrawnActivity;
 import com.vynkpay.adapter.ConversionAdapter;
@@ -82,6 +84,7 @@ public class ConvertBonusMcashActivity extends AppCompatActivity implements View
                 if(response.isSuccessful() && response.body()!=null){
                     serverDialog.dismiss();
                     if(response.body().getStatus().equals("true")){
+                        Log.d("convertcash",new Gson().toJson(response.body()));
                         GridLayoutManager manager = new GridLayoutManager(activity, 1, GridLayoutManager.VERTICAL, false);
                         //ConversionAdapter adapter = new ConversionAdapter(activity, response.body().getData().getListing());
                         /*binding.conversionList.setLayoutManager(manager);
