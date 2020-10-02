@@ -81,11 +81,11 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
         ApiCalls.getBonusTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
+                serverDialog.dismiss();
                 Log.d("transactionZLog", result+"//");
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
-                        serverDialog.dismiss();
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                         bonusBalance=dataObject.getString("walletBalance");
                         binding.tvBonusBalance.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
@@ -114,10 +114,11 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result + "//");
+                serverDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")) {
-                        serverDialog.dismiss();
+
                         JSONObject dataObject = jsonObject.getJSONObject("data");
                         vCashBalance=dataObject.getString("walletBalance");
                         binding.tvVCashBalance.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
@@ -168,10 +169,11 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
             @Override
             public void onResult(String result, String status, String message) {
                 //  Log.d("tmcashtrrr", result+"//");
+                serverDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
-                        serverDialog.dismiss();
+
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                         mCashBalance=dataObject.getString("walletBalance");
                         binding.tvMCashBalance.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
