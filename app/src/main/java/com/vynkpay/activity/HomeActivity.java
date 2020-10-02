@@ -447,6 +447,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             }
 
                             else {
+
                                 textCartItemCount.setVisibility(View.VISIBLE);
                                 textCartItemCount.setText(response.body().getData().getUnread_count());
                             }
@@ -596,17 +597,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } catch (Exception e) {
                 e.printStackTrace();
             }*/
-
-
-
-
-
-
-
-
-
-
-
 
         } else if (v == binding.sideLayout.careerPlanLinear) {
             drawer.closeDrawer(GravityCompat.START);

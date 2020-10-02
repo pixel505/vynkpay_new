@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import com.vynkpay.R;
@@ -28,9 +29,9 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
 
     ActivityOnboardingBinding binding;
 
-    private static int NUM_PAGES = 0;
-    private static int currentPage = 0;
-    final Handler handler = new Handler();
+    private int NUM_PAGES = 0;
+    private int currentPage = 0;
+    Handler handler = new Handler();
     Timer swipeTimer = new Timer();
     ArrayList<Slider> slist = new ArrayList<>();
     String country = "";
@@ -44,8 +45,9 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         country = getIntent().getStringExtra("Country");
         if (getIntent().getStringExtra("Country").equals("Global")) {
+            Log.d("fgfgfgfg",getIntent().getStringExtra("Country"));
         } else if (getIntent().getStringExtra("Country").equals("India")) {
-
+            Log.d("fgfgfgfg",getIntent().getStringExtra("Country"));
         }
         loadData();
         NUM_PAGES = slist.size();
@@ -103,7 +105,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(OnboardingActivity.this, HomeActivity.class).putExtra("Country", country));
                 OnboardingActivity.this.finish();
 
-            }else {
+            } else {
                 if (currentPage == NUM_PAGES) {
                     currentPage = 0;
                 }

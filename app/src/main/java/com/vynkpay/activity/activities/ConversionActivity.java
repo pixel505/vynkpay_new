@@ -64,9 +64,7 @@ public class ConversionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(binding.conversionHeader.searchUserET.getText().toString().isEmpty()){
                     Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(Float.parseFloat(binding.conversionHeader.searchUserET.getText().toString())<Float.parseFloat(miniAmount)){
+                } else if(Float.parseFloat(binding.conversionHeader.searchUserET.getText().toString())<Float.parseFloat(miniAmount)){
                     Toast.makeText(activity, "Minimum Amount is "+Functions.CURRENCY_SYMBOL+miniAmount, Toast.LENGTH_SHORT).show();
                 }
                 else {

@@ -112,6 +112,7 @@ public class ThemeParkCategoryActivity extends AppCompatActivity {
             public void onComplete() {
                 handleOperatorResponse(jsonObject);
             }
+
         };
 
         newGetOperatorData()

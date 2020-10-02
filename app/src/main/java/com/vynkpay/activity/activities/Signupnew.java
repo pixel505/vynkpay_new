@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -95,12 +96,14 @@ public class Signupnew extends AppCompatActivity {
     @BindView(R.id.tvAffilate)
     NormalTextView tvAffilate;
     Dialog dialog, serverDialog;
-    String countryId, referalCode;
+    String countryId="", referalCode="";
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_new);
+        sp = getSharedPreferences("sp",Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         getDynamicLink();
         serverDialog = M.showDialog(Signupnew.this, "", false, false);
@@ -259,7 +262,10 @@ public class Signupnew extends AppCompatActivity {
 
         tvAffilate.setText(ss1);
         tvAffilate.setMovementMethod(LinkMovementMethod.getInstance());
-
+        if (!sp.getString("referalCode","").equalsIgnoreCase("")){
+            referalCode = sp.getString("referalCode","");
+            referIdEdt.setText(referalCode);
+        }
 
     }
 
@@ -351,6 +357,7 @@ public class Signupnew extends AppCompatActivity {
                         Intent intent = new Intent(Signupnew.this, OtpActivityNew.class);
                         intent.putExtra("tempid", "" + response.body().getTempId());
                         startActivity(intent);
+                        sp.edit().putString("referalCode","").apply();
 
                     }
                 }
@@ -358,6 +365,7 @@ public class Signupnew extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                Log.d("Errorrrrer",t.getMessage()!= null ? t.getMessage() : "Error");
                 serverDialog.dismiss();
             }
         });
@@ -451,12 +459,18 @@ public class Signupnew extends AppCompatActivity {
                     String referLink = deepLink.toString();
                     referLink = referLink.substring(referLink.lastIndexOf("=") + 1);
                     referalCode = referLink;
+                    sp.edit().putString("referalCode",referalCode).apply();
                     referIdEdt.setText(referalCode);
+
                     Log.e("linkkk", "" + referalCode);
                     Log.e("linkkk", "" + referLink);
                     Log.e("linkkk", "" + pendingDynamicLinkData);
                     Log.e("linkkk", "" + deepLink);
                 } else {
+                    if (!sp.getString("referalCode","").equalsIgnoreCase("")){
+                        referalCode = sp.getString("referalCode","");
+                        referIdEdt.setText(referalCode);
+                    }
                 }
             }
         })
@@ -464,6 +478,10 @@ public class Signupnew extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(Signupnew.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        if (!sp.getString("referalCode","").equalsIgnoreCase("")){
+                            referalCode = sp.getString("referalCode","");
+                            referIdEdt.setText(referalCode);
+                        }
                     }
                 });
     }

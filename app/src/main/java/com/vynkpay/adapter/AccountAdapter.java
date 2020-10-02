@@ -62,11 +62,12 @@ public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.ViewHol
                     context.startActivity(new Intent(context, WalletNewActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else if (position == 5){
                     context.startActivity(new Intent(context, WithdrawRequestListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else if (position == 6){
+                } /*else if (position == 6){
                     context.startActivity(new Intent(context, CommunityDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } else if (position == 7){
+                }*/ else if (position == 6){
                     context.startActivity(new Intent(context, StatementActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } }
+                }
+            }
         });
     }
 
@@ -84,6 +85,7 @@ public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.ViewHol
             this.binding = itemBinding;
         }
     }
+
 }
 
 

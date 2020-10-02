@@ -29,7 +29,7 @@ public class WithdrawalTypeAdapter extends RecyclerView.Adapter<WithdrawalTypeAd
     OnItemClickListener mlistener;
 
 
-    public WithdrawalTypeAdapter(BonusWalletFragment activity, List<String> withdrawalType) {
+    public WithdrawalTypeAdapter(Context activity, List<String> withdrawalType) {
         this.context = activity;
         this.mList = withdrawalType;
     }

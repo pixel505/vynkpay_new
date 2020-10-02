@@ -414,7 +414,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_8sdp"
                         android:textStyle="bold"
-                        android:text="Bonus Wallet"/>
+                        android:text="Cashback"/>
 
                     <com.vynkpay.custom.NormalTextView
                         android:id="@+id/bonusWalletText"

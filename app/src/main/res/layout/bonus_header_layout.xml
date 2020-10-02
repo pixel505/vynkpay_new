@@ -12,12 +12,12 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:background="@color/colorPrimary" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
@@ -27,13 +27,14 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="@dimen/_10sdp"
                         android:weightSum="1">
@@ -42,6 +43,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.5"
+                            android:visibility="gone"
                             android:orientation="vertical">
 
                             <com.vynkpay.custom.NormalBoldTextView
@@ -88,14 +90,22 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="0.5"
-                            android:gravity="center|end"
+                            android:layout_weight="1"
+                            android:gravity="center"
                             android:orientation="vertical">
+
+                            <com.vynkpay.custom.NormalBoldTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/bonusWallet"
+                                android:textColor="@color/color_text"
+                                android:textSize="@dimen/_14sdp" />
 
                             <com.vynkpay.custom.NormalBoldTextView
                                 android:id="@+id/availableBalanceTV"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@string/rs"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_16sdp" />
 
@@ -113,12 +123,14 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
+                        android:visibility="gone"
                         android:background="@color/graycolor" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:visibility="gone"
                         android:padding="@dimen/_10sdp">
 
                         <com.vynkpay.custom.NormalTextView

@@ -3,7 +3,9 @@ package com.vynkpay.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -39,11 +41,13 @@ public class OtpActivityNew extends AppCompatActivity {
 
     String tempid;
     Dialog dialog;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_new);
+        sp = getSharedPreferences("sp", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         dialog = M.showDialog(OtpActivityNew.this, "", false, false);
 

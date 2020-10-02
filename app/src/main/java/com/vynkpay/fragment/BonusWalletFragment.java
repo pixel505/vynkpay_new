@@ -40,6 +40,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.activity.PinActivity;
 import com.vynkpay.activity.activities.RequestSuccess;
+import com.vynkpay.activity.activitiesnew.RequestWithdrawnActivity;
+import com.vynkpay.activity.activitiesnew.TransferWalletProcessActivity;
+import com.vynkpay.activity.activitiesnew.WithdrawTypeActivity;
 import com.vynkpay.adapter.ECashAdapter;
 import com.vynkpay.adapter.WithdrawalTypeAdapter;
 import com.vynkpay.custom.NormalEditText;
@@ -79,7 +82,7 @@ import retrofit2.Response;
 public class BonusWalletFragment extends AppCompatActivity {
     FragmentBonusWalletBinding binding;
     public static ArrayList<WalletTransactionsModel> walletTransactionsModelArrayList = new ArrayList<>();
-    public static String availableBalance;
+    public static String availableBalance = "0";
     Dialog dialog, serverDialog;
     String userId;
     final int rcWallet = 12;
@@ -108,11 +111,10 @@ public class BonusWalletFragment extends AppCompatActivity {
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
-             dev();
+        dev();
     }
 
     private void dev() {
-
 
         binding.bonusHeader.amountNew2.addTextChangedListener(new TextWatcher() {
             @Override
@@ -232,17 +234,16 @@ public class BonusWalletFragment extends AppCompatActivity {
         binding.bonusHeader.sendIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              if (binding.bonusHeader.searchUserET.getText().toString().isEmpty()) {
+                startActivity(new Intent(BonusWalletFragment.this, TransferWalletProcessActivity.class));
+              /*if (binding.bonusHeader.searchUserET.getText().toString().isEmpty()) {
                     Toast.makeText(activity, "Please Select User", Toast.LENGTH_SHORT).show();
                 } else if ( binding.bonusHeader.amountNew2.getText().toString().isEmpty()) {
                     Toast.makeText(activity, "Please Enter Amount", Toast.LENGTH_SHORT).show();
-                }
-                else if (binding.bonusHeader.remarkNew2.getText().toString().isEmpty()) {
+                } else if (binding.bonusHeader.remarkNew2.getText().toString().isEmpty()) {
                     Toast.makeText(activity, "Please Enter Remarks", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     transferMoneyByServer();
-                }
+                }*/
             }
         });
 
@@ -759,24 +760,6 @@ public class BonusWalletFragment extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -794,12 +777,8 @@ public class BonusWalletFragment extends AppCompatActivity {
                                     serverDialog.dismiss();
                                     if(response.body().isStatus()){
                                         startActivity(new Intent(activity, RequestSuccess.class).putExtra("msg",response.body().getMessage()).putExtra("typ","Bonus"));
-
-                                    }
-
-                                    else {
+                                    } else {
                                         Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                                     }
                                 }
                             }
@@ -894,9 +873,11 @@ public class BonusWalletFragment extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     if (Functions.isIndian) {
-                                        popupWithdrawalAmount();
+                                        //popupWithdrawalAmount();
+                                        startActivity(new Intent(BonusWalletFragment.this, RequestWithdrawnActivity.class));
                                     }else {
-                                        popupWithdrawalAmountIntern();
+                                        //popupWithdrawalAmountIntern();
+                                        startActivity(new Intent(BonusWalletFragment.this, WithdrawTypeActivity.class));
                                     }
                                 }
                             });

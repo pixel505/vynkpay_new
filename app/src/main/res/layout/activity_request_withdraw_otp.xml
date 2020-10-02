@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/mainBackColor"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_new_rcg" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/custom_rectangle"
+                        android:gravity="center"
+                        android:weightSum="1">
+
+                        <com.vynkpay.custom.BoldTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/withdrawalAmount"
+                            android:layout_weight="0.6"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:textSize="@dimen/_16sdp"
+                            android:textColor="@color/black" />
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:text="@string/rs"
+                            android:id="@+id/tvWithdrawAmount"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/_10sdp"
+                            android:textSize="@dimen/_16sdp" />
+
+
+                    </LinearLayout>
+
+                    <com.vynkpay.custom.BoldTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/otp"
+                        android:gravity="center"
+                        android:textAllCaps="true"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ontime"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_24sdp"
+                        android:layout_marginLeft="@dimen/_24sdp"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_20sdp"/>
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_marginRight="@dimen/_24sdp"
+                        android:layout_marginLeft="@dimen/_24sdp"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:id="@+id/otpET"
+                        android:paddingStart="@dimen/_16sdp"
+                        android:paddingEnd="@dimen/_16sdp"
+                        android:textColor="@color/color_text"
+                        android:hint="@string/enterOTP"
+                        android:background="@drawable/custom_rectangle"/>
+
+                    <com.vynkpay.custom.NormalButton
+                        android:id="@+id/submitButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/round_corner_red"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/_24sdp"
+                        android:layout_marginLeft="@dimen/_24sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:text="@string/submit"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/white" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_16sdp"/>
+
+
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

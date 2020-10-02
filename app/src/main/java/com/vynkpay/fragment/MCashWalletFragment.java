@@ -41,6 +41,7 @@ import com.vynkpay.activity.PinActivity;
 import com.vynkpay.activity.activities.AffiliateActivity;
 import com.vynkpay.activity.activities.RequestSuccess;
 import com.vynkpay.activity.activities.Signupnew;
+import com.vynkpay.activity.activitiesnew.TransferWalletMCashActivity;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.retrofit.MainApplication;
@@ -261,8 +262,8 @@ public class MCashWalletFragment extends AppCompatActivity {
 
 
                 Log.e("ampunt", "" + amount);
-
-                if ( binding.mheader.serachNewEdt.getText().toString().isEmpty()) {
+                startActivity(new Intent(MCashWalletFragment.this, TransferWalletMCashActivity.class));
+               /* if ( binding.mheader.serachNewEdt.getText().toString().isEmpty()) {
                     Toast.makeText(activity, "Please Select User", Toast.LENGTH_SHORT).show();
                 } else if (amount==null) {
                     Toast.makeText(activity, "Please Select Amount", Toast.LENGTH_SHORT).show();
@@ -273,7 +274,7 @@ public class MCashWalletFragment extends AppCompatActivity {
 
                 else {
                     transferMoneyByServer();
-                }
+                }*/
             }
         });
         binding.mheader.filterLinear.setOnClickListener(new View.OnClickListener() {

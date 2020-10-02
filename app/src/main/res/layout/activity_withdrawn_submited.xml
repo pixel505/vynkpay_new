@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/mainBackColor"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_new_rcg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="@dimen/_90sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:src="@drawable/withdrawarequestsubmitd"
+                    android:layout_marginBottom="@dimen/_20sdp"/>
+
+                <com.vynkpay.custom.BoldTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/withdrawalRequestsubmit"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ontime"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_24sdp"
+                    android:textSize="@dimen/_12sdp" />
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/submitButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:background="@drawable/round_corner_red"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:text="@string/home"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/white" />
+
+
+
+
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </RelativeLayout>
+</LinearLayout>

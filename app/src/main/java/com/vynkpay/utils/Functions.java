@@ -42,6 +42,7 @@ public class Functions {
     public static boolean isIndian=true;
 
     public static final int DTH=4;
+
     public static void hideStatusBar(Activity activity) {
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }

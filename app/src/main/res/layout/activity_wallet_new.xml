@@ -106,6 +106,78 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/reqstWithdrawalCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:id="@+id/im7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/requestwithdrawal" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im7"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Request Withdrawal"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/reqwithtext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/vCashCard"
@@ -252,7 +324,77 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/loadMcash"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
 
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:id="@+id/im5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/loadcash" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im5"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Load MCash"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/loadmCashText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/reqstCash"
@@ -324,79 +466,6 @@
 
                     </androidx.cardview.widget.CardView>
 
-
-
-                   <androidx.cardview.widget.CardView
-                        android:id="@+id/loadMcash"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_90sdp"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="@dimen/_5sdp"
-                        app:cardElevation="@dimen/_3sdp"
-                        app:contentPadding="@dimen/_10sdp">
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-
-                            <ImageView
-                                android:id="@+id/im5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/loadcash" />
-
-                            <LinearLayout
-                                android:layout_marginEnd="@dimen/_30sdp"
-                                android:layout_toRightOf="@+id/im5"
-                                android:layout_marginStart="@dimen/_20sdp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <com.vynkpay.custom.NormalTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Load MCash"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_14sdp" />
-
-                                <com.vynkpay.custom.NormalTextView
-                                    android:id="@+id/loadmCashText"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    />
-
-                            </LinearLayout>
-
-
-                            <LinearLayout
-                                android:layout_alignParentRight="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:gravity="center">
-
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/arrowcommunity" />
-
-                            </LinearLayout>
-
-
-                        </RelativeLayout>
-
-
-                    </androidx.cardview.widget.CardView>
                     <androidx.cardview.widget.CardView
                         android:id="@+id/transferCard"
                         android:layout_width="match_parent"
@@ -435,7 +504,7 @@
                                 <com.vynkpay.custom.NormalTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Transfer &amp; Conversion"
+                                    android:text="Conversion"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_14sdp" />
 
@@ -468,13 +537,15 @@
 
 
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/reqstWithdrawalCard"
+                        android:id="@+id/transferWallet"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_90sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="@dimen/_5sdp"
                         app:cardElevation="@dimen/_3sdp"
@@ -487,16 +558,16 @@
 
 
                             <ImageView
-                                android:id="@+id/im7"
+                                android:id="@+id/im8"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/requestwithdrawal" />
+                                android:src="@drawable/transfer_wallet78" />
 
                             <LinearLayout
                                 android:layout_marginEnd="@dimen/_30sdp"
-                                android:layout_toRightOf="@+id/im7"
+                                android:layout_toRightOf="@+id/im8"
                                 android:layout_marginStart="@dimen/_20sdp"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -506,14 +577,15 @@
                                 <com.vynkpay.custom.NormalTextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Request Withdrawal"
+                                    android:text="Transfer Wallet"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_14sdp" />
 
                                 <com.vynkpay.custom.NormalTextView
-                                    android:id="@+id/reqwithtext"
+                                    android:id="@+id/transferWalletText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:visibility="gone"
                                     android:text=""
                                     />
 
@@ -539,6 +611,7 @@
 
 
                     </androidx.cardview.widget.CardView>
+
 
 
                 </LinearLayout>

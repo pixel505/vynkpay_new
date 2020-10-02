@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -38,16 +39,37 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
 
     ActivityRegister2Binding binding;
     Dialog dialog, serverDialog;
-    String countryCode = "";
+    String countryCode = "",which="";
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register2);
         serverDialog = M.showDialog(Register2Activity.this, "", false, false);
+        sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         binding.otpButton.setOnClickListener(this);
         binding.linCode.setOnClickListener(this);
         binding.tvCCode.setOnClickListener(this);
+        if (getIntent().hasExtra("which")){
+            which = getIntent().getStringExtra("which");
+        }
+        assert which != null;
+        if (which.equalsIgnoreCase("customer")){
+            binding.linEmail.setVisibility(View.GONE);
+            binding.linPhone.setVisibility(View.VISIBLE);
+        }else {
+            binding.linEmail.setVisibility(View.VISIBLE);
+            binding.linPhone.setVisibility(View.GONE);
+        }
+
+       /* if(sp.getString("value", "").equalsIgnoreCase("Global")){
+            binding.linEmail.setVisibility(View.VISIBLE);
+            binding.linPhone.setVisibility(View.GONE);
+        }else {
+            binding.linEmail.setVisibility(View.GONE);
+            binding.linPhone.setVisibility(View.VISIBLE);
+        }*/
     }
 
     //for international phone will replace with email

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_above="@+id/keyboard"
+            android:gravity="center"
+            android:layout_marginStart="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_35sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/logo" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter Pin"
+                android:textSize="@dimen/_14sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="@color/color_text"/>
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/pinEdt"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:textSize="@dimen/_12sdp"
+                android:background="@drawable/custom_rectangle"
+                android:hint="Enter Pin"
+                android:gravity="center_vertical"
+                android:inputType="number"
+                android:maxLength="6"
+                android:layout_marginTop="@dimen/_16sdp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/round_corner_red"
+                android:gravity="center">
+
+                <com.vynkpay.custom.NormalButton
+                    android:id="@+id/addPinBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="Submit"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/buttonText" />
+
+            </LinearLayout>
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/forgotPINTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="@string/forgotPIN" />
+
+        </LinearLayout>
+
+        <com.vynkpay.utils.KeyboardView
+            android:layout_width="match_parent"
+            android:id="@+id/keyboard"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</layout>
+
+
+
+
+

@@ -17,6 +17,7 @@ import com.vynkpay.fragment.ECashWalletFragment;
 import com.vynkpay.prefes.Prefes;
 
 public class RequestSuccess extends AppCompatActivity {
+
     ActivityRequestSuccessBinding binding;
     RequestSuccess ac;
     SharedPreferences sp;

@@ -288,6 +288,7 @@ public class Splash extends AppCompatActivity {
                                         finish();
                                     }
                                 }
+                                Log.d("valuevalue",sp.getString("value", ""));
                             }
                         }
                     } else {

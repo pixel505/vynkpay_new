@@ -132,21 +132,14 @@ public class PinActivity extends AppCompatActivity {
 
                                                     if(sp.getString("value","").equals("Global") && isIndian.equals("NO")){
                                                         startActivity(new Intent(PinActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                                           finish();
-                                                    }
-
-                                                    else if(sp.getString("value","").equals("Global") && isIndian.equals("YES")){
+                                                        finish();
+                                                    } else if(sp.getString("value","").equals("Global") && isIndian.equals("YES")){
                                                         startActivity(new Intent(PinActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                                         finish();
-                                                    }
-
-
-                                                    else if(sp.getString("value","").equals("India") && isIndian.equals("YES")){
+                                                    } else if(sp.getString("value","").equals("India") && isIndian.equals("YES")){
                                                         startActivity(new Intent(PinActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                                         finish();
-                                                    }
-
-                                                    else if(sp.getString("value","").equals("India") && isIndian.equals("NO")){
+                                                    } else if(sp.getString("value","").equals("India") && isIndian.equals("NO")){
                                                         startActivity(new Intent(PinActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                                         finish();
                                                     }

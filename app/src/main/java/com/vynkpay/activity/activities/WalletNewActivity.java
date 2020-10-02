@@ -13,6 +13,11 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.vynkpay.R;
+import com.vynkpay.activity.activitiesnew.RequestWithdrawnActivity;
+import com.vynkpay.activity.activitiesnew.TranferWalletActivity;
+import com.vynkpay.activity.activitiesnew.WithdrawTypeActivity;
+import com.vynkpay.activity.activitiesnew.conversion.ConvertBonusMcashActivity;
+import com.vynkpay.activity.activitiesnew.loadmcash.LoadmcashActivity;
 import com.vynkpay.adapter.WalletTabAdapter;
 import com.vynkpay.databinding.ActivityWalletNewBinding;
 import com.vynkpay.fragment.BonusWalletFragment;
@@ -92,23 +97,55 @@ public class WalletNewActivity extends AppCompatActivity {
         });
 
 
+        binding.transferWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("teransferre","click");
+                startActivity(new Intent(WalletNewActivity.this, TranferWalletActivity.class));
+            }
+        });
+
+        binding.reqstWithdrawalCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Functions.isIndian) {
+                    //popupWithdrawalAmount();
+                    startActivity(new Intent(WalletNewActivity.this, RequestWithdrawnActivity.class));
+                }else {
+                    //popupWithdrawalAmountIntern();
+                    startActivity(new Intent(WalletNewActivity.this, WithdrawTypeActivity.class));
+                }
+            }
+        });
+
+        binding.loadMcash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(WalletNewActivity.this, LoadmcashActivity.class));
+            }
+        });
+
         if(Functions.isIndian){
-            binding.loadMcash.setVisibility(View.GONE);
+            binding.loadMcash.setVisibility(View.VISIBLE);
             binding.transferCard.setVisibility(View.GONE);
-            binding.reqstWithdrawalCard.setVisibility(View.GONE);
+            binding.reqstWithdrawalCard.setVisibility(View.VISIBLE);
+            binding.transferWallet.setVisibility(View.VISIBLE);
         }
 
         else {
             binding.loadMcash.setVisibility(View.VISIBLE);
             binding.transferCard.setVisibility(View.VISIBLE);
             binding.reqstWithdrawalCard.setVisibility(View.VISIBLE);
+            binding.transferWallet.setVisibility(View.GONE);
             binding.transferCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   startActivity(new Intent(ac,ConversionActivity.class));
+                   startActivity(new Intent(ac, ConvertBonusMcashActivity.class));
+                   //startActivity(new Intent(ac,ConversionActivity.class));
                 }
             });
         }
+
 
     }
     public void getBonusTransaction(){
@@ -123,6 +160,7 @@ public class WalletNewActivity extends AppCompatActivity {
                          serverDialog.dismiss();
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                          bonusBalance=dataObject.getString("walletBalance");
+                         binding.reqwithtext.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
                          binding.bonusAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
 
 

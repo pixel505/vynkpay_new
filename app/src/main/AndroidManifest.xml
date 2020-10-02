@@ -31,13 +31,115 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".newregistration.OnboardingActivity"></activity>
-        <activity android:name=".newregistration.Register4Activity" />
-        <activity android:name=".newregistration.Register3Activity" />
-        <activity android:name=".newregistration.Register2Activity" />
+        <activity android:name=".activity.activitiesnew.conversion.ConversionOtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"></activity>
+        <activity
+            android:name=".activity.activitiesnew.loadmcash.LoadMcashSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.loadmcash.PaymentMethodMcashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.loadmcash.LoadmcashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.conversion.ConvertSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.conversion.ConvertDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.conversion.ConvertBonusMcashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.conversion.ConvertMCashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.TransferWalletMCashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.TransferSuccessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.WithdrawTypeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.EnterPinNewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.TransferWalletProcessActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.TranferWalletActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.WithdrawnSubmitedActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.RequestWithdrawOtpActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.RequestWithdrawnActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".newregistration.OnboardingActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".newregistration.Register4Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".newregistration.Register3Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".newregistration.Register2Activity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
         <activity
             android:name=".newregistration.Register1Activity"
-            android:screenOrientation="portrait" />
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activities.ConversionActivity"
             android:launchMode="singleTop"

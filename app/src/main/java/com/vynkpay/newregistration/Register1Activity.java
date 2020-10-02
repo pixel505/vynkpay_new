@@ -38,7 +38,7 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(Register1Activity.this,Register2Activity.class));
+                    startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","customer"));
                 }
             },500);
         }
@@ -48,7 +48,7 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(Register1Activity.this,Register2Activity.class));
+                    startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","affiliate"));
                 }
             },500);
         }

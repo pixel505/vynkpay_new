@@ -28,12 +28,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_100sdp"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:padding="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:orientation="vertical">
@@ -91,12 +92,14 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
+                    android:visibility="gone"
                     android:background="@color/graycolor"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <com.vynkpay.custom.NormalTextView
@@ -168,11 +171,11 @@
                             android:background="@drawable/buttonbg">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/send_icon"
                                 android:id="@+id/sendIV"
-                                android:padding="@dimen/_5sdp"/>
+                                android:layout_width="match_parent"
+                                android:layout_height="16dp"
+                                android:padding="@dimen/_5sdp"
+                                android:src="@drawable/send_icon" />
 
                         </FrameLayout>
 
