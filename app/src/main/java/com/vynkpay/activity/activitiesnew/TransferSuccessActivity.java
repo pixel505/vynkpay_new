@@ -44,7 +44,10 @@ public class TransferSuccessActivity extends AppCompatActivity implements View.O
                 //binding.kycImage.setImageResource(R.drawable.requestcash);
             }
 
-
+            if(getIntent().getStringExtra("typ").equals("vCash")){
+                binding.messageText.setText("VCash Request Submitted Successfully");
+                //binding.kycImage.setImageResource(R.drawable.requestcash);
+            }
 
 
         }

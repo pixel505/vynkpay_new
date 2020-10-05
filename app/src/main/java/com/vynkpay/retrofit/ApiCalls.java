@@ -364,6 +364,16 @@ public interface ApiCalls {
             @Field("remarks") String remarks
     );
 
+    @FormUrlEncoded
+    @POST("account/api_accounts/TransferMetherCredit_mcash")
+    Call<TransferMoney> transfermVMoney(
+            @Header("access_token") String access_token,
+            @Field("pin") String pin,
+            @Field("user_id") String user_id,
+            @Field("amount") String amount,
+            @Field("remarks") String remarks
+    );
+
   @GET("account/api_accounts/dashboard")
     Call<GetNonWalletResponse> noindianWallet(
             @Header("access_token") String access_token);

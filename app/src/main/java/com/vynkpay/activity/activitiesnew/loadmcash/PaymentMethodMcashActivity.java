@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
@@ -26,6 +27,7 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityPaymentMethodMcashBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
+import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
 import com.vynkpay.retrofit.model.GetProfileResponse;
 import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
@@ -111,16 +113,19 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
                 if (!binding.btnRozarpay.isChecked()){
                     Toast.makeText(PaymentMethodMcashActivity.this, "Please select payment method", Toast.LENGTH_SHORT).show();
                 }else {
+                    binding.submitButton.setClickable(false);
                     payUsingRozarPay(amount);
                     //startActivity(new Intent(PaymentMethodMcashActivity.this,LoadMcashSuccessActivity.class));
                 }
             }else {
                 if (binding.btnCoinbase.isChecked() || binding.btnPayeer.isChecked()){
                     if (binding.btnCoinbase.isChecked()){
+                        binding.submitButton.setClickable(false);
                         //url
                         //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token=618f375122156a6df9ea873d57d71e66a7c0c10d577d9d643b8617403629e2471598446930&investValue=125&type=wallet
                         String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
                         startActivity(new Intent(PaymentMethodMcashActivity.this,CoinbaseActivity.class).putExtra("url",url));
+                        binding.submitButton.setClickable(true);
                         PaymentMethodMcashActivity.this.finish();
                     }else if (binding.btnCoinbase.isChecked()){
 
@@ -162,6 +167,7 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
             preFill.put("contact", phone);
             options.put("prefill", preFill);
             co.open(activity, options);
+            binding.submitButton.setClickable(true);
         } catch (Exception e) {
             Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -171,9 +177,46 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onPaymentSuccess(String s, PaymentData paymentData) {
-        try {
+        /*try {
             Log.e("razorpay_payment_idmca", "razorpay_payment_id" + paymentData.getData().getString("razorpay_payment_id"));
+
         } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        try {
+            Dialog loader=M.showDialog(PaymentMethodMcashActivity.this, "", false, false);
+            loader.show();
+            Log.e("razorpay_payment_id", "razorpay_payment_id" + paymentData.getData().getString("razorpay_payment_id"));
+            MainApplication.getApiService().addMoneyRazorMethod(Prefes.getAccessToken(PaymentMethodMcashActivity.this),
+                    paymentData.getData().getString("razorpay_payment_id"),
+                    amount.replace(Functions.CURRENCY_SYMBOL, ""))
+                    .enqueue(new Callback<AddMoneyRazorResponse>() {
+                        @Override
+                        public void onResponse(Call<AddMoneyRazorResponse> call, Response<AddMoneyRazorResponse> response) {
+                            Log.d("sdasfdasdsdad", response.toString()+"?/");
+                            Log.d("sdasfdasdsdad", response.body().getMessage()+"?/");
+                            loader.dismiss();
+                            if(response.isSuccessful()){
+                                Log.d("addmcashtmoney",new Gson().toJson(response.body()));
+                                if (response.body().getSuccess()) {
+                                    Toast.makeText(PaymentMethodMcashActivity.this, response.body().getMessage() != null ? response.body().getMessage() : "Money added successfully.", Toast.LENGTH_SHORT).show();
+                                    PaymentMethodMcashActivity.this.finish();
+                                }else {
+                                    Toast.makeText(PaymentMethodMcashActivity.this, response.body().getMessage() != null ? response.body().getMessage() : "Error in payment", Toast.LENGTH_SHORT).show();
+                                    PaymentMethodMcashActivity.this.finish();
+                                }
+
+                                //makeRechargeRequest(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL, ""));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<AddMoneyRazorResponse> call, Throwable t) {
+                            loader.dismiss();
+                        }
+                    });
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }

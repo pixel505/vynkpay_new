@@ -71,6 +71,8 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
 
         if (view == binding.crdVCash){
             Log.d("vchasssh","click");
+            startActivity(new Intent(TranferWalletActivity.this,TransferVcashActivity.class));
+            //TransferVcashActivity
         }
 
 
