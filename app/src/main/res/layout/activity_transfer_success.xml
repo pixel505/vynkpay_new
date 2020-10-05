@@ -37,6 +37,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/withdrawalRequestsubmit"
                         android:gravity="center"
+                        android:layout_marginRight="@dimen/_24sdp"
+                        android:layout_marginLeft="@dimen/_24sdp"
                         android:id="@+id/messageText"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16sdp" />

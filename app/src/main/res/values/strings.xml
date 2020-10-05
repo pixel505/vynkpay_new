@@ -269,4 +269,7 @@
     <string name="enteramounttobeadded">Enter amount to added</string>
     <string name="razorpay">Razorpay</string>
     <string name="mCashloaded">Mcash Loaded Successfully</string>
+    <string name="verifymmail">Verify Email</string>
+    <string name="onetimepasswordphone">One Time Password has been sent to your mobile number. please enter below and verify your moblie number</string>
+    <string name="onetimepasswordemail">One Time Password has been sent to your email. please enter below and verify your email</string>
 </resources>

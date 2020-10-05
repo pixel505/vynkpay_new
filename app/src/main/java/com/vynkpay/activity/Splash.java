@@ -284,7 +284,8 @@ public class Splash extends AppCompatActivity {
                                             finish();
                                         }
                                     }else {
-                                        startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", "Global"));
+
+                                        startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", sp.getString("value", "")));
                                         finish();
                                     }
                                 }

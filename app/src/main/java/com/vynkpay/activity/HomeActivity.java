@@ -76,6 +76,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         ButterKnife.bind(this);
+        if (getIntent().hasExtra("Country")) {
+            Log.d("homeactvi", getIntent().getStringExtra("Country") + "///////");
+        }
+
         if (Prefes.getisIndian(HomeActivity.this).equals("")) {
 
             if (getIntent().getStringExtra("Country").equals("Global")) {

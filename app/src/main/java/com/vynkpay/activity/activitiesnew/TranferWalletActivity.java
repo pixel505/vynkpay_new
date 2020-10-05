@@ -51,12 +51,18 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                 finish();
             }
         });
-        getBonusTransaction();
-        getMCashTransaction();
-        getVCashTransaction();
+
         binding.crdBouns.setOnClickListener(this);
         binding.crdMCash.setOnClickListener(this);
         binding.crdVCash.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBonusTransaction();
+        getMCashTransaction();
+        getVCashTransaction();
     }
 
     @Override
@@ -149,7 +155,9 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                             VCashWalletFragment.walletTransactionsModelArrayList.add(new WalletTransactionsModel(id, front_user_id, user_id, type,
                                     payment_via, p_amount, profit_type, mode, transactionStatus, created_date, username,
                                     email, phone, name, paid_status, balance, frontusername));
+
                         }
+
 
                         Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
 

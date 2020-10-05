@@ -200,7 +200,7 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
                                         countryRecycler.setVisibility(View.GONE);
                                     }
                                 } else {
-
+                                    Log.d("userResponse","response not successfull");
                                 }
                             }
 

@@ -41,6 +41,7 @@ public class GetUserResponse {
     }
 
     public class Datum {
+
         @SerializedName("text")
         @Expose
         private String text;
@@ -74,5 +75,6 @@ public class GetUserResponse {
         public void setUsername(String username) {
             this.username = username;
         }
+
     }
 }

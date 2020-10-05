@@ -27,6 +27,7 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
         binding.linCustomer.setOnClickListener(this);
         binding.linAffiliate.setOnClickListener(this);
 
+
     }
 
     @Override
@@ -40,7 +41,7 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
                 public void run() {
                     startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","customer"));
                 }
-            },500);
+            },400);
         }
         if (view == binding.linAffiliate){
             binding.linCustomer.setBackgroundResource(R.drawable.register_default_button);
@@ -50,7 +51,7 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
                 public void run() {
                     startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","affiliate"));
                 }
-            },500);
+            },400);
         }
 
     }

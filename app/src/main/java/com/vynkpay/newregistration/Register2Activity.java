@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +22,15 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.Signupnew;
 import com.vynkpay.databinding.ActivityRegister2Binding;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetCountryResponse;
 import com.vynkpay.utils.M;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +63,11 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
         if (which.equalsIgnoreCase("customer")){
             binding.linEmail.setVisibility(View.GONE);
             binding.linPhone.setVisibility(View.VISIBLE);
+            binding.tvText.setText(getString(R.string.mobile_number));
         }else {
             binding.linEmail.setVisibility(View.VISIBLE);
             binding.linPhone.setVisibility(View.GONE);
+            binding.tvText.setText(getString(R.string.email));
         }
 
        /* if(sp.getString("value", "").equalsIgnoreCase("Global")){
@@ -78,7 +85,7 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         if (view == binding.otpButton){
-            startActivity(new Intent(Register2Activity.this,Register3Activity.class));
+            startActivity(new Intent(Register2Activity.this,Register3Activity.class).putExtra("which",which));
         }
 
         if (view == binding.linCode){
@@ -143,13 +150,18 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
         if (view == binding.tvCCode){
             serverDialog.show();
             MainApplication.getApiService().getCountry().enqueue(new Callback<GetCountryResponse>() {
+
                 @Override
-                public void onResponse(Call<GetCountryResponse> call, Response<GetCountryResponse> response) {
+                public void onResponse(@NotNull Call<GetCountryResponse> call, @NotNull Response<GetCountryResponse> response) {
+
                     if (response.isSuccessful()) {
+                        Log.d("cResponsee",new Gson().toJson(response.body()));
                         serverDialog.dismiss();
                         dialog = new Dialog(Register2Activity.this);
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        if (dialog.getWindow()!=null) {
+                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        }
                         dialog.setCancelable(false);
                         dialog.setCanceledOnTouchOutside(true);
                         dialog.setContentView(R.layout.country_dialog_new);
@@ -213,8 +225,9 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
             this.searchedItemModelArrayList.addAll(mList);
         }
 
+        @NotNull
         @Override
-        public CountryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.country_list, parent, false);
 
@@ -222,18 +235,16 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
         }
 
         @Override
-        public void onBindViewHolder(CountryAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, int position) {
             GetCountryResponse.Datum data = mList.get(position);
             holder.countryText.setText(data.getText());
             holder.countryText.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
                     dialog.dismiss();
                     binding.tvCCode.setText("+"+data.getStdCode());
-
-
                     countryCode = "+"+data.getStdCode();
-
                 }
             });
         }
@@ -258,6 +269,7 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
             notifyDataSetChanged();
         }
 
+
         public class MyViewHolder extends RecyclerView.ViewHolder {
             TextView countryText;
 
@@ -266,6 +278,7 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
                 countryText = view.findViewById(R.id.countryText);
             }
         }
+
     }
 
 }

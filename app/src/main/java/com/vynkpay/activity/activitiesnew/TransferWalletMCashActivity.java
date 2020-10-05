@@ -300,7 +300,7 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
 
         @Override
         public int getItemCount() {
-            return mList.size();
+            return mList != null ? mList.size() :0;
         }
 
         public void filter(String charText) {

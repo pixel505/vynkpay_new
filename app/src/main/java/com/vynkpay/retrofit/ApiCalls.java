@@ -365,7 +365,7 @@ public interface ApiCalls {
     );
 
     @FormUrlEncoded
-    @POST("account/api_accounts/TransferMetherCredit_mcash")
+    @POST("account/api_accounts/TransferMetherCredit_cashback")
     Call<TransferMoney> transfermVMoney(
             @Header("access_token") String access_token,
             @Field("pin") String pin,

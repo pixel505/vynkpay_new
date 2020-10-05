@@ -89,14 +89,16 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
                 }
                 else{
                     serverDialog.dismiss();
-                    Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    if (response.body() != null) {
+                        Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<SendWaletOtp> call, Throwable t) {
                 serverDialog.dismiss();
-                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, t.getMessage()!=null ? t.getMessage() : "Error", Toast.LENGTH_SHORT).show();
             }
         });
 

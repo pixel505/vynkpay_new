@@ -110,7 +110,7 @@ public class ConvertBonusMcashActivity extends AppCompatActivity implements View
             @Override
             public void onFailure(Call<ConversionResponse> call, Throwable t) {
                 serverDialog.dismiss();
-                Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, t.getMessage()!=null?t.getMessage():"Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
     }

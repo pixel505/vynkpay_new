@@ -13,11 +13,24 @@ import com.vynkpay.databinding.ActivityRegister3Binding;
 public class Register3Activity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityRegister3Binding binding;
+    String which = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register3);
+        if (getIntent().hasExtra("which")){
+            which = getIntent().getStringExtra("which");
+        }
+        if (which != null) {
+            if (which.equalsIgnoreCase("customer")){
+                binding.tvTitleText.setText(getString(R.string.verifymobile));
+                binding.tvTextVerify.setText(getString(R.string.onetimepasswordphone));
+            } else {
+                binding.tvTitleText.setText(getString(R.string.verifymmail));
+                binding.tvTextVerify.setText(getString(R.string.onetimepasswordemail));
+            }
+        }
         binding.submitButton.setOnClickListener(this);
     }
 

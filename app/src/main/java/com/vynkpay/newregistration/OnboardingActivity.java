@@ -101,9 +101,8 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         if (view == binding.btnNext){
             if (binding.btnNext.getText().toString().equalsIgnoreCase("Login")){
                 sp.edit().putString("welcome","yes").apply();
-                //startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
                 startActivity(new Intent(OnboardingActivity.this, HomeActivity.class).putExtra("Country", country));
-                OnboardingActivity.this.finish();
+                finishAffinity();
 
             } else {
                 if (currentPage == NUM_PAGES) {

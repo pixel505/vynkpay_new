@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.PinActivity;
 import com.vynkpay.custom.NormalButton;
@@ -240,8 +241,9 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
 
                             @Override
                             public void onResponse(Call<TransferMoney> call, Response<TransferMoney> response) {
+                                serverDialog.dismiss();
                                 try {
-
+                                    Log.d("transfervcash",new Gson().toJson(response.body()));
                                     if (response.isSuccessful()) {
                                         if(response.body().isStatus()){
                                             startActivity(new Intent(TransferVcashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","vCash"));
@@ -270,6 +272,7 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
     }
 
     public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
+
         Context context;
         List<GetUserResponse.Datum> mList;
         List<GetUserResponse.Datum> searchedItemModelArrayList;
@@ -297,6 +300,7 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
         public void onBindViewHolder(MyViewHolder holder, int position) {
             GetUserResponse.Datum data = mList.get(position);
             holder.countryText.setText(data.getText());
+
             holder.countryText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -304,10 +308,9 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
                     sear.setText(data.getText());
                     userId = data.getId();
                     // countryId=data.getId();
-
-
                 }
             });
+
         }
 
         @Override

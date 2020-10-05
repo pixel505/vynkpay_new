@@ -37,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
+                    android:id="@+id/tvTitleText"
                     android:text="@string/verifymobile"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
@@ -47,8 +48,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
+                    android:id="@+id/tvTextVerify"
                     android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                    android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp" />
                 <LinearLayout
                     android:layout_width="match_parent"
