@@ -48,8 +48,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
                     android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <LinearLayout
 

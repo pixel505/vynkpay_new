@@ -169,8 +169,8 @@ public class LoginActivity extends AppCompatActivity {
     signUpText.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //Intent intent = new Intent(LoginActivity.this, Signupnew.class);
-        Intent intent = new Intent(LoginActivity.this, Register1Activity.class);
+        Intent intent = new Intent(LoginActivity.this, Signupnew.class);
+        //Intent intent = new Intent(LoginActivity.this, Register1Activity.class);
                /* intent.putExtra("url", "register");
                 intent.putExtra("title", "");*/
         startActivity(intent);
@@ -452,16 +452,20 @@ public class LoginActivity extends AppCompatActivity {
           ApiCalls.sendResetPasswordLink(LoginActivity.this, fieldET.getText().toString().trim(), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
+
               progressBar.setVisibility(View.GONE);
               button.setEnabled(true);
               dialog.dismiss();
+
               try {
+
                 JSONObject jsonObject=new JSONObject(result);
                 Toast.makeText(LoginActivity.this, jsonObject.getString("message")+"", Toast.LENGTH_LONG).show();
 
-              } catch (JSONException e) {
+              } catch (Exception e) {
                 e.printStackTrace();
               }
+
             }
 
             @Override

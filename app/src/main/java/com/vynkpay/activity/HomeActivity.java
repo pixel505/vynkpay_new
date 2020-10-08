@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawer;
     ActivityHomeBindingImpl binding;
     String referralLink="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -253,8 +254,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
         binding.sideLayout.legalitiesLinear.setOnClickListener(this);
+        binding.sideLayout.legalitiesLinear.setVisibility(View.GONE);
         binding.sideLayout.shareLinear.setOnClickListener(this);
         binding.sideLayout.careerPlanLinear.setOnClickListener(this);
+        binding.sideLayout.careerPlanLinear.setVisibility(View.GONE);
         binding.sideLayout.homeLinear.setOnClickListener(this);
         binding.sideLayout.loginLinear.setOnClickListener(this);
         binding.sideLayout.shopLinear.setOnClickListener(this);
@@ -263,6 +266,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         binding.sideLayout.accessLinear.setOnClickListener(this);
         binding.sideLayout.profileLinear.setOnClickListener(this);
         binding.sideLayout.kycLinear.setOnClickListener(this);
+        binding.sideLayout.kycLinear.setVisibility(View.GONE);
         binding.sideLayout.supportLinear.setOnClickListener(this);
         binding.sideLayout.aboutLinear.setOnClickListener(this);
         binding.sideLayout.logoutFrame.setOnClickListener(this);

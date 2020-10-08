@@ -110,7 +110,8 @@ public class BonusWalletFragment extends AppCompatActivity {
             }
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
-        binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
+        //binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
+        binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
         dev();
     }
 

@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHolder>  {
     Context context;
@@ -51,9 +52,9 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         holder.binding.invoiceNumber.setText(myListData.getInvoiceNumber());
 
         try {
-            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
             Date d = f.parse(myListData.getCreatedDate());
-            DateFormat date = new SimpleDateFormat("dd-MM-yyy");
+            DateFormat date = new SimpleDateFormat("dd-MM-yyy",Locale.getDefault());
             holder.binding.purchaseDate.setText(date.format(d));
             System.out.println("Date: " + date.format(d));
         } catch (ParseException e) {

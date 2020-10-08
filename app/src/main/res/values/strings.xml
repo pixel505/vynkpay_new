@@ -157,7 +157,7 @@
     <string name="supportchat">Support Chat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bonusWallet">Bonus Wallet</string>
+    <string name="bonusWallet">Cashback</string> <!--Bonus Wallet-->
     <string name="requestWithdrawal">Request \nWithdrawal</string>
     <string name="availableAmount">Available Amount</string>
     <string name="transferWallet">Transfer Wallet</string>
@@ -247,7 +247,7 @@
     <string name="statement">Statement</string>
     <string name="servicecharges">Service Charges</string>
     <string name="totalamount">Total Amount</string>
-    <string name="bonuswalletbalance">Bonus wallet Balance</string>
+    <string name="bonuswalletbalance">Cashback Balance</string><!--Bonus wallet Balance-->
     <string name="convert">Convert</string>
     <string name="withdrawtype">Withdrawal Type</string>
     <string name="next">Next</string>
