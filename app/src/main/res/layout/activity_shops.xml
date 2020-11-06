@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarnew"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.vynkpay.custom.NormalEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:paddingLeft="@dimen/_16sdp"
+                        android:textCursorDrawable="@drawable/white_cursor"
+                        android:background="@drawable/search_back"
+                        android:ellipsize="end"
+                        android:id="@+id/searchView"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/ivFilter"
+                        android:layout_marginRight="@dimen/_12sdp"
+                        android:src="@drawable/settings3x"
+                        />
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:id="@+id/toolbarTitlenew"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+                        android:textColor="@color/white" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_4sdp"
+                    android:orientation="vertical"
+                    android:background="@color/colorPrimary">
+                    <com.google.android.material.tabs.TabLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:id="@+id/tabLayout"
+                        app:tabIndicator="@color/white"
+                        app:tabTextColor="@color/white"
+                        app:tabIndicatorHeight="@dimen/_3sdp"
+                        app:tabMode="fixed"/>
+                </LinearLayout>
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/viewPager"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/frameContainer"
+                android:orientation="vertical"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+</layout>

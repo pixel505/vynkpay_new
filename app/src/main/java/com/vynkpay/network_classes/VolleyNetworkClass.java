@@ -72,7 +72,7 @@ public class VolleyNetworkClass {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                String errorString=error.getMessage();
+                String errorString = error.getMessage()!=null ? error.getMessage() : "Error";
                 if (volleyResponse!=null){
                     volleyResponse.onError(errorString);
                 }
@@ -155,7 +155,7 @@ public class VolleyNetworkClass {
             @Override
             public void onErrorResponse(VolleyError error) {
               
-                String errorString=error.getMessage();
+                String errorString = error.getMessage()!=null ? error.getMessage() : "Error";
                 if (volleyResponse!=null){
                     volleyResponse.onError(errorString);
                 }
@@ -234,7 +234,7 @@ public class VolleyNetworkClass {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                String errorString=error.getMessage();
+                String errorString = error.getMessage()!=null?error.getMessage():"Error";
                 if (volleyResponse!=null){
                     volleyResponse.onError(errorString);
                 }
@@ -325,7 +325,7 @@ public class VolleyNetworkClass {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                String errorString=error.getMessage();
+                String errorString = error.getMessage()!=null ? error.getMessage() : "Error";
                 if (volleyResponse!=null){
                     volleyResponse.onError(errorString);
                 }

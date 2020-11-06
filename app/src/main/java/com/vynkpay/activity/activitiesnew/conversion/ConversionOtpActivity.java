@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
@@ -68,7 +69,7 @@ public class ConversionOtpActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         if (view == binding.submitButton){
-            if(binding.otpET.getText().toString().isEmpty()){
+            if(TextUtils.isEmpty(binding.otpET.getText().toString().trim())){
                 Toast.makeText(activity, "Please Enter OTP", Toast.LENGTH_SHORT).show();
             } else {
                 checkOTP(binding.otpET.getText().toString());
@@ -116,7 +117,7 @@ public class ConversionOtpActivity extends AppCompatActivity implements View.OnC
 
                     if(response.body().getStatus()){
                         Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(ConversionOtpActivity.this,ConvertSuccessActivity.class));
+                        startActivity(new Intent(ConversionOtpActivity.this,ConvertSuccessActivity.class).putExtra("message",response.body().getMessage()!=null ? response.body().getMessage():"Error"));
                         ConversionOtpActivity.this.finish();
                         //getConversionList();
                         //binding.conversionHeader.searchUserET.setText("");

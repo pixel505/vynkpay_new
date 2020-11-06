@@ -126,6 +126,7 @@ public class WebviewActivityNew extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<PayResponse> call, Throwable t) {
+                Log.d("Error", t.getMessage() != null ? t.getMessage( ) : "Error");
                 dialog1.dismiss();
             }
         });

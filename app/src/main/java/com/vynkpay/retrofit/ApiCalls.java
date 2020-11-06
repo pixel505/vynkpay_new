@@ -11,6 +11,7 @@ import com.vynkpay.retrofit.model.AppVersionResponse;
 import com.vynkpay.retrofit.model.ChangePasswordResponse;
 import com.vynkpay.retrofit.model.CheckWaletOtp;
 import com.vynkpay.retrofit.model.CloseTicketResponse;
+import com.vynkpay.retrofit.model.Club1Response;
 import com.vynkpay.retrofit.model.CommunityDetailResponse;
 import com.vynkpay.retrofit.model.ConversionResponse;
 import com.vynkpay.retrofit.model.DeleteNotificationResponse;
@@ -34,6 +35,7 @@ import com.vynkpay.retrofit.model.LoginResponse;
 import com.vynkpay.retrofit.model.LogoutResponse;
 import com.vynkpay.retrofit.model.NotificationReadResponse;
 import com.vynkpay.retrofit.model.NotificationResponse;
+import com.vynkpay.retrofit.model.OtpVerifyLoginResponse;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.retrofit.model.PaidItemResponse;
 import com.vynkpay.retrofit.model.PayResponse;
@@ -96,6 +98,9 @@ public interface ApiCalls {
     @GET("api/auth/country_list")
     Call<GetCountryResponse> getCountry();
 
+    @GET("account/frontend/api_all_states")
+    Call<String> getAllState();
+
 
     @FormUrlEncoded
     @POST("account/frontend/register_user")
@@ -112,11 +117,18 @@ public interface ApiCalls {
             @Field("customControlAutosizing") String customControlAutosizing,
             @Field("affiliateagreement") String affiliateagreement,
             @Field("u_pan") String u_pan,
-            @Field("u_aadhar") String u_aadhar);
+            @Field("u_aadhar") String u_aadhar,
+            @Field("state") String state);
 
     @FormUrlEncoded
     @POST("account/frontend/otp_verification_sighup")
     Call<OtpVerifyResponse> otpVerifyMethod(
+            @Field("temp_id") String temp_id,
+            @Field("otp") String otp);
+
+    @FormUrlEncoded
+    @POST("account/frontend/login_otp_verification")
+    Call<OtpVerifyLoginResponse> otpLoginVerifyMethod(
             @Field("temp_id") String temp_id,
             @Field("otp") String otp);
 
@@ -137,7 +149,6 @@ public interface ApiCalls {
     @POST("account/api_accounts/submit_kyc")
     Call<UpdateImageResponse> uploadNationalImage(
             @Header("access_token") String access_token, @Part MultipartBody.Part national_id
-
     );
 
 
@@ -201,7 +212,6 @@ public interface ApiCalls {
 
 
     @FormUrlEncoded
-
     @POST("account/api_accounts/bitadress")
     Call<GetBitAddressResponse> bitAddress(
             @Header("access_token") String access_token,
@@ -460,6 +470,55 @@ public interface ApiCalls {
     Call<WithdrawalTypeTesponse> getWithdrawalType(
             @Header("access_token") String access_token);
 
+    /*New*/
+    @POST("account/api_accounts/settings")
+    Call<String> getTransferSettings(@Header("access_token") String access_token);
+
+    @POST("account/api_accounts/volume_bonus")
+    Call<GenerationBonusResponse> getVolumeBonus(
+            @Header("access_token") String access_token);
+
+    @POST("account/api_accounts/performance_bonus")
+    Call<GenerationBonusResponse> getPerformanceBonus(
+            @Header("access_token") String access_token);
+
+    @POST("account/api_accounts/shopping_bonus")
+    Call<GenerationBonusResponse> getShoppingBonus(
+            @Header("access_token") String access_token);
+
+    @POST("account/api_accounts/club1")
+    Call<Club1Response> getClub1(@Header("access_token") String access_token);
+
+    @POST("account/api_accounts/club2")
+    Call<Club1Response> getClub2(@Header("access_token") String access_token);
+
+    @POST("account/api_accounts/club3")
+    Call<Club1Response> getClub3(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/frontend/register_customer")
+    Call<String> registerCustomer(@Field("country_code") String country_code, @Field("umobile") String umobile,@Field("user_refferal") String user_refferal);
+
+    /*account/frontend/register_customer
+    country_code     umobile   u_password  fields name*/
+
+    @POST("account/api_accounts/shops")
+    Call<String> getShops(@Header("access_token") String access_token);
+
+    @POST("account/api_accounts/cashback")
+    Call<String> getCashBack(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/getDeals")
+    Call<String> shopSearch(@Header("access_token") String access_token,@Field("search") String search,@Field("category") String category);
+
+    @FormUrlEncoded
+    @POST("account/frontend/register_international_customer")
+    Call<String> registerByEmail(@Field("u_email") String u_email,@Field("user_refferal") String user_refferal);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/notification_setting")
+    Call<String> notificationSoundOnOff(@Header("access_token") String access_token,@Field("sound") String sound,@Field("display") String display);
 
 }
 

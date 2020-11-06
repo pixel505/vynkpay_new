@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApiCalls {
+
     public static void updateProfile(Context context, Bitmap bitmap, String token, final VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
             @Override
@@ -311,4 +312,23 @@ public class ApiCalls {
 
         volleyNetworkClass.makeGetRequest(URLS.USER_URL, "", token);
     }
+
+    public static void getShops(Context context,String id, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        volleyNetworkClass.makeRequest(URLS.SHOP_URL+id, "");
+    }
+
 }

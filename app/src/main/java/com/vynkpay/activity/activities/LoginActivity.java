@@ -31,8 +31,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.newregistration.Register1Activity;
+import com.vynkpay.newregistration.Register2Activity;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
@@ -84,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
   NormalTextView signUpText;
   @BindView(R.id.forgotPasswordTV)
   TextView forgotPasswordTV;
+  @BindView(R.id.loginascustomer)
+  TextView loginascustomer;
   @BindView(R.id.showHideImage)
   ImageView showHideImage;
   private boolean isPasswordShown = false;
@@ -169,8 +173,8 @@ public class LoginActivity extends AppCompatActivity {
     signUpText.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(LoginActivity.this, Signupnew.class);
-        //Intent intent = new Intent(LoginActivity.this, Register1Activity.class);
+        //Intent intent = new Intent(LoginActivity.this, Signupnew.class);
+        Intent intent = new Intent(LoginActivity.this, Register1Activity.class);
                /* intent.putExtra("url", "register");
                 intent.putExtra("title", "");*/
         startActivity(intent);
@@ -236,6 +240,13 @@ public class LoginActivity extends AppCompatActivity {
                 dialog1.show();*//*
             }
         });*/
+    loginascustomer.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(LoginActivity.this, Register2Activity.class).putExtra("which","customer").putExtra("forType","login"));
+      }
+    });
+
   }
 
   @Override
@@ -244,7 +255,7 @@ public class LoginActivity extends AppCompatActivity {
   }
 
   Dialog dialog1;
-  String mMessage, mSuccess;
+  String mMessage="", mSuccess="";
   NormalEditText etEmail1;
   NormalButton okButton, cancelButton;
 
@@ -257,7 +268,10 @@ public class LoginActivity extends AppCompatActivity {
       public void onResponse(Call<LoginResponse> call, retrofit2.Response<LoginResponse> response) {
         dialog.dismiss();
         if(response.isSuccessful()){
+          Log.d("loginresponse",new Gson().toJson(response.body()));
           if(response.body().getSuccess()){
+
+
             Intent intent = new Intent(LoginActivity.this, PinActivity.class);
             intent.putExtra("var", var);
             intent.putExtra("type", "login");
@@ -265,7 +279,7 @@ public class LoginActivity extends AppCompatActivity {
             intent.putExtra("isIndian", response.body().getData().getIsindian());
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            finish();
+            finishAffinity();
 
           } else {
             Toast.makeText(LoginActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -277,10 +291,13 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void onFailure(Call<LoginResponse> call, Throwable t) {
         dialog.dismiss();
+        Toast.makeText(LoginActivity.this, t.getMessage()!=null?t.getMessage():"Error", Toast.LENGTH_SHORT).show();
       }
     });
 
-  }/*{
+  }
+
+  /*{
         dialog.show();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.APP_BASE_URL + "auth/login",
@@ -446,7 +463,7 @@ public class LoginActivity extends AppCompatActivity {
       public void onClick(View v) {
         if (fieldET.getText().toString().trim().isEmpty()){
           Toast.makeText(LoginActivity.this, "Please enter username", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
           progressBar.setVisibility(View.VISIBLE);
           button.setEnabled(false);
           ApiCalls.sendResetPasswordLink(LoginActivity.this, fieldET.getText().toString().trim(), new VolleyResponse() {

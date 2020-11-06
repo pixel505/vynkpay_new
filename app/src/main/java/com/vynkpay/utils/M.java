@@ -66,6 +66,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -348,7 +349,9 @@ public class M {
     public static Dialog inflateDialog(Context context, int layoutId) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        if (dialog.getWindow()!=null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(layoutId);
@@ -420,8 +423,8 @@ public class M {
         String[] date1 = new String[1];
         String inputPattern = "yyyy-MM-dd HH:mm:ss";
         String outputPattern = "dd-MMM-yyyy h:mm a";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern,Locale.getDefault());
 
         Date date = null;
         String str = null;
@@ -431,7 +434,6 @@ public class M {
             date1 = str.split(" ");
             Log.i(">>method", "changeTimeFormat: " + str);
         } catch (ParseException e) {
-
             e.printStackTrace();
         }
         return str;
@@ -456,12 +458,7 @@ public class M {
                                 Prefes.savePhoneNumber("", context);
                                 Prefes.saveEmail("", context);
                                 Prefes.saveUserData("", context);
-
-
-
-
                                 SharedPreferences  sp = context.getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
-
                                 if(sp.getString("value","").equals("Global") && Prefes.getisIndian(context).equals("NO")){
                                     context.startActivity(new Intent(context, HomeActivity.class).putExtra("Country", "Global").putExtra(ApiParams.finishLogin, "0000")
                                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -473,7 +470,6 @@ public class M {
                                     ((Activity) context).finish();
                                 }
 
-
                                 else if(sp.getString("value","").equals("India") && Prefes.getisIndian(context).equals("YES")){
                                     context.startActivity(new Intent(context, HomeActivity.class).putExtra("Country", "India").putExtra(ApiParams.finishLogin, "0000").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                     ((Activity) context).finish();
@@ -484,11 +480,10 @@ public class M {
                                     ((Activity) context).finish();
                                 }
 
-
-
                             } else {
                                 M.dialogOk(context, mMessage, "Error");
                             }
+
                         } catch (Exception e) {
                             Log.i(">>exception", "onResponse: " + e.getMessage());
                             e.printStackTrace();
@@ -553,8 +548,8 @@ public class M {
         String[] date1 = new String[1];
         String inputPattern = "yyyy-MM-dd HH:mm:ss";
         String outputPattern = "dd-MMM-yyyy h:mm a";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern,Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern,Locale.getDefault());
 
         Date date = null;
         String str = null;
@@ -570,7 +565,7 @@ public class M {
 
     public static String changeDateFormat(String date, String foundFormat, String requiredFormat){
         //yyyy-MM-dd hh:mm:ss
-        SimpleDateFormat spf=new SimpleDateFormat(foundFormat);
+        SimpleDateFormat spf=new SimpleDateFormat(foundFormat,Locale.getDefault());
         Date newDate= null;
         try {
             newDate = spf.parse(date);
@@ -592,8 +587,8 @@ public class M {
         String[] date1 = new String[1];
         String inputPattern = "dd-MM-yyyy HH:mm:ss";
         String outputPattern = "dd-MMM-yyyy h:mm a";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern,Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern,Locale.getDefault());
 
         Date date = null;
         String str = null;
@@ -618,8 +613,8 @@ public class M {
         Log.i(">>inputDate", "changeDateFormat: " + inputString);
         String inputPattern = "yyyy-MM-dd HH:mm:ss";
         String outputPattern = "dd-MMM-yyyy h:mm a";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern,Locale.getDefault());
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern,Locale.getDefault());
 
         Date date = null;
         String str = null;

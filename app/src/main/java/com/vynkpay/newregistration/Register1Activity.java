@@ -1,24 +1,23 @@
 package com.vynkpay.newregistration;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.Signupnew;
 import com.vynkpay.databinding.ActivityRegister1Binding;
-import com.vynkpay.utils.M;
+
 
 public class Register1Activity extends AppCompatActivity implements View.OnClickListener {
 
     ActivityRegister1Binding binding;
-
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,8 +25,6 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register1);
         binding.linCustomer.setOnClickListener(this);
         binding.linAffiliate.setOnClickListener(this);
-
-
     }
 
     @Override
@@ -39,19 +36,26 @@ public class Register1Activity extends AppCompatActivity implements View.OnClick
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","customer"));
+                    binding.linCustomer.setBackgroundResource(R.drawable.register_default_button);
+                    binding.linAffiliate.setBackgroundResource(R.drawable.register_default_button);
+                    startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","customer").putExtra("forType","signup"));
                 }
-            },400);
+            },300);
         }
+
         if (view == binding.linAffiliate){
             binding.linCustomer.setBackgroundResource(R.drawable.register_default_button);
             binding.linAffiliate.setBackgroundResource(R.drawable.shadow_button);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","affiliate"));
+                    binding.linCustomer.setBackgroundResource(R.drawable.register_default_button);
+                    binding.linAffiliate.setBackgroundResource(R.drawable.register_default_button);
+                    Intent intent = new Intent(Register1Activity.this, Signupnew.class);
+                    startActivity(intent);
+                    //startActivity(new Intent(Register1Activity.this,Register2Activity.class).putExtra("which","affiliate"));
                 }
-            },400);
+            },300);
         }
 
     }

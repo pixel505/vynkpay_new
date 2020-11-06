@@ -53,8 +53,6 @@ public class PackageAActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetPackageResponse> call, Response<GetPackageResponse> response) {
                 if (response.isSuccessful()) {
-
-
                     if (response.body().getStatus().equals("true")) {
                         Log.d("investmentDataF",new Gson().toJson(response.body()));
                         Log.d("investmentData",new Gson().toJson(response.body().getData().getPackages()));

@@ -354,7 +354,7 @@ public class Prefes {
     public static void saveisIndian(String value, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("isIndian", value);
+        editor.putString("isIndian", value.toUpperCase());
         editor.apply();
     }
 
@@ -388,6 +388,18 @@ public class Prefes {
     public static String getCash(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
         return preferences.getString("cash", "");
+    }
+
+    public static void saveUserType(String value, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(BuildConfig.USER_TYPE, value);
+        editor.apply();
+    }
+
+    public static String getUserType(Context context){
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        return preferences.getString(BuildConfig.USER_TYPE,"");
     }
 
 

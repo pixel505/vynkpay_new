@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.util.Log;
@@ -23,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.gson.Gson;
+import com.vynkpay.retrofit.model.GetStateResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.OtpActivityNew;
@@ -46,6 +50,10 @@ import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.retrofit.model.RegisterResponse;
 import com.vynkpay.utils.M;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -57,6 +65,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Signupnew extends AppCompatActivity {
+    @BindView(R.id.linMain)
+    LinearLayout linMain;
     @BindView(R.id.signLoginText)
     NormalTextView signLoginText;
     @BindView(R.id.signUpBtn)
@@ -95,18 +105,24 @@ public class Signupnew extends AppCompatActivity {
     NormalTextView tvAgreement;
     @BindView(R.id.tvAffilate)
     NormalTextView tvAffilate;
-    Dialog dialog, serverDialog;
-    String countryId="", referalCode="";
-    SharedPreferences sp;
+    @BindView(R.id.stateNameEdt)
+    NormalTextView stateNameEdt;
+    ArrayList<GetStateResponse> stateList = new ArrayList<>();
+    Dialog dialog, serverDialog,stateDialog;
+    String countryId = "", referalCode="",stateId = "";
+    SharedPreferences sp,sp1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_new);
         sp = getSharedPreferences("sp",Context.MODE_PRIVATE);
+        sp1 = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         getDynamicLink();
         serverDialog = M.showDialog(Signupnew.this, "", false, false);
+
         countryNameEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,7 +134,9 @@ public class Signupnew extends AppCompatActivity {
                             serverDialog.dismiss();
                             dialog = new Dialog(Signupnew.this);
                             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            if (dialog.getWindow()!=null) {
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            }
                             dialog.setCancelable(false);
                             dialog.setCanceledOnTouchOutside(true);
                             dialog.setContentView(R.layout.country_dialog_new);
@@ -164,7 +182,97 @@ public class Signupnew extends AppCompatActivity {
                     public void onFailure(Call<GetCountryResponse> call, Throwable t) {
                         Toast.makeText(Signupnew.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+
                 });
+            }
+        });
+
+        if(sp.getString("value", "").equalsIgnoreCase("Global")){
+            stateNameEdt.setVisibility(View.GONE);
+        } else{
+            stateNameEdt.setVisibility(View.VISIBLE);
+        }
+
+        stateNameEdt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(Signupnew.this, "state click", Toast.LENGTH_SHORT).show();
+                serverDialog.show();
+                stateList.clear();
+                MainApplication.getApiService().getAllState().enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        serverDialog.dismiss();
+                        Log.d("stateResponse",response.body());
+                        try {
+                            JSONObject jData = new JSONObject(response.body());
+                            if (jData.getString("status").equalsIgnoreCase("true")){
+                                JSONObject data = jData.getJSONObject("data");
+                                JSONArray stateArr = data.getJSONArray("state");
+                                for (int i=0; i<stateArr.length();i++){
+                                    JSONObject sData = stateArr.getJSONObject(i);
+                                    String id = sData.getString("id");
+                                    String state_name = sData.getString("state_name");
+                                    stateList.add(new GetStateResponse(id,state_name));
+                                }
+                                stateDialog = new Dialog(Signupnew.this);
+                                stateDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                if (stateDialog.getWindow()!=null){
+                                    stateDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                }
+                                stateDialog.setCancelable(false);
+                                stateDialog.setCanceledOnTouchOutside(true);
+                                stateDialog.setContentView(R.layout.custom_statedialog);
+                                SearchView searchView = stateDialog.findViewById(R.id.searchViewState);
+                                searchView.setIconified(false);
+                                RecyclerView stateRecycler = stateDialog.findViewById(R.id.stateRecycler);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                stateRecycler.setLayoutManager(manager);
+                                StateAdapter stateAdapter = new StateAdapter(Signupnew.this,stateList);
+                                stateRecycler.setAdapter(stateAdapter);
+
+                                //searchView functionality
+                                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                    @Override
+                                    public boolean onQueryTextSubmit(String query) {
+                                        return false;
+                                    }
+
+                                    @Override
+                                    public boolean onQueryTextChange(String newText) {
+                                        stateAdapter.filter(newText);
+                                        return false;
+                                    }
+                                });
+
+                                searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+                                    @Override
+                                    public boolean onClose() {
+                                        if (!searchView.isFocused()) {
+                                            stateDialog.dismiss();
+                                        }
+                                        return false;
+                                    }
+                                });
+
+                                stateDialog.show();
+
+                            } else {
+                                Log.d("stateResponse","message");
+                            }
+
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        serverDialog.dismiss();
+                        Log.d("stateResponse",t.getMessage()!=null?t.getMessage():"Error");
+                    }
+                });
+
             }
         });
         signLoginText.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +321,6 @@ public class Signupnew extends AppCompatActivity {
                     startActivity(new Intent(Signupnew.this, AboutUsActivity.class)
                             .putExtra("title", "Terms & Conditions")
                             .putExtra("page", "terms_conditions"));
-
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -225,9 +332,9 @@ public class Signupnew extends AppCompatActivity {
             public void onClick(View textView) {
                 // do another thing
                 try {
-                            startActivity(new Intent(Signupnew.this, AboutUsActivity.class)
-                                    .putExtra("title", "Privacy Policy")
-                                    .putExtra("page", "privacy_policy"));
+                    startActivity(new Intent(Signupnew.this, AboutUsActivity.class)
+                            .putExtra("title", "Privacy Policy")
+                            .putExtra("page", "privacy_policy"));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -271,48 +378,34 @@ public class Signupnew extends AppCompatActivity {
 
     private void validations() {
 
-        if (referIdEdt.getText().toString().trim().length() == 0) {
+        if (TextUtils.isEmpty(referIdEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Referral Id", Toast.LENGTH_SHORT).show();
-
-        } else if (countryNameEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(countryNameEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Select Country", Toast.LENGTH_SHORT).show();
-
-        } else if (fullNameEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(fullNameEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Name", Toast.LENGTH_SHORT).show();
-
-        } else if (emailEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(emailEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Email", Toast.LENGTH_SHORT).show();
-
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailEdt.getText().toString().trim()).matches()) {
             Toast.makeText(this, "Please Enter Valid  Email", Toast.LENGTH_SHORT).show();
-
-        } else if (userNameEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(userNameEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter User Name", Toast.LENGTH_SHORT).show();
-
-        } else if (mobileEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(mobileEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Mobile Number ", Toast.LENGTH_SHORT).show();
-
-        } else if (passwordEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(passwordEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Password ", Toast.LENGTH_SHORT).show();
-
-        } else if (confirmPassEdt.getText().toString().trim().length() == 0) {
+        } else if (TextUtils.isEmpty(confirmPassEdt.getText().toString().trim())) {
             Toast.makeText(this, "Please Enter Password ", Toast.LENGTH_SHORT).show();
-
         } else if (!passwordEdt.getText().toString().trim().equals(confirmPassEdt.getText().toString().trim())) {
             Toast.makeText(this, "Password Do not match ", Toast.LENGTH_SHORT).show();
-
         } else if (panNumberEdt.getVisibility() == View.VISIBLE && panNumberEdt.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please Enter Pan Number", Toast.LENGTH_SHORT).show();
-
         } else if (adharNumberEdt.getVisibility() == View.VISIBLE && adharNumberEdt.getText().toString().isEmpty()) {
             Toast.makeText(this, "Please Enter Aadahar Number", Toast.LENGTH_SHORT).show();
-
         } else if (!agreementCheckbox.isChecked()) {
             Toast.makeText(this, "Please Accept User Aggrement", Toast.LENGTH_SHORT).show();
-
         } else if (!affilateCheckbox.isChecked()) {
             Toast.makeText(this, "Please Accept Affiliate Aggrement", Toast.LENGTH_SHORT).show();
-
         } else {
             signUp();
         }
@@ -330,8 +423,9 @@ public class Signupnew extends AppCompatActivity {
 
 
         MainApplication.getApiService().registerMethod(
-                referIdEdt.getText().toString(), fullNameEdt.getText().toString()
-                , userNameEdt.getText().toString(),
+                referIdEdt.getText().toString(),
+                fullNameEdt.getText().toString(),
+                userNameEdt.getText().toString(),
                 countryId,
                 emailEdt.getText().toString(),
                 countryCodeText.getText().toString(),
@@ -341,7 +435,8 @@ public class Signupnew extends AppCompatActivity {
                 agree,
                 affiliate,
                 panNumberEdt.getText().toString(),
-                adharNumberEdt.getText().toString()).enqueue(new Callback<RegisterResponse>() {
+                adharNumberEdt.getText().toString(),
+                stateId).enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 //  Log.d("signupKFjdkhdfdf", new Gson().toJson(response.body()));
@@ -350,15 +445,12 @@ public class Signupnew extends AppCompatActivity {
 
                     if (response.body().getUrl().equals("")) {
                         Toast.makeText(Signupnew.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                     } else {
                         Toast.makeText(Signupnew.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                         Intent intent = new Intent(Signupnew.this, OtpActivityNew.class);
                         intent.putExtra("tempid", "" + response.body().getTempId());
                         startActivity(intent);
                         sp.edit().putString("referalCode","").apply();
-
                     }
                 }
             }
@@ -370,6 +462,90 @@ public class Signupnew extends AppCompatActivity {
             }
         });
     }
+
+    private class StateAdapter extends RecyclerView.Adapter<StateAdapter.SHolder>{
+
+        Context context;
+        List<GetStateResponse> mList;
+        List<GetStateResponse> searchedItemModelArrayList;
+
+        public StateAdapter(Context applicationContext, List<GetStateResponse> data) {
+            this.context = applicationContext;
+            this.mList = data;
+            this.searchedItemModelArrayList = new ArrayList<>();
+            this.searchedItemModelArrayList.addAll(mList);
+        }
+
+        @NonNull
+        @Override
+        public SHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(Signupnew.this).inflate(R.layout.country_list,parent,false);
+            return new SHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull SHolder holder, int position) {
+            try {
+                holder.countryText.setText(mList.get(position).getStatename());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        stateDialog.dismiss();
+                        stateNameEdt.setText(mList.get(position).getStatename());
+                        stateId = mList.get(position).getId();
+                        Log.d("selectedState",mList.get(position).toString());
+                        linMain.clearFocus();
+                        hideKeyboard();
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return mList != null ? mList.size() : 0;
+        }
+
+        public void filter(String charText) {
+            charText = charText.toLowerCase(Locale.getDefault());
+            mList.clear();
+            if (charText.length() == 0) {
+                mList.addAll(searchedItemModelArrayList);
+            } else {
+                for (GetStateResponse wp : searchedItemModelArrayList) {
+                    if (wp.getStatename().toLowerCase(Locale.getDefault()).contains(charText)) {
+                        mList.add(wp);
+                    }
+                }
+            }
+            notifyDataSetChanged();
+        }
+
+        class SHolder extends RecyclerView.ViewHolder{
+
+            TextView countryText;
+            public SHolder(View view) {
+                super(view);
+                countryText = view.findViewById(R.id.countryText);
+            }
+        }
+    }
+
+    public void hideKeyboard() {
+        try {
+            View view = this.getCurrentFocus();
+            if (view != null) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     private class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder> {
         Context context;
@@ -383,6 +559,7 @@ public class Signupnew extends AppCompatActivity {
             this.searchedItemModelArrayList.addAll(mList);
         }
 
+        @NotNull
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
@@ -409,9 +586,11 @@ public class Signupnew extends AppCompatActivity {
                     if (data.getStdCode().equals("91")) {
                         panNumberEdt.setVisibility(View.VISIBLE);
                         adharNumberEdt.setVisibility(View.VISIBLE);
+                        stateNameEdt.setVisibility(View.VISIBLE);
                     } else {
                         panNumberEdt.setVisibility(View.GONE);
                         adharNumberEdt.setVisibility(View.GONE);
+                        stateNameEdt.setVisibility(View.GONE);
                     }
                 }
             });
@@ -438,17 +617,19 @@ public class Signupnew extends AppCompatActivity {
         }
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView countryText;
 
+            TextView countryText;
             public MyViewHolder(View view) {
                 super(view);
                 countryText = view.findViewById(R.id.countryText);
             }
+
         }
     }
 
 
     public void getDynamicLink() {
+
         FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent()).addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
             @Override
             public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
@@ -473,16 +654,19 @@ public class Signupnew extends AppCompatActivity {
                     }
                 }
             }
-        })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Signupnew.this, e.toString(), Toast.LENGTH_SHORT).show();
-                        if (!sp.getString("referalCode","").equalsIgnoreCase("")){
-                            referalCode = sp.getString("referalCode","");
-                            referIdEdt.setText(referalCode);
-                        }
-                    }
-                });
+        }).addOnFailureListener(this, new OnFailureListener() {
+
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(Signupnew.this, e.toString(), Toast.LENGTH_SHORT).show();
+                if (!sp.getString("referalCode","").equalsIgnoreCase("")){
+                    referalCode = sp.getString("referalCode","");
+                    referIdEdt.setText(referalCode);
+                }
+            }
+
+        });
+
     }
+
 }

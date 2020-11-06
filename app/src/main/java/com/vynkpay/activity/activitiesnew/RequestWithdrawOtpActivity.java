@@ -92,7 +92,7 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
                         submitButton.setEnabled(true);
                         Toast.makeText(RequestWithdrawOtpActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     serverDialog.dismiss();
                     submitButton.setEnabled(true);
@@ -104,7 +104,9 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
                 submitButton.setEnabled(true);
                 serverDialog.dismiss();
             }
+
         });
+
     }
 
     public void payNow(String amount) {
@@ -142,6 +144,7 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
                 serverDialog.dismiss();
                 submitButton.setEnabled(true);
             }
+
         });
     }
     

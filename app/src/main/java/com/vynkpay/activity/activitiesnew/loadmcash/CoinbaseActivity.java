@@ -24,7 +24,6 @@ import com.vynkpay.utils.M;
 public class CoinbaseActivity extends AppCompatActivity {
 
     Dialog dialog1;
-
     //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_success?ud=Payment%20verify%20successfully%20and%20added%20to%20Wallet
     //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_notFound?ud=You%20have%20paid%20a%20less%20amount%20than%20requested.%20Please%20send%20full%20amount%20or%20contact%20support
 

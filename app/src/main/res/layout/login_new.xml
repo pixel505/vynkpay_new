@@ -127,6 +127,17 @@
 
 
                 <com.vynkpay.custom.NormalTextView
+                    android:id="@+id/loginascustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="@string/loginascustomer" />
+
+                <com.vynkpay.custom.NormalTextView
                     android:id="@+id/signUpText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

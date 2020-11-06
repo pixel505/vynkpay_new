@@ -175,4 +175,8 @@ public class WalletTransactionsModel {
     public void setFrontusername(String frontusername) {
         this.frontusername = frontusername;
     }
+
+    public String toString(){
+        return "";
+    }
 }

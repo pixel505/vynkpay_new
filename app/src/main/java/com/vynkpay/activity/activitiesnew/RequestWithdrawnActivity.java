@@ -8,13 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.AllTransactionsActivity;
-import com.vynkpay.adapter.WalletTransactionAdapter;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
@@ -25,15 +21,11 @@ import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
-import butterknife.BindView;
 
 public class RequestWithdrawnActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -72,7 +64,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         ApiCalls.getBonusTransactions(RequestWithdrawnActivity.this, Prefes.getAccessToken(RequestWithdrawnActivity.this), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
-                Log.d("transactionZLog", result+"//");
+                Log.d("bonusTransaction", result+"//");
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
@@ -104,46 +96,11 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                             walletTransactionsModelArrayList.add(new WalletTransactionsModel( id,  front_user_id,  user_id,  type,
                                     payment_via, p_amount,  profit_type,  mode,  transactionStatus,  created_date,  username,
                                     email,  phone,  name,  paid_status,  balance, frontusername));
-
-                            //WalletTransactionAdapter adapter = new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false);
-                            //binding.transactionsListView.setAdapter(adapter);
-
-
-
-
-                           /* if (walletTransactionsModelArrayList.size() > 5) {
-                                binding.bonusHeader.viewAll.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.bonusHeader.viewAll.setVisibility(View.GONE);
-                            }
-                            if (walletTransactionsModelArrayList.size() > 0) {
-                                binding.noLayout.setVisibility(View.GONE);
-                            } else {
-                                binding.noLayout.setVisibility(View.VISIBLE);
-                            }
-                            binding.bonusHeader.  viewAll.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
-                                    startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "bonus"));
-                                }
-                            });
-
-                            binding.bonusHeader.requestLinear.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    if (Functions.isIndian) {
-                                        popupWithdrawalAmount();
-                                    }else {
-                                        popupWithdrawalAmountIntern();
-                                    }
-                                }
-                            });*/
                         }
 
                         Collections.reverse(walletTransactionsModelArrayList);
 
-                    }else {
+                    } else {
                         serverDialog.dismiss();
                         Toast.makeText(RequestWithdrawnActivity.this, jsonObject.getString("message")+"", Toast.LENGTH_SHORT).show();
                         finish();
@@ -151,8 +108,6 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -174,7 +129,6 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
             } else {
                 requestForOtp(amountET.getText().toString());
             }
-            //startActivity(new Intent(RequestWithdrawnActivity.this,RequestWithdrawOtpActivity.class));
         }
     }
 
@@ -182,6 +136,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         submitButton.setEnabled(false);
         serverDialog.show();
         ApiCalls.sendWalletOTP(RequestWithdrawnActivity.this, Prefes.getAccessToken(RequestWithdrawnActivity.this), new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 serverDialog.dismiss();
@@ -190,11 +145,10 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                     JSONObject jsonObject = new JSONObject(result);
                     Toast.makeText(RequestWithdrawnActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
                     if (jsonObject.getString("status").equals("true")) {
-                        //popupOTPCall(amountET.getText().toString().trim());
                         startActivity(new Intent(RequestWithdrawnActivity.this,RequestWithdrawOtpActivity.class).putExtra("amountWithdraw",amount));
                         RequestWithdrawnActivity.this.finish();
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -204,6 +158,9 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                 submitButton.setEnabled(true);
                 serverDialog.dismiss();
             }
+
         });
+
     }
+
 }

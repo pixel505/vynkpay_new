@@ -18,15 +18,28 @@ public class ConvertSuccessActivity extends AppCompatActivity implements View.On
 
     ActivityConvertSuccessBinding binding;
     Toolbar toolbar;
-    NormalTextView toolbarTitle;
+    NormalTextView toolbarTitle,tvMessage;
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_convert_success);
+        tvMessage.setText("");
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText(getString(R.string.convertmcashtext));
+        try {
+            if (getIntent().hasExtra("message")){
+                message = getIntent().getStringExtra("message");
+                tvMessage.setText(message);
+            }else {
+                tvMessage.setText("");
+            }
+        }catch (Exception e){
+            tvMessage.setText("");
+            e.printStackTrace();
+        }
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

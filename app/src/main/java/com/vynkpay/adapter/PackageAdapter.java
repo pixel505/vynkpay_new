@@ -53,6 +53,7 @@ public class PackageAdapter extends PagerAdapter {
         NormalButton btn=itemView.findViewById(R.id.bynow);
         LinearLayout ln=itemView.findViewById(R.id.lnBg);
         ImageView uperImage=itemView.findViewById(R.id.uperIcon);
+        uperImage.setVisibility(View.GONE);
         GetPackageResponse.DataBean.PackagesBean data=sliderItemModelArrayList.get(position);
 
         if(Functions.isIndian){
@@ -60,7 +61,6 @@ public class PackageAdapter extends PagerAdapter {
         }
         else {
             packageprice.setText(Functions.CURRENCY_SYMBOL +data.getPrice());
-
         }
         cashback.setText(Functions.CURRENCY_SYMBOL+data.getPrice());
         points.setText(data.getPoints());
@@ -90,52 +90,52 @@ public class PackageAdapter extends PagerAdapter {
 
         if(position%8==0){
             ln.setBackgroundResource(R.drawable.onebg);
-            //uperImage.setImageResource(R.drawable.packageneww);
+            uperImage.setImageResource(R.drawable.packageneww);
         }
 
         if(position%8==1){
             ln.setBackgroundResource(R.drawable.twobg);
-            //uperImage.setImageResource(R.drawable.twoicon);
+            uperImage.setImageResource(R.drawable.twoicon);
 
         }
         if(position%8==2){
             ln.setBackgroundResource(R.drawable.threebg);
-            //uperImage.setImageResource(R.drawable.threeicon);
+            uperImage.setImageResource(R.drawable.threeicon);
 
         }
         if(position%8==3){
             ln.setBackgroundResource(R.drawable.fourbg);
-            //uperImage.setImageResource(R.drawable.fouricon);
+            uperImage.setImageResource(R.drawable.fouricon);
 
         }
         if(position%8==4){
             ln.setBackgroundResource(R.drawable.fifthbg);
-            //uperImage.setImageResource(R.drawable.fifthicon);
+            uperImage.setImageResource(R.drawable.fifthicon);
 
         }
         if(position%8==5){
             ln.setBackgroundResource(R.drawable.sixthbg);
-            //uperImage.setImageResource(R.drawable.sixthicon);
+            uperImage.setImageResource(R.drawable.sixthicon);
 
         }
         if(position%8==6){
             ln.setBackgroundResource(R.drawable.seventhbg);
-            //uperImage.setImageResource(R.drawable.seventhicon);
+            uperImage.setImageResource(R.drawable.seventhicon);
 
         }
         if(position%8==7){
             ln.setBackgroundResource(R.drawable.eightbg);
-            //uperImage.setImageResource(R.drawable.eighticon);
+            uperImage.setImageResource(R.drawable.eighticon);
 
         }
 
-        try {
+        /*try {
             Glide.with(context).load(data.getImg()).fitCenter().into(uperImage);
             tvTitleDisp.setText(data.getTitle());
             tvTitleDisp.setSelected(true);
         }catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
 
         container.addView(itemView);
@@ -146,4 +146,5 @@ public class PackageAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((LinearLayout)object);
     }
+
 }

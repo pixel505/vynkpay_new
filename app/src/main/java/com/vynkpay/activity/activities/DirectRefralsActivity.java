@@ -105,9 +105,9 @@ public class DirectRefralsActivity extends AppCompatActivity  {
     }
 
     private List<ReferalsResponse.Datum> filter(List<ReferalsResponse.Datum> data, String newText) {
-        newText=newText.toLowerCase();
+        newText = newText.toLowerCase();
         String text;
-        filteredDataList=new ArrayList<>();
+        filteredDataList = new ArrayList<>();
         for(ReferalsResponse.Datum dataFromDataList:data){
             text=dataFromDataList.getName().toLowerCase();
 

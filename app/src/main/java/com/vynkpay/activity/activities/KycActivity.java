@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
@@ -72,8 +73,6 @@ public class KycActivity extends AppCompatActivity {
             }
         } else {
             shouldAllowBack = true;
-
-
         }
     }
 
@@ -85,76 +84,33 @@ public class KycActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     dialog1.dismiss();
 
+                    try {
+                        if (response.body().getStatus().equalsIgnoreCase("true")) {
+                            Log.d("kycc",new Gson().toJson(response.body().getData().getUserdata()));
+                            if (response.body().getData().getUserdata().getCountryCode().equals("91")) {
 
-                    if (response.body().getData().getUserdata().getCountryCode().equals("91")) {
-
-                        GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
-                        GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
-
-
-                        if (getKycStatus.getStaus().equals("2")) {    // kyc done  Approved
-
-
-                            binding.kycImage.setBackgroundResource(R.drawable.kycsuccess);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.checkdocu);
-
-                            if(getBankDetails!=null){
-
-                                if(getBankDetails.getIsactive().equals("1")){
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setText("Bank Details Pending");
-                                }
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
+                                GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
+                                Log.d("bankDetail",new Gson().toJson(getBankDetails));
 
 
-                                String AccountType = response.body().getData().getBankDetails().getAccountType();
-                                String NameInBank = response.body().getData().getBankDetails().getNameInBank();
-                                String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
-                                String IfscCode = response.body().getData().getBankDetails().getIfscCode();
-                                String BankName = response.body().getData().getBankDetails().getBankName();
-                                String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
-                                String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
-                                                .putExtra("AccountType", AccountType)
-                                                .putExtra("NameInBank", NameInBank)
-                                                .putExtra("AccountNumber", AccountNumber)
-                                                .putExtra("IfscCode", IfscCode)
-                                                .putExtra("BankName", BankName)
-                                                .putExtra("BranchAddress", BranchAddress)
-                                                .putExtra("ChequeReceipt", ChequeReceipt)
-                                                .putExtra("status", getBankDetails.getIsactive())
-
-                                        );
-
-                                        finish();
-
-                                    }
-                                });
-                            }
-
-                            else {
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                binding.bankdetailsBtnn.setText("Bank Details Rejected");
-
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
-                                    }
-                                });
-                            }
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
+                                if (getKycStatus.getStaus().equals("2")) {    // kyc done  Approved
 
 
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycsuccess);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.checkdocu);
 
                                     if (getBankDetails != null) {
+
+                                        if (getBankDetails.getIsactive().equals("1")) {
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setText("Bank Details Pending");
+                                        }
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+
+
                                         String AccountType = response.body().getData().getBankDetails().getAccountType();
                                         String NameInBank = response.body().getData().getBankDetails().getNameInBank();
                                         String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
@@ -162,198 +118,184 @@ public class KycActivity extends AppCompatActivity {
                                         String BankName = response.body().getData().getBankDetails().getBankName();
                                         String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
                                         String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
+                                                        .putExtra("AccountType", AccountType)
+                                                        .putExtra("NameInBank", NameInBank)
+                                                        .putExtra("AccountNumber", AccountNumber)
+                                                        .putExtra("IfscCode", IfscCode)
+                                                        .putExtra("BankName", BankName)
+                                                        .putExtra("BranchAddress", BranchAddress)
+                                                        .putExtra("ChequeReceipt", ChequeReceipt)
+                                                        .putExtra("status", getBankDetails.getIsactive())
 
-                                        startActivity(new Intent(ac, KycSuccessActiviy.class).putExtra(
-                                                "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                                .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                                .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                                .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                                );
 
-                                                .putExtra("AccountType", AccountType)
-                                                .putExtra("NameInBank", NameInBank)
-                                                .putExtra("AccountNumber", AccountNumber)
-                                                .putExtra("IfscCode", IfscCode)
-                                                .putExtra("BankName", BankName)
-                                                .putExtra("BranchAddress", BranchAddress)
-                                                .putExtra("ChequeReceipt", ChequeReceipt)
-                                                .putExtra("bankStatus", getBankDetails.getIsactive())
-                                        );
+                                                finish();
 
-                                        finish();
+                                            }
+                                        });
                                     } else {
-                                        startActivity(new Intent(ac, KycSuccessActiviy.class).putExtra(
-                                                "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                                .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                                .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                                .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
-                                                .putExtra("bankStatus", "4"));
-                                        finish();
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnn.setText("Bank Details Rejected");
+
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
+                                            }
+                                        });
                                     }
-                                }
-                            });
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
 
-                        }     // approved   done
+                                            if (getBankDetails != null) {
+                                                String AccountType = response.body().getData().getBankDetails().getAccountType();
+                                                String NameInBank = response.body().getData().getBankDetails().getNameInBank();
+                                                String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
+                                                String IfscCode = response.body().getData().getBankDetails().getIfscCode();
+                                                String BankName = response.body().getData().getBankDetails().getBankName();
+                                                String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
+                                                String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
+
+                                                startActivity(new Intent(ac, KycSuccessActiviy.class).putExtra(
+                                                        "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                        .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                        .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                        .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+
+                                                        .putExtra("AccountType", AccountType)
+                                                        .putExtra("NameInBank", NameInBank)
+                                                        .putExtra("AccountNumber", AccountNumber)
+                                                        .putExtra("IfscCode", IfscCode)
+                                                        .putExtra("BankName", BankName)
+                                                        .putExtra("BranchAddress", BranchAddress)
+                                                        .putExtra("ChequeReceipt", ChequeReceipt)
+                                                        .putExtra("bankStatus", getBankDetails.getIsactive())
+                                                );
+
+                                                finish();
+                                            } else {
+                                                startActivity(new Intent(ac, KycSuccessActiviy.class).putExtra(
+                                                        "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                        .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                        .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                        .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                                        .putExtra("bankStatus", "4"));
+                                                finish();
+                                            }
+                                        }
+                                    });
+
+                                }     // approved   done
+
+                                else if (getKycStatus.getStaus().equals("0")) {   // have to do kyc
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycverify);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.startverify);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(ac, KycUploadActiviy.class));
+                                        }
+                                    });
+                                }  // new
 
 
-                        else if (getKycStatus.getStaus().equals("0")) {   // have to do kyc
-                            binding.kycImage.setBackgroundResource(R.drawable.kycverify);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.startverify);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(ac, KycUploadActiviy.class));
-                                }
-                            });
-                        }  // new
+                                else if (getKycStatus.getStaus().equals("1")) {          // waiitng from admin //
+
+                                    // have to do kyc  pending from admin
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycverify);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.home);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            if (sp.getString("value", "").equals("Global") && Prefes.getisIndian(ac).equalsIgnoreCase("NO")) {
+                                                startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
+                                                finish();
+                                            } else if (sp.getString("value", "").equals("Global") && Prefes.getisIndian(ac).equalsIgnoreCase("YES")) {
+                                                startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
+                                                finish();
+                                            } else if (sp.getString("value", "").equals("India") && Prefes.getisIndian(ac).equalsIgnoreCase("YES")) {
+                                                startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
+                                                finish();
+                                            } else if (sp.getString("value", "").equals("India") && Prefes.getisIndian(ac).equalsIgnoreCase("NO")) {
+                                                startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
+                                                finish();
+                                            }
+
+                                        }
+                                    });
+                                    if (getBankDetails != null) {
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        if (getBankDetails.getIsactive().equals("1")) {
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setText("Bank Details Pending");
+                                        }
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        String AccountType = response.body().getData().getBankDetails().getAccountType();
+                                        String NameInBank = response.body().getData().getBankDetails().getNameInBank();
+                                        String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
+                                        String IfscCode = response.body().getData().getBankDetails().getIfscCode();
+                                        String BankName = response.body().getData().getBankDetails().getBankName();
+                                        String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
+                                        String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
+                                                        .putExtra("AccountType", AccountType)
+                                                        .putExtra("NameInBank", NameInBank)
+                                                        .putExtra("AccountNumber", AccountNumber)
+                                                        .putExtra("IfscCode", IfscCode)
+                                                        .putExtra("BankName", BankName)
+                                                        .putExtra("BranchAddress", BranchAddress)
+                                                        .putExtra("ChequeReceipt", ChequeReceipt)
+                                                        .putExtra("status", getBankDetails.getIsactive())
+
+                                                );
+
+                                                finish();
+
+                                            }
+                                        });
 
 
-                        else if (getKycStatus.getStaus().equals("1")) {          // waiitng from admin //
-
-                            // have to do kyc  pending from admin
-                            binding.kycImage.setBackgroundResource(R.drawable.kycverify);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.home);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                    if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("NO")){
-                                        startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
-                                        finish();
+                                    } else {
+                                        binding.bankdetailsBtnn.setText("Bank Details Rejected");
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
+                                            }
+                                        });
                                     }
-
-                                    else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("YES")){
-                                        startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
-                                        finish();
-                                    }
+                                }    //pending done
 
 
-                                    else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("YES")){
-                                        startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
-                                        finish();
-                                    }
+                                else if (getKycStatus.getStaus().equals("3")) {   // Rejected
+                                    GetKycStatusResponse.Data.BankDetails data1 = response.body().getData().getBankDetails();
 
-                                    else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("NO")){
-                                        startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
-                                        finish();
-                                    }
+                                    binding.kycImage.setBackgroundResource(R.drawable.unscusses);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.reverifi);
 
-                                }
-                            });
-                            if (getBankDetails != null) {
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                if(getBankDetails.getIsactive().equals("1")){
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setText("Bank Details Pending");
-                                }
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                String AccountType = response.body().getData().getBankDetails().getAccountType();
-                                String NameInBank = response.body().getData().getBankDetails().getNameInBank();
-                                String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
-                                String IfscCode = response.body().getData().getBankDetails().getIfscCode();
-                                String BankName = response.body().getData().getBankDetails().getBankName();
-                                String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
-                                String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
-                                                .putExtra("AccountType", AccountType)
-                                                .putExtra("NameInBank", NameInBank)
-                                                .putExtra("AccountNumber", AccountNumber)
-                                                .putExtra("IfscCode", IfscCode)
-                                                .putExtra("BankName", BankName)
-                                                .putExtra("BranchAddress", BranchAddress)
-                                                .putExtra("ChequeReceipt", ChequeReceipt)
-                                                .putExtra("status", getBankDetails.getIsactive())
-
-                                        );
-
-                                        finish();
-
-                                    }
-                                });
-
-
-                            } else {
-                                binding.bankdetailsBtnn.setText("Bank Details Rejected");
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
-                                    }
-                                });
-                            }
-                        }    //pending done
-
-
-                        else if (getKycStatus.getStaus().equals("3")) {   // Rejected
-                            GetKycStatusResponse.Data.BankDetails data1 = response.body().getData().getBankDetails();
-
-                            binding.kycImage.setBackgroundResource(R.drawable.unscusses);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.reverifi);
-
-
-                            if(data1!=null){
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                if(getBankDetails.getIsactive().equals("1")){
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                    binding.bankdetailsBtnn.setText("Bank Details Pending");
-                                }
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                String AccountType = response.body().getData().getBankDetails().getAccountType();
-                                String NameInBank = response.body().getData().getBankDetails().getNameInBank();
-                                String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
-                                String IfscCode = response.body().getData().getBankDetails().getIfscCode();
-                                String BankName = response.body().getData().getBankDetails().getBankName();
-                                String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
-                                String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
-                                                .putExtra("AccountType", AccountType)
-                                                .putExtra("NameInBank", NameInBank)
-                                                .putExtra("AccountNumber", AccountNumber)
-                                                .putExtra("IfscCode", IfscCode)
-                                                .putExtra("BankName", BankName)
-                                                .putExtra("BranchAddress", BranchAddress)
-                                                .putExtra("ChequeReceipt", ChequeReceipt)
-                                                .putExtra("status", getBankDetails.getIsactive())
-
-                                        );
-
-                                        finish();
-
-                                    }
-                                });
-                            }
-
-                            else {
-                                binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                binding.bankdetailsBtnn.setText("Bank Details Rejected");
-
-                                binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
-                                    }
-                                });
-                            }
-
-
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
 
                                     if (data1 != null) {
-
-                                        Toast.makeText(ac, data1.getIsactive(), Toast.LENGTH_SHORT).show();
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        if (getBankDetails.getIsactive().equals("1")) {
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnn.setText("Bank Details Pending");
+                                        }
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
                                         String AccountType = response.body().getData().getBankDetails().getAccountType();
                                         String NameInBank = response.body().getData().getBankDetails().getNameInBank();
                                         String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
@@ -361,163 +303,205 @@ public class KycActivity extends AppCompatActivity {
                                         String BankName = response.body().getData().getBankDetails().getBankName();
                                         String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
                                         String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankRejectedActivity.class)
+                                                        .putExtra("AccountType", AccountType)
+                                                        .putExtra("NameInBank", NameInBank)
+                                                        .putExtra("AccountNumber", AccountNumber)
+                                                        .putExtra("IfscCode", IfscCode)
+                                                        .putExtra("BankName", BankName)
+                                                        .putExtra("BranchAddress", BranchAddress)
+                                                        .putExtra("ChequeReceipt", ChequeReceipt)
+                                                        .putExtra("status", getBankDetails.getIsactive())
 
-                                        startActivity(new Intent(ac, KycRejectedActiviy.class).putExtra(
-                                                "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                                .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                                .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                                .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                                );
 
-                                                .putExtra("AccountType", AccountType)
-                                                .putExtra("NameInBank", NameInBank)
-                                                .putExtra("AccountNumber", AccountNumber)
-                                                .putExtra("IfscCode", IfscCode)
-                                                .putExtra("BankName", BankName)
-                                                .putExtra("BranchAddress", BranchAddress)
-                                                .putExtra("ChequeReceipt", ChequeReceipt)
-                                                .putExtra("bankstatus", data1.getIsactive())
-                                        );
-                                        finish();
+                                                finish();
+
+                                            }
+                                        });
                                     } else {
-                                        startActivity(new Intent(ac, KycRejectedActiviy.class).putExtra(
-                                                "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                                .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                                .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                                .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
-                                                .putExtra("bankstatus", "4")
-                                        );
-                                        finish();
+                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnn.setText("Bank Details Rejected");
+
+                                        binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                startActivity(new Intent(KycActivity.this, KycBankActivity.class).putExtra("status", "4"));
+                                            }
+                                        });
                                     }
 
 
-                                }
-                            });
-                        }   // Rejected
-                    }   //  indian
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            if (data1 != null) {
+
+                                                Toast.makeText(ac, data1.getIsactive(), Toast.LENGTH_SHORT).show();
+                                                String AccountType = response.body().getData().getBankDetails().getAccountType();
+                                                String NameInBank = response.body().getData().getBankDetails().getNameInBank();
+                                                String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
+                                                String IfscCode = response.body().getData().getBankDetails().getIfscCode();
+                                                String BankName = response.body().getData().getBankDetails().getBankName();
+                                                String BranchAddress = response.body().getData().getBankDetails().getBranchAddress();
+                                                String ChequeReceipt = response.body().getData().getBankDetails().getChequeReceipt();
+
+                                                startActivity(new Intent(ac, KycRejectedActiviy.class).putExtra(
+                                                        "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                        .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                        .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                        .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+
+                                                        .putExtra("AccountType", AccountType)
+                                                        .putExtra("NameInBank", NameInBank)
+                                                        .putExtra("AccountNumber", AccountNumber)
+                                                        .putExtra("IfscCode", IfscCode)
+                                                        .putExtra("BankName", BankName)
+                                                        .putExtra("BranchAddress", BranchAddress)
+                                                        .putExtra("ChequeReceipt", ChequeReceipt)
+                                                        .putExtra("bankstatus", data1.getIsactive())
+                                                );
+                                                finish();
+                                            } else {
+                                                startActivity(new Intent(ac, KycRejectedActiviy.class).putExtra(
+                                                        "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                        .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                        .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                        .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                                        .putExtra("bankstatus", "4")
+                                                );
+                                                finish();
+                                            }
 
 
+                                        }
+                                    });
+                                }   // Rejected
+                            }//  indian
+
+                            else {
+                                Log.e("countryCode", "onResponse: " + response.body().getData().getUserdata().getCountryCode());
+
+                                GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
+                                GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
+                                if (getKycStatus.getStaus().equals("0")) {   // have to do kyc
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycverify);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.startverify);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(ac, KycForignUploadActivity.class));
+                                        }
+                                    });
+                                }  // new
 
 
+                                else if (getKycStatus.getStaus().equals("1")) {          // waiitng from admin //
 
-                    else {
-                        Log.e("countryCode", "onResponse: " + response.body().getData().getUserdata().getCountryCode());
+                                    // have to do kyc  pending from admin
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycverify);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.home);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
 
-                        GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
-                        GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
-                        if (getKycStatus.getStaus().equals("0")) {   // have to do kyc
-                            binding.kycImage.setBackgroundResource(R.drawable.kycverify);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.startverify);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(ac, KycForignUploadActivity.class));
-                                }
-                            });
-                        }  // new
+                                            finish();
 
+                                        }
+                                    });
 
+                                    binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.bitAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
 
-                        else if (getKycStatus.getStaus().equals("1")) {          // waiitng from admin //
-
-                            // have to do kyc  pending from admin
-                            binding.kycImage.setBackgroundResource(R.drawable.kycverify);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.home);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                    finish();
-
-                                }
-                            });
-
-                            binding.bitAddress.setVisibility(View.VISIBLE);
-                            binding.bitAddress.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(KycActivity.this,BtcActivity.class).putExtra("bit",response.body().getData().getUserdata().getBitAddress()));
-                                }
-                            });
-
-                        }    //pending from admin
+                                }    //pending from admin
 
 
+                                if (getKycStatus.getStaus().equals("2")) {    // kyc done  Approved
 
 
-
-                        if (getKycStatus.getStaus().equals("2")) {    // kyc done  Approved
-
-
-                            binding.kycImage.setBackgroundResource(R.drawable.kycsuccess);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.checkdocu);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(ac, KycForeignSuccessActiviy.class).putExtra(
-                                                "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                                .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                                .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                                .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                    binding.kycImage.setBackgroundResource(R.drawable.kycsuccess);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.checkdocu);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(ac, KycForeignSuccessActiviy.class).putExtra(
+                                                    "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                    .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                    .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                    .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
 
 
-                                        );
+                                            );
 
-                                        finish();
+                                            finish();
 
-                                }
-                            });
+                                        }
+                                    });
 
-                            binding.bitAddress.setVisibility(View.VISIBLE);
-                            binding.bitAddress.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(KycActivity.this,BtcActivity.class).putExtra("bit",response.body().getData().getUserdata().getBitAddress()));
-                                }
-                            });
+                                    binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.bitAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
 
-                        }     // approved   done
-
-
-                        else if (getKycStatus.getStaus().equals("3")) {   // Rejected
-                            GetKycStatusResponse.Data.BankDetails data1 = response.body().getData().getBankDetails();
-
-                            binding.kycImage.setBackgroundResource(R.drawable.unscusses);
-                            binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
-                            binding.startVerificationBtn.setText(R.string.reverifi);
-                            binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
+                                }     // approved   done
 
 
-                                    startActivity(new Intent(ac, KycForeignRejectedActiviy.class).putExtra(
-                                            "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
-                                            .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
-                                            .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
-                                            .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
-                                    );
-                                    finish();
+                                else if (getKycStatus.getStaus().equals("3")) {   // Rejected
+                                    GetKycStatusResponse.Data.BankDetails data1 = response.body().getData().getBankDetails();
 
-                                }
-
-
-                            });
-
-                            binding.bitAddress.setVisibility(View.VISIBLE);
-                            binding.bitAddress.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    startActivity(new Intent(KycActivity.this,BtcActivity.class).
-                                            putExtra("bit",response.body().getData().getUserdata().getBitAddress()));
-                                }
-                            });
-
-                        }   // Rejected
-                    }   // not indian
+                                    binding.kycImage.setBackgroundResource(R.drawable.unscusses);
+                                    binding.kycText.setText(response.body().getData().getKycStatus().getMessage());
+                                    binding.startVerificationBtn.setText(R.string.reverifi);
+                                    binding.startVerificationBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
 
 
+                                            startActivity(new Intent(ac, KycForeignRejectedActiviy.class).putExtra(
+                                                    "nationIdStatus", response.body().getData().getUserdata().getNationalIdStatus())
+                                                    .putExtra("addressProffStatus", response.body().getData().getUserdata().getAddressIdStatus())
+                                                    .putExtra("addressProffPath", response.body().getData().getUserdata().getAddressproofPath())
+                                                    .putExtra("nationProffPath", response.body().getData().getUserdata().getNationalidPath())
+                                            );
+                                            finish();
+
+                                        }
+
+
+                                    });
+
+                                    binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.bitAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, BtcActivity.class).
+                                                    putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
+
+                                }   // Rejected
+                            }   // not indian
+                        }else {
+                            Toast.makeText(KycActivity.this,response.body().getMessage()!=null?response.body().getMessage():"Error",Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
 
@@ -546,7 +530,6 @@ public class KycActivity extends AppCompatActivity {
         if (shouldAllowBack == true) {
             super.onBackPressed();
         } else {
-
 
         }
     }

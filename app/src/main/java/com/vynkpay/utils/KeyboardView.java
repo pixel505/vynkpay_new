@@ -115,4 +115,5 @@ public class KeyboardView extends FrameLayout implements View.OnClickListener {
     protected <T extends View> T $(@IdRes int id) {
         return (T) super.findViewById(id);
     }
+
 }

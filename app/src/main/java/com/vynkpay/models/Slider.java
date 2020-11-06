@@ -1,5 +1,10 @@
 package com.vynkpay.models;
 
+import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
+
 public class Slider{
 
     public Integer image;
@@ -35,5 +40,18 @@ public class Slider{
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public String toString(){
+        JSONObject object = new JSONObject();
+        try {
+            object.put("description",getDesc());
+            object.put("image",getImage());
+            object.put("text",getText());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return object.toString();
+    }
+
 }
 

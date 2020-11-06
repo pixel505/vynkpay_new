@@ -31,10 +31,41 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".activity.activitiesnew.TransferVcashActivity"
+
+        <activity android:name=".activity.activitiesnew.CustomerWalletActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"></activity>
+        <activity
+            android:name=".activity.shops.AddBankDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.shops.ProductsDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.shops.ShopsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.ClubBonusListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.ClubBonusActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
+        <activity
+            android:name=".activity.activitiesnew.TransferVcashActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.CoinbaseActivity"
             android:launchMode="singleTop"
@@ -129,7 +160,7 @@
         <activity
             android:name=".newregistration.OnboardingActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".newregistration.Register4Activity"
             android:launchMode="singleTop"
@@ -145,8 +176,7 @@
         <activity
             android:name=".newregistration.Register1Activity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.activities.ConversionActivity"
             android:launchMode="singleTop"

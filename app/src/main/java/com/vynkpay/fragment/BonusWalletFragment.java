@@ -111,7 +111,16 @@ public class BonusWalletFragment extends AppCompatActivity {
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         //binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
-        binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
+        if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+            binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
+            binding.bonusHeader.tvWTitle.setText("Cashback");
+        } else {
+            binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
+            binding.bonusHeader.tvWTitle.setText("Bonus Wallet");
+        }
+        //binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
+        //binding.bonusHeader.tvWTitle.setText("Bonus Wallet");
+
         dev();
     }
 
@@ -177,7 +186,9 @@ public class BonusWalletFragment extends AppCompatActivity {
                 binding.bonusHeader.searchUserET.setText("");
                 dialog = new Dialog(activity);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                }
                 dialog.setCancelable(false);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.setContentView(R.layout.country_dialog);
@@ -221,7 +232,7 @@ public class BonusWalletFragment extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<GetUserResponse> call, Throwable t) {
-                                    Toast.makeText(activity, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, t.getMessage() != null ? t.getMessage() : "Error", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -522,7 +533,6 @@ public class BonusWalletFragment extends AppCompatActivity {
         dialog.setCancelable(false);
         dialog.show();
 
-
         Button button = view.findViewById(R.id.submitButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -774,7 +784,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                         MainApplication.getApiService().transferMoney(Prefes.getAccessToken(activity), value, userId, amount, remarks).enqueue(new Callback<TransferMoney>() {
                             @Override
                             public void onResponse(Call<TransferMoney> call, Response<TransferMoney> response) {
-                                if (response.isSuccessful()) {
+                                if (response.isSuccessful() && response.body()!=null) {
                                     serverDialog.dismiss();
                                     if(response.body().isStatus()){
                                         startActivity(new Intent(activity, RequestSuccess.class).putExtra("msg",response.body().getMessage()).putExtra("typ","Bonus"));
@@ -849,9 +859,6 @@ public class BonusWalletFragment extends AppCompatActivity {
                             WalletTransactionAdapter adapter = new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false);
                             binding.transactionsListView.setAdapter(adapter);
 
-
-
-
                             if (walletTransactionsModelArrayList.size() > 5) {
                                 binding.bonusHeader.viewAll.setVisibility(View.VISIBLE);
                             } else {
@@ -862,7 +869,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                             } else {
                                 binding.noLayout.setVisibility(View.VISIBLE);
                             }
-                            binding.bonusHeader.  viewAll.setOnClickListener(new View.OnClickListener() {
+                            binding.bonusHeader.viewAll.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
@@ -876,7 +883,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                                     if (Functions.isIndian) {
                                         //popupWithdrawalAmount();
                                         startActivity(new Intent(BonusWalletFragment.this, RequestWithdrawnActivity.class));
-                                    }else {
+                                    } else {
                                         //popupWithdrawalAmountIntern();
                                         startActivity(new Intent(BonusWalletFragment.this, WithdrawTypeActivity.class));
                                     }
@@ -886,11 +893,12 @@ public class BonusWalletFragment extends AppCompatActivity {
 
                         Collections.reverse(walletTransactionsModelArrayList);
 
-                    }else {
+                    } else {
                         serverDialog.dismiss();
                         Toast.makeText(activity, jsonObject.getString("message")+"", Toast.LENGTH_SHORT).show();
                         finish();
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -900,7 +908,7 @@ public class BonusWalletFragment extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                                serverDialog.dismiss();
+                serverDialog.dismiss();
             }
         });
     }
@@ -914,4 +922,5 @@ public class BonusWalletFragment extends AppCompatActivity {
         dev();
         super.onResume();
     }
+
 }

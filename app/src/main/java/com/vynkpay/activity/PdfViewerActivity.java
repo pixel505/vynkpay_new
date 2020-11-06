@@ -94,7 +94,6 @@ public class PdfViewerActivity extends AppCompatActivity {
             Prefes.savePDFREC(PDFFileModel.file_recognize,  PdfViewerActivity.this);
             binding.progressLinear.setVisibility(View.VISIBLE);
             downloadingFile();
-
         }
 
 

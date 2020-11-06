@@ -36,7 +36,6 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
-import com.vynkpay.retrofit.model.ApiRechargeResponse;
 import com.vynkpay.retrofit.model.GetProfileResponse;
 import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
@@ -55,8 +54,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class    PaymentMethodActivity extends AppCompatActivity implements PaymentResultWithDataListener {
-    String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent,points;
+public class PaymentMethodActivity extends AppCompatActivity implements PaymentResultWithDataListener {
+    String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent="",points="";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     /*  @BindView(R.id.txtConnectAmount)
@@ -86,30 +85,17 @@ public class    PaymentMethodActivity extends AppCompatActivity implements Payme
     Dialog dialog;
     JSONObject userPreference;
     String accessToken;
-
-
     @BindView(R.id.razorLayout)
     LinearLayout razorLayout;
-
-
     @BindView(R.id.payAmountText)
     NormalTextView payAmountText;
-
     String walletBalane;
-
     @BindView(R.id.payAmountPayText)
     NormalTextView payAmountPayText;
-
-
     @BindView(R.id.vCashPercent)
     TextView vCashPercent;
-
-
     @BindView(R.id.vCashBalance)
     TextView vCashBalance;
-
-
-
     @BindView(R.id.vCashAmount)
     TextView vCashAmount;
 
@@ -195,17 +181,10 @@ public class    PaymentMethodActivity extends AppCompatActivity implements Payme
 
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         toolbar_title.setText("Payment Method");
-
         _AMOUNT = getIntent().getStringExtra("amount");
-
         _TYPE = getIntent().getStringExtra("type");
-
-
         _OPERATOR_ID = getIntent().getStringExtra("operator_id");
-
         Log.i(">>operatorId", "method: " + _OPERATOR_ID);
-
-
         _MOBILE_NUMBER = getIntent().getStringExtra("mobile");
 
         tvMobileNumber.setText("Mobile: "+_MOBILE_NUMBER);
@@ -246,15 +225,13 @@ public class    PaymentMethodActivity extends AppCompatActivity implements Payme
 
         textResult.setText(title);
         if (mSuccess.equalsIgnoreCase("true")) {
-            imageResult.setBackgroundDrawable(getResources().getDrawable(R.drawable.success));
+            imageResult.setBackgroundResource(R.drawable.success);
         } else {
-            imageResult.setBackgroundDrawable(getResources().getDrawable(R.drawable.failed));
+            imageResult.setBackgroundResource(R.drawable.failed);
         }
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
 
                  if(sp.getString("value","").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")){
                     startActivity(new Intent(PaymentMethodActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -412,6 +389,7 @@ public class    PaymentMethodActivity extends AppCompatActivity implements Payme
                 if(response.body().getSuccess()){
                     vCashBalance.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getWalletRedeem());
                     razorpaykey=response.body().getData().getRazorpikey();
+                    Log.d("ererre",razorpaykey);
                     walletBalance.setText("Available Balance "+" "+response.body().getData().getBalance());
                     walletBalane=response.body().getData().getBalance();
 
@@ -587,9 +565,6 @@ public class    PaymentMethodActivity extends AppCompatActivity implements Payme
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     @Override

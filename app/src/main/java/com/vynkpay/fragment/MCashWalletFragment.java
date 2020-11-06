@@ -113,7 +113,17 @@ public class MCashWalletFragment extends AppCompatActivity {
             }
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
+        if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+            //binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
+            //binding.mheader.tvMcashWallet.setText("Cashback");
+            binding.mheader.affilitiateFrame.setVisibility(View.GONE);
+        } else {
+            //
+            //binding.mheader.tvMcashWallet.setText(getString(R.string.mCashWallet));
+            binding.mheader.affilitiateFrame.setVisibility(View.VISIBLE);
+        }
         binding.toolbarLayout.toolbarTitlenew.setText("MCash Wallet");
+
         dev();
     }
 

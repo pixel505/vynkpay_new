@@ -9,11 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

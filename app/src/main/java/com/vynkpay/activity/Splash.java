@@ -4,49 +4,34 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
-
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.vynkpay.BuildConfig;
+import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.newregistration.OnboardingActivity;
-import com.vynkpay.onboard.SplashActivity;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivitySplashBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AppVersionResponse;
-import com.vynkpay.utils.M;
-
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,6 +58,8 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+        sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
+        //sp.edit().putString("welcome","").apply();
         prefs = new Prefes(Splash.this);
         checkPermissions();
     }
@@ -226,7 +213,7 @@ public class Splash extends AppCompatActivity {
                             if (response.body().getIsUpdate().equals("0")) {
                                 dialog(true, response.body().getMessage());
                             } else {
-                                sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
+
                                 if (sp.getString("value", "").isEmpty()) {
                                     GPSTracker gps = new GPSTracker(Splash.this);
                                     // Check if GPS enabled
@@ -243,7 +230,11 @@ public class Splash extends AppCompatActivity {
                                                 if (countryName.equals("India")) {
                                                     sp.edit().putString("value", "India").commit();
                                                     if (sp.getString("welcome","").equalsIgnoreCase("yes")) {
-                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                        if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
+                                                            startActivity(new Intent(Splash.this, LoginActivity.class));
+                                                        }else {
+                                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                        }
                                                     }else {
                                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", "India"));
                                                     }
@@ -251,40 +242,41 @@ public class Splash extends AppCompatActivity {
                                                 } else {
                                                     sp.edit().putString("value", "Global").commit();
                                                     if (sp.getString("welcome","").equalsIgnoreCase("yes")) {
-                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                        if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
+                                                            startActivity(new Intent(Splash.this, LoginActivity.class));
+                                                        }else {
+                                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                        }
                                                     }else {
                                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", "Global"));
                                                     }
                                                     finish();
                                                 }
                                             }
-                                        } catch (IOException e) {
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
-                                    }
-
-
-
-                                    else {
+                                    } else {
                                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                         startActivity(intent);
-
-
                                     }
 
-                                }
-                                else {
+                                } else {
                                     Log.e("data", "" + sp.getString("value", ""));
                                     if (sp.getString("welcome","").equalsIgnoreCase("yes")) {
-                                        if (sp.getString("value", "").equals("Global")) {
-                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                        if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
+                                            startActivity(new Intent(Splash.this, LoginActivity.class));
                                             finish();
-                                        } else if (sp.getString("value", "").equals("India")) {
-                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
-                                            finish();
+                                        }else {
+                                            if (sp.getString("value", "").equals("Global")) {
+                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                finish();
+                                            } else if (sp.getString("value", "").equals("India")) {
+                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                finish();
+                                            }
                                         }
-                                    }else {
-
+                                    } else {
                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", sp.getString("value", "")));
                                         finish();
                                     }
@@ -303,6 +295,7 @@ public class Splash extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AppVersionResponse> call, Throwable t) {
+                Log.d("eeError",t.getMessage()!=null ? t.getMessage():"Error");
             }
         });
     }

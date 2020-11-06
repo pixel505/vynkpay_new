@@ -11,8 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -27,8 +29,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.CheckoutActivity;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.custom.NormalButton;
@@ -48,7 +48,6 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -63,54 +62,44 @@ import retrofit2.Callback;
 public class AccountActivity extends AppCompatActivity {
     @BindView(R.id.editImage)
     ImageView editImage;
-
     @BindView(R.id.editLayout)
     LinearLayout editLayout;
-
     @BindView(R.id.changePasswordLayout)
     LinearLayout changePasswordLayout;
-
     @BindView(R.id.userEmail)
     NormalEditText userEmail;
-
     @BindView(R.id.userName)
     NormalEditText userName;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.tvEdit)
     NormalTextView tvEdit;
-
     @BindView(R.id.genderSpinner)
     Spinner genderSpinner;
-
     @BindView(R.id.userPhone)
     NormalTextView userPhone;
-
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbarTitle;
-
     @BindView(R.id.submitButton)
     NormalButton submitButton;
-
     @BindView(R.id.stateET)
     NormalEditText stateET;
-
     @BindView(R.id.cityET)
     NormalEditText cityET;
-
     @BindView(R.id.postalCodeET)
     NormalEditText postalCodeET;
-
     @BindView(R.id.addressET)
     NormalEditText addressET;
-
     @BindView(R.id.referralIDTV)
     NormalTextView referralIDTV;
-
     @BindView(R.id.imageView)
     CircleImageView imageView;
+
+    @BindView(R.id.chkNotification)
+    SwitchCompat chkNotification;
+
+    @BindView(R.id.linNotification)
+    LinearLayout linNotification;
 
 
     boolean isEnabled = false;
@@ -141,6 +130,12 @@ public class AccountActivity extends AppCompatActivity {
         setListeners();
         toolbarTitle.setText("My Account");
 
+        if (Prefes.getUserType(AccountActivity.this).equalsIgnoreCase("2")){
+            linNotification.setVisibility(View.GONE);
+        } else {
+            linNotification.setVisibility(View.VISIBLE);
+        }
+
 
         makeProfileRequest(accessToken);
 
@@ -152,12 +147,6 @@ public class AccountActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
         tvEdit.setText("Edit");
         submitButton.setVisibility(View.GONE);
     }
@@ -255,14 +244,10 @@ public class AccountActivity extends AppCompatActivity {
                 cancelButton = dialog.findViewById(R.id.cancelButton);
                 oldPassword = dialog.findViewById(R.id.oldPassword);
                 newPassword = dialog.findViewById(R.id.newPassword);
-
                 showHideImage = dialog.findViewById(R.id.showHideImage);
                 showHideImage1 = dialog.findViewById(R.id.showHideImage1);
                 showHideImage2 = dialog.findViewById(R.id.showHideImage2);
-
                 confirmNewPassword = dialog.findViewById(R.id.confirmNewPassword);
-
-
                 M.showHidePassword(AccountActivity.this, isPasswordShown, oldPassword, showHideImage);
                 M.showHidePassword(AccountActivity.this, isPasswordShown1, newPassword, showHideImage1);
                 M.showHidePassword(AccountActivity.this, isPasswordShown2, confirmNewPassword, showHideImage2);
@@ -273,12 +258,14 @@ public class AccountActivity extends AppCompatActivity {
                         M.showHidePassword(AccountActivity.this, isPasswordShown = !isPasswordShown, oldPassword, showHideImage);
                     }
                 });
+
                 showHideImage1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         M.showHidePassword(AccountActivity.this, isPasswordShown1 = !isPasswordShown1, newPassword, showHideImage1);
                     }
                 });
+
                 showHideImage2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -292,20 +279,21 @@ public class AccountActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (oldPassword.getText().length() == 0) {
+                        if (TextUtils.isEmpty(oldPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.old_password_fill), Toast.LENGTH_SHORT).show();
-                        } else if (newPassword.getText().length() == 0) {
+                        } else if (TextUtils.isEmpty(newPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.old_new_fill), Toast.LENGTH_SHORT).show();
-                        } else if (confirmNewPassword.getText().length() == 0) {
+                        } else if (TextUtils.isEmpty(confirmNewPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.old_confirm_fill), Toast.LENGTH_SHORT).show();
-                        } else if (oldPassword.getText().toString().trim().length() == 0) {
+                        } else if (TextUtils.isEmpty(oldPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.old_not_valid_fill), Toast.LENGTH_SHORT).show();
-                        } else if (newPassword.getText().toString().trim().length() == 0) {
+                        } else if (TextUtils.isEmpty(newPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.new_not_valid_fill), Toast.LENGTH_SHORT).show();
-                        } else if (confirmNewPassword.getText().toString().trim().length() == 0) {
+                        } else if (TextUtils.isEmpty(confirmNewPassword.getText().toString().trim())) {
                             Toast.makeText(AccountActivity.this, getString(R.string.confirm_not_valid_fill), Toast.LENGTH_SHORT).show();
                         } else if (newPassword.getText().length() < 6) {
                             Toast.makeText(AccountActivity.this, getString(R.string.new_not_valid_fill), Toast.LENGTH_SHORT).show();
@@ -324,6 +312,20 @@ public class AccountActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        if (sp.getString("isSound","1").equalsIgnoreCase("1")){
+            chkNotification.setChecked(true);
+        }else {
+            chkNotification.setChecked(false);
+        }
+
+        chkNotification.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b){
+                setChkNotification("1");
+            } else {
+                setChkNotification("0");
+            }
+        });
     }
 
 
@@ -339,9 +341,7 @@ public class AccountActivity extends AppCompatActivity {
                     try {
                         bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), resultUri);
                         Uri tempUri = getImageUri(AccountActivity.this, bitmap);
-
                         imageView.setImageURI(tempUri);
-
                         ApiCalls.updateProfile(AccountActivity.this, bitmap, accessToken, new VolleyResponse() {
                             @Override
                             public void onResult(String result, String status, String message) {
@@ -354,7 +354,6 @@ public class AccountActivity extends AppCompatActivity {
 
                             }
                         });
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -421,14 +420,10 @@ public class AccountActivity extends AppCompatActivity {
                                 String fullNameString = jsonObject1.getString(ApiParams.full_name);
                                 String referral_code = jsonObject1.getString("referral_code");
                                 String image = jsonObject1.getString("image");
-
                                 String address = jsonObject1.getString("address");
                                 String city = jsonObject1.getString("city");
                                 String state = jsonObject1.getString("state");
                                 String zip_code = jsonObject1.getString("zip_code");
-
-
-
                                 referralIDTV.setText(referral_code);
 
                                 if (!jsonObject1.isNull("image")){
@@ -452,8 +447,6 @@ public class AccountActivity extends AppCompatActivity {
                                 if (!jsonObject1.isNull("zip_code")){
                                     postalCodeET.setText(zip_code);
                                 }
-
-
 
                                 stateET.setAlpha(.5f);
                                 cityET.setAlpha(.5f);
@@ -549,11 +542,6 @@ public class AccountActivity extends AppCompatActivity {
                                                 startActivity(new Intent(AccountActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                                 finish();
                                             }
-
-
-
-
-
                                         }
                                     }
 
@@ -573,7 +561,6 @@ public class AccountActivity extends AppCompatActivity {
                                         }
                                     }
                                 }
-
                             }
                         } catch (Exception e) {
                             Log.i(">>exception", "onResponse: " + e.getMessage());
@@ -696,6 +683,30 @@ public class AccountActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
+    }
+
+    void setChkNotification(String text){
+        Log.d("nResponse",text);
+        MainApplication.getApiService().notificationSoundOnOff(Prefes.getAccessToken(AccountActivity.this),text,"1").enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+                if (response.isSuccessful() && response.body()!=null) {
+                    Log.d("nResponse", response.body());
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body());
+                        Log.d("nResponse", jsonObject.toString());
+                        sp.edit().putString("isSound",text).apply();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("nError",t.getMessage()!=null?t.getMessage():"Error");
+            }
+        });
     }
 
 }

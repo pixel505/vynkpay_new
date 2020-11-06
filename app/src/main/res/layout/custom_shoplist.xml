@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingBottom="@dimen/_3sdp"
+        android:background="@drawable/custom_rectangle"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:weightSum="1">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:layout_gravity="center_vertical"
+            android:gravity="center">
+
+            <com.vynkpay.activity.shops.RoundRectCornerImageView
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/bg_image"
+                android:id="@+id/ivBrandImage"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_5sdp">
+
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/black"
+                android:id="@+id/tvProductName"
+                android:text="Adobe"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_10sdp"
+                    android:id="@+id/tvOffers"
+                    android:layout_toLeftOf="@+id/tvShopOnline"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:text="upto 5% off"/>
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/_8sdp"
+                    android:background="@drawable/button_bg"
+                    android:textColor="@color/white"
+                    android:layout_gravity="right"
+                    android:padding="@dimen/_8sdp"
+                    android:id="@+id/tvShopOnline"
+                    android:layout_alignParentRight="true"
+                    android:textAllCaps="true"
+                    android:text="Shop Online"/>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +24,6 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.PinActivity;
@@ -44,7 +43,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -130,13 +128,13 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
 
         if (view == binding.submitButton){
-            if (binding.usernameET.getText().toString().isEmpty()) {
+            if (TextUtils.isEmpty(binding.usernameET.getText().toString().trim())) {
                 Toast.makeText(TransferVcashActivity.this, "Please Select User", Toast.LENGTH_SHORT).show();
-            } else if ( binding.amountET.getText().toString().isEmpty()) {
+            } else if (TextUtils.isEmpty(binding.amountET.getText().toString().trim())) {
                 Toast.makeText(TransferVcashActivity.this, "Please Enter Amount", Toast.LENGTH_SHORT).show();
-            }else if (Float.parseFloat(binding.amountET.getText().toString().trim()) > Float.parseFloat(TranferWalletActivity.vCashBalance.trim())) {
+            } else if (Float.parseFloat(binding.amountET.getText().toString().trim()) > Float.parseFloat(TranferWalletActivity.vCashBalance.trim())) {
                 Toast.makeText(TransferVcashActivity.this, "This amount is not available in wallet", Toast.LENGTH_SHORT).show();
-            } else if (binding.remarkET.getText().toString().isEmpty()) {
+            } else if (TextUtils.isEmpty(binding.remarkET.getText().toString().trim())) {
                 Toast.makeText(TransferVcashActivity.this, "Please Enter Remarks", Toast.LENGTH_SHORT).show();
             } else {
                 transferMoneyByServer();
@@ -197,7 +195,9 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
                             public void onFailure(Call<GetUserResponse> call, Throwable t) {
                                 Toast.makeText(TransferVcashActivity.this, t.getMessage()!=null?t.getMessage():"Error", Toast.LENGTH_SHORT).show();
                             }
+
                         });
+
                     }
                 }
             });
@@ -234,29 +234,27 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
             case rcWallet: {
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
-
                         value = data.getStringExtra("edttext");
                         serverDialog.show();
                         MainApplication.getApiService().transfermVMoney(Prefes.getAccessToken(TransferVcashActivity.this), value, userId, amount, remarks).enqueue(new Callback<TransferMoney>() {
-
                             @Override
                             public void onResponse(Call<TransferMoney> call, Response<TransferMoney> response) {
                                 serverDialog.dismiss();
                                 try {
-                                    Log.d("transfervcash",new Gson().toJson(response.body()));
+                                    Log.d("transfervcashresponse",new Gson().toJson(response.body()));
                                     if (response.isSuccessful()) {
-                                        if(response.body().isStatus()){
-                                            startActivity(new Intent(TransferVcashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","vCash"));
-                                            TransferVcashActivity.this.finish();
-                                        } else {
-                                            Toast.makeText(TransferVcashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        if (response.body() != null) {
+                                            if(response.body().isStatus()){
+                                                startActivity(new Intent(TransferVcashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","vCash"));
+                                                TransferVcashActivity.this.finish();
+                                            } else {
+                                                Toast.makeText(TransferVcashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
                                         }
                                     }
-
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }
-
                             }
 
                             @Override
@@ -288,11 +286,10 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
 
         }
 
+        @NotNull
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.country_list, parent, false);
-
+            View itemView = LayoutInflater.from(TransferVcashActivity.this).inflate(R.layout.country_list, parent, false);
             return new MyViewHolder(itemView);
         }
 
@@ -310,7 +307,6 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
                     // countryId=data.getId();
                 }
             });
-
         }
 
         @Override
@@ -334,15 +330,14 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView countryText;
 
+            TextView countryText;
             public MyViewHolder(View view) {
                 super(view);
                 countryText = view.findViewById(R.id.countryText);
             }
+
         }
     }
-
-
 
 }

@@ -29,6 +29,7 @@ import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class InvoiceDetailActivity extends AppCompatActivity {
     ActivityInvoiceDetailBinding binding;
     InvoiceDetailActivity ac;

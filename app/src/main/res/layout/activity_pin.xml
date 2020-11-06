@@ -40,7 +40,7 @@
             android:background="@drawable/custom_rectangle"
             android:hint="Enter Pin"
             android:gravity="center_vertical"
-            android:inputType="number"
+            android:inputType="numberPassword"
             android:maxLength="6"
             android:layout_marginTop="@dimen/_16sdp" />
 

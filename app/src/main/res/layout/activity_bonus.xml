@@ -23,13 +23,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true">
+                android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/bonusRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/_16sdp"/>
             </LinearLayout>
         </RelativeLayout>
 

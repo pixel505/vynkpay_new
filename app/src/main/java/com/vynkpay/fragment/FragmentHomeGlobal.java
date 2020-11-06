@@ -1,8 +1,8 @@
 package com.vynkpay.fragment;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.squareup.picasso.Picasso;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
@@ -34,14 +32,11 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetNonWalletResponse;
 import com.vynkpay.utils.Functions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -66,23 +61,24 @@ public class FragmentHomeGlobal extends Fragment {
     AutoScrollViewPager viewPager;
     @BindView(R.id.tabLayout)
     DotsIndicator tabLayout;
-
     @BindView(R.id.globalImage)
     CircleImageView globalImage;
-
     @BindView(R.id.globalUserId)
     NormalTextView globalUserId;
-
     @BindView(R.id.globalUserName)
     NormalBoldTextView globalUserName;
-
     @BindView(R.id.globalEmail)
     NormalLightTextView globalEmail;
 
+    @BindView(R.id.tvBCash)
+    NormalTextView tvBCash;
+
+    @BindView(R.id.crdBouns)
+    CardView crdBouns;
 
     String bonusBalance,vCashBalance,mCashBalance;
     Activity activity;
-    String imageURL;
+    String imageURL="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,6 +119,14 @@ public class FragmentHomeGlobal extends Fragment {
                 Log.e("imageeeeeeeeeeeeeeee", "" + imagepath);
             }
 
+        }
+
+        if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+            //crdBouns.setVisibility(View.GONE);
+            tvBCash.setText("Cashback");
+        }else {
+            //crdBouns.setVisibility(View.VISIBLE);
+            tvBCash.setText("Bonus Wallet");
         }
 
         bonusLinear.setOnClickListener(new View.OnClickListener() {
@@ -276,7 +280,7 @@ public class FragmentHomeGlobal extends Fragment {
 
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
         });
     }
@@ -320,7 +324,7 @@ public class FragmentHomeGlobal extends Fragment {
 
                     }else {
                     }
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -329,7 +333,7 @@ public class FragmentHomeGlobal extends Fragment {
 
             @Override
             public void onError(String error) {
-
+                Log.d("Erroror",error+"");
             }
         });
     }
@@ -378,7 +382,7 @@ public class FragmentHomeGlobal extends Fragment {
             }
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
 
         });
@@ -432,9 +436,10 @@ public class FragmentHomeGlobal extends Fragment {
 
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
         });
+
     }
 
 

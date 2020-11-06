@@ -3,10 +3,10 @@ package com.vynkpay.activity.activitiesnew.conversion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
@@ -40,6 +40,8 @@ public class ConvertMCashActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-
+        if (view == binding.submitButton){
+            Toast.makeText(ConvertMCashActivity.this, "coming soon!1", Toast.LENGTH_SHORT).show();
+        }
     }
 }

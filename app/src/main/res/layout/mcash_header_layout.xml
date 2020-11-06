@@ -50,6 +50,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_14sdp"
                             android:text="@string/mCashWallet"
+                            android:id="@+id/tvMcashWallet"
                             android:textColor="@color/color_text"/>
 
                         <com.vynkpay.custom.NormalBoldTextView

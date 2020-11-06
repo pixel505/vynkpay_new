@@ -72,6 +72,7 @@ public class OtpActivityNew extends AppCompatActivity {
                                     dialog.dismiss();
 
                                     Intent intent=new Intent(OtpActivityNew.this, RechargeSuccess.class);
+                                    intent.putExtra("which","affiliate");
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     startActivity(intent);
                                     finishAffinity();

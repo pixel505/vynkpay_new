@@ -3,17 +3,13 @@ package com.vynkpay.activity.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.adapter.CloseTicketAdapter;
 import com.vynkpay.adapter.OpenTicketAdapter;
 import com.vynkpay.databinding.ActivitySupportTicketBinding;

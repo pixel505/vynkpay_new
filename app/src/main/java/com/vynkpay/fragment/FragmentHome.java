@@ -13,14 +13,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.activity.activities.AboutUsActivity;
-import com.vynkpay.models.EcashModelClass;
 import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
@@ -90,6 +87,10 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.vCashWalletText)
     TextView vCashWalletText;
 
+    @BindView(R.id.tvBonus)
+    TextView tvBonus;
+
+
 
     @BindView(R.id.mCashWalletText)
     TextView mCashWalletText;
@@ -112,12 +113,15 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.tabLayout)
     DotsIndicator tabLayout;
 
+    @BindView(R.id.crdBouns)
+    CardView crdBouns;
+
     String bonusBalance,mCashBalance,vCashBalance;
 
     SharedPreferences popupSP;
     SharedPreferences.Editor editor;
     Activity activity;
-    String imageURL;
+    String imageURL="";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -127,7 +131,7 @@ public class FragmentHome extends Fragment {
         ButterKnife.bind(this, view);
 
         popupSP = activity.getSharedPreferences("popupSP", Context.MODE_PRIVATE);
-        editor=popupSP.edit();
+        editor = popupSP.edit();
         editor.putBoolean("showPopup", true).apply();
 
         getBonusTransaction();
@@ -140,10 +144,21 @@ public class FragmentHome extends Fragment {
             userLayout.setVisibility(View.GONE);
         } else {
             userLayout.setVisibility(View.VISIBLE);
-            userIdText.setText(getString(R.string.userName) + " " + Prefes.getUserName(activity));
+            if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+                userIdText.setText("");
+            }else {
+                userIdText.setText(getString(R.string.userName) + " " + Prefes.getUserName(activity));
+            }
         }
 
 
+        if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+            //crdBouns.setVisibility(View.VISIBLE);
+            tvBonus.setText("Cashback");
+        }else {
+            //crdBouns.setVisibility(View.VISIBLE);
+            tvBonus.setText("Bonus Wallet");
+        }
 
         bonusLinear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,19 +357,21 @@ public class FragmentHome extends Fragment {
                             bonusWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getEarningBalance());
                             vCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getBalance());
 
-                            Prefes.saveCash(response.body().getData().getBalance(),getContext());
+                            Prefes.saveCash(response.body().getData().getBalance(),getActivity());
                             mCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getWalletRedeem());
 
                         } else {
+
                         }
                     } else {
+
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<GetWalletResponse> call, Throwable t) {
-
+                Log.d("Error",t.getMessage()!=null?t.getMessage():"Error");
             }
         });
     }
@@ -366,7 +383,11 @@ public class FragmentHome extends Fragment {
             userLayout.setVisibility(View.GONE);
         } else {
             userLayout.setVisibility(View.VISIBLE);
-            userIdText.setText(getString(R.string.userName) + " " + Prefes.getUserName(activity));
+            if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
+                userIdText.setText("");
+            }else {
+                userIdText.setText(getString(R.string.userName) + " " + Prefes.getUserName(activity));
+            }
         }
     }
 
@@ -485,7 +506,7 @@ public class FragmentHome extends Fragment {
 
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
         });
     }
@@ -536,7 +557,7 @@ public class FragmentHome extends Fragment {
             }
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
 
         });
@@ -586,14 +607,13 @@ public class FragmentHome extends Fragment {
                     e.printStackTrace();
                 }
 
-
-
             }
 
             @Override
             public void onError(String error) {
-
+                Log.d("Error",error+"");
             }
+
         });
     }
 
@@ -639,6 +659,7 @@ public class FragmentHome extends Fragment {
         if (alertDialog.getWindow()!=null){
             alertDialog.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         }
+
     }
 
 }

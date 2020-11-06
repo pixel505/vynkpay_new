@@ -2,6 +2,7 @@ package com.vynkpay.adapter;
 
 import android.content.Context;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,12 @@ public class WelComeAdapter extends PagerAdapter {
         TextView tvTitleText = (TextView)imageLayout.findViewById(R.id.tvTitleText);
         TextView tvText = (TextView)imageLayout.findViewById(R.id.tvText);
         LinearLayout linMainTuto = (LinearLayout)imageLayout.findViewById(R.id.linMainTuto);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("selectedd",IMAGES.get(position).toString());
+            }
+        });
         /*if (position == 0) {
             linMainTuto.setBackgroundColor(ContextCompat.getColor(context,R.color.searchfreelancer));
         }else if (position == 1){

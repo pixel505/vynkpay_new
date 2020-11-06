@@ -1,5 +1,6 @@
 package com.vynkpay.activity.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,9 +27,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
+import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityAffiliateBinding;
 import com.vynkpay.fragment.MCashWalletFragment;
 import com.vynkpay.models.WalletTransactionsModel;
@@ -63,18 +67,22 @@ public class AffiliateActivity extends AppCompatActivity  {
     Dialog dialog,dialog1;
     RecyclerView countryRecycler;
     UsrAdapter adapter;
-    String userId,orgId;
+    String userId="",orgId="";
+    List<GetUserPackageResponse.Datum> packageList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_affiliate);
         ac = AffiliateActivity.this;
-        getMCashTransaction();
         dialog1 = M.showDialog(ac, "", false, false);
+        binding.packageList.setLayoutManager(M.horizontalRecyclerView(AffiliateActivity.this));
+        getMCashTransaction();
+
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(ac,WalletNewActivity.class));
+               //startActivity(new Intent(ac,WalletNewActivity.class));
                finish();
             }
         });
@@ -84,41 +92,43 @@ public class AffiliateActivity extends AppCompatActivity  {
 
     }
     private void getMCashTransaction(){
+
+        dialog1.show();
             MCashWalletFragment.walletTransactionsModelArrayList.clear();
             ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
                 @Override
                 public void onResult(String result, String status, String message) {
                     //  Log.d("tmcashtrrr", result+"//");
+                    dialog1.dismiss();
                     try {
                         JSONObject jsonObject = new JSONObject(result);
                         if (jsonObject.getString("status").equals("true")){
                             JSONObject dataObject=jsonObject.getJSONObject("data");
                           binding.walletText.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
-
-
-
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
                 }
 
                 @Override
                 public void onError(String error) {
+                    dialog1.dismiss();
                 }
             });
         }
-    private void clicks() {
+
+        private void clicks() {
         binding.searchUserEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 binding.searchUserEdt.setText("");
                 dialog = new Dialog(ac);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                if (dialog.getWindow()!=null) {
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                }
                 dialog.setCancelable(false);
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.setContentView(R.layout.country_dialog);
@@ -177,9 +187,12 @@ public class AffiliateActivity extends AppCompatActivity  {
                     Toast.makeText(ac, "Please Select User", Toast.LENGTH_SHORT).show();
                 }
 
-                else if(binding.packageText.getText().toString().isEmpty()){
+               /* else if(binding.packageText.getText().toString().isEmpty()){
                     Toast.makeText(ac, "No Package Found Select another User", Toast.LENGTH_SHORT).show();
 
+                }*/
+                else if(TextUtils.isEmpty(orgId)){
+                    Toast.makeText(ac, "No Package Found Select another User", Toast.LENGTH_SHORT).show();
                 }
                 else{
                       dialog1.show();
@@ -218,7 +231,6 @@ public class AffiliateActivity extends AppCompatActivity  {
 
                                                         } else {
                                                             Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-
                                                         }
                                                     }
                                                 }
@@ -233,11 +245,7 @@ public class AffiliateActivity extends AppCompatActivity  {
                                         }
                                     }
                                 });
-
-
                                 dialog.show();
-
-
                             }
                             else {
                                 dialog1.dismiss();
@@ -249,30 +257,35 @@ public class AffiliateActivity extends AppCompatActivity  {
                         public void onFailure(Call<SendWaletOtp> call, Throwable t) {
                             dialog1.dismiss();
                             Toast.makeText(ac, t.getMessage(), Toast.LENGTH_SHORT).show();
-
                         }
                     });
             }
             }
         });
-
-
     }
+
+
+
     private void getPackage() {
+        packageList.clear();
         MainApplication.getApiService().getUserPackage(Prefes.getAccessToken(ac), userId).enqueue(new Callback<GetUserPackageResponse>() {
             @Override
             public void onResponse(Call<GetUserPackageResponse> call, Response<GetUserPackageResponse> response) {
                 if (response.isSuccessful() && response != null) {
                     if (response.body().getStatus()) {
                         binding.packageTextt.setVisibility(View.VISIBLE);
-                        binding.packageCard.setVisibility(View.VISIBLE);
+                        binding.packageCard.setVisibility(View.GONE);
+                        binding.linPackage.setVisibility(View.VISIBLE);
+                         packageList.addAll(response.body().getData());
+                         binding.packageList.setAdapter(new PackageAdapter(packageList));
                          binding.packageText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getTotalAmount());
                          binding.amountText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getPrice());
                          binding.pointsText.setText("("+response.body().getData().get(0).getPoints()+" "+"points"+")");
-                         orgId=response.body().getData().get(0).getId();
+                         //orgId=response.body().getData().get(0).getId();
                     } else {
                          binding.packageCard.setVisibility(View.GONE);
                         binding.packageTextt.setVisibility(View.GONE);
+                        binding.linPackage.setVisibility(View.GONE);
 
                     }
                 } else {
@@ -282,7 +295,7 @@ public class AffiliateActivity extends AppCompatActivity  {
 
             @Override
             public void onFailure(Call<GetUserPackageResponse> call, Throwable t) {
-                Toast.makeText(ac, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ac, t.getMessage()!=null?t.getMessage():"Error", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -321,7 +334,6 @@ public class AffiliateActivity extends AppCompatActivity  {
                     searc.setText(data.getText());
                     userId = data.getId();
                     getPackage();
-
                 }
             });
         }
@@ -357,6 +369,56 @@ public class AffiliateActivity extends AppCompatActivity  {
         }
     }
 
+    class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.PHolder>{
+
+        List<GetUserPackageResponse.Datum> packageList;
+
+        public PackageAdapter(List<GetUserPackageResponse.Datum> packageList) {
+            this.packageList = packageList;
+        }
+
+        @NonNull
+        @Override
+        public PHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(AffiliateActivity.this).inflate(R.layout.custom_packagelist,parent,false);
+            return new PHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull PHolder holder, int position) {
+            try {
+                holder.packageText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getTotalAmount());
+                holder.amountText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getPrice());
+                holder.pointsText.setText("("+packageList.get(position).getPoints()+" "+"points"+")");
+                holder.itemView.setOnClickListener(view -> {
+                    orgId = packageList.get(position).getId();
+                });
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return packageList!=null?packageList.size():0;
+        }
+
+        class PHolder extends RecyclerView.ViewHolder{
+
+            NormalTextView packageText;
+            NormalTextView amountText;
+            NormalTextView pointsText;
+            public PHolder(@NonNull View itemView) {
+                super(itemView);
+                packageText = itemView.findViewById(R.id.packageText);
+                amountText = itemView.findViewById(R.id.amountText);
+                pointsText = itemView.findViewById(R.id.pointsText);
+            }
+        }
+
+    }
+
+
     @Override
     protected void onResume() {
         if(dialog1!=null){
@@ -364,4 +426,5 @@ public class AffiliateActivity extends AppCompatActivity  {
         }
         super.onResume();
     }
+
 }

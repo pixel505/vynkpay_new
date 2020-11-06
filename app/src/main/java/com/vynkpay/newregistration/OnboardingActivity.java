@@ -11,14 +11,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.Splash;
+import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.adapter.WelComeAdapter;
 import com.vynkpay.databinding.ActivityOnboardingBinding;
-import com.vynkpay.fragment.FragmentHome;
-import com.vynkpay.fragment.FragmentHomeGlobal;
 import com.vynkpay.models.Slider;
 
 import java.util.ArrayList;
@@ -83,6 +80,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
             public void onPageScrollStateChanged(int state) {
 
             }
+
         });
 
 
@@ -101,7 +99,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         if (view == binding.btnNext){
             if (binding.btnNext.getText().toString().equalsIgnoreCase("Login")){
                 sp.edit().putString("welcome","yes").apply();
-                startActivity(new Intent(OnboardingActivity.this, HomeActivity.class).putExtra("Country", country));
+                startActivity(new Intent(OnboardingActivity.this, LoginActivity.class).putExtra("Country", country));
                 finishAffinity();
 
             } else {
@@ -112,6 +110,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 binding.viewPager.setCurrentItem(currentPage, true);
             }
         }
+
         if (view == binding.btnSkip){
             if (currentPage == NUM_PAGES) {
                 currentPage = 0;

@@ -13,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -42,14 +40,11 @@ import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.URLS;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -61,8 +56,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent,points;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    /*  @BindView(R.id.txtConnectAmount)
-      NormalTextView txtConnectAmount;*/
     @BindView(R.id.txtRechargeAmount)
     NormalTextView txtRechargeAmount;
     @BindView(R.id.txtBalance)
@@ -86,34 +79,25 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     @BindView(R.id.orendaCheck)
     CheckBox orendaCheck;
     Dialog dialog;
-
     @BindView(R.id.razorLayout)
     LinearLayout razorLayout;
-
     @BindView(R.id.payAmountText)
     NormalTextView payAmountText;
-
     String walletBalane;
-
     @BindView(R.id.payAmountPayText)
     NormalTextView payAmountPayText;
-
     @BindView(R.id.vCashPercent)
     TextView vCashPercent;
-
     @BindView(R.id.vCashBalance)
     TextView vCashBalance;
-
     @BindView(R.id.vCashAmount)
     TextView vCashAmount;
-
     String razorpaykey;
-
     @BindView(R.id.walletBalance)
     TextView walletBalance;
 
-    String phone ,email,countrycode;
-        SharedPreferences sp;
+    String phone="" ,email="",countrycode="";
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -127,29 +111,24 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
             public void onResponse(Call<GetProfileResponse> call, Response<GetProfileResponse> response) {
                 if(response.isSuccessful() ){
 
-                    if(response.body().getSuccess()){
+                    if (response.body() != null) {
+                        if(response.body().getSuccess()){
 
-                        phone=response.body().getData().getMobileNumber();
-                        email=response.body().getData().getEmail();
-                        countrycode=response.body().getData().getZipCode();
-
+                            phone=response.body().getData().getMobileNumber();
+                            email=response.body().getData().getEmail();
+                            countrycode=response.body().getData().getZipCode();
+                        } else {
+                            Log.d("checkout","success===-false");
+                        }
                     }
-
-
-                    else {
-
-
-                    }
-                }
-
-                else {
-
+                } else {
+                    Log.d("checkout","there is error");
                 }
             }
 
             @Override
             public void onFailure(Call<GetProfileResponse> call, Throwable t) {
-
+                Log.d("checkoutError",t.getMessage()!=null ? t.getMessage():"Error");
             }
         });
 
@@ -170,21 +149,14 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         toolbar_title.setText("Payment Method");
 
         _AMOUNT = getIntent().getStringExtra("amount");
-
         _TYPE = getIntent().getStringExtra("type");
-
-
         _OPERATOR_ID = getIntent().getStringExtra("operator_id");
 
         Log.i(">>operatorId", "method: " + _OPERATOR_ID);
 
-
         _MOBILE_NUMBER = getIntent().getStringExtra("mobile");
 
-
-
         Log.e("operatorDetailid1",""+Prefes.getAccessToken(CheckoutActivity.this));
-
 
         txtRechargeAmount.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
 
@@ -214,30 +186,23 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
 
         textResult.setText(title);
         if (mSuccess.equalsIgnoreCase("true")) {
-            imageResult.setBackgroundDrawable(getResources().getDrawable(R.drawable.success));
+            imageResult.setBackgroundResource(R.drawable.success);
         } else {
-            imageResult.setBackgroundDrawable(getResources().getDrawable(R.drawable.failed));
+            imageResult.setBackgroundResource(R.drawable.failed);
         }
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
+                 if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("NO")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                } else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("YES")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("YES")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
+                } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("NO")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                 }
@@ -249,23 +214,16 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
             @Override
             public void onClick(View v) {
 
-                if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
+                if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("NO")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                } else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("YES")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("YES")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
+                } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equalsIgnoreCase("NO")){
                     startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                 }
@@ -299,20 +257,13 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                     if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
                         startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
-                    }
-
-                    else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                    } else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
                         startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
-                    }
-
-
-                    else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
+                    } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("YES")){
                         startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
-                    }
-
-                    else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
+                    } else if(sp.getString("value","").equals("India") && Prefes.getisIndian(CheckoutActivity.this).equals("NO")){
                         startActivity(new Intent(CheckoutActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
                         finish();
                     }
@@ -387,32 +338,21 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                             if(response.isSuccessful()){
                                 if(response.body().getSuccess()){
                                     if(response.body().getData().getRedeemShow()==1){
-
                                         vCashPercent.setText(response.body().getData().getPointsRedeemed());
                                         vCashAmount.setText(Functions.CURRENCY_SYMBOL+" "+ response.body().getData().getPointsAmount());
-
                                         payAmountPayText.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
-
                                         orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
                                         payUPaid.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
-
                                         percent=response.body().getData().getPointsRedeemed();
                                         points=response.body().getData().getPointsAmount();
-
-
                                         setListeners(response.body().getData().getTotalAmount());
-
-                                    }
-
-                                    else {
+                                    } else {
                                         setListeners(_AMOUNT);
                                         percent="";
                                         points="";
                                         payAmountPayText.setText("Total Amount "+" "+_AMOUNT);
-
                                         orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
                                         payUPaid.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
-
                                     }
                                 }
                             }
@@ -627,9 +567,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                         Prefes.getValidity(CheckoutActivity.this)
                         + "\n" + Prefes.getPlan(CheckoutActivity.this));
 
-
-
-
                 params.put("type", Prefes.getType(CheckoutActivity.this));
                 params.put("operator_url_type", Prefes.getOperatorUrl(CheckoutActivity.this));
                 params.put("mobile_number", Prefes.getPhoneNumber(CheckoutActivity.this));
@@ -649,8 +586,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                 Log.e("data",""+percent);
                 Log.e("data",""+_OPERATOR_ID);
                 Log.e("data",""+Prefes.getOperatorDID(CheckoutActivity.this));
-
-
                 return params;
             }
 
@@ -661,7 +596,6 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                 params.put("Accept", "application/json");
                 return params;
             }
-
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(

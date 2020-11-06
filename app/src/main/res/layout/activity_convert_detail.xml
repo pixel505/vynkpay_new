@@ -138,6 +138,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.4"
                                 android:text="@string/rs"
+                                android:id="@+id/tvConversionFee"
                                 android:gravity="right"
                                 android:textSize="@dimen/_12sdp" />
                         </LinearLayout>

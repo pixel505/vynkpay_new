@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarLayout"
+            layout="@layout/toolbar_new" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:background="@color/color_red" />
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:id="@+id/scrollView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/bonusCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/bonuswall" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im1"
+                                android:id="@+id/centeLn"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <!--Bonus wallet-->
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Bonus Wallet"
+                                    android:id="@+id/tvWTitle"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/bonusAvail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/endLn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mCashCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:id="@+id/im3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/mcashwall" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im3"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="MCash Wallet"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/mCashAvail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/vCashCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:id="@+id/im2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/vcashwall" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im2"
+                                android:id="@+id/centeLn1"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="VCash Wallet"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/vCashAvail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/reqstWithdrawalCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/requestwithdrawal" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im7"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Request Withdrawal"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/reqwithtext"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/loadMcash"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/loadcash" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im5"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Load MCash"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/loadmCashText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/reqstCash"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/requestcash" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im4"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Request MCash"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/transferCard"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/transferconversion" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im6"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Conversion"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/transferText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/transferWallet"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/_90sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="@dimen/_3sdp"
+                        app:contentPadding="@dimen/_10sdp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/im8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/transfer_wallet78" />
+
+                            <LinearLayout
+                                android:layout_marginEnd="@dimen/_30sdp"
+                                android:layout_toRightOf="@+id/im8"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Transfer Wallet"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:id="@+id/transferWalletText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:text="" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_alignParentRight="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:gravity="center">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/arrowcommunity" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

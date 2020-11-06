@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/radio_button_unchecked/baseline_radio_button_unchecked_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/arrow_back_ios/baseline_arrow_back_ios_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="b10d25" />
-                            <entry key="outputName" value="radio_button_unchecked" />
+                            <entry key="outputName" value="ic_baseline_arrow_back_ios_24" />
                             <entry key="sourceFile" value="C:\Users\All Mankind\AndroidStudioProjects\VynkPayUpdated" />
                           </map>
                         </option>

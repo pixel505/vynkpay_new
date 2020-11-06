@@ -3,7 +3,6 @@ package com.vynkpay.activity.activitiesnew.loadmcash;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentData;
@@ -22,7 +20,6 @@ import com.razorpay.PaymentResultWithDataListener;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.recharge.mobile.activity.PaymentMethodActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityPaymentMethodMcashBinding;
 import com.vynkpay.prefes.Prefes;
@@ -30,13 +27,10 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
 import com.vynkpay.retrofit.model.GetProfileResponse;
 import com.vynkpay.retrofit.model.GetWalletResponse;
-import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -127,8 +121,8 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
                         startActivity(new Intent(PaymentMethodMcashActivity.this,CoinbaseActivity.class).putExtra("url",url));
                         binding.submitButton.setClickable(true);
                         PaymentMethodMcashActivity.this.finish();
-                    }else if (binding.btnCoinbase.isChecked()){
-
+                    }else if (binding.btnPayeer.isChecked()){
+                        Toast.makeText(ac, "Coming soon!!", Toast.LENGTH_SHORT).show();
                     }
                     //startActivity(new Intent(PaymentMethodMcashActivity.this,LoadMcashSuccessActivity.class));
                 }else {

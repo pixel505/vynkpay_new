@@ -44,34 +44,6 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center|bottom"
                     android:orientation="vertical"
-                    android:id="@+id/hln"
-                    android:layout_height="match_parent">
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/logo"/>
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_5sdp"/>
-                    <com.vynkpay.custom.NormalTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:text="Home"/>
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_6sdp"
-                        android:background="@color/white"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:gravity="center|bottom"
-                    android:orientation="vertical"
                     android:id="@+id/shopLinear"
                     android:layout_height="match_parent">
                     <ImageView
@@ -94,12 +66,7 @@
                         android:layout_height="@dimen/_6sdp"
                         android:background="@color/white"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center|bottom"
-                    android:orientation="vertical"
-                    android:layout_height="match_parent"/>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -129,19 +96,26 @@
                         android:background="@color/white"/>
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center|bottom"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"/>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:background="?android:attr/selectableItemBackground"
                     android:gravity="center|bottom"
+                    android:id="@+id/walletLinear"
                     android:orientation="vertical"
-                    android:id="@+id/storeLinear"
                     android:layout_height="match_parent">
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:src="@drawable/store"/>
+                        android:src="@drawable/wallethome3x"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_5sdp"/>
@@ -152,7 +126,36 @@
                         android:textSize="@dimen/_11sdp"
                         android:gravity="center"
                         android:layout_gravity="center"
-                        android:text="Vynk Store"/>
+                        android:text="Wallet"/>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_6sdp"
+                        android:background="@color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:gravity="center|bottom"
+                    android:orientation="vertical"
+                    android:id="@+id/storeLinear"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="@dimen/_17sdp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:src="@drawable/shareblack3x"/>
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_5sdp"/>
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="Share"/>
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_6sdp"
@@ -164,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:id="@+id/categoriesLinear"
+                android:id="@+id/hln"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_marginBottom="@dimen/_8sdp"
@@ -172,7 +175,7 @@
                     android:layout_width="@dimen/_45sdp"
                     android:layout_height="@dimen/_45sdp"
                     android:gravity="center"
-                    android:background="@drawable/vynksafar"
+                    android:background="@drawable/vynkpayhome"
                     android:padding="@dimen/_10sdp"
                     android:orientation="vertical">
 
@@ -186,7 +189,7 @@
                     android:textAllCaps="false"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="Vynk Safar"/>
+                    android:text="Home"/>
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_6sdp"/>

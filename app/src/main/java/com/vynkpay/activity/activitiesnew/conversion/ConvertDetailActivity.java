@@ -3,33 +3,30 @@ package com.vynkpay.activity.activitiesnew.conversion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.ConversionActivity;
-import com.vynkpay.custom.NormalButton;
-import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConvertDetailBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.CheckWaletOtp;
 import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 
+import java.text.NumberFormat;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.vynkpay.activity.activitiesnew.conversion.ConvertBonusMcashActivity.wallet_convert_charges;
 
 public class ConvertDetailActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,7 +34,7 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
     Toolbar toolbar;
     NormalTextView toolbarTitle;
     Dialog serverDialog;
-    String amount = "",convertedAmount="";
+    String amount = "",convertedAmount="",payAmount="";
     Activity activity;
 
 
@@ -51,20 +48,33 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
             amount = getIntent().getStringExtra("amount");
         }
         binding.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+amount);
-        binding.tvBalance.setText(Functions.CURRENCY_SYMBOL+amount);
+        //wallet_convert_charges
         if (getIntent().hasExtra("convertedAmount")){
             convertedAmount = getIntent().getStringExtra("convertedAmount");
         }
-        binding.tvConvertedAmount.setText(Functions.CURRENCY_SYMBOL+convertedAmount);
+        //binding.tvConvertedAmount.setText(Functions.CURRENCY_SYMBOL+convertedAmount);
+        String charges = wallet_convert_charges != null ? (!TextUtils.isEmpty(wallet_convert_charges) ? wallet_convert_charges:"0") :"0";
+        float  percentage = Float.parseFloat(charges);
+        Log.d("chargess",percentage+"//");
+        float tFee = (percentage*Float.parseFloat(convertedAmount));
+        float conversionFee = tFee/100;
+        Log.d("cargesss",conversionFee+"//"+tFee);
+        binding.tvConversionFee.setText(Functions.CURRENCY_SYMBOL+NumberFormat.getInstance().format(conversionFee));
+        binding.tvBalance.setText(Functions.CURRENCY_SYMBOL+convertedAmount);
+        float totalAmount = Float.parseFloat(convertedAmount)-conversionFee;
+        payAmount = String.valueOf(NumberFormat.getInstance().format(totalAmount));
+        binding.tvConvertedAmount.setText(Functions.CURRENCY_SYMBOL+ NumberFormat.getInstance().format(totalAmount));
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
         toolbarTitle.setText(getString(R.string.convertmcashtext));
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 finish();
             }
+
         });
         binding.submitButton.setOnClickListener(this);
     }
@@ -72,7 +82,8 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         if (view == binding.submitButton){
-            submit(convertedAmount);
+            Log.d("payAmount",payAmount);
+            submit(payAmount);
         }
     }
 

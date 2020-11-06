@@ -45,6 +45,7 @@ public class KycBankRejectedActivity extends AppCompatActivity {
                 binding.bankStatus.setText("Pending");
                 binding.bankStatus.setTextColor(Color.parseColor("#E4D760"));
                 String AccountType = getIntent().getStringExtra("AccountType");
+                Log.d("AccountType",AccountType);
                 String NameInBank = getIntent().getStringExtra("NameInBank");
                 String AccountNumber = getIntent().getStringExtra("AccountNumber");
                 String IfscCode = getIntent().getStringExtra("IfscCode");

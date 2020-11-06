@@ -25,6 +25,7 @@ import com.vynkpay.models.MyAccount;
 import com.vynkpay.utils.CallActivity;
 
 public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.ViewHolder> {
+
     Context context;
     MyAccount[]  listdata;
     CallActivity callActivity;
@@ -50,23 +51,44 @@ public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.ViewHol
         holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (position == 0){
+              /*  if (position == 0){
                     context.startActivity(new Intent(context, PackageAActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (position == 1){
                     context.startActivity(new Intent(context, InvoiceActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else if (position ==2){
                     context.startActivity(new Intent(context, Community.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else if (position ==3){
-                    context.startActivity(new Intent(context, BonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                }else if (position == 4){
-                    context.startActivity(new Intent(context, WalletNewActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","Bonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }else if (position ==4){
+                    context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","OldBonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }else if (position == 5){
+                    context.startActivity(new Intent(context, WalletNewActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }else if (position == 6){
                     context.startActivity(new Intent(context, WithdrawRequestListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                } /*else if (position == 6){
+                } *//*else if (position == 6){
                     context.startActivity(new Intent(context, CommunityDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                }*/ else if (position == 6){
+                }*//* else if (position == 7){
+                    context.startActivity(new Intent(context, StatementActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }*/
+
+                if (listdata[position].getDescription().equalsIgnoreCase("Purchase")){
+                    context.startActivity(new Intent(context, PackageAActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Invoice")){
+                    context.startActivity(new Intent(context, InvoiceActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Community")){
+                    context.startActivity(new Intent(context, Community.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Bonuses")){
+                    context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","Bonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Old Bonuses")){
+                    context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","OldBonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Wallets")){
+                    context.startActivity(new Intent(context, WalletNewActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Withdrawal History")){
+                    context.startActivity(new Intent(context, WithdrawRequestListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Statement")){
                     context.startActivity(new Intent(context, StatementActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
+
             }
         });
     }

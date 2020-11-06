@@ -37,6 +37,7 @@ public class LoadmcashActivity extends AppCompatActivity implements View.OnClick
                 finish();
             }
         });
+
         binding.submitButton.setOnClickListener(this);
     }
 

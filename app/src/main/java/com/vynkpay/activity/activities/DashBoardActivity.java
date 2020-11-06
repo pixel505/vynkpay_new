@@ -161,7 +161,6 @@ public class DashBoardActivity extends AppCompatActivity {
                     etUserName.setText(M.fetchUserTrivialInfo(DashBoardActivity.this, ApiParams.full_name));
                 } else
                     etUserName.setText("Username");
-
             }
 
             etPhoneNumber.setText(M.fetchUserTrivialInfo(DashBoardActivity.this, ApiParams.email));

@@ -171,7 +171,7 @@ public class PostPaidActivity extends AppCompatActivity {
                     etAmount.setText("");
                     etAmount.setEnabled(false);
                 } else if (s.length() == 10) {
-                    //makeMobileNumberLookupRequest();
+                    makeMobileNumberLookupRequest();
                     loadOperatorCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);
@@ -185,6 +185,7 @@ public class PostPaidActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 M.removeZero(s);
             }
+
         });
 
         etAmount.addTextChangedListener(new TextWatcher() {
@@ -339,7 +340,7 @@ public class PostPaidActivity extends AppCompatActivity {
         return future.get();
     }
 
-    String operatorName, circleName,operatorID,opUrl,operatorDetail;
+    String operatorName="", circleName="",operatorID="",opUrl="",operatorDetail="";
 
     private void makeRechargeRequest() {
 
@@ -352,19 +353,13 @@ public class PostPaidActivity extends AppCompatActivity {
         intent.putExtra("amount", etAmount.getText().toString());
         intent.putExtra("type", type);
         intent.putExtra("operator_id", operatorID);
-
-
         Log.e("operatorID",""+operatorID);
-
-
-
         Prefes.saveType(type,PostPaidActivity.this);
         Prefes.saveOperatorUrl(opUrl,PostPaidActivity.this);
         Prefes.savePhoneNumber(etMobileNumber.getText().toString(),PostPaidActivity.this);
         Prefes.saveOperatorID(_SPECIAL_OR_TOP_UP,PostPaidActivity.this);
         Prefes.saveCircle(circleName,PostPaidActivity.this);
         Prefes.saveOperatorDID(operatorDetail,PostPaidActivity.this);
-
 
         startActivity(intent);
     }
@@ -562,6 +557,7 @@ public class PostPaidActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -571,7 +567,7 @@ public class PostPaidActivity extends AppCompatActivity {
         });
     }
 
- /*   private void makeMobileNumberLookupRequest() {
+    private void makeMobileNumberLookupRequest() {
         dialog.show();
         String url = BuildConfig.APP_BASE_URL + URLS.mobileLookup;// + "?" + ApiParams.mobile_number + "=" + etMobileNumber.getText().toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -632,12 +628,15 @@ public class PostPaidActivity extends AppCompatActivity {
                 params.put(ApiParams.accept, ApiParams.application_json);
                 return params;
             }
+
         };
+
         MySingleton.getInstance(PostPaidActivity.this).addToRequestQueue(stringRequest);
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    }*/
+
+    }
 
     String _SPECIAL_OR_TOP_UP = "";
 
@@ -673,11 +672,13 @@ public class PostPaidActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.i(">>id", "onResponse: " + _SPECIAL_OR_TOP_UP);
+
         if (_SPECIAL_OR_TOP_UP.equalsIgnoreCase("2")) {
             fetchBillLayout.setVisibility(View.VISIBLE);
         } else {
             fetchBillLayout.setVisibility(View.GONE);
         }
+
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.BACKGROUND)

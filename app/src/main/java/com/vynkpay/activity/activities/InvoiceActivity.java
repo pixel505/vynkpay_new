@@ -80,7 +80,6 @@ public class InvoiceActivity extends AppCompatActivity {
                         }
                         else {
                             Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
-
                         }
 
                     } else if (response.body().getMessage().equals("false")) {
@@ -91,8 +90,7 @@ public class InvoiceActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GetInvoiceResponse> call, Throwable t) {
-                Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
-
+                Toast.makeText(ac, t.getMessage()!=null?t.getMessage():"Error", Toast.LENGTH_LONG).show();
             }
         });
     }

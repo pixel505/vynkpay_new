@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -16,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
@@ -24,12 +24,9 @@ import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -63,13 +60,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etPassword.getText().length() == 0) {
+                if (TextUtils.isEmpty(etPassword.getText().toString().trim())) {
                     Toast.makeText(ForgotPasswordActivity.this, getString(R.string.please_password), Toast.LENGTH_SHORT).show();
-                } else if (etConfirmPassword.getText().length() == 0) {
+                } else if (TextUtils.isEmpty(etConfirmPassword.getText().toString().trim())) {
                     Toast.makeText(ForgotPasswordActivity.this, getString(R.string.confirm_not_valid_fill), Toast.LENGTH_SHORT).show();
-                } else if (etPassword.getText().toString().trim().length() == 0) {
+                } else if (TextUtils.isEmpty(etPassword.getText().toString().trim())) {
                     Toast.makeText(ForgotPasswordActivity.this, getString(R.string.please_valid_password), Toast.LENGTH_SHORT).show();
-                } else if (etConfirmPassword.getText().toString().trim().length() == 0) {
+                } else if (TextUtils.isEmpty(etConfirmPassword.getText().toString().trim())) {
                     Toast.makeText(ForgotPasswordActivity.this, getString(R.string.valid_new_password), Toast.LENGTH_SHORT).show();
                 } else if (etPassword.getText().length() < 6) {
                     Toast.makeText(ForgotPasswordActivity.this, "Password should be at least 6 char long", Toast.LENGTH_SHORT).show();

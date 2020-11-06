@@ -199,7 +199,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         serviceModelArrayList.add(new ServiceModel("Electricity", R.drawable.electricity_icon));
         serviceModelArrayList.add(new ServiceModel("More", R.drawable.gas_icon));
         servicesRecyclerView.setLayoutManager(Functions.layoutManager(Dashboard.this, Functions.GRID, 4));
-        servicesAdapter=new ServicesAdapter(Dashboard.this, serviceModelArrayList);
+        servicesAdapter = new ServicesAdapter(Dashboard.this, serviceModelArrayList);
         servicesRecyclerView.setAdapter(servicesAdapter);
 
         whatNewArrayList.clear();
@@ -224,7 +224,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         updateUIAccordingToUserStatus();
         getRecentOffers();
         fetchWalletData();
-
     }
 
     @Override
@@ -462,6 +461,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 Toast.makeText(Dashboard.this, "Coming soon.", Toast.LENGTH_SHORT).show();
             }
         });
+
         myNotification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -473,6 +473,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 }
             }
         });
+
         myHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -484,6 +485,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 startActivity(intent);
             }
         });
+
         mySupport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -553,7 +555,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 intent.putExtra("title", "");
                 startActivity(intent);
             }
+
         });
+
     }
 
     @Override
@@ -566,9 +570,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     RequestQueue requestQueue;
     public void getRecentOffers(){
         String Url = BuildConfig.APP_BASE_URL + URLS.recentOffers.replace(" ","%20");
-        if (requestQueue==null) {
-            requestQueue = Volley.newRequestQueue(Dashboard.this);
-        }
+            if (requestQueue==null) {
+                requestQueue = Volley.newRequestQueue(Dashboard.this);
+            }
+
             StringRequest stringRequest=new StringRequest(Request.Method.GET, Url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -594,7 +599,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 }
             });
             requestQueue.add(stringRequest);
-        }
+    }
 
     ArrayList<OffersModel> offerList = new ArrayList<>();
     private void handleOperatorResponse(JSONObject receivedJSON) {
@@ -666,6 +671,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             Log.i(">>exception", "onResponse: " + e.getMessage());
                             e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -699,4 +705,5 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
+
 }

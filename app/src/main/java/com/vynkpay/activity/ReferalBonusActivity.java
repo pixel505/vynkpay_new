@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.gson.Gson;
+import com.vynkpay.retrofit.model.Club1Response;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.GenerationBonusAdapter;
@@ -20,7 +21,10 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -123,7 +127,6 @@ public class ReferalBonusActivity extends AppCompatActivity {
                                 Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
                             }
 
-
                         } else if (response.body().getMessage().equals("false")) {
                             binding.noLayout.setVisibility(View.VISIBLE);
                             binding.noMessageTV.setText(response.body().getMessage()+"");
@@ -138,7 +141,6 @@ public class ReferalBonusActivity extends AppCompatActivity {
                 public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
                     Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
                     binding.progressFrame.setVisibility(View.GONE);
-
                 }
             });
         }
@@ -170,7 +172,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             binding.noMessageTV.setText(response.body().getMessage()+"");
                             Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }else {
+                    } else {
                         binding.progressFrame.setVisibility(View.GONE);
                     }
                 }
@@ -209,16 +211,15 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             binding.noMessageTV.setText(response.body().getMessage()+"");
                             Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }else {
+                    } else {
                         binding.progressFrame.setVisibility(View.GONE);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
-                    Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ac, t.getMessage()!=null ? t.getMessage() : "Error", Toast.LENGTH_LONG).show();
                     binding.progressFrame.setVisibility(View.GONE);
-
                 }
             });
         }
@@ -249,7 +250,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             binding.noMessageTV.setText(response.body().getMessage()+"");
                             Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
-                    }else {
+                    } else {
                         binding.progressFrame.setVisibility(View.GONE);
                     }
                 }
@@ -259,6 +260,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                     Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
                     binding.progressFrame.setVisibility(View.GONE);
                 }
+
             });
         }
 
@@ -320,7 +322,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                                 GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
                                 binding.referalbonusRecycler.setLayoutManager(manager);
                                 binding.referalbonusRecycler.setAdapter(adapter);
-                            }else {
+                            } else {
                                 Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
                                 binding.noLayout.setVisibility(View.VISIBLE);
                                 binding.noMessageTV.setText(response.body().getMessage()+"");
@@ -338,10 +340,146 @@ public class ReferalBonusActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
-                    Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ac, t.getMessage()!=null?t.getMessage():"Error", Toast.LENGTH_LONG).show();
                     binding.progressFrame.setVisibility(View.GONE);
                 }
             });
+        }
+        else if (type.equals("8")){
+            Log.d("printaccess",Prefes.getAccessToken(ReferalBonusActivity.this));
+            //binding.toolbarLayout.toolbarTitlenew.setText(getString(R.string.clubbonus));
+            //binding.noLayout.setVisibility(View.VISIBLE);
+            //binding.noMessageTV.setText("No Club Data found");
+        }
+        else if (type.equals("9")){
+            binding.toolbarLayout.toolbarTitlenew.setText(getString(R.string.volumebonus));
+            binding.progressFrame.setVisibility(View.VISIBLE);
+            MainApplication.getApiService().getVolumeBonus(Prefes.getAccessToken(ReferalBonusActivity.this)).enqueue(new Callback<GenerationBonusResponse>() {
+
+                @Override
+                public void onResponse(Call<GenerationBonusResponse> call, Response<GenerationBonusResponse> response) {
+                    if (response.isSuccessful() && response.body()!= null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+
+                        Log.d("volumeBonusLOG", new Gson().toJson(response.body().getData()));
+
+                        if (response.body().getStatus().equals("true")) {
+                            if(!response.body().getData().getListing().isEmpty()){
+                                binding.noLayout.setVisibility(View.GONE);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            } else {
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
+                    Log.d("vBonusresponse",t.getMessage()!=null?t.getMessage():"Error");
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+            });
+        }
+        else if (type.equals("10")){
+            binding.toolbarLayout.toolbarTitlenew.setText(getString(R.string.performancebonus));
+            binding.progressFrame.setVisibility(View.VISIBLE);
+
+            MainApplication.getApiService().getPerformanceBonus(Prefes.getAccessToken(ReferalBonusActivity.this)).enqueue(new Callback<GenerationBonusResponse>() {
+
+                @Override
+                public void onResponse(Call<GenerationBonusResponse> call, Response<GenerationBonusResponse> response) {
+                    if (response.isSuccessful() && response.body()!= null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+
+                        Log.d("perfomBonusLOG", new Gson().toJson(response.body().getData()));
+
+                        if (response.body().getStatus().equals("true")) {
+                            if(!response.body().getData().getListing().isEmpty()){
+                                binding.noLayout.setVisibility(View.GONE);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            } else {
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
+                    Log.d("perfomBonusLOG",t.getMessage()!=null?t.getMessage():"Error");
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+            });
+
+        }
+        else if (type.equals("11")){
+            binding.toolbarLayout.toolbarTitlenew.setText(getString(R.string.shoppingbonus));
+            binding.progressFrame.setVisibility(View.VISIBLE);
+
+            MainApplication.getApiService().getShoppingBonus(Prefes.getAccessToken(ReferalBonusActivity.this)).enqueue(new Callback<GenerationBonusResponse>() {
+
+                @Override
+                public void onResponse(Call<GenerationBonusResponse> call, Response<GenerationBonusResponse> response) {
+                    if (response.isSuccessful() && response.body()!= null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+
+                        Log.d("shopingBonusLOG", new Gson().toJson(response.body().getData()));
+
+                        if (response.body().getStatus().equals("true")) {
+                            if(!response.body().getData().getListing().isEmpty()){
+                                binding.noLayout.setVisibility(View.GONE);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            } else {
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GenerationBonusResponse> call, Throwable t) {
+                    Log.d("shopingBonusLOG",t.getMessage()!=null?t.getMessage():"Error");
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+            });
+
         }
     }
 }

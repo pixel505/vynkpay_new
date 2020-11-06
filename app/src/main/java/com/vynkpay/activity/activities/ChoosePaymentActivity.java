@@ -6,14 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
+
+import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityChoosePaymentBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.PayResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
@@ -99,6 +99,7 @@ public class ChoosePaymentActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 dialog1.show();
                                 MainApplication.getApiService().pay(Prefes.getAccessToken(ac), getIntent().getStringExtra("ids")).enqueue(new Callback<PayResponse>() {
+
                                     @Override
                                     public void onResponse(Call<PayResponse> call, Response<PayResponse> response) {
                                         if (response.isSuccessful() && response.body() != null) {
@@ -108,10 +109,12 @@ public class ChoosePaymentActivity extends AppCompatActivity {
                                             finish();
                                         }
                                     }
+
                                     @Override
                                     public void onFailure(Call<PayResponse> call, Throwable t) {
                                         dialog1.dismiss();
                                     }
+
                                 });
                             }
                         });
@@ -131,7 +134,7 @@ public class ChoosePaymentActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             dialog1.show();
                             if(Functions.isIndian){
-                                String url = "https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_choose_payment?package_id="
+                                String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id="
                                         + getIntent().getStringExtra("ids") + "&alien=1&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
                                 Log.e("ids", "" + url);
                                 startActivity(new Intent(ChoosePaymentActivity.this, WebviewActivityNew.class)
@@ -139,7 +142,7 @@ public class ChoosePaymentActivity extends AppCompatActivity {
                                         .putExtra("packageID", getIntent().getStringExtra("ids")));
                             }
                             else {
-                                String url = "https://www.vynkpay.app/account/coinBaseAppWebView/app_choose_payment?package_id="
+                                String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id="
                                         + getIntent().getStringExtra("ids") + "&alien=1&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
                                 Log.e("ids", "" + url);
                                 startActivity(new Intent(ChoosePaymentActivity.this, WebviewActivityNew.class)

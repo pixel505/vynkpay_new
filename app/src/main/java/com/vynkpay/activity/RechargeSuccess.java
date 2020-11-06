@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.vynkpay.newregistration.Register2Activity;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
@@ -18,17 +19,33 @@ public class RechargeSuccess extends AppCompatActivity {
 
     @BindView(R.id.loginBtnNew)
     NormalButton loginBtn;
+    String which = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge_success);
         ButterKnife.bind(this);
+        try {
+            if (getIntent().hasExtra("which")){
+                which = getIntent().getStringExtra("which");
+            } else {
+                which = "";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            which = "";
+        }
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RechargeSuccess.this, LoginActivity.class));
-                finish();
+                if (which.equalsIgnoreCase("customer")){
+                    startActivity(new Intent(RechargeSuccess.this, Register2Activity.class).putExtra("forType","login"));
+                }else {
+                    startActivity(new Intent(RechargeSuccess.this, LoginActivity.class));
+                    finish();
+                }
             }
         });
     }

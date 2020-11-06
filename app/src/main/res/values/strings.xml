@@ -157,7 +157,7 @@
     <string name="supportchat">Support Chat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bonusWallet">Cashback</string> <!--Bonus Wallet-->
+    <string name="bonusWallet">Bonus Wallet</string> <!--Bonus Wallet-->
     <string name="requestWithdrawal">Request \nWithdrawal</string>
     <string name="availableAmount">Available Amount</string>
     <string name="transferWallet">Transfer Wallet</string>
@@ -197,13 +197,19 @@
     <string name="paid">Paid</string>
     <string name="canceled">Canceled</string>
     <string name="earning">Earnings</string>
-    <string name="referalbonus">Referral Bonus</string>
+    <string name="oldbonuses">Old Bonuses</string>
+    <string name="referalbonus">First Level Bonus</string>
     <string name="generationBonus">Generation Bonus</string>
-    <string name="globalpool">Global Pool Bonus</string>
+    <string name="globalpool">Global Royalty</string>
+    <!--<string name="globalpool">Global Pool Bonus</string>--> <!--old-->
     <string name="leaderBonus">Leadership Bonus</string>
     <string name="ambasBonus">Ambassador Bonus</string>
     <string name="appraisalbonus">Appraisal Bonus</string>
     <string name="chairBonus">Chairman Bonus</string>
+    <string name="clubbonus">Club Bonus</string>
+    <string name="volumebonus">Volume Bonus</string>
+    <string name="performancebonus">Performance Bonus</string>
+    <string name="shoppingbonus">Shopping Bonus</string>
     <string name="invoice">Invoice</string>
     <string name="careerPlan">Career plan</string>
     <string name="legalities">Legalities</string>
@@ -247,7 +253,7 @@
     <string name="statement">Statement</string>
     <string name="servicecharges">Service Charges</string>
     <string name="totalamount">Total Amount</string>
-    <string name="bonuswalletbalance">Cashback Balance</string><!--Bonus wallet Balance-->
+    <string name="bonuswalletbalance">Bonus wallet Balance</string><!--Bonus wallet Balance-->
     <string name="convert">Convert</string>
     <string name="withdrawtype">Withdrawal Type</string>
     <string name="next">Next</string>
@@ -272,4 +278,8 @@
     <string name="verifymmail">Verify Email</string>
     <string name="onetimepasswordphone">One Time Password has been sent to your mobile number. please enter below and verify your moblie number</string>
     <string name="onetimepasswordemail">One Time Password has been sent to your email. please enter below and verify your email</string>
+    <string name="wallets">Wallets</string>
+    <string name="nodatavolumebonus">No Volume Bonus found</string>
+    <string name="noperformacebonus">No performance bonus found</string>
+    <string name="loginascustomer">Login as Customer</string>
 </resources>

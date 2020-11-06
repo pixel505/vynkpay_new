@@ -18,9 +18,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled true
+
+    buildFeatures{
+        dataBinding true
     }
+   /* dataBinding {
+        enabled true
+    }*/
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -47,6 +51,7 @@ android {
         it.buildConfigField 'String', 'fundTransfer', fundTransfer
         it.buildConfigField 'String', 'normalDelete', normalDelete
         it.buildConfigField 'String', 'deleteWithVerification', deleteWithVerification
+        it.buildConfigField 'String', 'USER_TYPE', userType
     }
 }
 dependencies {
@@ -87,6 +92,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.google.code.gson:gson:2.8.6'

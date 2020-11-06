@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +21,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -31,6 +29,10 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.squareup.picasso.Picasso;
 import com.vynkpay.BuildConfig;
+import com.vynkpay.activity.activities.WalletNewActivity;
+import com.vynkpay.activity.activitiesnew.CustomerWalletActivity;
+import com.vynkpay.activity.shops.AddBankDetailActivity;
+import com.vynkpay.activity.shops.ShopsActivity;
 import com.vynkpay.databinding.ActivityHomeBindingImpl;
 import com.vynkpay.fragment.FragmentHomeGlobal;
 import com.vynkpay.network_classes.ApiCalls;
@@ -51,10 +53,8 @@ import com.vynkpay.fragment.FragmentHome;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.LogoutResponse;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -93,18 +93,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else {
 
-            if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
+            if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                 fragment = new FragmentHomeGlobal();
                 switchFragment(fragment, "home");
-            } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
+            } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
                 fragment = new FragmentHome();
                 switchFragment(fragment, "home");
 
-            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
+            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
                 fragment = new FragmentHome();
                 switchFragment(fragment, "home");
 
-            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
+            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                 fragment = new FragmentHomeGlobal();
                 switchFragment(fragment, "home");
             }
@@ -113,7 +113,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        if (getSupportActionBar()!=null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -129,6 +131,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         setNavigationClicks();
 
+        Log.d("getUserType",Prefes.getUserType(HomeActivity.this)+"//");
+        /*if (Prefes.getUserType(HomeActivity.this).equalsIgnoreCase("2")){
+            Log.d("loginas","c");
+        }else {
+            Log.d("loginas","a");
+        }*/
+
     }
 
     BottomNavigationView bottomNavigationView;
@@ -139,7 +148,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
              LinearLayout homeLinear=contentview.findViewById(R.id.hln);
              LinearLayout shopLinear=contentview.findViewById(R.id.shopLinear);
-             LinearLayout categoriesLinear=contentview.findViewById(R.id.categoriesLinear);
+             LinearLayout walletLinear=contentview.findViewById(R.id.walletLinear);
              LinearLayout transactionLinear=contentview.findViewById(R.id.transactionLinear);
              LinearLayout storeLinear=contentview.findViewById(R.id.storeLinear);
 
@@ -148,18 +157,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                  public void onClick(View view) {
                      if (getIntent().getStringExtra("Country") != null) {
 
-                         if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
+                         if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                              fragment = new FragmentHomeGlobal();
                              replaceFragment(fragment, "home");
-                         } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
+                         } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
                              fragment = new FragmentHome();
                              replaceFragment(fragment, "home");
 
-                         } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
+                         } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
                              fragment = new FragmentHome();
                              replaceFragment(fragment, "home");
 
-                         } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
+                         } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                              fragment = new FragmentHomeGlobal();
                              replaceFragment(fragment, "home");
                          }
@@ -183,16 +192,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
              shopLinear.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     Toast.makeText(HomeActivity.this, "coming soon", Toast.LENGTH_SHORT).show();
-
+                     //RKChanges
+                     if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
+                         startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                     } else {
+                         startActivity(new Intent(HomeActivity.this, ShopsActivity.class));
+                     }
+                     //Toast.makeText(HomeActivity.this, "coming soon", Toast.LENGTH_SHORT).show();
                  }
              });
 
-        categoriesLinear.setOnClickListener(new View.OnClickListener() {
+        walletLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(HomeActivity.this, "coming soon", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(HomeActivity.this, "coming soon", Toast.LENGTH_SHORT).show();
+                if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
+                    startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                } else {
+                    if (Prefes.getUserType(HomeActivity.this).equalsIgnoreCase("2")){
+                        startActivity(new Intent(HomeActivity.this, CustomerWalletActivity.class));
+                    }else {
+                        startActivity(new Intent(HomeActivity.this, WalletNewActivity.class));
+                    }
+                }
             }
         });
 
@@ -216,8 +238,56 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         storeLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(HomeActivity.this, "coming soon", Toast.LENGTH_SHORT).show();
+                MainApplication.getApiService().getLinks(Prefes.getAccessToken(HomeActivity.this)).enqueue(new Callback<ReferLinkResponse>() {
+                    @Override
+                    public void onResponse(Call<ReferLinkResponse> call, Response<ReferLinkResponse> response) {
+                        if(response.isSuccessful()){
+                            DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                    //.setLink(Uri.parse("https://www.pixelsoftwares.com/?referralCode="+referralCode))
+                                    .setLink(Uri.parse(response.body().getData().getReferUrl()))
+                                    //.setDomainUriPrefix("https://pixelsoftwares.page.link")
+                                    .setDomainUriPrefix(response.body().getData().getReferPage())
+                                    .setSocialMetaTagParameters(new DynamicLink.SocialMetaTagParameters.Builder()
+                                            .setTitle("Vynkpay - Apps on Google Play")
+                                            .setDescription("Developing an iconic digital-infrastructural entity that creates an altogether new definition of e-commerce industry")
+                                            .build())
+                                    // Open links with this app on Android
+                                    .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+                                    .buildDynamicLink();
 
+                            Uri dynamicLinkUri = dynamicLink.getUri();
+
+                            Task<ShortDynamicLink> shortLinkTask = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                    .setLongLink(dynamicLinkUri)
+                                    .buildShortDynamicLink()
+                                    .addOnCompleteListener(HomeActivity.this, new OnCompleteListener<ShortDynamicLink>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<ShortDynamicLink> task) {
+                                            if (task.isSuccessful()) {
+                                                // Short link created
+                                                if (task.getResult()!=null){
+                                                    Uri shortLink = task.getResult().getShortLink();
+                                                    referralLink = shortLink.toString();
+                                                    Log.e("neww",""+referralLink);
+                                                    Intent sendIntent = new Intent();
+                                                    sendIntent.setAction(Intent.ACTION_SEND);
+                                                    sendIntent.putExtra(Intent.EXTRA_TEXT, referralLink);
+                                                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "VYNKPAY Refer To Friend");
+                                                    sendIntent.setType("text/plain");
+                                                    startActivity(Intent.createChooser(sendIntent, "VYNKPAY Refer To Friend"));
+                                                }
+
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ReferLinkResponse> call, Throwable t) {
+                        Log.d("Error", t.getMessage()!=null ? t.getMessage() : "Error");
+                    }
+                });
             }
         });
 
@@ -227,6 +297,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     public void sideHeaderCall(String imageURL) {
         if (Prefes.getUserID(HomeActivity.this).equals("")) {
+
             binding.sideLayout.loginLinear.setVisibility(View.VISIBLE);
             binding.sideLayout.logoutFrame.setVisibility(View.GONE);
             binding.sideLayout.headerLayout.emailText.setText("Vynkpay Email");
@@ -251,27 +322,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setNavigationClicks() {
-
-
         binding.sideLayout.legalitiesLinear.setOnClickListener(this);
-        binding.sideLayout.legalitiesLinear.setVisibility(View.GONE);
         binding.sideLayout.shareLinear.setOnClickListener(this);
+        binding.sideLayout.shareLinear.setVisibility(View.GONE);
         binding.sideLayout.careerPlanLinear.setOnClickListener(this);
-        binding.sideLayout.careerPlanLinear.setVisibility(View.GONE);
         binding.sideLayout.homeLinear.setOnClickListener(this);
         binding.sideLayout.loginLinear.setOnClickListener(this);
         binding.sideLayout.shopLinear.setOnClickListener(this);
         binding.sideLayout.notificationLinear.setOnClickListener(this);
+        binding.sideLayout.notificationLinear.setVisibility(View.GONE);
         binding.sideLayout.transactionLinear.setOnClickListener(this);
         binding.sideLayout.accessLinear.setOnClickListener(this);
+        binding.sideLayout.addBankDetailLinear.setOnClickListener(this);
         binding.sideLayout.profileLinear.setOnClickListener(this);
         binding.sideLayout.kycLinear.setOnClickListener(this);
-        binding.sideLayout.kycLinear.setVisibility(View.GONE);
         binding.sideLayout.supportLinear.setOnClickListener(this);
         binding.sideLayout.aboutLinear.setOnClickListener(this);
         binding.sideLayout.logoutFrame.setOnClickListener(this);
 
+        if (Prefes.getUserType(HomeActivity.this).equalsIgnoreCase("2")){
+            binding.sideLayout.legalitiesLinear.setVisibility(View.GONE);
+            binding.sideLayout.careerPlanLinear.setVisibility(View.GONE);
+            binding.sideLayout.kycLinear.setVisibility(View.GONE);
+            binding.sideLayout.accessLinear.setVisibility(View.GONE);
+            binding.sideLayout.addBankDetailLinear.setVisibility(View.VISIBLE);
 
+        } else {
+
+            binding.sideLayout.legalitiesLinear.setVisibility(View.VISIBLE);
+            binding.sideLayout.careerPlanLinear.setVisibility(View.VISIBLE);
+            binding.sideLayout.kycLinear.setVisibility(View.VISIBLE);
+            binding.sideLayout.accessLinear.setVisibility(View.VISIBLE);
+            binding.sideLayout.addBankDetailLinear.setVisibility(View.GONE);
+
+        }
 
 
         binding.drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -294,7 +378,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void onDrawerStateChanged(int newState) {
 
             }
+
         });
+
     }
 
     String fragmentTag = "home";
@@ -362,7 +448,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
                 } else {
                     startActivity(new Intent(HomeActivity.this, NotificationActivity.class));
-
                 }
                 return true;
             }
@@ -392,12 +477,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
 //        bottomNavigationView.getMenu().getItem(0).setChecked(true);
         if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
+            Log.d("calledd","calledw");
             binding.sideLayout.loginLinear.setVisibility(View.VISIBLE);
             binding.sideLayout.logoutFrame.setVisibility(View.GONE);
             binding.sideLayout.headerLayout.emailText.setText("Vynkpay Email");
             binding.sideLayout.headerLayout.userNameText.setText("Vynkpay");
             binding.sideLayout.headerLayout.imageView.setImageResource(R.drawable.dummy);
+
         } else {
+            Log.d("calledd","calledlogin");
+
             ApiCalls.getUserDetails(HomeActivity.this, Prefes.getAccessToken(HomeActivity.this), new VolleyResponse() {
                 @Override
                 public void onResult(String result, String status, String message) {
@@ -411,8 +500,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             Log.e("curr",""+Functions.CURRENCY_SYMBOL);
                             Log.e("curr",""+data.getString("is_indian"));
 
+                            if (data.has("username")){
+                                String username = data.getString("username");
+                                //Prefes.saveUserName(username, HomeActivity.this);
+                            }
 
-                            if (data.getString("is_indian").equals("YES")) {
+                            if (data.getString("is_indian").equalsIgnoreCase("YES")) {
                                 //indian
                                 Functions.isIndian = true;
                                 binding.sideLayout.transactionLinear.setVisibility(View.VISIBLE);
@@ -441,7 +534,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 @Override
                 public void onError(String error) {
-
+                    Log.d("Error",error+"");
                 }
             });
 
@@ -455,22 +548,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             }
 
                             else {
-
                                 textCartItemCount.setVisibility(View.VISIBLE);
                                 textCartItemCount.setText(response.body().getData().getUnread_count());
                             }
                         }
-
                     }
                 }
 
                 @Override
                 public void onFailure(Call<NotificationResponse> call, Throwable t) {
-
+                    Log.d("Errorrr",t.getMessage() !=null ? t.getMessage() : "Error");
                 }
+
             });
-
-
         }
     }
 
@@ -572,7 +662,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                                 // Short link created
                                                 if (task.getResult()!=null){
                                                     Uri shortLink = task.getResult().getShortLink();
-                                                    referralLink=shortLink.toString();
+                                                    referralLink = shortLink.toString();
                                                      Log.e("neww",""+referralLink);
                                                     Intent sendIntent = new Intent();
                                                     sendIntent.setAction(Intent.ACTION_SEND);
@@ -590,10 +680,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onFailure(Call<ReferLinkResponse> call, Throwable t) {
-
+                        Log.d("Error", t.getMessage()!=null ? t.getMessage() : "Error");
                     }
                 });
             }
+
            /* try {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
@@ -613,14 +704,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             } else {
                 if (!Prefes.getPDFFile(HomeActivity.this).equals("")) {
-
                     startActivity(new Intent(HomeActivity.this, PdfViewerActivity.class));
-
                 } else {
                     Toast.makeText(this, "Career plans are not available", Toast.LENGTH_SHORT).show();
                 }
             }
-
 
         } else if (v == binding.sideLayout.profileLinear) {
             drawer.closeDrawer(GravityCompat.START);
@@ -636,6 +724,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             } else {
                 startActivity(new Intent(HomeActivity.this, AccountAccessActivity.class));
+            }
+        } else if (v == binding.sideLayout.addBankDetailLinear) {
+            drawer.closeDrawer(GravityCompat.START);
+            if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+            } else {
+                startActivity(new Intent(HomeActivity.this, AddBankDetailActivity.class));
             }
         } else if (v == binding.sideLayout.supportLinear) {
             drawer.closeDrawer(GravityCompat.START);
@@ -671,15 +766,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void logoutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
         builder.setCancelable(false);
-
         View view = LayoutInflater.from(HomeActivity.this).inflate(R.layout.app_update_layout_rcg, null);
         builder.setView(view);
-
         TextView titleTV = view.findViewById(R.id.titleTV);
         TextView messageTV = view.findViewById(R.id.messageTV);
         TextView noThanksButtonTV = view.findViewById(R.id.noThanksButtonTV);
         TextView updateButtonTV = view.findViewById(R.id.updateButtonTV);
-
         titleTV.setText("Logout");
         messageTV.setText("Are you sure you want to logout?");
         noThanksButtonTV.setText("No");
@@ -707,12 +799,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 alertDialog.dismiss();
                 drawer.closeDrawer(GravityCompat.START);
                 MainApplication.getApiService().logoutMethod(Prefes.getAccessToken(HomeActivity.this)).enqueue(new Callback<LogoutResponse>() {
+
                     @Override
                     public void onResponse(Call<LogoutResponse> call, Response<LogoutResponse> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(HomeActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                             Prefes.clear(HomeActivity.this);
-                            if (getIntent().getStringExtra("Country") != null) {
+                            startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                            finishAffinity();
+                            //Old
+                            /*if (getIntent().getStringExtra("Country") != null) {
 
                                 if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
                                     startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -742,17 +838,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                     finish();
 
                                 }
-                            }
-
-
+                            }*/
                         }
                     }
 
                     @Override
                     public void onFailure(Call<LogoutResponse> call, Throwable t) {
-                        Toast.makeText(HomeActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this, t.getMessage()!=null ? t.getMessage() : "Error", Toast.LENGTH_SHORT).show();
                     }
+
                 });
+
             }
         });
 

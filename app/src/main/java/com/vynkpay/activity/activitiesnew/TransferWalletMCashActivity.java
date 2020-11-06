@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,28 +24,21 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.PinActivity;
-import com.vynkpay.activity.activities.RequestSuccess;
+import com.vynkpay.activity.PinActivity;;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityTransferWalletMCashBinding;
-import com.vynkpay.fragment.BonusWalletFragment;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetUserResponse;
 import com.vynkpay.retrofit.model.TransferMoney;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -129,13 +122,13 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
     @Override
     public void onClick(View view) {
         if (view == submitButton) {
-            if (binding.usernameET.getText().toString().isEmpty()) {
+            if (TextUtils.isEmpty(binding.usernameET.getText().toString().trim())) {
                 Toast.makeText(TransferWalletMCashActivity.this, "Please Select User", Toast.LENGTH_SHORT).show();
-            } else if ( binding.amountET.getText().toString().isEmpty()) {
+            } else if (TextUtils.isEmpty(binding.amountET.getText().toString().trim())) {
                 Toast.makeText(TransferWalletMCashActivity.this, "Please Enter Amount", Toast.LENGTH_SHORT).show();
             }else if (Float.parseFloat(binding.amountET.getText().toString().trim()) > Float.parseFloat(TranferWalletActivity.mCashBalance.trim())) {
                 Toast.makeText(TransferWalletMCashActivity.this, "This amount is not available in wallet", Toast.LENGTH_SHORT).show();
-            } else if (binding.remarkET.getText().toString().isEmpty()) {
+            } else if (TextUtils.isEmpty(binding.remarkET.getText().toString().trim())) {
                 Toast.makeText(TransferWalletMCashActivity.this, "Please Enter Remarks", Toast.LENGTH_SHORT).show();
             } else {
                 transferMoneyByServer();
@@ -230,24 +223,26 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
             case rcWallet: {
                 if (resultCode == Activity.RESULT_OK) {
                     if (data != null) {
-
                         value = data.getStringExtra("edttext");
                         serverDialog.show();
                         MainApplication.getApiService().transfermMoney(Prefes.getAccessToken(TransferWalletMCashActivity.this), value, userId, amount, remarks).enqueue(new Callback<TransferMoney>() {
                             @Override
                             public void onResponse(Call<TransferMoney> call, Response<TransferMoney> response) {
                                 if (response.isSuccessful()) {
-                                    if(response.body().isStatus()){
-                                        startActivity(new Intent(TransferWalletMCashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","MCash"));
-                                        TransferWalletMCashActivity.this.finish();
-                                    } else {
-                                        Toast.makeText(TransferWalletMCashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    if (response.body() != null) {
+                                        if(response.body().isStatus()){
+                                            startActivity(new Intent(TransferWalletMCashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","MCash"));
+                                            TransferWalletMCashActivity.this.finish();
+                                        } else {
+                                            Toast.makeText(TransferWalletMCashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<TransferMoney> call, Throwable t) {
+                                Log.d("mcashtarans",t.getMessage() !=null ? t.getMessage() : "Error");
                                 serverDialog.dismiss();
                             }
                         });
@@ -275,9 +270,7 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.country_list, parent, false);
-
+            View itemView = LayoutInflater.from(TransferWalletMCashActivity.this).inflate(R.layout.country_list, parent, false);
             return new MyViewHolder(itemView);
         }
 
@@ -292,8 +285,6 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
                     sear.setText(data.getText());
                     userId = data.getId();
                     // countryId=data.getId();
-
-
                 }
             });
         }
@@ -320,11 +311,11 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             TextView countryText;
-
             public MyViewHolder(View view) {
                 super(view);
                 countryText = view.findViewById(R.id.countryText);
             }
         }
+
     }
 }

@@ -76,6 +76,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class PrepaidActivity extends AppCompatActivity {
+
     @BindView(R.id.prepaidLayout)
     LinearLayout prepaidLayout;
     @BindView(R.id.postPaidLayout)
@@ -199,7 +200,7 @@ public class PrepaidActivity extends AppCompatActivity {
                     rootLayoutForRadio.setVisibility(View.GONE);
                     layoutToBeVisible.setVisibility(View.GONE);
                 } else if (s.length() == 10) {
-                    //makeMobileNumberLookupRequest();
+                    makeMobileNumberLookupRequest();
                     loadAddCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);
@@ -237,6 +238,7 @@ public class PrepaidActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 M.removeZero(s);
             }
+
         });
 
 
@@ -508,7 +510,9 @@ public class PrepaidActivity extends AppCompatActivity {
     private void makeDialogForMultipleNumbers(String[] phoneNum, String[] type, String name) {
         final Dialog dialog = new Dialog(PrepaidActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        if (dialog.getWindow()!=null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(R.layout.dialog_multiple_numbers_rcg);
@@ -566,7 +570,7 @@ public class PrepaidActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-  /*  private void makeMobileNumberLookupRequest() {
+    private void makeMobileNumberLookupRequest() {
         dialog.show();
         String url =  BuildConfig.APP_BASE_URL + URLS.mobileLookup;// + "?" + ApiParams.mobile_number + "=" + etMobileNumber.getText().toString();
         String SURL=url.replace(" ","%20");
@@ -622,7 +626,7 @@ public class PrepaidActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    }*/
+    }
 
     String _SPECIAL_OR_TOP_UP = "";
     String operatorDetail = "";
