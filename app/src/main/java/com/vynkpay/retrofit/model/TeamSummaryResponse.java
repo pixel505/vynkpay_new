@@ -72,7 +72,7 @@ public class TeamSummaryResponse {
         private String name;
         @SerializedName("designation")
         @Expose
-        private Object designation;
+        private String designation;
         @SerializedName("referdby")
         @Expose
         private String referdby;
@@ -175,11 +175,11 @@ public class TeamSummaryResponse {
             this.name = name;
         }
 
-        public Object getDesignation() {
+        public String  getDesignation() {
             return designation;
         }
 
-        public void setDesignation(Object designation) {
+        public void setDesignation(String designation) {
             this.designation = designation;
         }
 

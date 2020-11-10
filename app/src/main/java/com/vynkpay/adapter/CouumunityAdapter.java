@@ -63,6 +63,7 @@ public class CouumunityAdapter extends RecyclerView.Adapter<CouumunityAdapter.Vi
         holder.binding.numbertext.setText(myListData.getUserPhone());
         holder.binding.usernameText.setText(myListData.getReferdby());
         holder.binding.refusernameText.setText("("+myListData.getRefusername()+")");
+
         try {
             DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date d = f.parse(myListData.getRegisterDate());
@@ -70,6 +71,11 @@ public class CouumunityAdapter extends RecyclerView.Adapter<CouumunityAdapter.Vi
             holder.binding.registeDateText.setText(date.format(d));
             System.out.println("Date: " + date.format(d));
         } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.binding.designationtext.setText(myListData.getDesignation());
+        }catch (Exception e){
             e.printStackTrace();
         }
 

@@ -274,9 +274,10 @@ public interface ApiCalls {
     Call<ReferalsResponse> getReferal(
             @Header("access_token") String access_token);
 
+    @FormUrlEncoded
     @POST("account/api_accounts/teamsummary")
     Call<TeamSummaryResponse> getTeam(
-            @Header("access_token") String access_token);
+            @Header("access_token") String access_token,@Field("per_page") String per_page);
 
     @POST("account/api_accounts/ref_profit")
     Call<ReferalBonusResponse> getreferalBonus(
@@ -519,6 +520,60 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("account/api_accounts/notification_setting")
     Call<String> notificationSoundOnOff(@Header("access_token") String access_token,@Field("sound") String sound,@Field("display") String display);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/referrals")
+    //startdate, enddate, search_by
+    Call<ReferalsResponse> getReferralsFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/teamsummary")
+    Call<TeamSummaryResponse> getTeamFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by,@Field("per_page") String per_page);
+
+    /*ETH*/
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/ethadress")
+    Call<GetBitAddressResponse> addETHAddress(@Header("access_token") String access_token,@Field("eth_address") String eth_address);
+
+    @POST("account/api_accounts/send_eth_otp")
+    Call<SendBitResponse> sendETHOtp(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/verify_eth_otp")
+    Call<VerifyBitResponse> sendETHverify(
+            @Header("access_token") String access_token,
+            @Field("eth_otp") String eth_otp);
+
+    /*Perfect money*/
+    @FormUrlEncoded
+    @POST("account/api_accounts/pemadress")
+    Call<GetBitAddressResponse> addPerfectAddress(@Header("access_token") String access_token,@Field("pem_address") String pem_address);
+
+    @POST("account/api_accounts/send_pem_otp")
+    Call<SendBitResponse> sendPerfectOtp(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/verify_pem_otp")
+    Call<VerifyBitResponse> sendPerfectverify(
+            @Header("access_token") String access_token,
+            @Field("pem_otp") String pem_otp);
+
+    /*Payeer*/
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/payeer_account")
+    Call<GetBitAddressResponse> addPayeerAddress(@Header("access_token") String access_token,@Field("payeer_account") String payeer_account);
+
+    @POST("account/api_accounts/send_payeer_otp")
+    Call<SendBitResponse> sendPayeerOtp(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/verify_payeer_otp")
+    Call<VerifyBitResponse> sendPayeerverify(
+            @Header("access_token") String access_token,
+            @Field("payeer_otp") String payeer_otp);
+
 
 }
 

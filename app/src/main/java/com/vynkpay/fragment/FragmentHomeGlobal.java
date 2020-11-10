@@ -100,22 +100,22 @@ public class FragmentHomeGlobal extends Fragment {
             globalImage.setImageResource(R.drawable.dummy);
 
         } else {
-                Log.e("name",""+Prefes.getName(getContext()));
-                Log.e("name",""+Prefes.getUserName(getContext()));
+                Log.e("name",""+Prefes.getName(activity));
+                Log.e("name",""+Prefes.getUserName(activity));
 
 
-             globalUserId.setText("Username :"+Prefes.getUserName(getContext()));
-             globalEmail.setText(Prefes.getEmail(getContext()));
-            globalUserName.setText(Prefes.getName(getContext()));
+             globalUserId.setText("Username :"+Prefes.getUserName(activity));
+             globalEmail.setText(Prefes.getEmail(activity));
+            globalUserName.setText(Prefes.getName(activity));
              globalImage.setImageResource(R.drawable.dummy);
 
-            if(Prefes.getImage(getContext()).isEmpty()){
+            if(Prefes.getImage(activity).isEmpty()){
                 globalImage.setImageResource(R.drawable.dummy);
             }
 
             else{
-                Picasso.get().load(BuildConfig.BASE_URL + Prefes.getImage(getContext())).into(globalImage);
-                String imagepath = BuildConfig.BASE_URL + Prefes.getImage(getContext());
+                Picasso.get().load(BuildConfig.BASE_URL + Prefes.getImage(activity)).into(globalImage);
+                String imagepath = BuildConfig.BASE_URL + Prefes.getImage(activity);
                 Log.e("imageeeeeeeeeeeeeeee", "" + imagepath);
             }
 
@@ -177,7 +177,7 @@ public class FragmentHomeGlobal extends Fragment {
                     if (response.body().getStatus().equals("true")) {
                         bonusWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getBonusWallet());
                         vCashWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getMcashWallet());
-                        Prefes.saveCash(response.body().getData().getMcashWallet(),getContext());
+                        Prefes.saveCash(response.body().getData().getMcashWallet(),activity);
                         mCashWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getVCashWallet());
                         mCashBalance=response.body().getData().getVCashWallet();
                         vCashBalance=response.body().getData().getMcashWallet();
@@ -204,18 +204,18 @@ public class FragmentHomeGlobal extends Fragment {
             globalImage.setImageResource(R.drawable.dummy);
 
         } else {
-            globalUserId.setText("Username :"+Prefes.getUserName(getContext()));
-            globalEmail.setText(Prefes.getEmail(getContext()));
-            globalUserName.setText(Prefes.getName(getContext()));
+            globalUserId.setText("Username :"+Prefes.getUserName(activity));
+            globalEmail.setText(Prefes.getEmail(activity));
+            globalUserName.setText(Prefes.getName(activity));
             globalImage.setImageResource(R.drawable.dummy);
 
-            if(Prefes.getImage(getContext()).isEmpty()){
+            if(Prefes.getImage(activity).isEmpty()){
                 globalImage.setImageResource(R.drawable.dummy);
             }
 
             else{
-                Picasso.get().load(BuildConfig.BASE_URL + Prefes.getImage(getContext())).into(globalImage);
-                String imagepath = BuildConfig.BASE_URL + Prefes.getImage(getContext());
+                Picasso.get().load(BuildConfig.BASE_URL + Prefes.getImage(activity)).into(globalImage);
+                String imagepath = BuildConfig.BASE_URL + Prefes.getImage(activity);
                 Log.e("imageeeeeeeeeeeeeeee", "" + imagepath);
             }
 

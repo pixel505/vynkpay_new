@@ -20,6 +20,13 @@ public class MySingleton extends Application{
 
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        AppLifecycleTracker appLifecycleTracker=new AppLifecycleTracker();
+        registerActivityLifecycleCallbacks(appLifecycleTracker);
+    }
+
     private MySingleton(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();

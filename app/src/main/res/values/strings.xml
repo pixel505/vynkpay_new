@@ -282,4 +282,7 @@
     <string name="nodatavolumebonus">No Volume Bonus found</string>
     <string name="noperformacebonus">No performance bonus found</string>
     <string name="loginascustomer">Login as Customer</string>
+    <string name="payeeraddress">Payeer Address</string>
+    <string name="perfectmoney">Perfect Money</string>
+    <string name="ethaddress">ETH Address</string>
 </resources>

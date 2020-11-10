@@ -34,7 +34,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
     NormalTextView toolbarTitle;
     NormalEditText amountET;
     NormalButton submitButton;
-    public static String availableBalance= "";
+    public static String availableBalance= "0";
     Dialog serverDialog;
     public static ArrayList<WalletTransactionsModel> walletTransactionsModelArrayList = new ArrayList<>();
 
@@ -103,7 +103,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                     } else {
                         serverDialog.dismiss();
                         Toast.makeText(RequestWithdrawnActivity.this, jsonObject.getString("message")+"", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

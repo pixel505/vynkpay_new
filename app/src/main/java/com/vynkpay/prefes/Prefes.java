@@ -402,5 +402,17 @@ public class Prefes {
         return preferences.getString(BuildConfig.USER_TYPE,"");
     }
 
+    public  void saveAskPin(String value) {
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("ASK_PIN", value);
+        editor.apply();
+    }
+
+    public String getAskPin(){
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        return preferences.getString("ASK_PIN","");
+    }
+
 
 }

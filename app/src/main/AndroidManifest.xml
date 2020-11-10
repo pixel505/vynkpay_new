@@ -31,11 +31,26 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-
-        <activity android:name=".activity.activitiesnew.CustomerWalletActivity"
+        <activity android:name=".activity.PayeerAddressActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash.Theme"></activity>
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity"></activity>
+        <activity android:name=".activity.activities.PerfectMoneyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name=".activity.activities.ETHActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".activity.activitiesnew.CustomerWalletActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.shops.AddBankDetailActivity"
             android:launchMode="singleTop"

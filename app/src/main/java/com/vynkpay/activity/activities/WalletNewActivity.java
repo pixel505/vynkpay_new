@@ -110,6 +110,7 @@ public class WalletNewActivity extends AppCompatActivity {
         binding.reqstCash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("dfdfdf","called");
                 startActivity(new Intent(ac,ECashWalletFragment.class).putExtra("balancWalletM",mCashBalance));
             }
         });
@@ -184,7 +185,9 @@ public class WalletNewActivity extends AppCompatActivity {
                          binding.bonusAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
                     }else {
                         serverDialog.dismiss();
-                        finish();
+                        binding.reqwithtext.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+"0");
+                        binding.bonusAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+"0");
+                        //finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

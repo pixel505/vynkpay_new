@@ -107,6 +107,12 @@ public class DirectRefAdapter extends RecyclerView.Adapter<DirectRefAdapter.View
             holder.binding.statusText.setText("Unpaid");
             holder.binding.statusText.setTextColor(ContextCompat.getColor(context, R.color.buttonOffer));
         }
+
+        try{
+            holder.binding.designationtext.setText(myListData.getDesignation());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

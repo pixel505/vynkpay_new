@@ -26,24 +26,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <androidx.appcompat.widget.SearchView
                         app:iconifiedByDefault="false"
                         android:id="@+id/searchView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
                         android:layout_height="wrap_content"
                         android:background="@android:color/white"
                         android:queryHint="Search Here"
                         app:searchHintIcon="@null"/>
 
 
+                    <View
+                        android:layout_width="0.1dp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@color/black"/>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0.2"
                         android:gravity="end"
-                        android:visibility="gone"
+                        android:id="@+id/linFilter"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -69,10 +75,92 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:background="#C8C4C4"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/linFilterView"
+                        android:padding="@dimen/_5sdp"
+                        android:weightSum="1">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.35"
+                            android:orientation="vertical">
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Paid Status"/>
+
+                            <Spinner
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/spinPaidStatus"/>
+
+                        </LinearLayout>
+                        <View
+                            android:layout_width="0.1dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@color/black"/>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.65"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center|right"
+                            android:weightSum="1">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/_5sdp"
+                                android:layout_weight="0.45"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:id="@+id/tvStartDate"
+                                android:hint="Start Date"/>
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="TO"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:layout_weight="0.1"
+                                android:padding="@dimen/_5sdp"/>
+
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.45"
+                                android:gravity="center"
+                                android:textColor="@color/black"
+                                android:id="@+id/tvEndDate"
+                                android:padding="@dimen/_5sdp"
+                                android:hint="End Date"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_gravity="bottom"
+                        android:background="#C8C4C4"/>
+                </FrameLayout>
+
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/commurecycler"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:layout_height="match_parent" />
 
             </LinearLayout>

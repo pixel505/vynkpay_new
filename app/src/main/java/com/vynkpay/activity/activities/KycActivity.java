@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.vynkpay.activity.PayeerAddressActivity;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
@@ -384,7 +385,7 @@ public class KycActivity extends AppCompatActivity {
                             }//  indian
 
                             else {
-                                Log.e("countryCode", "onResponse: " + response.body().getData().getUserdata().getCountryCode());
+                                Log.e("countryCode", "onResponse: " + new Gson().toJson(response.body().getData().getUserdata()));
 
                                 GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
                                 GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
@@ -417,10 +418,31 @@ public class KycActivity extends AppCompatActivity {
                                     });
 
                                     binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.ethAddress.setVisibility(View.VISIBLE);
+                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
+                                    binding.ethAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, ETHActivity.class).putExtra("eth", response.body().getData().getUserdata().getEthAddress()));
+                                        }
+                                    });
+                                    binding.prefectMoneyAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PerfectMoneyActivity.class).putExtra("perfect", response.body().getData().getUserdata().getPemAddress()));
+                                        }
+                                    });
+                                    binding.PayeerAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
                                     });
 
@@ -451,10 +473,35 @@ public class KycActivity extends AppCompatActivity {
                                     });
 
                                     binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.ethAddress.setVisibility(View.VISIBLE);
+                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
+
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
+
+                                    binding.ethAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, ETHActivity.class).putExtra("eth", response.body().getData().getUserdata().getEthAddress()));
+                                        }
+                                    });
+
+                                    binding.prefectMoneyAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PerfectMoneyActivity.class).putExtra("perfect", response.body().getData().getUserdata().getPemAddress()));
+                                        }
+                                    });
+
+                                    binding.PayeerAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
                                     });
 
@@ -486,11 +533,36 @@ public class KycActivity extends AppCompatActivity {
                                     });
 
                                     binding.bitAddress.setVisibility(View.VISIBLE);
+                                    binding.ethAddress.setVisibility(View.VISIBLE);
+                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
+
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, BtcActivity.class).
                                                     putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                        }
+                                    });
+
+                                    binding.ethAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, ETHActivity.class).putExtra("eth", response.body().getData().getUserdata().getEthAddress()));
+                                        }
+                                    });
+
+                                    binding.prefectMoneyAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PerfectMoneyActivity.class).putExtra("perfect", response.body().getData().getUserdata().getPemAddress()));
+                                        }
+                                    });
+
+                                    binding.PayeerAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
                                     });
 

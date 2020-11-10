@@ -63,6 +63,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
+    static HomeActivity mInstance;
     CircleImageView profileImage;
     TextView textCartItemCount;
     int mCartItemCount = 0;
@@ -76,6 +77,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        mInstance = HomeActivity.this;
         ButterKnife.bind(this);
         if (getIntent().hasExtra("Country")) {
             Log.d("homeactvi", getIntent().getStringExtra("Country") + "///////");
@@ -92,22 +94,26 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         } else {
+            try {
+                if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
+                    fragment = new FragmentHomeGlobal();
+                    switchFragment(fragment, "home");
+                } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
+                    fragment = new FragmentHome();
+                    switchFragment(fragment, "home");
 
-            if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
-                fragment = new FragmentHomeGlobal();
-                switchFragment(fragment, "home");
-            } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
-                fragment = new FragmentHome();
-                switchFragment(fragment, "home");
+                } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
+                    fragment = new FragmentHome();
+                    switchFragment(fragment, "home");
 
-            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("YES")) {
-                fragment = new FragmentHome();
-                switchFragment(fragment, "home");
-
-            } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
-                fragment = new FragmentHomeGlobal();
-                switchFragment(fragment, "home");
+                } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
+                    fragment = new FragmentHomeGlobal();
+                    switchFragment(fragment, "home");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
+
         }
 
 
@@ -138,6 +144,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("loginas","a");
         }*/
 
+    }
+
+
+    public static synchronized HomeActivity getInstance(){
+        return mInstance;
     }
 
     BottomNavigationView bottomNavigationView;
@@ -332,6 +343,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         binding.sideLayout.notificationLinear.setOnClickListener(this);
         binding.sideLayout.notificationLinear.setVisibility(View.GONE);
         binding.sideLayout.transactionLinear.setOnClickListener(this);
+        if (Functions.isIndian) {
+            binding.sideLayout.transactionLinear.setVisibility(View.GONE);
+        }
         binding.sideLayout.accessLinear.setOnClickListener(this);
         binding.sideLayout.addBankDetailLinear.setOnClickListener(this);
         binding.sideLayout.profileLinear.setOnClickListener(this);
@@ -508,7 +522,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             if (data.getString("is_indian").equalsIgnoreCase("YES")) {
                                 //indian
                                 Functions.isIndian = true;
-                                binding.sideLayout.transactionLinear.setVisibility(View.VISIBLE);
+                                binding.sideLayout.transactionLinear.setVisibility(View.GONE);
 
                             } else {
                                 //foreigner

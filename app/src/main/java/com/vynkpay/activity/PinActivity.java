@@ -96,6 +96,7 @@ public class PinActivity extends AppCompatActivity {
                                         if (response.body().getSuccess()) {
                                             dialog.dismiss();
                                             Log.d("pinresponse",new Gson().toJson(response.body()));
+                                            new Prefes(PinActivity.this).saveAskPin("no");
                                             String user_id = response.body().getData().getUserId();
                                             Prefes.saveUserID(user_id, PinActivity.this);
                                             Prefes.saveID(response.body().getData().getId(), PinActivity.this);

@@ -896,7 +896,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                     } else {
                         serverDialog.dismiss();
                         Toast.makeText(activity, jsonObject.getString("message")+"", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //finish();
                     }
 
                 } catch (JSONException e) {

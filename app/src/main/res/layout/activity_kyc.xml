@@ -69,7 +69,6 @@
             </LinearLayout>
 
             <com.vynkpay.custom.NormalTextView
-
                 android:id="@+id/bitAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,6 +77,48 @@
                 android:background="@android:color/transparent"
                 android:gravity="center"
                 android:text="BTC Address"
+                android:textAllCaps="false"
+                android:textColor="@color/color_red"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="gone" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/ethAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="ETH Address"
+                android:textAllCaps="false"
+                android:textColor="@color/color_red"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="gone" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/prefectMoneyAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="Perfect Money Address"
+                android:textAllCaps="false"
+                android:textColor="@color/color_red"
+                android:textSize="@dimen/_14sdp"
+                android:visibility="gone" />
+
+            <com.vynkpay.custom.NormalTextView
+                android:id="@+id/PayeerAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:text="Payeer Account Number"
                 android:textAllCaps="false"
                 android:textColor="@color/color_red"
                 android:textSize="@dimen/_14sdp"

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.google.gson.Gson;
+import com.vynkpay.adapter.PerformanceBonusAdapter;
 import com.vynkpay.retrofit.model.Club1Response;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
@@ -367,7 +368,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             if(!response.body().getData().getListing().isEmpty()){
                                 binding.noLayout.setVisibility(View.GONE);
                                 GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
-                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "");
                                 binding.referalbonusRecycler.setLayoutManager(manager);
                                 binding.referalbonusRecycler.setAdapter(adapter);
                             } else {
@@ -410,7 +411,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             if(!response.body().getData().getListing().isEmpty()){
                                 binding.noLayout.setVisibility(View.GONE);
                                 GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
-                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                PerformanceBonusAdapter adapter = new PerformanceBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "");
                                 binding.referalbonusRecycler.setLayoutManager(manager);
                                 binding.referalbonusRecycler.setAdapter(adapter);
                             } else {
@@ -454,7 +455,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
                             if(!response.body().getData().getListing().isEmpty()){
                                 binding.noLayout.setVisibility(View.GONE);
                                 GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
-                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "AB");
+                                GenerationBonusAdapter adapter = new GenerationBonusAdapter(getApplicationContext(), response.body().getData().getListing(), "");
                                 binding.referalbonusRecycler.setLayoutManager(manager);
                                 binding.referalbonusRecycler.setAdapter(adapter);
                             } else {

@@ -339,14 +339,15 @@ public class GetKycStatusResponse {
             }
         }
 
+
         public class Userdata {
 
             @SerializedName("id")
             @Expose
             private String id;
-            @SerializedName("ref_id")
+            @SerializedName("user_type")
             @Expose
-            private String refId;
+            private String userType;
             @SerializedName("ref_by")
             @Expose
             private String refBy;
@@ -362,18 +363,12 @@ public class GetKycStatusResponse {
             @SerializedName("right_count")
             @Expose
             private String rightCount;
-            @SerializedName("referalid")
+            @SerializedName("designation")
             @Expose
-            private String referalid;
-            @SerializedName("tokenid")
+            private String designation;
+            @SerializedName("designation_date")
             @Expose
-            private Object tokenid;
-            @SerializedName("gcmid")
-            @Expose
-            private Object gcmid;
-            @SerializedName("loginid")
-            @Expose
-            private Object loginid;
+            private String designationDate;
             @SerializedName("username")
             @Expose
             private String username;
@@ -422,18 +417,57 @@ public class GetKycStatusResponse {
             @SerializedName("country")
             @Expose
             private String country;
+            @SerializedName("state")
+            @Expose
+            private String state;
+            @SerializedName("city")
+            @Expose
+            private String city;
             @SerializedName("address")
             @Expose
             private String address;
             @SerializedName("dob")
             @Expose
             private String dob;
-            @SerializedName("city")
+            @SerializedName("email_status")
             @Expose
-            private String city;
-            @SerializedName("state")
+            private String emailStatus;
+            @SerializedName("otp")
             @Expose
-            private String state;
+            private String otp;
+            @SerializedName("createdate")
+            @Expose
+            private Object createdate;
+            @SerializedName("created_at")
+            @Expose
+            private String createdAt;
+            @SerializedName("modified_date")
+            @Expose
+            private String modifiedDate;
+            @SerializedName("isactive")
+            @Expose
+            private String isactive;
+            @SerializedName("ref_id")
+            @Expose
+            private String refId;
+            @SerializedName("tokenid")
+            @Expose
+            private Object tokenid;
+            @SerializedName("device_token")
+            @Expose
+            private String deviceToken;
+            @SerializedName("device_type")
+            @Expose
+            private String deviceType;
+            @SerializedName("referalid")
+            @Expose
+            private String referalid;
+            @SerializedName("gcmid")
+            @Expose
+            private Object gcmid;
+            @SerializedName("loginid")
+            @Expose
+            private Object loginid;
             @SerializedName("pin")
             @Expose
             private String pin;
@@ -449,39 +483,15 @@ public class GetKycStatusResponse {
             @SerializedName("photo_thumb")
             @Expose
             private String photoThumb;
-            @SerializedName("otp")
-            @Expose
-            private String otp;
             @SerializedName("forget_pass_otp")
             @Expose
             private Object forgetPassOtp;
-            @SerializedName("email_status")
-            @Expose
-            private String emailStatus;
-            @SerializedName("device_type")
-            @Expose
-            private String deviceType;
-            @SerializedName("device_token")
-            @Expose
-            private String deviceToken;
             @SerializedName("wallet_amount")
             @Expose
             private String walletAmount;
             @SerializedName("fb_id")
             @Expose
             private Object fbId;
-            @SerializedName("createdate")
-            @Expose
-            private Object createdate;
-            @SerializedName("created_at")
-            @Expose
-            private String createdAt;
-            @SerializedName("modified_date")
-            @Expose
-            private String modifiedDate;
-            @SerializedName("isactive")
-            @Expose
-            private String isactive;
             @SerializedName("tele_bot_id")
             @Expose
             private Object teleBotId;
@@ -506,9 +516,6 @@ public class GetKycStatusResponse {
             @SerializedName("role")
             @Expose
             private String role;
-            @SerializedName("designation")
-            @Expose
-            private String designation;
             @SerializedName("level")
             @Expose
             private String level;
@@ -542,9 +549,39 @@ public class GetKycStatusResponse {
             @SerializedName("bit_otp")
             @Expose
             private String bitOtp;
-            @SerializedName("user_type")
+            @SerializedName("eth_address")
             @Expose
-            private String userType;
+            private String ethAddress;
+            @SerializedName("eth_address_status")
+            @Expose
+            private String ethAddressStatus;
+            @SerializedName("eth_otp")
+            @Expose
+            private String ethOtp;
+            @SerializedName("pem_address")
+            @Expose
+            private String pemAddress;
+            @SerializedName("pem_address_status")
+            @Expose
+            private String pemAddressStatus;
+            @SerializedName("pem_otp")
+            @Expose
+            private String pemOtp;
+            @SerializedName("ppl_address")
+            @Expose
+            private String pplAddress;
+            @SerializedName("ppl_address_status")
+            @Expose
+            private String pplAddressStatus;
+            @SerializedName("ppl_otp")
+            @Expose
+            private String pplOtp;
+            @SerializedName("payeer_account")
+            @Expose
+            private String payeerAccount;
+            @SerializedName("payeer_otp")
+            @Expose
+            private String payeerOtp;
             @SerializedName("last_resetPass_at")
             @Expose
             private Object lastResetPassAt;
@@ -608,6 +645,12 @@ public class GetKycStatusResponse {
             @SerializedName("p_otp")
             @Expose
             private String pOtp;
+            @SerializedName("notifi_sound")
+            @Expose
+            private String notifiSound;
+            @SerializedName("notifi_display")
+            @Expose
+            private String notifiDisplay;
             @SerializedName("f_name")
             @Expose
             private String fName;
@@ -652,10 +695,13 @@ public class GetKycStatusResponse {
             private String nationalidpath;
             @SerializedName("designation_user")
             @Expose
-            private Object designationUser;
+            private String designationUser;
             @SerializedName("kycst")
             @Expose
             private String kycst;
+            @SerializedName("state_name")
+            @Expose
+            private Object stateName;
             @SerializedName("addressproof_path")
             @Expose
             private String addressproofPath;
@@ -671,12 +717,12 @@ public class GetKycStatusResponse {
                 this.id = id;
             }
 
-            public String getRefId() {
-                return refId;
+            public String getUserType() {
+                return userType;
             }
 
-            public void setRefId(String refId) {
-                this.refId = refId;
+            public void setUserType(String userType) {
+                this.userType = userType;
             }
 
             public String getRefBy() {
@@ -719,36 +765,20 @@ public class GetKycStatusResponse {
                 this.rightCount = rightCount;
             }
 
-            public String getReferalid() {
-                return referalid;
+            public String getDesignation() {
+                return designation;
             }
 
-            public void setReferalid(String referalid) {
-                this.referalid = referalid;
+            public void setDesignation(String designation) {
+                this.designation = designation;
             }
 
-            public Object getTokenid() {
-                return tokenid;
+            public String getDesignationDate() {
+                return designationDate;
             }
 
-            public void setTokenid(Object tokenid) {
-                this.tokenid = tokenid;
-            }
-
-            public Object getGcmid() {
-                return gcmid;
-            }
-
-            public void setGcmid(Object gcmid) {
-                this.gcmid = gcmid;
-            }
-
-            public Object getLoginid() {
-                return loginid;
-            }
-
-            public void setLoginid(Object loginid) {
-                this.loginid = loginid;
+            public void setDesignationDate(String designationDate) {
+                this.designationDate = designationDate;
             }
 
             public String getUsername() {
@@ -879,6 +909,22 @@ public class GetKycStatusResponse {
                 this.country = country;
             }
 
+            public String getState() {
+                return state;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public String getCity() {
+                return city;
+            }
+
+            public void setCity(String city) {
+                this.city = city;
+            }
+
             public String getAddress() {
                 return address;
             }
@@ -895,20 +941,108 @@ public class GetKycStatusResponse {
                 this.dob = dob;
             }
 
-            public String getCity() {
-                return city;
+            public String getEmailStatus() {
+                return emailStatus;
             }
 
-            public void setCity(String city) {
-                this.city = city;
+            public void setEmailStatus(String emailStatus) {
+                this.emailStatus = emailStatus;
             }
 
-            public String getState() {
-                return state;
+            public String getOtp() {
+                return otp;
             }
 
-            public void setState(String state) {
-                this.state = state;
+            public void setOtp(String otp) {
+                this.otp = otp;
+            }
+
+            public Object getCreatedate() {
+                return createdate;
+            }
+
+            public void setCreatedate(Object createdate) {
+                this.createdate = createdate;
+            }
+
+            public String getCreatedAt() {
+                return createdAt;
+            }
+
+            public void setCreatedAt(String createdAt) {
+                this.createdAt = createdAt;
+            }
+
+            public String getModifiedDate() {
+                return modifiedDate;
+            }
+
+            public void setModifiedDate(String modifiedDate) {
+                this.modifiedDate = modifiedDate;
+            }
+
+            public String getIsactive() {
+                return isactive;
+            }
+
+            public void setIsactive(String isactive) {
+                this.isactive = isactive;
+            }
+
+            public String getRefId() {
+                return refId;
+            }
+
+            public void setRefId(String refId) {
+                this.refId = refId;
+            }
+
+            public Object getTokenid() {
+                return tokenid;
+            }
+
+            public void setTokenid(Object tokenid) {
+                this.tokenid = tokenid;
+            }
+
+            public String getDeviceToken() {
+                return deviceToken;
+            }
+
+            public void setDeviceToken(String deviceToken) {
+                this.deviceToken = deviceToken;
+            }
+
+            public String getDeviceType() {
+                return deviceType;
+            }
+
+            public void setDeviceType(String deviceType) {
+                this.deviceType = deviceType;
+            }
+
+            public String getReferalid() {
+                return referalid;
+            }
+
+            public void setReferalid(String referalid) {
+                this.referalid = referalid;
+            }
+
+            public Object getGcmid() {
+                return gcmid;
+            }
+
+            public void setGcmid(Object gcmid) {
+                this.gcmid = gcmid;
+            }
+
+            public Object getLoginid() {
+                return loginid;
+            }
+
+            public void setLoginid(Object loginid) {
+                this.loginid = loginid;
             }
 
             public String getPin() {
@@ -951,44 +1085,12 @@ public class GetKycStatusResponse {
                 this.photoThumb = photoThumb;
             }
 
-            public String getOtp() {
-                return otp;
-            }
-
-            public void setOtp(String otp) {
-                this.otp = otp;
-            }
-
             public Object getForgetPassOtp() {
                 return forgetPassOtp;
             }
 
             public void setForgetPassOtp(Object forgetPassOtp) {
                 this.forgetPassOtp = forgetPassOtp;
-            }
-
-            public String getEmailStatus() {
-                return emailStatus;
-            }
-
-            public void setEmailStatus(String emailStatus) {
-                this.emailStatus = emailStatus;
-            }
-
-            public String getDeviceType() {
-                return deviceType;
-            }
-
-            public void setDeviceType(String deviceType) {
-                this.deviceType = deviceType;
-            }
-
-            public String getDeviceToken() {
-                return deviceToken;
-            }
-
-            public void setDeviceToken(String deviceToken) {
-                this.deviceToken = deviceToken;
             }
 
             public String getWalletAmount() {
@@ -1005,38 +1107,6 @@ public class GetKycStatusResponse {
 
             public void setFbId(Object fbId) {
                 this.fbId = fbId;
-            }
-
-            public Object getCreatedate() {
-                return createdate;
-            }
-
-            public void setCreatedate(Object createdate) {
-                this.createdate = createdate;
-            }
-
-            public String getCreatedAt() {
-                return createdAt;
-            }
-
-            public void setCreatedAt(String createdAt) {
-                this.createdAt = createdAt;
-            }
-
-            public String getModifiedDate() {
-                return modifiedDate;
-            }
-
-            public void setModifiedDate(String modifiedDate) {
-                this.modifiedDate = modifiedDate;
-            }
-
-            public String getIsactive() {
-                return isactive;
-            }
-
-            public void setIsactive(String isactive) {
-                this.isactive = isactive;
             }
 
             public Object getTeleBotId() {
@@ -1101,14 +1171,6 @@ public class GetKycStatusResponse {
 
             public void setRole(String role) {
                 this.role = role;
-            }
-
-            public String getDesignation() {
-                return designation;
-            }
-
-            public void setDesignation(String designation) {
-                this.designation = designation;
             }
 
             public String getLevel() {
@@ -1199,12 +1261,92 @@ public class GetKycStatusResponse {
                 this.bitOtp = bitOtp;
             }
 
-            public String getUserType() {
-                return userType;
+            public String getEthAddress() {
+                return ethAddress;
             }
 
-            public void setUserType(String userType) {
-                this.userType = userType;
+            public void setEthAddress(String ethAddress) {
+                this.ethAddress = ethAddress;
+            }
+
+            public String getEthAddressStatus() {
+                return ethAddressStatus;
+            }
+
+            public void setEthAddressStatus(String ethAddressStatus) {
+                this.ethAddressStatus = ethAddressStatus;
+            }
+
+            public String getEthOtp() {
+                return ethOtp;
+            }
+
+            public void setEthOtp(String ethOtp) {
+                this.ethOtp = ethOtp;
+            }
+
+            public String getPemAddress() {
+                return pemAddress;
+            }
+
+            public void setPemAddress(String pemAddress) {
+                this.pemAddress = pemAddress;
+            }
+
+            public String getPemAddressStatus() {
+                return pemAddressStatus;
+            }
+
+            public void setPemAddressStatus(String pemAddressStatus) {
+                this.pemAddressStatus = pemAddressStatus;
+            }
+
+            public String getPemOtp() {
+                return pemOtp;
+            }
+
+            public void setPemOtp(String pemOtp) {
+                this.pemOtp = pemOtp;
+            }
+
+            public String getPplAddress() {
+                return pplAddress;
+            }
+
+            public void setPplAddress(String pplAddress) {
+                this.pplAddress = pplAddress;
+            }
+
+            public String getPplAddressStatus() {
+                return pplAddressStatus;
+            }
+
+            public void setPplAddressStatus(String pplAddressStatus) {
+                this.pplAddressStatus = pplAddressStatus;
+            }
+
+            public String getPplOtp() {
+                return pplOtp;
+            }
+
+            public void setPplOtp(String pplOtp) {
+                this.pplOtp = pplOtp;
+            }
+
+            public String getPayeerAccount() {
+                return payeerAccount;
+            }
+
+            public void setPayeerAccount(String payeerAccount) {
+                this.payeerAccount = payeerAccount;
+            }
+
+            public String getPayeerOtp() {
+                return payeerOtp;
+            }
+
+            public void setPayeerOtp(String payeerOtp) {
+                this.payeerOtp = payeerOtp;
             }
 
             public Object getLastResetPassAt() {
@@ -1375,6 +1517,22 @@ public class GetKycStatusResponse {
                 this.pOtp = pOtp;
             }
 
+            public String getNotifiSound() {
+                return notifiSound;
+            }
+
+            public void setNotifiSound(String notifiSound) {
+                this.notifiSound = notifiSound;
+            }
+
+            public String getNotifiDisplay() {
+                return notifiDisplay;
+            }
+
+            public void setNotifiDisplay(String notifiDisplay) {
+                this.notifiDisplay = notifiDisplay;
+            }
+
             public String getFName() {
                 return fName;
             }
@@ -1487,11 +1645,11 @@ public class GetKycStatusResponse {
                 this.nationalidpath = nationalidpath;
             }
 
-            public Object getDesignationUser() {
+            public String getDesignationUser() {
                 return designationUser;
             }
 
-            public void setDesignationUser(Object designationUser) {
+            public void setDesignationUser(String designationUser) {
                 this.designationUser = designationUser;
             }
 
@@ -1501,6 +1659,14 @@ public class GetKycStatusResponse {
 
             public void setKycst(String kycst) {
                 this.kycst = kycst;
+            }
+
+            public Object getStateName() {
+                return stateName;
+            }
+
+            public void setStateName(Object stateName) {
+                this.stateName = stateName;
             }
 
             public String getAddressproofPath() {
@@ -1518,6 +1684,8 @@ public class GetKycStatusResponse {
             public void setNationalidPath(String nationalidPath) {
                 this.nationalidPath = nationalidPath;
             }
+
         }
+
         }
     }

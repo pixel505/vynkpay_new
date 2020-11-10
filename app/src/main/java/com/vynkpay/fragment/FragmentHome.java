@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.activity.activities.AboutUsActivity;
 import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.utils.Functions;
@@ -199,10 +200,10 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    M.reset(activity);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
                     ViewGroup viewGroup = v.findViewById(android.R.id.content);
-                    View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_rcg_dialog, viewGroup, false);
+                    View dialogView = LayoutInflater.from(activity).inflate(R.layout.custom_rcg_dialog, viewGroup, false);
                     builder.setView(dialogView);
                     AlertDialog alertDialog = builder.create();
                     LinearLayout postPaid = dialogView.findViewById(R.id.btn_postpaid);
@@ -211,14 +212,14 @@ public class FragmentHome extends Fragment {
                         @Override
                         public void onClick(View view) {
                             alertDialog.dismiss();
-                            startActivity(new Intent(getContext(), PostPaidActivity.class).putExtra("type", "2"));
+                            startActivity(new Intent(activity, PostPaidActivity.class).putExtra("type", "2"));
                         }
                     });
                     prePaid.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             alertDialog.dismiss();
-                            startActivity(new Intent(getContext(), PrepaidActivity.class).putExtra("type", "1"));
+                            startActivity(new Intent(activity, PrepaidActivity.class).putExtra("type", "1"));
                         }
                     });
                     alertDialog.show();
@@ -236,8 +237,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), DthActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, DthActivity.class));
                 }
             }
         });
@@ -248,8 +249,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), BroadbandActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, BroadbandActivity.class));
                 }
             }
         });
@@ -260,8 +261,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), ElectricityActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, ElectricityActivity.class));
                 }
             }
         });
@@ -272,8 +273,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), DataCardActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, DataCardActivity.class));
                 }
             }
         });
@@ -284,8 +285,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), LandLineActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, LandLineActivity.class));
                 }
             }
         });
@@ -296,8 +297,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), WaterActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, WaterActivity.class));
                 }
             }
         });
@@ -308,8 +309,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), GasActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, GasActivity.class));
                 }
             }
         });
@@ -320,8 +321,8 @@ public class FragmentHome extends Fragment {
                 if (popupSP.getBoolean("popupSP", true)){
                     preLoadDialog();
                 }else {
-                    M.reset(getContext());
-                    startActivity(new Intent(getContext(), InsuranceActivity.class));
+                    M.reset(activity);
+                    startActivity(new Intent(activity, InsuranceActivity.class));
                 }
             }
         });
@@ -357,7 +358,7 @@ public class FragmentHome extends Fragment {
                             bonusWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getEarningBalance());
                             vCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getBalance());
 
-                            Prefes.saveCash(response.body().getData().getBalance(),getActivity());
+                            Prefes.saveCash(response.body().getData().getBalance(), activity);
                             mCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getWalletRedeem());
 
                         } else {

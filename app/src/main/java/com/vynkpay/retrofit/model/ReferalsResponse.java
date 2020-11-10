@@ -71,7 +71,7 @@ public class ReferalsResponse {
         private String name;
         @SerializedName("designation")
         @Expose
-        private Object designation;
+        private String designation;
         @SerializedName("amount")
         @Expose
         private String amount;
@@ -160,11 +160,11 @@ public class ReferalsResponse {
             this.name = name;
         }
 
-        public Object getDesignation() {
+        public String getDesignation() {
             return designation;
         }
 
-        public void setDesignation(Object designation) {
+        public void setDesignation(String designation) {
             this.designation = designation;
         }
 

@@ -233,7 +233,22 @@ public class Splash extends AppCompatActivity {
                                                         if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
                                                             startActivity(new Intent(Splash.this, LoginActivity.class));
                                                         }else {
-                                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                            if (Prefes.getUserType(Splash.this).equalsIgnoreCase("2")) {
+                                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                            } else {
+                                                                if (new Prefes(Splash.this).getAskPin().equalsIgnoreCase("yes")) {
+                                                                    Intent intent = new Intent(Splash.this, PinActivity.class);
+                                                                    intent.putExtra("var", "0000000");
+                                                                    intent.putExtra("type", "login");
+                                                                    intent.putExtra("accessToken", Prefes.getAccessToken(Splash.this));
+                                                                    intent.putExtra("isIndian", Prefes.getisIndian(Splash.this));
+                                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                    startActivity(intent);
+                                                                    finishAffinity();
+                                                                } else {
+                                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                                }
+                                                            }
                                                         }
                                                     }else {
                                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", "India"));
@@ -245,7 +260,22 @@ public class Splash extends AppCompatActivity {
                                                         if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
                                                             startActivity(new Intent(Splash.this, LoginActivity.class));
                                                         }else {
-                                                            startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                            if (Prefes.getUserType(Splash.this).equalsIgnoreCase("2")) {
+                                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                            } else {
+                                                                if (new Prefes(Splash.this).getAskPin().equalsIgnoreCase("yes")) {
+                                                                    Intent intent = new Intent(Splash.this, PinActivity.class);
+                                                                    intent.putExtra("var", "0000000");
+                                                                    intent.putExtra("type", "login");
+                                                                    intent.putExtra("accessToken", Prefes.getAccessToken(Splash.this));
+                                                                    intent.putExtra("isIndian", Prefes.getisIndian(Splash.this));
+                                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                                    startActivity(intent);
+                                                                    finishAffinity();
+                                                                } else {
+                                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                                }
+                                                            }
                                                         }
                                                     }else {
                                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", "Global"));
@@ -268,12 +298,33 @@ public class Splash extends AppCompatActivity {
                                             startActivity(new Intent(Splash.this, LoginActivity.class));
                                             finish();
                                         }else {
-                                            if (sp.getString("value", "").equals("Global")) {
-                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
-                                                finish();
-                                            } else if (sp.getString("value", "").equals("India")) {
-                                                startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
-                                                finish();
+                                            if (Prefes.getUserType(Splash.this).equalsIgnoreCase("2")) {
+                                                if (sp.getString("value", "").equals("Global")) {
+                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                    finish();
+                                                } else if (sp.getString("value", "").equals("India")) {
+                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                    finish();
+                                                }
+                                            } else {
+                                                if (new Prefes(Splash.this).getAskPin().equalsIgnoreCase("yes")) {
+                                                    Intent intent = new Intent(Splash.this, PinActivity.class);
+                                                    intent.putExtra("var", "0000000");
+                                                    intent.putExtra("type", "login");
+                                                    intent.putExtra("accessToken", Prefes.getAccessToken(Splash.this));
+                                                    intent.putExtra("isIndian", Prefes.getisIndian(Splash.this));
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finishAffinity();
+                                                } else {
+                                                    if (sp.getString("value", "").equals("Global")) {
+                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                        finish();
+                                                    } else if (sp.getString("value", "").equals("India")) {
+                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                        finish();
+                                                    }
+                                                }
                                             }
                                         }
                                     } else {

@@ -45,6 +45,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/custom_rectangle"
                 android:hint="Referral ID"
+                android:focusable="false"
+                android:clickable="false"
                 android:paddingRight="@dimen/_10sdp"
                 android:singleLine="true"
                 android:textSize="@dimen/_12sdp" />
