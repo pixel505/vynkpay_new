@@ -17,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.CashbackRewardAdapter;
 import com.vynkpay.custom.NormalTextView;
@@ -30,7 +29,6 @@ import com.vynkpay.utils.URLS;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,10 +47,10 @@ public class CashbackRewardActivity extends AppCompatActivity {
     LinearLayout noLayout;
 
     Dialog dialog1;
-    String mSuccess, mMessage;
+    String mSuccess="", mMessage="";
     CashbackRewardAdapter cashbackRewardAdapter;
     JSONObject userPreference;
-    String userID;
+    String userID="";
     ArrayList<CashbackRewardModel> cashbackRewardModelArrayList = new ArrayList<>();
 
 

@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -25,12 +23,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.history.AllRechargeHistoryActivity;
 import com.vynkpay.adapter.CashbackRewardAdapter;
 import com.vynkpay.adapter.WalletTransactionAdapter;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
-import com.vynkpay.models.CashbackRewardModel;
 import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
@@ -61,21 +57,16 @@ public class WalletActivity extends AppCompatActivity {
     NormalTextView addNewCardButton;
     @BindView(R.id.existingCardRecycler)
     RecyclerView existingCardRecycler;
-
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbarTitle;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.walletBalance)
     NormalTextView walletBalance;
-
     @BindView(R.id.noLayout)
     LinearLayout noLayout;
-
     @BindView(R.id.transactionsListView)
     ListView transactionsListView;
-
     @BindView(R.id.noDataTV)
     NormalTextView noDataTV;
 

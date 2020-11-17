@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.models.WalletTransactionsModel;
-import com.vynkpay.utils.Functions;
 import java.util.ArrayList;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.Holder>{

@@ -5,8 +5,6 @@ import android.os.Handler;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.Dashboard;
 import com.vynkpay.adapter.ViewPagerAdapter;

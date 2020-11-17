@@ -3,29 +3,19 @@ package com.vynkpay.activity.activitiesnew.conversion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.ConversionActivity;
-import com.vynkpay.activity.activitiesnew.RequestWithdrawOtpActivity;
-import com.vynkpay.custom.NormalButton;
-import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConversionOtpBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.CheckWaletOtp;
-import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.retrofit.model.SubmitConversionResponse;
 import com.vynkpay.utils.M;
 

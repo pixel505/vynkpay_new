@@ -2,7 +2,6 @@ package com.vynkpay.newregistration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +11,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.PinActivity;
 import com.vynkpay.databinding.ActivityRegister3Binding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.OtpVerifyLoginResponse;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.utils.M;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

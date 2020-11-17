@@ -7,12 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.HelpSupportModel;
-
 import java.util.ArrayList;
 
 public class HelpDetailsAdapter extends RecyclerView.Adapter<HelpDetailsAdapter.MyViewHolder> {

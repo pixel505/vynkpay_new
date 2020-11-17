@@ -4,19 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.models.WithdrawalRequestModel;
-import com.vynkpay.utils.Functions;
-
 import java.util.ArrayList;
 
 public class WalletRequestAdapter extends RecyclerView.Adapter<WalletRequestAdapter.Holder> {

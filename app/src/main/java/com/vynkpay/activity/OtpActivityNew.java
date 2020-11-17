@@ -6,24 +6,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.LoginActivity;
-import com.vynkpay.activity.activities.Signupnew;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.utils.M;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -34,11 +25,8 @@ public class OtpActivityNew extends AppCompatActivity {
 
     @BindView(R.id.verifyLnNew)
     NormalButton verifyLn;
-
-
     @BindView(R.id.otpEdt)
     NormalEditText otpEdt;
-
     String tempid;
     Dialog dialog;
     SharedPreferences sp;

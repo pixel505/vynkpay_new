@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,7 +25,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.MoneyTransferActivity;
 import com.vynkpay.activity.activities.history.AllRechargeHistoryActivity;
 import com.vynkpay.adapter.PreviousTransferAdapter;
 import com.vynkpay.custom.NormalButton;
@@ -40,7 +38,6 @@ import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;

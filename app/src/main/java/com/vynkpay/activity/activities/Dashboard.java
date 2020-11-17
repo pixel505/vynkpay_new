@@ -39,7 +39,6 @@ import com.vynkpay.models.OffersModel;
 import com.vynkpay.models.ServiceModel;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
@@ -50,7 +49,6 @@ import com.rd.animation.type.AnimationType;
 import com.rd.draw.data.Orientation;
 import com.rd.draw.data.RtlMode;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -32,21 +32,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.recharge.mobile.adapter.PlansPagerAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

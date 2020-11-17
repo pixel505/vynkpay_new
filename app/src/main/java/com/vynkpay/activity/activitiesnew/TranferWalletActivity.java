@@ -3,19 +3,15 @@ package com.vynkpay.activity.activitiesnew;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.WalletNewActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityTranferWalletBinding;
-import com.vynkpay.fragment.BonusWalletFragment;
 import com.vynkpay.fragment.VCashWalletFragment;
 import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.network_classes.ApiCalls;
@@ -24,13 +20,10 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Collections;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

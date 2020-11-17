@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.themepark.event.IsAgeLimitSelectedEvent;
@@ -17,9 +16,7 @@ import com.vynkpay.activity.themepark.event.ThemeParkCategoryTicketEvent;
 import com.vynkpay.activity.themepark.event.ThemeParkQuantityEvent;
 import com.vynkpay.activity.themepark.model.ThemeParkCategoryTicketModel;
 import com.vynkpay.custom.NormalTextView;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 
 public class ThemeParkTicketSelectionAdapter extends RecyclerView.Adapter<ThemeParkTicketSelectionAdapter.MyViewHolder> {

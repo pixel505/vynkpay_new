@@ -26,7 +26,6 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityReferLayoutBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
-import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
 import org.json.JSONException;

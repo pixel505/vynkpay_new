@@ -3,7 +3,6 @@ package com.vynkpay.newregistration;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,12 +11,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import com.vynkpay.R;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.adapter.WelComeAdapter;
 import com.vynkpay.databinding.ActivityOnboardingBinding;
 import com.vynkpay.models.Slider;
-
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.recharge.dth.activity.DthActivity;
 import com.vynkpay.activity.recharge.dth.events.EventBusDth;

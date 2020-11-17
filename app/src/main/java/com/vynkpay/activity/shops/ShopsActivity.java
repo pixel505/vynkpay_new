@@ -3,22 +3,17 @@ package com.vynkpay.activity.shops;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.databinding.ActivityShopsBinding;
-import com.vynkpay.fragment.FragmentHome;
-
 import java.util.ArrayList;
 import java.util.List;
 

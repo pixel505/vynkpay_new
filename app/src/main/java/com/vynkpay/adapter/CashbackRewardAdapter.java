@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.models.CashbackRewardModel;
-import com.vynkpay.utils.Functions;
 
 import java.util.ArrayList;
 

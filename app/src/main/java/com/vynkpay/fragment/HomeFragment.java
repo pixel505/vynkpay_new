@@ -23,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.activity.activities.MoneyTransferActivity;

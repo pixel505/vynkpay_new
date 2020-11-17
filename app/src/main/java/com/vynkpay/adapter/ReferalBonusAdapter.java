@@ -3,17 +3,12 @@ package com.vynkpay.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.databinding.RefBonusItemListBinding;
 import com.vynkpay.databinding.ReferralBonusItemBinding;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
-import com.vynkpay.utils.Functions;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

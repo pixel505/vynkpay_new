@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,13 +18,10 @@ import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalLightTextView;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
-import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

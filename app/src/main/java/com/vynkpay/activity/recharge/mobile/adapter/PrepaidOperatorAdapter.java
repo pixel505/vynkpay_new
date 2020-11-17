@@ -9,15 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.recharge.mobile.activity.SelectCircleActivity;
 import com.vynkpay.activity.recharge.mobile.model.RechargeModel;
 import com.vynkpay.custom.NormalLightTextView;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class PrepaidOperatorAdapter extends RecyclerView.Adapter<PrepaidOperatorAdapter.MyViewHolder> {

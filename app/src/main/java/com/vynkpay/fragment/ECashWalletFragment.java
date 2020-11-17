@@ -5,42 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
-import com.vynkpay.activity.activities.ChoosePaymentActivity;
 import com.vynkpay.activity.activities.ChoosePaymentActivityB;
 import com.vynkpay.databinding.FragmentEcashWalletBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.AllTransactionsActivity;
 import com.vynkpay.adapter.ECashAdapter;
-import com.vynkpay.adapter.WalletTransactionAdapter;
-import com.vynkpay.databinding.FragmentVcashWalletBinding;
 import com.vynkpay.models.EcashModelClass;
-import com.vynkpay.models.WalletTransactionsModel;
-import com.vynkpay.utils.M;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

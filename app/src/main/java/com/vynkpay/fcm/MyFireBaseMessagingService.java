@@ -35,7 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
-public class MyFireBaseMessagingService extends FirebaseMessagingService {
+public class  MyFireBaseMessagingService extends FirebaseMessagingService {
     String image, title="", message, type = "000", amount;
     Notification notification;
 
@@ -146,7 +146,8 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
                     .setStyle(new Notification.BigTextStyle().bigText(message))
                     .setAutoCancel(true)
                     .setChannelId(channelId)
-                    .setVisibility(View.VISIBLE)
+                    .setVisibility(
+                            View.VISIBLE)
                     .setContentIntent(intent)
                     .setCategory(Notification.CATEGORY_PROMO)
                     .setPriority(Notification.PRIORITY_HIGH).build();
@@ -244,12 +245,12 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
                 height_tmp /= 2;
                 scale *= 2;
             }
-
             //decode with inSampleSize
             BitmapFactory.Options o2 = new BitmapFactory.Options();
             o2.inSampleSize = scale;
             return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

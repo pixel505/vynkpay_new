@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
@@ -20,9 +17,7 @@ import com.vynkpay.retrofit.model.VerifyPinResponse;
 import com.vynkpay.utils.KeyboardView;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.OnChangeKeys;
-
 import org.greenrobot.eventbus.EventBus;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;

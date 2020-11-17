@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 
 public class ViewPagerAdapter extends PagerAdapter {

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
-
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityChoosePaymentBinding;
@@ -20,6 +19,7 @@ import com.vynkpay.utils.M;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 public class ChoosePaymentActivity extends AppCompatActivity {
     ActivityChoosePaymentBinding binding;
     ChoosePaymentActivity ac;

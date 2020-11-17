@@ -2,7 +2,6 @@ package com.vynkpay.activity.shops;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,26 +34,20 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.AccountAccessActivity;
 import com.vynkpay.activity.shops.models.Categorys;
 import com.vynkpay.activity.shops.models.CountryList;
 import com.vynkpay.activity.shops.models.Deal;
-import com.vynkpay.activity.shops.models.ShopCashbackResponse;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.FragmentShopBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.URLS;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

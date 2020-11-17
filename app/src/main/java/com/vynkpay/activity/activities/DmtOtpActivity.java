@@ -17,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
@@ -46,7 +45,7 @@ public class DmtOtpActivity extends AppCompatActivity {
     NormalEditText etOtp;
     @BindView(R.id.termTV)
     NormalTextView termTV;
-    String beneficiary_id, ben_account, ben_ifsc;
+    String beneficiary_id="", ben_account="", ben_ifsc="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.recharge.datacard.activity.DataCardActivity;
@@ -21,9 +20,7 @@ import com.vynkpay.activity.recharge.mobile.model.OnBottomReachedListener;
 import com.vynkpay.activity.recharge.mobile.model.PlanModel;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 
 public class FullTalkTimeAdapter extends RecyclerView.Adapter<FullTalkTimeAdapter.MyViewHolder> {

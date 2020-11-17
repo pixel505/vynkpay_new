@@ -42,16 +42,12 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
 import com.vynkpay.utils.ApiParams;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;

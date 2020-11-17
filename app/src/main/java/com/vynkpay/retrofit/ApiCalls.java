@@ -5,10 +5,7 @@ import com.vynkpay.models.EcashModelClass;
 import com.vynkpay.models.GetKycStatusResponse;
 import com.vynkpay.models.UpdatebankResponse;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
-import com.vynkpay.retrofit.model.ApiRechargeResponse;
-import com.vynkpay.retrofit.model.AppVersionRequest;
 import com.vynkpay.retrofit.model.AppVersionResponse;
-import com.vynkpay.retrofit.model.ChangePasswordResponse;
 import com.vynkpay.retrofit.model.CheckWaletOtp;
 import com.vynkpay.retrofit.model.CloseTicketResponse;
 import com.vynkpay.retrofit.model.Club1Response;
@@ -53,17 +50,13 @@ import com.vynkpay.retrofit.model.SubmitConversionResponse;
 import com.vynkpay.retrofit.model.TeamSummaryResponse;
 import com.vynkpay.retrofit.model.TransferMoney;
 import com.vynkpay.retrofit.model.UpdateImageResponse;
-import com.vynkpay.retrofit.model.UpdateProfileResponse;
 import com.vynkpay.retrofit.model.VerifyBitResponse;
 import com.vynkpay.retrofit.model.VerifyPinResponse;
 import com.vynkpay.retrofit.model.WithdrawalTypeTesponse;
-
 import java.util.List;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;

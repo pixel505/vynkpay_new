@@ -12,12 +12,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.vynkpay.activity.PayeerAddressActivity;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityVerifyBitBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.SendBitResponse;
 import com.vynkpay.retrofit.model.VerifyBitResponse;
 import com.vynkpay.utils.M;
 

@@ -228,6 +228,7 @@ public class ClubBonusActivity extends AppCompatActivity {
                 statusText = itemView.findViewById(R.id.statusText);
             }
         }
+
     }
 
 

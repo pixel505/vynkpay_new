@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.vynkpay.R;
 import com.vynkpay.adapter.InvoiceAdapter;
 import com.vynkpay.databinding.ActivityInvoiceBinding;

@@ -2,32 +2,18 @@ package com.vynkpay.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.WatchFileActivity;
 import com.vynkpay.activity.activities.WatchPdfActivity;
-import com.vynkpay.databinding.CloseTicketItemListBinding;
 import com.vynkpay.databinding.MessageItemBinding;
-import com.vynkpay.models.ChatModel;
-import com.vynkpay.models.OpenTicketModel;
 import com.vynkpay.retrofit.model.GetChatResponse;
-import com.vynkpay.utils.ApiParams;
 
 import java.util.List;
 

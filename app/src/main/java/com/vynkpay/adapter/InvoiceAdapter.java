@@ -5,15 +5,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.InvoiceDetailActivity;
 import com.vynkpay.databinding.InvoiceItemBinding;
 import com.vynkpay.retrofit.model.GetInvoiceResponse;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

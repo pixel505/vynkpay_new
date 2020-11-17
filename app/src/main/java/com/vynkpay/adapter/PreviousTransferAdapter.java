@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.AddMoneyActivity;
@@ -17,7 +16,6 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.events.UpdateWalletTransferFields;
 import com.vynkpay.models.TransferMoneyModel;
 import com.vynkpay.utils.ApiParams;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;

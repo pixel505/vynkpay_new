@@ -45,7 +45,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password_rcg);
         ButterKnife.bind(ForgotPasswordActivity.this);
-        //FirebaseMessaging.getInstance().subscribeToTopic(ApiParams.GLOBAL_PARAMS);
         setListeners();
         dialog = M.showDialog(ForgotPasswordActivity.this, "", false, false);
         if (getIntent() != null) {

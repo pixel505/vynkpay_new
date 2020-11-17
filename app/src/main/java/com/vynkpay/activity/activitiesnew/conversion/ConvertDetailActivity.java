@@ -19,9 +19,7 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import java.text.NumberFormat;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

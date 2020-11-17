@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,18 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.adapter.WithdrawalTypeAdapter;
 import com.vynkpay.custom.NormalButton;
-import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.WithdrawalTypeTesponse;
 import com.vynkpay.utils.M;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

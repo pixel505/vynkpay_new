@@ -581,7 +581,9 @@ public class KycActivity extends AppCompatActivity {
             public void onFailure(Call<GetKycStatusResponse> call, Throwable t) {
                 dialog1.dismiss();
             }
+
         });
+
     }
 
     private void clicks() {

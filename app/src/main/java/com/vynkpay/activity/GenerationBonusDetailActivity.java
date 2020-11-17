@@ -2,12 +2,10 @@ package com.vynkpay.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.GenerationBonusDetailAdapter;
@@ -16,12 +14,9 @@ import com.vynkpay.models.GenerationBonusDetailModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
-import com.vynkpay.utils.Functions;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class GenerationBonusDetailActivity extends AppCompatActivity {

@@ -11,9 +11,6 @@ import android.widget.TextView;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.models.EcashModelClass;
-import com.vynkpay.utils.Functions;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ECashAdapter extends BaseAdapter{

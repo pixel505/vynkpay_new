@@ -2,19 +2,11 @@ package com.vynkpay.activity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityRequestSuccessBinding;
-import com.vynkpay.fragment.ECashWalletFragment;
-import com.vynkpay.prefes.Prefes;
 
 public class RequestSuccess extends AppCompatActivity {
 

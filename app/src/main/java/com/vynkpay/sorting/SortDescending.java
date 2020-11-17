@@ -1,7 +1,6 @@
 package com.vynkpay.sorting;
 
 import com.vynkpay.activity.recharge.mobile.model.PlanModel;
-
 import java.util.Comparator;
 
 public class SortDescending implements Comparator<PlanModel> {

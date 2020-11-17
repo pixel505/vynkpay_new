@@ -3,9 +3,7 @@ package com.vynkpay.prefes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.activities.LoginActivity;
 
 public class Prefes {
     private static final String APP_KEY = BuildConfig.APP_KEY;

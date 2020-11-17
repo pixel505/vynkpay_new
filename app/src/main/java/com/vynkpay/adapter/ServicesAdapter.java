@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.activity.activities.MoneyTransferActivity;
@@ -30,7 +28,6 @@ import com.vynkpay.models.ServiceModel;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
-
 import java.util.ArrayList;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.Holder>{

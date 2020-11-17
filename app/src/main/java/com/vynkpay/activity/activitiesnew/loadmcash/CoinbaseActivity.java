@@ -16,9 +16,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.WebviewActivityNew;
 import com.vynkpay.utils.M;
 
 public class CoinbaseActivity extends AppCompatActivity {

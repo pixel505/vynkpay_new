@@ -1,6 +1,5 @@
 package com.vynkpay.utils;
 
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 
 public class ApiParams {

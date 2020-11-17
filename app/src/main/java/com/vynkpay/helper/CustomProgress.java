@@ -1,13 +1,10 @@
 package com.vynkpay.helper;
 
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 
 public class CustomProgress extends Dialog implements DialogInterface.OnDismissListener {

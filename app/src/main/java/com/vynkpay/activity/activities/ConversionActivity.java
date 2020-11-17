@@ -3,24 +3,19 @@ package com.vynkpay.activity.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.vynkpay.R;
 import com.vynkpay.adapter.ConversionAdapter;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
-import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConversionBinding;
-import com.vynkpay.fragment.BonusWalletFragment;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.CheckWaletOtp;

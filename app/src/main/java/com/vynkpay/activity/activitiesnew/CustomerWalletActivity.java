@@ -2,15 +2,12 @@ package com.vynkpay.activity.activitiesnew;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.WalletNewActivity;
 import com.vynkpay.activity.activitiesnew.conversion.ConvertBonusMcashActivity;
 import com.vynkpay.activity.activitiesnew.loadmcash.LoadmcashActivity;
 import com.vynkpay.databinding.ActivityCustomerWalletBinding;
@@ -24,11 +21,9 @@ import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Collections;
 
 public class CustomerWalletActivity extends AppCompatActivity {

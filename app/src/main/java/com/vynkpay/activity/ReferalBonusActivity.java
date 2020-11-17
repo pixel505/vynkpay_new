@@ -4,15 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import com.google.gson.Gson;
 import com.vynkpay.adapter.PerformanceBonusAdapter;
-import com.vynkpay.retrofit.model.Club1Response;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.GenerationBonusAdapter;
 import com.vynkpay.adapter.ReferalBonusAdapter;
@@ -21,12 +17,6 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
-
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

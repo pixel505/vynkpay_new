@@ -9,53 +9,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityKycUploadActiviyBinding;
-import com.vynkpay.network_classes.ApiCalls;
-import com.vynkpay.network_classes.VolleyResponse;
-import com.vynkpay.prefes.Prefes;
-import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.UpdateImageResponse;
-import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
-import com.vynkpay.utils.MySingleton;
-import com.vynkpay.utils.URLS;
-
-import org.json.JSONObject;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class KycUploadActiviy extends AppCompatActivity {
     ActivityKycUploadActiviyBinding binding;

@@ -2,12 +2,10 @@ package com.vynkpay.activity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityStatementBinding;
 import com.vynkpay.prefes.Prefes;
@@ -15,7 +13,6 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.StatementResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

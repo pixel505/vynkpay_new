@@ -35,13 +35,10 @@ import com.android.volley.toolbox.Volley;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
-import com.squareup.picasso.Picasso;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.recharge.dth.activity.DthPaymentMethodActivity;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.recharge.mobile.activity.PaymentMethodActivity;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
@@ -52,18 +49,12 @@ import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
-import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;

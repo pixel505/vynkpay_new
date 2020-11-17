@@ -3,10 +3,8 @@ package com.vynkpay.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-
 import android.os.Bundle;
 import android.view.View;
-
 import com.vynkpay.R;
 import com.vynkpay.adapter.BonusAdapter;
 import com.vynkpay.databinding.ActivityClubBonusListBinding;

@@ -1,31 +1,14 @@
 package com.vynkpay.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.vynkpay.R;
-import com.vynkpay.activity.BonusActivity;
-import com.vynkpay.activity.activities.Community;
-import com.vynkpay.activity.activities.CommunityDetailActivity;
-import com.vynkpay.activity.activities.ConversionActivity;
-import com.vynkpay.activity.activities.InvoiceActivity;
-import com.vynkpay.activity.activities.PackageAActivity;
-import com.vynkpay.activity.activities.StatementActivity;
-import com.vynkpay.activity.activities.WalletNewActivity;
-import com.vynkpay.activity.activities.WithdrawRequestListActivity;
-import com.vynkpay.databinding.AccountItemListBinding;
 import com.vynkpay.databinding.ConversionItemListBinding;
-import com.vynkpay.models.MyAccount;
 import com.vynkpay.retrofit.model.ConversionResponse;
-import com.vynkpay.utils.CallActivity;
 import com.vynkpay.utils.Functions;
 
 import java.util.List;

@@ -7,8 +7,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatImageView;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 
 public class RoundishImageView extends AppCompatImageView {

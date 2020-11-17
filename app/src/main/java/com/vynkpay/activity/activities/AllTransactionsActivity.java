@@ -2,14 +2,10 @@ package com.vynkpay.activity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.WalletTransactionAdapter;
 import com.vynkpay.databinding.ActivityAllTransactionsBinding;

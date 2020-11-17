@@ -94,20 +94,15 @@ public class AccountActivity extends AppCompatActivity {
     NormalTextView referralIDTV;
     @BindView(R.id.imageView)
     CircleImageView imageView;
-
     @BindView(R.id.chkNotification)
     SwitchCompat chkNotification;
-
     @BindView(R.id.linNotification)
     LinearLayout linNotification;
-
-
     boolean isEnabled = false;
     JSONObject userPreference;
     String accessToken;
     Dialog dialog1;
-
-    String kyc_status;
+    String kyc_status="";
     SharedPreferences sp;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

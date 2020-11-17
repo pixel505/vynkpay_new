@@ -2,11 +2,9 @@ package com.vynkpay.newregistration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.databinding.ActivityRegister4Binding;

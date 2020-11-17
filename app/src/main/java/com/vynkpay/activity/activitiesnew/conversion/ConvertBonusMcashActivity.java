@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.R;
-import com.vynkpay.activity.activitiesnew.TranferWalletActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConvertBonusMcashBinding;
 import com.vynkpay.prefes.Prefes;
@@ -22,9 +21,7 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ConversionResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

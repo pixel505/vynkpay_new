@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.WebViewActivity;
 import com.vynkpay.activity.recharge.broadband.activity.BroadbandActivity;
@@ -27,7 +25,6 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.ServiceModel;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
-
 import java.util.ArrayList;
 
 public class RechargeServiceAdapter extends RecyclerView.Adapter<RechargeServiceAdapter.MyViewHolder> {

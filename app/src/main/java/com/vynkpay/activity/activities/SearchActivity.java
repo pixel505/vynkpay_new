@@ -25,10 +25,7 @@ import com.vynkpay.activity.recharge.water.WaterActivity;
 import com.vynkpay.adapter.SearchItemAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.SearchItemModel;
-import com.vynkpay.utils.Functions;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

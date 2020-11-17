@@ -30,7 +30,6 @@ import com.razorpay.Checkout;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.PinActivity;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
@@ -44,7 +43,6 @@ import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
-import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
 
 

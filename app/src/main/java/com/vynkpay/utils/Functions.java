@@ -3,17 +3,12 @@ package com.vynkpay.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.text.SpannableString;
-import android.util.Pair;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.budiyev.android.imageloader.ImageLoader;
-
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

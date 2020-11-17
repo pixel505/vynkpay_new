@@ -91,7 +91,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } else if (getIntent().getStringExtra("Country").equals("India")) {
                 fragment = new FragmentHome();
                 switchFragment(fragment, "home");
-
             }
         } else {
             try {
@@ -541,7 +540,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             binding.sideLayout.headerLayout.imageView.setImageResource(R.drawable.dummy);
                         }
 
-                    } catch (JSONException e) {
+                    } catch ( Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -696,6 +695,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     public void onFailure(Call<ReferLinkResponse> call, Throwable t) {
                         Log.d("Error", t.getMessage()!=null ? t.getMessage() : "Error");
                     }
+
                 });
             }
 

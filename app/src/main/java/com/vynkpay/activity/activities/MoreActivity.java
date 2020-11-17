@@ -14,10 +14,7 @@ import com.vynkpay.adapter.AllServicesAdapter;
 import com.vynkpay.adapter.CustomPagerAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.ServiceModel;
-import com.vynkpay.utils.Functions;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

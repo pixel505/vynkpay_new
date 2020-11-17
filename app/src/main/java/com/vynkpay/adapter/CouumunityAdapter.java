@@ -1,26 +1,18 @@
 package com.vynkpay.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.databinding.CommunityItemListBinding;
-import com.vynkpay.databinding.DirectRefItemListBinding;
-import com.vynkpay.models.DirectRefModel;
-import com.vynkpay.retrofit.model.ReferalsResponse;
 import com.vynkpay.retrofit.model.TeamSummaryResponse;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

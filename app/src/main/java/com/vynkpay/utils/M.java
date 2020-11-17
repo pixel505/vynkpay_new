@@ -43,11 +43,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.recharge.landline.activity.LandlinePaymentMethodActivity;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.activities.Dashboard;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
@@ -55,7 +52,6 @@ import com.vynkpay.helper.CustomProgress;
 import com.vynkpay.models.ErrorDialogModel;
 import com.vynkpay.models.SuccessDialogModel;
 import com.vynkpay.prefes.Prefes;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

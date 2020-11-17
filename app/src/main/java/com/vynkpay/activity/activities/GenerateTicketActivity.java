@@ -22,11 +22,8 @@ import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityGenerateTicketBinding;
-import com.vynkpay.models.UpdatebankResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerateticketResponse;

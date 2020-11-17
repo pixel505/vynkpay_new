@@ -1,7 +1,6 @@
 package com.vynkpay.activity.shops;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;

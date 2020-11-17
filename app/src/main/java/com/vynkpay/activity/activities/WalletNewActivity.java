@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import com.vynkpay.R;
-import com.vynkpay.activity.ClubBonusActivity;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.activity.activitiesnew.RequestWithdrawnActivity;
 import com.vynkpay.activity.activitiesnew.TranferWalletActivity;
 import com.vynkpay.activity.activitiesnew.WithdrawTypeActivity;
@@ -24,19 +22,12 @@ import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
-import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Collections;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class WalletNewActivity extends AppCompatActivity {
     ActivityWalletNewBinding binding;

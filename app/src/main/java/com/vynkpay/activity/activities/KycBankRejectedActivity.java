@@ -10,17 +10,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.activity.PinActivity;
 import com.vynkpay.prefes.Prefes;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityKycBankRejectedBinding;
-import com.vynkpay.databinding.ActivityKycRejectedActiviyBinding;
 
 public class KycBankRejectedActivity extends AppCompatActivity {
     ActivityKycBankRejectedBinding binding;

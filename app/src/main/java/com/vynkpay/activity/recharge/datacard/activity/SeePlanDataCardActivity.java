@@ -26,8 +26,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.recharge.datacard.adapter.DataCardPagerAdapter;
 import com.vynkpay.activity.recharge.mobile.adapter.PlansPagerAdapter;

@@ -10,15 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.HelpAndSupportQuestions;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.HelpSupportModel;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class HelpAndSupportAdapter extends RecyclerView.Adapter<HelpAndSupportAdapter.MyViewHolder> {

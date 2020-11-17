@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.adapter.PackageAdapter;
@@ -15,7 +13,6 @@ import com.vynkpay.databinding.ActivityPackageABinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetPackageResponse;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -37,9 +37,7 @@ import com.vynkpay.retrofit.model.GetUserResponse;
 import com.vynkpay.retrofit.model.TransferMoney;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

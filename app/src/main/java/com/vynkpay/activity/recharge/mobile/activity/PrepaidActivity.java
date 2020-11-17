@@ -1,6 +1,5 @@
 package com.vynkpay.activity.recharge.mobile.activity;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,7 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -40,7 +38,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.StringRequest;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.activity.recharge.mobile.events.PlanRechargeBus;
@@ -54,20 +51,16 @@ import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.reactivestreams.Publisher;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Flowable;
@@ -144,6 +137,7 @@ public class PrepaidActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable t) {
                 // todo
+                System.out.println(t.getMessage() != null ? t.getMessage() : "Error!");
             }
 
             @Override
@@ -253,12 +247,7 @@ public class PrepaidActivity extends AppCompatActivity {
 
     /**Related to RX java*/
     public Flowable<JSONObject> getOperatorCircle() {
-        return Flowable.defer(new Callable<Publisher<? extends JSONObject>>() {
-            @Override
-            public Publisher<? extends JSONObject> call() throws Exception {
-                return Flowable.just(callOperatorApi());
-            }
-        });
+        return Flowable.defer( () -> Flowable.just(callOperatorApi()));
     }
 
     private JSONObject callOperatorApi() throws ExecutionException, InterruptedException, RuntimeException {

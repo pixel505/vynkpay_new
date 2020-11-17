@@ -17,15 +17,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.vynkpay.utils.EndlessOnScrollListener;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.CouumunityAdapter;
-import com.vynkpay.adapter.DirectRefAdapter;
 import com.vynkpay.databinding.ActivityCommunitySummaryBinding;
-import com.vynkpay.models.DirectRefModel;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.ReferalsResponse;
 import com.vynkpay.retrofit.model.TeamSummaryResponse;
 import com.vynkpay.utils.M;
 

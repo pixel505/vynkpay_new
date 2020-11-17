@@ -45,7 +45,7 @@ public class DmtCustVerifiOtpActivity extends AppCompatActivity {
     NormalTextView timerText;
     @BindView(R.id.etOtp)
     NormalEditText etOtp;
-    String beneficiary_id, fname, lname, ben_account, ben_ifsc,  mobile_number;
+    String beneficiary_id="", fname="", lname="", ben_account="", ben_ifsc="",  mobile_number="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

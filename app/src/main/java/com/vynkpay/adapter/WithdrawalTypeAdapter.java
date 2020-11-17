@@ -5,17 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalEditText;
-import com.vynkpay.fragment.BonusWalletFragment;
-import com.vynkpay.retrofit.model.GetUserResponse;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class WithdrawalTypeAdapter extends RecyclerView.Adapter<WithdrawalTypeAdapter.MyViewHolder> {
     Context context;

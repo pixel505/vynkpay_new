@@ -9,16 +9,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.vynkpay.R;
-import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityPerfectMoneyBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetBitAddressResponse;
 import com.vynkpay.retrofit.model.SendBitResponse;
 import com.vynkpay.utils.M;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

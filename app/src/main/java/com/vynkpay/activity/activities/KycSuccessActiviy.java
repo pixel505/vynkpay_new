@@ -7,27 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityKycSuccessActiviyBinding;
-import com.vynkpay.prefes.Prefes;
-import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.UpdateImageResponse;
-
-import java.io.File;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class KycSuccessActiviy extends AppCompatActivity {
   ActivityKycSuccessActiviyBinding binding;

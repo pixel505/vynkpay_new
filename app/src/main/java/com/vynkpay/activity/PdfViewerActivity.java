@@ -1,44 +1,25 @@
 package com.vynkpay.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
 import androidx.databinding.DataBindingUtil;
-
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
 import com.downloader.OnProgressListener;
 import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
-import com.downloader.PRDownloaderConfig;
 import com.downloader.Progress;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.vynkpay.BuildConfig;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.SQLiteDB.DBHelper;
 import com.vynkpay.databinding.ActivityPdfViewerBinding;
 import com.vynkpay.models.PDFFileModel;
 import com.vynkpay.prefes.Prefes;
-import com.vynkpay.utils.DownloadTask;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 
 public class PdfViewerActivity extends AppCompatActivity {

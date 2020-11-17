@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,12 +13,10 @@ import com.vynkpay.R;
 import com.vynkpay.activity.GenerationBonusDetailActivity;
 import com.vynkpay.databinding.GenerationItemBinding;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
-import com.vynkpay.utils.Functions;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

@@ -8,10 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import androidx.viewpager.widget.PagerAdapter;
-
-import com.bumptech.glide.Glide;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.ChoosePaymentActivity;
 import com.vynkpay.custom.NormalBoldTextView;

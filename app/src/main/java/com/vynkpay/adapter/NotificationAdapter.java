@@ -1,41 +1,20 @@
 package com.vynkpay.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.vynkpay.activity.activities.NotificationActivity;
-import com.vynkpay.prefes.Prefes;
-import com.vynkpay.retrofit.MainApplication;
-import com.vynkpay.retrofit.model.DeleteNotificationResponse;
-import com.vynkpay.retrofit.model.NotificationReadResponse;
 import com.vynkpay.retrofit.model.NotificationResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.NotificationDetailActivity;
 import com.vynkpay.custom.NormalTextView;
-import com.vynkpay.models.NotificationModel;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
     List<NotificationResponse.DataBean.NotificationBean> notificationListData;
