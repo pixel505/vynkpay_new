@@ -6,11 +6,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.SystemClock;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
@@ -38,9 +41,11 @@ import java.util.Map;
 public class  MyFireBaseMessagingService extends FirebaseMessagingService {
     String image, title="", message, type = "000", amount;
     Notification notification;
+    SharedPreferences sp;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         Map<String, String> data = remoteMessage.getData();
         RemoteMessage.Notification m = remoteMessage.getNotification();
 
@@ -100,6 +105,11 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
         showNotification(this, title, message, image, type);
     }
 
+    @Override
+    public void onNewToken(@NonNull String s) {
+        super.onNewToken(s);
+    }
+
     Intent notificationIntent;
     Bitmap remote_picture;
 
@@ -110,6 +120,11 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String channelId = getString(R.string.channel_name);
             int imp = NotificationManager.IMPORTANCE_HIGH;
+            if (sp.getString("isSound","").equalsIgnoreCase("0")){
+                imp = NotificationManager.IMPORTANCE_LOW;
+            }else {
+                imp = NotificationManager.IMPORTANCE_HIGH;
+            }
             NotificationChannel mChannel = new NotificationChannel(channelId, title, imp);
             mChannel.setDescription(message);
             mChannel.setLightColor(Color.CYAN);
@@ -138,7 +153,7 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
                 }
             }
 
-            notification = new Notification.Builder(this, "")
+            notification = new Notification.Builder(this, channelId)
                     .setContentTitle(title)
                     .setContentText(message)
                     .setNumber(5)
@@ -146,11 +161,9 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
                     .setStyle(new Notification.BigTextStyle().bigText(message))
                     .setAutoCancel(true)
                     .setChannelId(channelId)
-                    .setVisibility(
-                            View.VISIBLE)
+                    .setVisibility(Notification.VISIBILITY_PUBLIC)
                     .setContentIntent(intent)
-                    .setCategory(Notification.CATEGORY_PROMO)
-                    .setPriority(Notification.PRIORITY_HIGH).build();
+                    .setCategory(Notification.CATEGORY_PROMO).build();
 
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
             notification.defaults |= Notification.DEFAULT_SOUND;
@@ -179,23 +192,44 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
 
             }
 
-            Notification notification = new NotificationCompat.Builder(context)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                    .setSmallIcon(icon)
-                    .setContentIntent(intent)
-                    .setCategory(Notification.CATEGORY_PROMO)
-                    .setPriority(Notification.PRIORITY_HIGH)
-                    .setVisibility(View.VISIBLE)
-                    .build();
+            if (sp.getString("isSound","").equalsIgnoreCase("0")){
+                Notification notification = new NotificationCompat.Builder(context,"app_name")
+                        .setContentTitle(title)
+                        .setContentText(message)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                        .setSmallIcon(icon)
+                        .setContentIntent(intent)
+                        .setCategory(Notification.CATEGORY_PROMO)
+                        .setPriority(Notification.PRIORITY_LOW)
+                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .build();
 
-            notification.flags |= Notification.FLAG_AUTO_CANCEL;
-            notification.defaults |= Notification.DEFAULT_SOUND;
-            notification.defaults |= Notification.DEFAULT_VIBRATE;
-            notification.defaults |= Notification.DEFAULT_LIGHTS;
-            notificationManager.notify((int) SystemClock.currentThreadTimeMillis(), notification);
+                notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                notification.defaults |= Notification.DEFAULT_SOUND;
+                notification.defaults |= Notification.DEFAULT_VIBRATE;
+                notification.defaults |= Notification.DEFAULT_LIGHTS;
+                notificationManager.notify((int) SystemClock.currentThreadTimeMillis(), notification);
+            } else {
+                Notification notification = new NotificationCompat.Builder(context,"app_name")
+                        .setContentTitle(title)
+                        .setContentText(message)
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                        .setSmallIcon(icon)
+                        .setContentIntent(intent)
+                        .setCategory(Notification.CATEGORY_PROMO)
+                        .setPriority(Notification.PRIORITY_HIGH)
+                        .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                        .build();
+
+                notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                notification.defaults |= Notification.DEFAULT_SOUND;
+                notification.defaults |= Notification.DEFAULT_VIBRATE;
+                notification.defaults |= Notification.DEFAULT_LIGHTS;
+                notificationManager.notify((int) SystemClock.currentThreadTimeMillis(), notification);
+            }
+
         }
+
     }
 
     private Bitmap getBitmap(String url) {
@@ -255,10 +289,3 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
         return null;
     }
 }
-
-
-
-
-
-
-

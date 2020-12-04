@@ -8,11 +8,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.google.gson.Gson;
+import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.adapter.PerformanceBonusAdapter;
 import com.vynkpay.R;
 import com.vynkpay.adapter.GenerationBonusAdapter;
 import com.vynkpay.adapter.ReferalBonusAdapter;
+import com.vynkpay.adapter.VyncPerformanceBonusAdapter;
+import com.vynkpay.adapter.VyncVolumeAdapter;
 import com.vynkpay.databinding.ActivityReferalBonusBinding;
+import com.vynkpay.models.IntGeneralBonusResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
@@ -31,6 +35,7 @@ public class ReferalBonusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_referal_bonus);
         ac = ReferalBonusActivity.this;
+        Log.d("access_token",Prefes.getAccessToken(ac));
         clicks();
     }
 
@@ -471,6 +476,131 @@ public class ReferalBonusActivity extends AppCompatActivity {
                 }
             });
 
+        } else if (type.equalsIgnoreCase("v14")){
+            binding.toolbarLayout.toolbarTitlenew.setText(R.string.referalbonus1);
+            binding.progressFrame.setVisibility(View.VISIBLE);
+            MainApplication.getApiService().getvyncreferalBonus(Prefes.getAccessToken(ac)).enqueue(new Callback<ReferalBonusResponse>() {
+                @Override
+                public void onResponse(Call<ReferalBonusResponse> call, Response<ReferalBonusResponse> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+                        if (response.body().getStatus().equals("true")) {
+                            if (response.body().getData().size()>0){
+                                binding.noLayout.setVisibility(View.GONE);
+                                Log.d("bonusLOGG", new Gson().toJson(response.body().getData()));
+
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                ReferalBonusAdapter adapter = new ReferalBonusAdapter(getApplicationContext(), response.body().getData());
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            }else {
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ReferalBonusResponse> call, Throwable t) {
+                    Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+
+            });
+        } else if (type.equalsIgnoreCase("v15")){
+            binding.toolbarLayout.toolbarTitlenew.setText(R.string.volumebonus);
+            binding.progressFrame.setVisibility(View.VISIBLE);
+            MainApplication.getApiService().getvyncVolumeBonus(Prefes.getAccessToken(ReferalBonusActivity.this)).enqueue(new Callback<IntGeneralBonusResponse>() {
+
+                @Override
+                public void onResponse(Call<IntGeneralBonusResponse> call, Response<IntGeneralBonusResponse> response) {
+                    if (response.isSuccessful() && response.body()!= null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+
+                        Log.d("volumeBonusLOG", new Gson().toJson(response.body().getData()));
+
+                        if (response.body().getStatus().equals("true")) {
+                            if(!response.body().getData().isEmpty()){
+                                binding.noLayout.setVisibility(View.GONE);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                VyncVolumeAdapter adapter = new VyncVolumeAdapter(getApplicationContext(), response.body().getData(), "");
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            } else {
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<IntGeneralBonusResponse> call, Throwable t) {
+                    Log.d("vBonusresponse",t.getMessage()!=null?t.getMessage():"Error");
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+            });
+        } else if (type.equalsIgnoreCase("v16")){
+            binding.toolbarLayout.toolbarTitlenew.setText(R.string.performancebonus);
+            binding.progressFrame.setVisibility(View.VISIBLE);
+            MainApplication.getApiService().getvyncPerformanceBonus(Prefes.getAccessToken(ReferalBonusActivity.this)).enqueue(new Callback<IntGeneralBonusResponse>() {
+
+                @Override
+                public void onResponse(Call<IntGeneralBonusResponse> call, Response<IntGeneralBonusResponse> response) {
+                    if (response.isSuccessful() && response.body()!= null) {
+                        binding.progressFrame.setVisibility(View.GONE);
+
+                        Log.d("perfomBonusLOG", new Gson().toJson(response.body().getData()));
+
+                        if (response.body().getStatus().equals("true")) {
+                            if(!response.body().getData().isEmpty()){
+                                binding.noLayout.setVisibility(View.GONE);
+                                GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                                VyncPerformanceBonusAdapter adapter = new VyncPerformanceBonusAdapter(getApplicationContext(), response.body().getData(), "");
+                                binding.referalbonusRecycler.setLayoutManager(manager);
+                                binding.referalbonusRecycler.setAdapter(adapter);
+                            } else {
+                                Toast.makeText(ac, "No Data Found", Toast.LENGTH_LONG).show();
+                                binding.noLayout.setVisibility(View.VISIBLE);
+                                binding.noMessageTV.setText(response.body().getMessage()+"");
+                            }
+
+                        } else if (response.body().getMessage().equals("false")) {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                            binding.noMessageTV.setText(response.body().getMessage()+"");
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        binding.progressFrame.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<IntGeneralBonusResponse> call, Throwable t) {
+                    Log.d("perfomBonusLOG",t.getMessage()!=null?t.getMessage():"Error");
+                    binding.progressFrame.setVisibility(View.GONE);
+                }
+            });
+
         }
     }
+
 }

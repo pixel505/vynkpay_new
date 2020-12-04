@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
-import com.vynkpay.activity.PinActivity;
 import com.vynkpay.databinding.ActivityChoosePaymentDBinding;
 import com.vynkpay.prefes.Prefes;
 
@@ -39,9 +38,6 @@ public class ChoosePaymentActivityD extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
-
                 if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("NO")){
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
                     finish();
@@ -62,6 +58,7 @@ public class ChoosePaymentActivityD extends AppCompatActivity {
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
                     finish();
                 }
+
             }
         });
     }

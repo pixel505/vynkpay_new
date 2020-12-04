@@ -133,6 +133,7 @@ public class WalletRequestAdapter extends RecyclerView.Adapter<WalletRequestAdap
              impsFeesTV = itemView.findViewById(R.id.impsFeesTV);
 
              detailLinear = itemView.findViewById(R.id.detailLinear);
+
         }
     }
 }

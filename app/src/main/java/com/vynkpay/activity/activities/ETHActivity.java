@@ -97,8 +97,7 @@ public class ETHActivity extends AppCompatActivity {
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(ETHActivity.this, VerifyBitActivity.class).putExtra("from","eth"));
                                     finish();
-                                }
-                                else if(response.body().getStatus().equals("false")){
+                                } else if(response.body().getStatus().equals("false")){
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                                 }

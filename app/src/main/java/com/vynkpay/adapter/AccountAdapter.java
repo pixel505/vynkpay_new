@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.vynkpay.activity.VyncBonusessActivity;
 import com.vynkpay.activity.activities.InvoiceActivity;
 import com.vynkpay.activity.activities.PackageAActivity;
-import com.vynkpay.activity.activities.StatementActivity;
 import com.vynkpay.activity.activities.WalletNewActivity;
 import com.vynkpay.R;
 import com.vynkpay.activity.BonusActivity;
@@ -77,12 +78,15 @@ public class AccountAdapter  extends RecyclerView.Adapter<AccountAdapter.ViewHol
                     context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","Bonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Old Bonuses")){
                     context.startActivity(new Intent(context, BonusActivity.class).putExtra("from","OldBonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("VYNC Bonuses")){
+                    context.startActivity(new Intent(context, VyncBonusessActivity.class).putExtra("from","VYNCBonuses").setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Wallets")){
                     context.startActivity(new Intent(context, WalletNewActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Withdrawal History")){
                     context.startActivity(new Intent(context, WithdrawRequestListActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Statement")){
-                    context.startActivity(new Intent(context, StatementActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    Toast.makeText(context, "Coming soon", Toast.LENGTH_SHORT).show();
+                    //context.startActivity(new Intent(context, StatementActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 }
 
             }

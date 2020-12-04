@@ -596,6 +596,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                 params.put("Accept", "application/json");
                 return params;
             }
+
         };
 
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(

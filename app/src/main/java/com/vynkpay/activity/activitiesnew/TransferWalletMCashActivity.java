@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -76,6 +77,13 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
         submitButton.setOnClickListener(this);
         binding.usernameET.setOnClickListener(this);
         initTextWatchers();
+
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     void initTextWatchers() {
         binding.amountET.addTextChangedListener(new TextWatcher() {
@@ -177,7 +185,7 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
                         countryRecycler.setVisibility(View.GONE);
                     }
                     if (arg0.toString().length() >= 3) {
-                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferWalletMCashActivity.this), arg0.toString()).enqueue(new Callback<GetUserResponse>() {
+                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferWalletMCashActivity.this), arg0.toString(),"mcash").enqueue(new Callback<GetUserResponse>() {
                             @Override
                             public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                                 if (response.isSuccessful()) {
@@ -213,6 +221,7 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
     private void transferMoneyByServer() {
         startActivityForResult(new Intent(TransferWalletMCashActivity.this, PinActivity.class)
                 .putExtra("type", "Wallet")
+                .putExtra("isIndian",Prefes.getisIndian(TransferWalletMCashActivity.this))
                 .putExtra("accessToken", Prefes.getAccessToken(TransferWalletMCashActivity.this)), rcWallet);
     }
 
@@ -226,12 +235,13 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
                         value = data.getStringExtra("edttext");
                         serverDialog.show();
                         MainApplication.getApiService().transfermMoney(Prefes.getAccessToken(TransferWalletMCashActivity.this), value, userId, amount, remarks).enqueue(new Callback<TransferMoney>() {
+
                             @Override
                             public void onResponse(Call<TransferMoney> call, Response<TransferMoney> response) {
                                 if (response.isSuccessful()) {
                                     if (response.body() != null) {
                                         if(response.body().isStatus()){
-                                            startActivity(new Intent(TransferWalletMCashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","MCash"));
+                                            startActivity(new Intent(TransferWalletMCashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","MCash").putExtra("invoice_number",response.body().getInvoice_number()));
                                             TransferWalletMCashActivity.this.finish();
                                         } else {
                                             Toast.makeText(TransferWalletMCashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -245,7 +255,9 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
                                 Log.d("mcashtarans",t.getMessage() !=null ? t.getMessage() : "Error");
                                 serverDialog.dismiss();
                             }
+
                         });
+
                     }
                 }
             }
@@ -318,4 +330,6 @@ public class TransferWalletMCashActivity extends AppCompatActivity implements Vi
         }
 
     }
+
+
 }

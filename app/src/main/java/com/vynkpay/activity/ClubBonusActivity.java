@@ -73,12 +73,12 @@ public class ClubBonusActivity extends AppCompatActivity {
                             if (response.body().getStatus().equalsIgnoreCase("true")) {
                                 if ((response.body().getData().getListing()!=null?response.body().getData().getListing().size():0)>0) {
                                     binding.referalbonusRecycler.setAdapter(new ClubBonusAdapter(response.body().getData().getListing()));
-                                }else {
+                                } else {
                                     binding.noLayout.setVisibility(View.VISIBLE);
                                     binding.noMessageTV.setText(response.body().getMessage()+"");
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                                 }
-                            }else {
+                            } else {
                                 binding.noLayout.setVisibility(View.VISIBLE);
                                 binding.noMessageTV.setText(response.body().getMessage()+"");
                                 Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -130,6 +130,7 @@ public class ClubBonusActivity extends AppCompatActivity {
         }else if (type.equalsIgnoreCase("c3")){
 
             binding.progressFrame.setVisibility(View.VISIBLE);
+
             MainApplication.getApiService().getClub3(Prefes.getAccessToken(ClubBonusActivity.this)).enqueue(new Callback<Club1Response>() {
                 @Override
                 public void onResponse(Call<Club1Response> call, Response<Club1Response> response) {

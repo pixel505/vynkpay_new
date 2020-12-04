@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 import com.vynkpay.R;
@@ -50,26 +51,30 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
                 finish();
             }
         });
+
         submitButton.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
+
         if (view == submitButton){
-            if (binding.otpET.getText().toString().trim().isEmpty()) {
+            if (TextUtils.isEmpty(binding.otpET.getText().toString().trim())) {
                 Toast.makeText(RequestWithdrawOtpActivity.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 checkwalletOtp(amountWithdraw);
             }
             //startActivity(new Intent(RequestWithdrawOtpActivity.this,WithdrawnSubmitedActivity.class));
         }
+
     }
 
     public void checkwalletOtp(String amount){
         serverDialog.show();
         submitButton.setEnabled(false);
         ApiCalls.checkWalletOTP(RequestWithdrawOtpActivity.this, Prefes.getAccessToken(RequestWithdrawOtpActivity.this), binding.otpET.getText().toString().trim(), new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                             /*progressBar.setVisibility(View.GONE);
@@ -85,6 +90,7 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
                     } else {
                         serverDialog.dismiss();
                         submitButton.setEnabled(true);
+                        String msg = "Insufficient balance in wallet to convert";
                         Toast.makeText(RequestWithdrawOtpActivity.this, jsonObject.getString("message") + "", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
@@ -111,11 +117,12 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
         String action = "wr";
         if (Functions.isIndian) {
             action = "wr";
-        }else {
+        } else {
             action = WithdrawTypeActivity.withdrawType;
         }
 
         ApiCalls.withdrawalRequest(RequestWithdrawOtpActivity.this, Prefes.getAccessToken(RequestWithdrawOtpActivity.this), amount, action, new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 serverDialog.dismiss();
@@ -141,6 +148,7 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
             }
 
         });
+
     }
     
 }

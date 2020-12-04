@@ -168,7 +168,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")) {
                         JSONObject dataObject = jsonObject.getJSONObject("data");
-                        vCashBalance=dataObject.getString("walletBalance");
+                        vCashBalance = dataObject.getString("walletBalance");
                         binding.tvVCashBalance.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
 
                         JSONArray listingArray = dataObject.getJSONArray("listing");
@@ -233,6 +233,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
             public void onError(String error) {
                 serverDialog.dismiss();
             }
+
         });
     }
 

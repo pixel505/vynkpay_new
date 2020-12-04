@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CouumunityAdapter extends RecyclerView.Adapter<CouumunityAdapter.ViewHolder> {
     Context context;
@@ -57,7 +58,7 @@ public class CouumunityAdapter extends RecyclerView.Adapter<CouumunityAdapter.Vi
         holder.binding.refusernameText.setText("("+myListData.getRefusername()+")");
 
         try {
-            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
             Date d = f.parse(myListData.getRegisterDate());
             DateFormat date = new SimpleDateFormat("dd-MM-yyy");
             holder.binding.registeDateText.setText(date.format(d));

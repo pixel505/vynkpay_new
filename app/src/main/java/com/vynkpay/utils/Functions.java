@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Functions {
 
@@ -69,14 +70,14 @@ public class Functions {
 
     public static String changeDateFormat(String date, String foundFormat, String requiredFormat){
         //yyyy-MM-dd hh:mm:ss
-        SimpleDateFormat spf=new SimpleDateFormat(foundFormat);
+        SimpleDateFormat spf=new SimpleDateFormat(foundFormat, Locale.getDefault());
         Date newDate= null;
         try {
             newDate = spf.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        spf= new SimpleDateFormat(requiredFormat);
+        spf= new SimpleDateFormat(requiredFormat,Locale.getDefault());
         return spf.format(newDate);
     }
 

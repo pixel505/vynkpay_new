@@ -29,8 +29,10 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.squareup.picasso.Picasso;
 import com.vynkpay.BuildConfig;
+import com.vynkpay.activity.activities.StatementActivity;
 import com.vynkpay.activity.activities.WalletNewActivity;
 import com.vynkpay.activity.activitiesnew.CustomerWalletActivity;
+import com.vynkpay.activity.activitiesnew.TransactionInternationalActivity;
 import com.vynkpay.activity.shops.AddBankDetailActivity;
 import com.vynkpay.activity.shops.ShopsActivity;
 import com.vynkpay.databinding.ActivityHomeBindingImpl;
@@ -92,8 +94,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 fragment = new FragmentHome();
                 switchFragment(fragment, "home");
             }
+            Log.d("homeAct",getIntent().getStringExtra("Country")+"//(IF)");
         } else {
             try {
+                Log.d("homeAct",getIntent().getStringExtra("Country")+"//(ELSE)");
                 if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                     fragment = new FragmentHomeGlobal();
                     switchFragment(fragment, "home");
@@ -144,7 +148,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }*/
 
     }
-
 
     public static synchronized HomeActivity getInstance(){
         return mInstance;
@@ -239,6 +242,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(HomeActivity.this, AllRechargeHistoryActivity.class));
                     }
                     else {
+                        startActivity(new Intent(HomeActivity.this, TransactionInternationalActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
 
                 }
@@ -557,12 +561,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     if (response.isSuccessful() && response.body() != null) {
                         if (response.body().isSuccess()) {
                             if (response.body().getData().getUnread_count().equals("0")) {
-                                textCartItemCount.setVisibility(View.GONE);
+                                if (textCartItemCount!=null) {
+                                    textCartItemCount.setVisibility(View.GONE);
+                                }
                             }
 
                             else {
-                                textCartItemCount.setVisibility(View.VISIBLE);
-                                textCartItemCount.setText(response.body().getData().getUnread_count());
+                                if (textCartItemCount!=null) {
+                                    textCartItemCount.setVisibility(View.VISIBLE);
+                                    textCartItemCount.setText(response.body().getData().getUnread_count());
+                                }
                             }
                         }
                     }
@@ -632,7 +640,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 startActivity(new Intent(HomeActivity.this, AllRechargeHistoryActivity.class));
             }
-
         } else if (v == binding.sideLayout.kycLinear) {
             drawer.closeDrawer(GravityCompat.START);
             if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
@@ -770,6 +777,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawer(GravityCompat.START);
             Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
@@ -822,37 +830,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(new Intent(HomeActivity.this,LoginActivity.class));
                             finishAffinity();
                             //Old
-                            /*if (getIntent().getStringExtra("Country") != null) {
-
-                                if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-                                } else if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-
-                                } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("YES")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-
-                                } else if (getIntent().getStringExtra("Country").equals("India") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-                                }
-
-                            }
-
-
-                            if (getIntent().getStringExtra("Country") != null && Prefes.getisIndian(getApplicationContext()).equals("")) {
-                                if (getIntent().getStringExtra("Country").equals("Global")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-                                } else if (getIntent().getStringExtra("Country").equals("India")) {
-                                    startActivity(new Intent(HomeActivity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                                    finish();
-
-                                }
-                            }*/
                         }
                     }
 
@@ -864,11 +841,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 });
 
             }
+
         });
 
         if (alertDialog.getWindow() != null) {
             alertDialog.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         }
+
     }
 
 

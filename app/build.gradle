@@ -1,11 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+repositories {
+    maven {
+        url "https://highsoft.bintray.com/Highcharts"
+    }
+}
 android {
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.vynkpay"
-        minSdkVersion 20
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 6
         versionName "1.5"
@@ -106,6 +111,9 @@ dependencies {
     implementation 'com.mindorks.android:prdownloader:0.6.0'
     implementation 'com.itextpdf:itextpdf:5.0.6'
     implementation 'com.google.firebase:firebase-dynamic-links:19.1.0'
+    implementation 'com.highsoft.highcharts:highcharts:8.1.2'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.appersiano:imageprogressview:-SNAPSHOT'
    // implementation 'com.google.firebase:firebase-analytics:17.5.0'
 }
 apply plugin: 'com.google.gms.google-services'

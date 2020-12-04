@@ -65,6 +65,24 @@
                             android:text="@string/availableAmount"
                             android:textColor="@color/color_text"/>
 
+                        <FrameLayout
+                            android:id="@+id/optOutFrame"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/buttonbg">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:id="@+id/optOutActive"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:background="?attr/selectableItemBackground"
+                                android:textColor="@color/white"
+                                android:text="Opt for VCash"/>
+
+                        </FrameLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>

@@ -29,7 +29,7 @@ public class PdfViewerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(this, R.layout.activity_pdf_viewer);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_pdf_viewer);
 
         binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbar.notifyIcon.setImageResource(R.drawable.ic_share_white);
@@ -87,6 +87,7 @@ public class PdfViewerActivity extends AppCompatActivity {
             public void onStartOrResume() {
 
             }
+
         }).setOnProgressListener(new OnProgressListener() {
             @Override
             public void onProgress(Progress progress) {
@@ -151,4 +152,5 @@ public class PdfViewerActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(intentShareFile, "Share File"));
         }
     }
+
 }

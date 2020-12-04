@@ -28,6 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DirectRefralsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     ActivityDirectRefralsBinding binding;
     DirectRefralsActivity ac;
     Dialog dialog1;

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -57,6 +58,11 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         });
         submitButton.setOnClickListener(this);
         getBonusTransaction();
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void getBonusTransaction(){
@@ -122,7 +128,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         if (view == submitButton){
             if (amountET.getText().toString().trim().isEmpty()) {
                 Toast.makeText(RequestWithdrawnActivity.this, "Please enter amount", Toast.LENGTH_SHORT).show();
-            } else if (Integer.parseInt(amountET.getText().toString().trim()) <= 0) {
+            } else if (Float.parseFloat(amountET.getText().toString().trim()) <= 0) {
                 Toast.makeText(RequestWithdrawnActivity.this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
             } else if (Float.parseFloat(amountET.getText().toString().trim()) > Float.parseFloat(availableBalance.trim())) {
                 Toast.makeText(RequestWithdrawnActivity.this, "This amount is not available in wallet", Toast.LENGTH_SHORT).show();

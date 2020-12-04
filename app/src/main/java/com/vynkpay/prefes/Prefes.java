@@ -20,6 +20,7 @@ public class Prefes {
     private static final String NAME = "name";
     private static final String PDFFile = "PDFFile";
     private static final String PDFFileREC = "PDFFileREC";
+    private static final String COUNTRY_CODE = "COUNTRY_CODE";
 
     Context context;
     SharedPreferences prefs;
@@ -412,5 +413,17 @@ public class Prefes {
         return preferences.getString("ASK_PIN","");
     }
 
+
+    public  void saveCountryCode(String value) {
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(COUNTRY_CODE, value);
+        editor.apply();
+    }
+
+    public String getCountryCode(){
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        return preferences.getString(COUNTRY_CODE,"");
+    }
 
 }

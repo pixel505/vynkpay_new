@@ -20,6 +20,10 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.WithdrawalTypeTesponse;
 import com.vynkpay.utils.M;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +40,8 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
     LinearLayout linWithdrawnType;
     boolean isClicked = true;
     public static String withdrawType = "";
+    List<String> withdrawalTypelist = new ArrayList<>();
+    String messageStr = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,7 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
     }
 
     public void getWihdrawType(){
+        withdrawalTypelist.clear();
         serverDialog.show();
         MainApplication.getApiService().getWithdrawalType(Prefes.getAccessToken(WithdrawTypeActivity.this)).enqueue(new Callback<WithdrawalTypeTesponse>() {
             @Override
@@ -74,6 +81,7 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
                     serverDialog.dismiss();
                     if(response.body().getStatus().equals("true")){
                         GridLayoutManager manager = new GridLayoutManager(WithdrawTypeActivity.this, 1, GridLayoutManager.VERTICAL, false);
+                        withdrawalTypelist.addAll(response.body().getData().getWithdrawalType());
                         WithdrawalTypeAdapter adapter = new WithdrawalTypeAdapter(WithdrawTypeActivity.this, response.body().getData().getWithdrawalType());
                         withdrawalRecycler.setLayoutManager(manager);
                         withdrawalRecycler.setAdapter(adapter);
@@ -87,9 +95,10 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
                                 //Toast.makeText(BonusWalletFragment.this, withdrawType, Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
-
-                    else{
+                    } else{
+                        messageStr = response.body().getMessage()!=null?response.body().getMessage():"You need to purchase first to access this page";
+                        String message = response.body().getMessage()!=null?response.body().getMessage():"You need to purchase first to access this page";
+                        Toast.makeText(WithdrawTypeActivity.this, messageStr+"", Toast.LENGTH_SHORT).show();
                         serverDialog.dismiss();
                     }
                 }
@@ -103,6 +112,7 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
             public void onFailure(Call<WithdrawalTypeTesponse> call, Throwable t) {
                 serverDialog.dismiss();
             }
+
         });
     }
 
@@ -115,24 +125,34 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
                 startActivity(new Intent(WithdrawTypeActivity.this,RequestWithdrawnActivity.class).putExtra("withdrawType",withdrawType));
             }
         }
+
         if (view == linWithdrawnType){
-            if (isClicked){
-                withdrawalRecycler.setVisibility(View.VISIBLE);
-                isClicked = false;
-            }else {
-                withdrawalRecycler.setVisibility(View.GONE);
-                isClicked = true;
+            if (withdrawalTypelist.size()>0) {
+                if (isClicked) {
+                    withdrawalRecycler.setVisibility(View.VISIBLE);
+                    isClicked = false;
+                } else {
+                    withdrawalRecycler.setVisibility(View.GONE);
+                    isClicked = true;
+                }
+            } else {
+                Toast.makeText(WithdrawTypeActivity.this, ""+messageStr, Toast.LENGTH_SHORT).show();
             }
         }
 
         if (view == amountET){
-            if (isClicked){
-                withdrawalRecycler.setVisibility(View.VISIBLE);
-                isClicked = false;
-            }else {
-                withdrawalRecycler.setVisibility(View.GONE);
-                isClicked = true;
+            if (withdrawalTypelist.size()>0) {
+                if (isClicked) {
+                    withdrawalRecycler.setVisibility(View.VISIBLE);
+                    isClicked = false;
+                } else {
+                    withdrawalRecycler.setVisibility(View.GONE);
+                    isClicked = true;
+                }
+            } else {
+                Toast.makeText(WithdrawTypeActivity.this, ""+messageStr, Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }

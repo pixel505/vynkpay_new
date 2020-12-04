@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Toast;
 import com.vynkpay.R;
+import com.vynkpay.activity.activitiesnew.DecimalDigitsInputFilter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConvertMCashBinding;
 import com.vynkpay.utils.M;
@@ -35,6 +37,11 @@ public class ConvertMCashActivity extends AppCompatActivity implements View.OnCl
             }
         });
         binding.submitButton.setOnClickListener(this);
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

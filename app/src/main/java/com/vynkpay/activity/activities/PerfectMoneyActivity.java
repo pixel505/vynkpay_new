@@ -74,10 +74,7 @@ public class PerfectMoneyActivity extends AppCompatActivity {
                     }
                 });
             }
-        }
-
-
-        else {
+        } else {
             binding.benifiName.setFocusable(false);
             binding.approveLn.setOnClickListener(new View.OnClickListener() {
                 @Override

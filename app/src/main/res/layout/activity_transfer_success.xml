@@ -46,9 +46,9 @@
                     <com.vynkpay.custom.NormalTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/ontime"
                         android:gravity="center"
-                        android:visibility="gone"
+                        android:text="Transaction number:- 123455"
+                        android:id="@+id/tvTransationNumber"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_24sdp"
                         android:layout_marginLeft="@dimen/_24sdp"

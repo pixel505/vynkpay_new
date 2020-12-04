@@ -47,6 +47,9 @@ public class GetUserPackageResponse {
         @SerializedName("title")
         @Expose
         private String title;
+        @SerializedName("type")
+        @Expose
+        private String type;
         @SerializedName("price")
         @Expose
         private String price;
@@ -56,6 +59,14 @@ public class GetUserPackageResponse {
         @SerializedName("total_amount")
         @Expose
         private String totalAmount;
+
+        @SerializedName("weekly_amount")
+        @Expose
+        private String weekly_amount;
+
+        private String isClicked;
+
+        /*{"id":"11","type":"1","title":"Beetle Affiliate","price":"100.00","points":"2","weekly_amount":"0.00","total_amount":"100.00"*/
 
         public String getId() {
             return id;
@@ -96,5 +107,30 @@ public class GetUserPackageResponse {
         public void setTotalAmount(String totalAmount) {
             this.totalAmount = totalAmount;
         }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getWeekly_amount() {
+            return weekly_amount;
+        }
+
+        public void setWeekly_amount(String weekly_amount) {
+            this.weekly_amount = weekly_amount;
+        }
+
+        public String getIsClicked() {
+            return isClicked;
+        }
+
+        public void setIsClicked(String isClicked) {
+            this.isClicked = isClicked;
+        }
     }
-    }
+
+}

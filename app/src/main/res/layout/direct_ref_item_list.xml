@@ -5,7 +5,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
@@ -17,15 +17,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
-            android:weightSum="2">
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                     android:gravity="center"
                 android:orientation="horizontal">
 
@@ -33,7 +31,7 @@
                 <RelativeLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
 
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp">
@@ -41,7 +39,7 @@
                     <LinearLayout
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_toLeftOf="@+id/ry1"
                         android:orientation="vertical">
 
@@ -49,7 +47,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="vertical">
 
                             <com.vynkpay.custom.NormalTextView
                                 android:id="@+id/nameText"
@@ -61,12 +59,11 @@
 
 
                             <com.vynkpay.custom.NormalTextView
-                                android:visibility="gone"
+                                android:visibility="visible"
                                 android:id="@+id/nameryttext"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:text="(Daljeet007)"
+                                android:text="(username)"
                                 android:textSize="@dimen/_12sdp" />
                         </LinearLayout>
 
@@ -122,7 +119,8 @@
                         android:gravity="center"
                         android:id="@+id/ry1"
                         android:layout_width="@dimen/_100sdp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:orientation="vertical">
 
@@ -144,24 +142,21 @@
                     </LinearLayout>
 
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_alignParentBottom="true"
-                        android:background="#C8C4C4" />
-
                 </RelativeLayout>
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="#C8C4C4" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:weightSum="3">
 

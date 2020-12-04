@@ -46,9 +46,10 @@ public class StatementActivity extends AppCompatActivity {
 
     private void getStatements() {
          serverDialog.show();
-        MainApplication.getApiService().getstatement(Prefes.getAccessToken(ac),Prefes.getUserID(ac)).enqueue(new Callback<StatementResponse>() {
-            @Override
-            public void onResponse(Call<StatementResponse> call, Response<StatementResponse> response) {
+         MainApplication.getApiService().getstatement(Prefes.getAccessToken(ac),Prefes.getUserID(ac)).enqueue(new Callback<StatementResponse>() {
+
+             @Override
+             public void onResponse(Call<StatementResponse> call, Response<StatementResponse> response) {
                 if (response.isSuccessful() && response.body()!=null){
                      serverDialog.dismiss();
                     if(response.body().getStatus().equals("true")){
@@ -63,14 +64,11 @@ public class StatementActivity extends AppCompatActivity {
                         binding.ambassadarText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getAmbassadorBonus());
                         binding.appraisalText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getAppraisalBonus());
                         binding.chairmanText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getChairmanBonus());
-
-
                     }
                     else {
                         Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
+                } else {
                     serverDialog.dismiss();
                 }
 
@@ -78,8 +76,10 @@ public class StatementActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<StatementResponse> call, Throwable t) {
-                    serverDialog.dismiss();
+                 serverDialog.dismiss();
             }
         });
+
     }
+
 }

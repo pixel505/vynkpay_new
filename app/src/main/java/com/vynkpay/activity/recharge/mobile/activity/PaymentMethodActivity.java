@@ -53,7 +53,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class PaymentMethodActivity extends AppCompatActivity implements PaymentResultWithDataListener {
     String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent="",points="";
     @BindView(R.id.toolbar)

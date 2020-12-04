@@ -43,4 +43,5 @@ public class ClubBonusListActivity extends AppCompatActivity {
         binding.clubRecycler.setLayoutManager(manager);
         binding.clubRecycler.setAdapter(adapter);
     }
+
 }

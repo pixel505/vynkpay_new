@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class PerformanceBonusAdapter extends RecyclerView.Adapter<PerformanceBonusAdapter.ViewHolder>  {
     Context context;
@@ -55,9 +56,9 @@ public class PerformanceBonusAdapter extends RecyclerView.Adapter<PerformanceBon
         }
 
         try {
-            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
             Date d = f.parse(myListData.getCreatedDate());
-            DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat date = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
             holder.binding.datetext.setText(date.format(d));
             System.out.println("Date: " + date.format(d));
         } catch (ParseException e) {

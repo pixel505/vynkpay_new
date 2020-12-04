@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.vynkpay.R;
+import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.events.UpDateUIEvent;
@@ -45,7 +46,7 @@ public class PinActivity extends AppCompatActivity {
     @BindView(R.id.pinEdt)
     NormalTextView pinEdt;
     Dialog dialog;
-    String var, accessToken, isIndian;
+    String var="", accessToken="", isIndian="";
     @BindView(R.id.keyboard)
     KeyboardView keyboardView;
     @BindView(R.id.forgotPINTV)
@@ -57,12 +58,13 @@ public class PinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
+        sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
         dialog = M.showDialog(PinActivity.this, "", false, false);
         if (getIntent() != null) {
-            var = getIntent().getStringExtra("var");
-            type = getIntent().getStringExtra("type");
-            accessToken = getIntent().getStringExtra("accessToken");
+            var = getIntent().getStringExtra("var")!=null ? getIntent().getStringExtra("var") :"";
+            type = getIntent().getStringExtra("type")!=null ? getIntent().getStringExtra("type"):"";
+            accessToken = getIntent().getStringExtra("accessToken")!=null?getIntent().getStringExtra("accessToken"):"";
             isIndian = getIntent().getStringExtra("isIndian");
         }
 
@@ -141,7 +143,15 @@ public class PinActivity extends AppCompatActivity {
                                         } else {
                                             dialog.dismiss();
                                             EventBus.getDefault().postSticky(new UpDateUIEvent(false));
-                                            Toast.makeText(PinActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                            Log.d("pinmessage",response.body().getMessage());
+                                            if (response.body().getMessage().equalsIgnoreCase("Access Denied.")){
+                                                startActivity(new Intent(PinActivity.this, LoginActivity.class));
+                                                PinActivity.this.finish();
+                                                Toast.makeText(PinActivity.this, response.body().getMessage()+"Please login again", Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(PinActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+
                                         }
                                     }
                                 }
@@ -233,5 +243,7 @@ public class PinActivity extends AppCompatActivity {
         if (dialog.getWindow() != null) {
             dialog.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         }
+
     }
+
 }

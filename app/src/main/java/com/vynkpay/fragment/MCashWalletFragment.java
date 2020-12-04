@@ -95,6 +95,7 @@ public class MCashWalletFragment extends AppCompatActivity {
             }
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
+        Log.d("derrr",Prefes.getUserType(activity)+"/////");
         if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
             //binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
             //binding.mheader.tvMcashWallet.setText("Cashback");
@@ -102,6 +103,7 @@ public class MCashWalletFragment extends AppCompatActivity {
         } else {
             //
             //binding.mheader.tvMcashWallet.setText(getString(R.string.mCashWallet));
+            getSettings();
             binding.mheader.affilitiateFrame.setVisibility(View.VISIBLE);
         }
         binding.toolbarLayout.toolbarTitlenew.setText("MCash Wallet");
@@ -114,21 +116,21 @@ public class MCashWalletFragment extends AppCompatActivity {
         serverDialog = M.showDialog(activity, "", false, false);
         if(getIntent()!=null){
             binding.mheader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+getIntent().getStringExtra("balancWalletM"));
-        }        if(Functions.isIndian){
+        }
+
+       /* if(Functions.isIndian){
             binding.mheader.affilitiateFrame.setVisibility(View.GONE);
-        }
-
-        else {
+        } else {
             binding.mheader.affilitiateFrame.setVisibility(View.VISIBLE);
+        }*/
 
-            binding.mheader.affiliateActive.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(activity, AffiliateActivity.class));
+        binding.mheader.affiliateActive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(activity, AffiliateActivity.class));
 
-                }
-            });
-        }
+            }
+        });
 
         binding.mheader.amEdt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -217,7 +219,7 @@ public class MCashWalletFragment extends AppCompatActivity {
                             countryRecycler.setVisibility(View.GONE);
                         }
                         if (arg0.toString().length() >= 3) {
-                            MainApplication.getApiService().getUser(Prefes.getAccessToken(activity), arg0.toString()).enqueue(new Callback<GetUserResponse>() {
+                            MainApplication.getApiService().getUser(Prefes.getAccessToken(activity), arg0.toString(),"mcash").enqueue(new Callback<GetUserResponse>() {
                                 @Override
                                 public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                                     if (response.isSuccessful()) {
@@ -283,6 +285,48 @@ public class MCashWalletFragment extends AppCompatActivity {
         }*/
 
 
+
+    }
+
+    public void getSettings(){
+        MainApplication.getApiService().getTransferSettings(Prefes.getAccessToken(MCashWalletFragment.this)).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("settingsresponseM",response.body());
+                //{"status":true,"data":{"m_wallet_transfer_enable":true,"v_wallet_transfer_enable":true,"earning_wallet_transfer_enable":true},"message":"success"}
+                try {
+                    JSONObject respData = new JSONObject(response.body());
+                    if (respData.getString("status").equalsIgnoreCase("true")){
+                        JSONObject data = respData.getJSONObject("data");
+                        String m_wallet_transfer_enable = data.getString("m_wallet_transfer_enable");
+                        String v_wallet_transfer_enable = data.getString("v_wallet_transfer_enable");
+                        String earning_wallet_transfer_enable = data.getString("earning_wallet_transfer_enable");
+                        String affiliate_activation = data.getString("affiliate_activation");
+                        Log.d("affiliate_activation",affiliate_activation);
+                        String opt_vcash_enable = data.getString("opt_vcash_enable");
+                        if (affiliate_activation.equalsIgnoreCase("true")){
+                            binding.mheader.affilitiateFrame.setVisibility(View.VISIBLE);
+                        } else {
+                           binding.mheader.affilitiateFrame.setVisibility(View.GONE);
+                        }
+                        if (respData.has("message")){
+                            Log.d("settingsresponse",respData.getString("message"));
+                        }
+                    }else {
+                        if (respData.has("message")){
+                            Log.d("settingsresponse",respData.getString("message"));
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("settingsresponseM",t.getMessage()!=null?t.getMessage():"Error");
+            }
+        });
     }
 
 
@@ -475,6 +519,7 @@ public class MCashWalletFragment extends AppCompatActivity {
             public void onError(String error) {
                   serverDialog.dismiss();
             }
+
         });
     }
 

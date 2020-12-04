@@ -306,6 +306,154 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
+                            android:layout_height="@dimen/_180sdp"
+                            android:orientation="vertical"
+                            android:background="@drawable/newmap"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:id="@+id/linChartt">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/lintv">
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:paddingTop="@dimen/_5sdp"
+                                    android:textColor="@color/black"
+                                    android:layout_gravity="center_vertical"
+                                    android:paddingBottom="@dimen/_5sdp"
+                                    android:text="EARNING PROGRESS"/>
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="Monthly stats..."
+                                    android:visibility="gone"
+                                    android:id="@+id/tvEarning"/>
+                                <FrameLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:visibility="gone"
+                                    android:id="@+id/frmFilter">
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="@dimen/_5sdp"
+                                        android:paddingBottom="@dimen/_5sdp"
+                                        android:paddingLeft="@dimen/_10sdp"
+                                        android:paddingRight="@dimen/_10sdp"
+                                        android:id="@+id/filterRange"
+                                        android:background="@drawable/filter_stroke"
+                                        android:layout_marginRight="@dimen/_5sdp"
+                                        android:layout_gravity="right|center"
+                                        android:text="Filter Range"/>
+                                </FrameLayout>
+
+
+                            </LinearLayout>
+
+
+                            <com.highsoft.highcharts.core.HIChartView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@+id/tv"
+                                android:focusable="true"
+                                android:visibility="gone"
+                                android:orientation="vertical"
+                                android:id="@+id/hiChart"/>
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/chart1"
+                                android:layout_width="match_parent"
+                                android:layout_margin="@dimen/_5sdp"
+                                android:visibility="gone"
+                                android:layout_height="match_parent" />
+
+                            <com.appersiano.progressimage.ProgressImage
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:srcImage="@drawable/line_layer15x"
+                                app:imageShadowColor="@color/colorPrimary"
+                                android:id="@+id/progressView"/>
+
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/_12sdp"
+                                android:textColor="@color/black"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:id="@+id/tvChartTitle"
+                                android:text=""/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                android:orientation="vertical">
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_8sdp"
+                                    android:text="Earning Progress"/>
+
+                                <com.vynkpay.custom.NormalTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/_14sdp"
+                                    android:textColor="@color/black"
+                                    android:id="@+id/tvProgressTV"
+                                    android:text="36.5%"/>
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:visibility="gone"
+                            android:id="@+id/linImportantStats"
+                            android:orientation="vertical">
+
+                            <com.vynkpay.custom.NormalTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:textSize="@dimen/_14sdp"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:textColor="@color/black"
+                                android:paddingBottom="@dimen/_5sdp"
+                                android:text="IMPORTANT STATISTICS"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:id="@+id/rvListImportant"/>
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/_70sdp"
                             android:background="@android:color/transparent">
                         </RelativeLayout>

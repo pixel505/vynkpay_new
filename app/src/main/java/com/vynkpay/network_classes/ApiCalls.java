@@ -185,6 +185,7 @@ public class ApiCalls {
 
     public static void updatePaymentMode(Context context, String token, String mode, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 volleyResponse.onResult(result, status, message);
@@ -194,6 +195,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -205,6 +207,7 @@ public class ApiCalls {
 
     public static void withdrawalRequestsList(Context context, String token, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 volleyResponse.onResult(result, status, message);
@@ -214,6 +217,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
         volleyNetworkClass.makeRequest(URLS.withdraw_list_mode_URL, token);
@@ -221,6 +225,7 @@ public class ApiCalls {
 
     public static void getBonusDetail(Context context, String dateForView, String token, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 volleyResponse.onResult(result, status, message);
@@ -230,6 +235,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
 
@@ -242,6 +248,7 @@ public class ApiCalls {
 
     public static void getTeamProfitDetail(Context context, String front_user_id, String token, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
             @Override
             public void onResult(String result, String status, String message) {
                 volleyResponse.onResult(result, status, message);
@@ -251,6 +258,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -290,6 +298,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -298,6 +307,7 @@ public class ApiCalls {
     }
 
     public static void getUserDetails(Context context, String token, VolleyResponse volleyResponse){
+
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -308,6 +318,7 @@ public class ApiCalls {
             public void onError(String error) {
                 volleyResponse.onError(error);
             }
+
         });
 
         volleyNetworkClass.makeGetRequest(URLS.USER_URL, "", token);

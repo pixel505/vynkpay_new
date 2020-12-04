@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,24 +23,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 import com.vynkpay.R;
+import com.vynkpay.adapter.PackageAdapter;
+import com.vynkpay.custom.NormalBoldTextView;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityAffiliateBinding;
 import com.vynkpay.fragment.MCashWalletFragment;
+import com.vynkpay.models.PlanList;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
+import com.vynkpay.retrofit.model.GetPackageResponse;
 import com.vynkpay.retrofit.model.GetUserPackageResponse;
 import com.vynkpay.retrofit.model.GetUserResponse;
 import com.vynkpay.retrofit.model.PaidItemResponse;
 import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -55,6 +70,10 @@ public class AffiliateActivity extends AppCompatActivity  {
     UsrAdapter adapter;
     String userId="",orgId="";
     List<GetUserPackageResponse.Datum> packageList = new ArrayList<>();
+    List<GetUserPackageResponse.Datum> affilateList = new ArrayList<>();
+    List<GetUserPackageResponse.Datum> vyncchainList = new ArrayList<>();
+    List<PlanList> planList = new ArrayList<>();
+    RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +83,15 @@ public class AffiliateActivity extends AppCompatActivity  {
         dialog1 = M.showDialog(ac, "", false, false);
         binding.packageList.setLayoutManager(M.horizontalRecyclerView(AffiliateActivity.this));
         getMCashTransaction();
+
+      /*  binding.radioGrp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId=binding.radioGrp.getCheckedRadioButtonId();
+                radioButton=(RadioButton)findViewById(selectedId);
+                Toast.makeText(AffiliateActivity.this,radioButton.getText(),Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +103,101 @@ public class AffiliateActivity extends AppCompatActivity  {
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbarLayout.toolbarTitlenew.setText("Affiliate Activation");
         clicks();
+        getSettings();
+
 
     }
+
+    public void getSettings(){
+        planList.clear();
+        MainApplication.getApiService().getTransferSettings(Prefes.getAccessToken(AffiliateActivity.this)).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("settingsresponseM",response.body());
+                //{"status":true,"data":{"m_wallet_transfer_enable":true,"v_wallet_transfer_enable":true,"earning_wallet_transfer_enable":true},"message":"success"}
+                try {
+                    JSONObject respData = new JSONObject(response.body());
+                    if (respData.getString("status").equalsIgnoreCase("true")){
+                        JSONObject data = respData.getJSONObject("data");
+                        String m_wallet_transfer_enable = data.getString("m_wallet_transfer_enable");
+                        String v_wallet_transfer_enable = data.getString("v_wallet_transfer_enable");
+                        String earning_wallet_transfer_enable = data.getString("earning_wallet_transfer_enable");
+                        String affiliate_activation = data.getString("affiliate_activation");
+                        String opt_vcash_enable = data.getString("opt_vcash_enable");
+                        if (affiliate_activation.equalsIgnoreCase("true")){
+
+                        } else {
+
+                        }
+                        if (respData.has("message")){
+                            Log.d("settingsresponse",respData.getString("message"));
+                        }
+                        JSONArray plan_list = data.getJSONArray("plan_list");
+                        for (int i=0;i<plan_list.length();i++){
+                            JSONObject jData = plan_list.getJSONObject(i);
+                            String id = jData.getString("id");
+                            String title = jData.getString("title");
+                            String package_type = jData.getString("package_type");
+                            String display = jData.getString("display");
+                            String defaultStr = jData.getString("default");
+                            planList.add(new PlanList(id,title,package_type,display,defaultStr));
+                        }
+                        if (Prefes.getisIndian(AffiliateActivity.this).equalsIgnoreCase("YES")){
+                            binding.linPackageOption.setVisibility(View.GONE);
+                        } else {
+                            if ((planList != null ? planList.size() : 0) > 0) {
+                                binding.linPackageOption.setVisibility(View.VISIBLE);
+                                for (int i = 0; i < planList.size(); i++) {
+                                    if (planList.get(i).getTitle().equalsIgnoreCase("Affiliate")) {
+                                        if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
+                                            binding.rAffiliate.setVisibility(View.VISIBLE);
+                                        } else {
+                                            binding.rAffiliate.setVisibility(View.GONE);
+                                        }
+                                        if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
+                                            binding.rAffiliate.setChecked(true);
+                                        } else {
+                                            binding.rAffiliate.setChecked(false);
+                                        }
+                                    }
+                                    if (planList.get(i).getTitle().equalsIgnoreCase("VYNC Chain")) {
+                                        if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
+                                            binding.rVyncChain.setVisibility(View.VISIBLE);
+                                        } else {
+                                            binding.rVyncChain.setVisibility(View.GONE);
+                                        }
+                                        if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
+                                            binding.rVyncChain.setChecked(true);
+                                        } else {
+                                            binding.rVyncChain.setChecked(false);
+                                        }
+                                    }
+                                }
+                            } else {
+                                binding.linPackageOption.setVisibility(View.GONE);
+                            }
+                        }
+
+                    }else {
+                        binding.linPackageOption.setVisibility(View.GONE);
+                        if (respData.has("message")){
+                            Log.d("settingsresponse",respData.getString("message"));
+                        }
+                    }
+                }catch (Exception e){
+                    binding.linPackageOption.setVisibility(View.GONE);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.d("settingsresponseM",t.getMessage()!=null?t.getMessage():"Error");
+            }
+        });
+    }
+
+
     private void getMCashTransaction(){
 
         dialog1.show();
@@ -105,7 +226,23 @@ public class AffiliateActivity extends AppCompatActivity  {
             });
         }
 
+
         private void clicks() {
+
+            binding.radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    int selectedId=group.getCheckedRadioButtonId();
+                    radioButton=(RadioButton)findViewById(selectedId);
+                    //Toast.makeText(AffiliateActivity.this,radioButton.getText(),Toast.LENGTH_SHORT).show();
+                    if (radioButton.getText().toString().equalsIgnoreCase("Affiliate")){
+                        affilateList();
+                    }else  if (radioButton.getText().toString().equalsIgnoreCase("VYNC Chain")){
+                        vyncChainList();
+                    }
+                }
+            });
+
         binding.searchUserEdt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -251,6 +388,43 @@ public class AffiliateActivity extends AppCompatActivity  {
     }
 
 
+    public void affilateList(){
+        affilateList.clear();
+        if(packageList.size()>0){
+            for (int i=0;i<packageList.size();i++){
+                if (packageList.get(i).getType().equalsIgnoreCase("1")){
+                    affilateList.add(packageList.get(i));
+                }
+            }
+            if (affilateList.size()>0){
+                binding.packageList.setAdapter(new PackageAdapter(affilateList));
+                binding.viewPackageList.setAdapter(new PackageViewAdapter(AffiliateActivity.this,affilateList));
+                binding.tabLayout.setViewPager(binding.viewPackageList);
+            } else {
+
+            }
+        }
+    }
+
+
+    public void vyncChainList(){
+        vyncchainList.clear();
+        if(packageList.size()>0){
+            for (int i=0;i<packageList.size();i++){
+                if (packageList.get(i).getType().equalsIgnoreCase("0")){
+                    vyncchainList.add(packageList.get(i));
+                }
+            }
+            if (vyncchainList.size()>0){
+                binding.packageList.setAdapter(new PackageAdapter(vyncchainList));
+                binding.viewPackageList.setAdapter(new PackageViewAdapter(AffiliateActivity.this,vyncchainList));
+                binding.tabLayout.setViewPager(binding.viewPackageList);
+            }else {
+
+            }
+        }
+    }
+
 
     private void getPackage() {
         packageList.clear();
@@ -258,15 +432,26 @@ public class AffiliateActivity extends AppCompatActivity  {
             @Override
             public void onResponse(Call<GetUserPackageResponse> call, Response<GetUserPackageResponse> response) {
                 if (response.isSuccessful() && response != null) {
+                    Log.d("packageresp",new Gson().toJson(response.body()));
                     if (response.body().getStatus()) {
                         binding.packageTextt.setVisibility(View.VISIBLE);
                         binding.packageCard.setVisibility(View.GONE);
                         binding.linPackage.setVisibility(View.VISIBLE);
-                         packageList.addAll(response.body().getData());
-                         binding.packageList.setAdapter(new PackageAdapter(packageList));
-                         binding.packageText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getTotalAmount());
-                         binding.amountText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getPrice());
-                         binding.pointsText.setText("("+response.body().getData().get(0).getPoints()+" "+"points"+")");
+                        if ((response.body().getData() !=null ? response.body().getData().size():0)>0){
+                            packageList.addAll(response.body().getData());
+                            //MyChanges
+                            affilateList();
+
+                            binding.packageText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getTotalAmount());
+                            binding.amountText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().get(0).getPrice());
+                            binding.pointsText.setText("("+response.body().getData().get(0).getPoints()+" "+"points"+")");
+
+                        }else {
+                            binding.linPackageOption.setVisibility(View.GONE);
+                        }
+
+                        // binding.packageList.setAdapter(new PackageAdapter(packageList));
+
                          //orgId=response.body().getData().get(0).getId();
                     } else {
                          binding.packageCard.setVisibility(View.GONE);
@@ -355,6 +540,68 @@ public class AffiliateActivity extends AppCompatActivity  {
         }
     }
 
+    public class PackageViewAdapter extends PagerAdapter {
+        //boolean[] clicked = new boolean[0];
+        Context context;
+        LayoutInflater mLayoutInflater;
+        List<GetUserPackageResponse.Datum> packageList;
+
+        public PackageViewAdapter(Context context, List<GetUserPackageResponse.Datum> packageList){
+            this.context=context;
+            this.packageList=packageList;
+            mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //clicked = new boolean[packageList.size()];
+        }
+
+        @Override
+        public int getCount() {
+            return packageList.size();
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == (object);
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View itemView = mLayoutInflater.inflate(R.layout.custom_packagelist, container, false);
+            NormalTextView packageText = itemView.findViewById(R.id.packageText);
+            NormalTextView amountText = itemView.findViewById(R.id.amountText);
+            NormalTextView pointsText = itemView.findViewById(R.id.pointsText);
+            ImageView ivCheck = itemView.findViewById(R.id.ivCheck);
+            try {
+
+                packageText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getTotalAmount());
+                amountText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getPrice());
+                pointsText.setText("("+packageList.get(position).getPoints()+" "+"points"+")");
+                if (packageList.get(position).getType().equalsIgnoreCase("1")){
+                    pointsText.setVisibility(View.VISIBLE);
+                    pointsText.setText("Vcash 200% and Global Royality 100%");
+                } else {
+                    pointsText.setVisibility(View.VISIBLE);
+                    pointsText.setText("Weekly "+Functions.CURRENCY_SYMBOL+packageList.get(position).getWeekly_amount());
+                }
+
+                itemView.setOnClickListener(view -> {
+
+                    orgId = packageList.get(position).getId();
+                });
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            container.addView(itemView);
+            return itemView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((LinearLayout)object);
+        }
+
+    }
+
     class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.PHolder>{
 
         List<GetUserPackageResponse.Datum> packageList;
@@ -376,6 +623,13 @@ public class AffiliateActivity extends AppCompatActivity  {
                 holder.packageText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getTotalAmount());
                 holder.amountText.setText(Functions.CURRENCY_SYMBOL+packageList.get(position).getPrice());
                 holder.pointsText.setText("("+packageList.get(position).getPoints()+" "+"points"+")");
+                if (packageList.get(position).getType().equalsIgnoreCase("1")){
+                    holder.pointsText.setVisibility(View.VISIBLE);
+                    holder.pointsText.setText("Cashback");
+                }else {
+                    holder.pointsText.setVisibility(View.VISIBLE);
+                    holder.pointsText.setText("Weekly "+Functions.CURRENCY_SYMBOL+packageList.get(position).getWeekly_amount());
+                }
                 holder.itemView.setOnClickListener(view -> {
                     orgId = packageList.get(position).getId();
                 });

@@ -25,6 +25,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -107,9 +108,9 @@ public class InvoiceDetailActivity extends AppCompatActivity {
                     if(response.body().getStatus().equals("true")){
                         binding.invoice.setText(response.body().getData().getInvoiceNumber());
                         try {
-                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
                             Date d = f.parse(response.body().getData().getCreatedDate());
-                            DateFormat date = new SimpleDateFormat("dd-MM-yyy");
+                            DateFormat date = new SimpleDateFormat("dd-MM-yyy",Locale.getDefault());
                             binding.date.setText(date.format(d));
                             System.out.println("Date: " + date.format(d));
                         } catch (ParseException e) {
@@ -141,8 +142,7 @@ public class InvoiceDetailActivity extends AppCompatActivity {
                                 saveBitmap(bitmap);
                             }
                         });
-                    }
-                    else {
+                    } else {
                         Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }

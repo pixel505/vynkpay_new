@@ -11,6 +11,7 @@ import com.vynkpay.custom.NormalEditText;
 import java.util.List;
 
 public class WithdrawalTypeAdapter extends RecyclerView.Adapter<WithdrawalTypeAdapter.MyViewHolder> {
+
     Context context;
     List<String> mList;
     NormalEditText sear;
@@ -65,4 +66,5 @@ public class WithdrawalTypeAdapter extends RecyclerView.Adapter<WithdrawalTypeAd
             countryText = view.findViewById(R.id.countryText);
         }
     }
+
 }

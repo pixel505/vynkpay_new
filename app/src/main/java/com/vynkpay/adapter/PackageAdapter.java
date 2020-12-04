@@ -44,6 +44,8 @@ public class PackageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = mLayoutInflater.inflate(R.layout.viewpager_package_item_layout, container, false);
         NormalTextView tvTitleDisp = itemView.findViewById(R.id.tvTitleDisp);
+        NormalTextView tvWeekly = itemView.findViewById(R.id.tvWeekly);
+        NormalTextView tvText = itemView.findViewById(R.id.tvText);
         NormalBoldTextView packageprice=itemView.findViewById(R.id.packageprice);
         NormalBoldTextView cashback=itemView.findViewById(R.id.cashback);
         NormalBoldTextView points=itemView.findViewById(R.id.points);
@@ -52,6 +54,14 @@ public class PackageAdapter extends PagerAdapter {
         ImageView uperImage=itemView.findViewById(R.id.uperIcon);
         uperImage.setVisibility(View.GONE);
         GetPackageResponse.DataBean.PackagesBean data=sliderItemModelArrayList.get(position);
+        if (data.getType().equalsIgnoreCase("1")){
+            tvWeekly.setVisibility(View.GONE);
+            tvText.setText("Cashback");
+        }else {
+            tvText.setText("");
+            tvWeekly.setVisibility(View.VISIBLE);
+            tvWeekly.setText("Weekly "+Functions.CURRENCY_SYMBOL+data.getWeekly_amount());
+        }
 
         if(Functions.isIndian){
             packageprice.setText(Functions.CURRENCY_SYMBOL +data.getTotal_amount());
@@ -113,13 +123,13 @@ public class PackageAdapter extends PagerAdapter {
         if(position%8==5){
             ln.setBackgroundResource(R.drawable.sixthbg);
             uperImage.setImageResource(R.drawable.sixthicon);
-
         }
+
         if(position%8==6){
             ln.setBackgroundResource(R.drawable.seventhbg);
             uperImage.setImageResource(R.drawable.seventhicon);
-
         }
+
         if(position%8==7){
             ln.setBackgroundResource(R.drawable.eightbg);
             uperImage.setImageResource(R.drawable.eighticon);

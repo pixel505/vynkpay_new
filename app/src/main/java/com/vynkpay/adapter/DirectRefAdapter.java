@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DirectRefAdapter extends RecyclerView.Adapter<DirectRefAdapter.ViewHolder>  {
     Context context;
@@ -42,15 +43,16 @@ public class DirectRefAdapter extends RecyclerView.Adapter<DirectRefAdapter.View
         ReferalsResponse.Datum  myListData = listdata.get(position);
 
         holder.binding.nameText.setText(myListData.getName());
-        holder.binding.nameryttext.setText("("+myListData.getUsername()+")");
+
         holder.binding.codeText.setText("+"+myListData.getMobileCode());
         holder.binding.numbertext.setText(myListData.getPhone());
 
 
         try {
-            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            holder.binding.nameryttext.setText("("+myListData.getUsername()+")");
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
             Date d = f.parse(myListData.getCreatedDate());
-            DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat date = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
             holder.binding.registeDateText.setText(date.format(d));
             System.out.println("Date: " + date.format(d));
         } catch (ParseException e) {

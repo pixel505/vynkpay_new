@@ -87,6 +87,7 @@
                         android:layout_marginRight="@dimen/_24sdp"
                         android:layout_marginLeft="@dimen/_24sdp"
                         android:gravity="center"
+                        android:maxLength="6"
                         android:inputType="number"
                         android:id="@+id/otpET"
                         android:paddingStart="@dimen/_16sdp"

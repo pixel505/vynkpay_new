@@ -8,12 +8,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.R;
+import com.vynkpay.activity.activitiesnew.DecimalDigitsInputFilter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityConvertBonusMcashBinding;
 import com.vynkpay.prefes.Prefes;
@@ -56,6 +58,11 @@ public class ConvertBonusMcashActivity extends AppCompatActivity implements View
             }
         });
         binding.submitButton.setOnClickListener(this);
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

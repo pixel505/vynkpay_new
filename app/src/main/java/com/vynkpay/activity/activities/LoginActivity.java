@@ -1,6 +1,7 @@
 package com.vynkpay.activity.activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +45,7 @@ import com.vynkpay.fcm.Config;
 import com.vynkpay.fcm.SharedPrefManager;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
+import com.vynkpay.newregistration.SelectionActivity;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.LoginResponse;
 import com.vynkpay.utils.ApiParams;
@@ -78,8 +85,13 @@ public class LoginActivity extends AppCompatActivity {
   TextView forgotPasswordTV;
   @BindView(R.id.loginascustomer)
   TextView loginascustomer;
+
   @BindView(R.id.showHideImage)
   ImageView showHideImage;
+
+  @BindView(R.id.tvTextFor)
+  TextView tvTextFor;
+
   private boolean isPasswordShown = false;
   /*@BindView(R.id.forgotPassWordText)
   NormalTextView forgotPassWordText;*/
@@ -90,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
   Dialog dialog;
   boolean isWhat = false;
   UserSharedPreferences mShraredPref;
+  SharedPreferences sp;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -147,6 +160,20 @@ public class LoginActivity extends AppCompatActivity {
     M.showHidePassword(LoginActivity.this, isPasswordShown, etPassword, showHideImage);
 
     Log.d("fcmTokkken", SharedPrefManager.getInstance(LoginActivity.this).getDeviceToken());
+    changingValues();
+  }
+
+  void changingValues(){
+    sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
+    if (sp.getString("value","").equalsIgnoreCase("India")){
+      SpannableString iString=new SpannableString("Change your region to GLOBAL");
+      iString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorAccent)), 21, iString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+      tvTextFor.setText(iString);
+    }else {
+      SpannableString gString=new SpannableString("Change your region to INDIA");
+      gString.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorAccent)), 21, gString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+      tvTextFor.setText(gString);
+    }
   }
 
 
@@ -193,6 +220,13 @@ public class LoginActivity extends AppCompatActivity {
           makeLoginRequestWithPassword();
         }
       }
+    });
+
+    tvTextFor.setOnClickListener(v -> {
+
+      startActivity(new Intent(LoginActivity.this, SelectionActivity.class));
+      LoginActivity.this.finish();
+
     });
 
      /*   forgotPassWordText.setOnCl   ickListener(new View.OnClickListener() {

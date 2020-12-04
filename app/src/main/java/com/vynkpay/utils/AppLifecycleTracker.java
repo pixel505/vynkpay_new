@@ -10,14 +10,17 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.vynkpay.activity.activitiesnew.ForegroundCheckTask;
 import com.vynkpay.prefes.Prefes;
+
+import java.util.concurrent.ExecutionException;
 
 public class AppLifecycleTracker implements Application.ActivityLifecycleCallbacks {
     Prefes prefers;
     private int numStarted = 0;
     Handler handler;
     Runnable runnable;
-    public static  int LOCKTIME = 3000;
+    public static  int LOCKTIME = 500;
 
     @Override
     public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
@@ -67,13 +70,28 @@ public class AppLifecycleTracker implements Application.ActivityLifecycleCallbac
                 @Override
                 public void run() {
                     Log.d("appstate","handercalled");
-                    prefers.saveAskPin("yes");
+
                     //prefers.setString(Prefers.ASK_PIN, "yes");
+                    prefers.saveAskPin("yes");
                 }
             };
             handler.postDelayed(runnable, LOCKTIME);
 
         }
+
+       /* try {
+            boolean foreground = new ForegroundCheckTask().execute(activity).get();
+            if(!foreground) {
+                prefers.saveAskPin("yes");
+                Log.d("appstate","handercalledAsyncTask");
+                //App is in Background - do what you want
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }*/
+
     }
 
     @Override

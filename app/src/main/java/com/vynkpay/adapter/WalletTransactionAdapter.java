@@ -104,4 +104,5 @@ public class WalletTransactionAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 }

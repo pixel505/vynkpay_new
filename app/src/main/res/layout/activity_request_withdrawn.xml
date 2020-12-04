@@ -101,7 +101,7 @@
                         android:layout_marginRight="@dimen/_24sdp"
                         android:layout_marginLeft="@dimen/_24sdp"
                         android:gravity="center"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:id="@+id/amountET"
                         android:paddingStart="@dimen/_16sdp"
                         android:paddingEnd="@dimen/_16sdp"

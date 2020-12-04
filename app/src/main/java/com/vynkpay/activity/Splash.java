@@ -22,11 +22,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.activities.LoginActivity;
+import com.vynkpay.activity.activities.Signupnew;
 import com.vynkpay.newregistration.OnboardingActivity;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivitySplashBinding;
+import com.vynkpay.newregistration.SelectionActivity;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AppVersionResponse;
@@ -48,11 +55,12 @@ public class Splash extends AppCompatActivity {
     String[] permissionsRequired = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA,
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.CAMERA
     };
 
     SharedPreferences sp;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +69,8 @@ public class Splash extends AppCompatActivity {
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         //sp.edit().putString("welcome","").apply();
         prefs = new Prefes(Splash.this);
-        checkPermissions();
+        //getDynamicLink();
+
     }
 
     private void CheckGpsStatus() {
@@ -80,11 +89,11 @@ public class Splash extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[0]) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[1]) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[2]) != PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[3]) != PackageManager.PERMISSION_GRANTED) {
+                /*|| ActivityCompat.checkSelfPermission(Splash.this, permissionsRequired[3]) != PackageManager.PERMISSION_GRANTED*/) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[2])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[3])) {
+                    /*|| ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[3])*/) {
                 //Show Information about why you need the permission
                 AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
                 builder.setCancelable(false);
@@ -137,7 +146,8 @@ public class Splash extends AppCompatActivity {
             prefs.setBoolean(permissionsRequired[0], true);
         } else {
             //You already have the permission, just go ahead.
-            CheckGpsStatus();
+            //CheckGpsStatus();
+            updateVersionApi();
         }
     }
 
@@ -157,11 +167,12 @@ public class Splash extends AppCompatActivity {
             }
 
             if (allgranted) {
-                CheckGpsStatus();
+                //CheckGpsStatus();
+                updateVersionApi();
             } else if (ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[0])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[1])
                     || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[2])
-                    || ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[3])) {
+                    /*|| ActivityCompat.shouldShowRequestPermissionRationale(Splash.this, permissionsRequired[3])*/) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(Splash.this);
                 builder.setCancelable(false);
@@ -202,6 +213,42 @@ public class Splash extends AppCompatActivity {
         }
     }
 
+    public void getDynamicLink() {
+        Log.d("refferla","called");
+        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent()).addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+            @Override
+            public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                // Get deep link from result (may be null if no link is found)
+                Log.d("refferla","called1");
+                Uri deepLink = null;
+                if (pendingDynamicLinkData != null) {
+                    deepLink = pendingDynamicLinkData.getLink();
+                    String referLink = deepLink.toString();
+                    referLink = referLink.substring(referLink.lastIndexOf("=") + 1);
+                    String referalCode = referLink;
+                    sp.edit().putString("referalCode",referalCode).apply();
+
+                    Log.e("linkkk", "" + referalCode);
+                    Log.e("linkkk", "" + referLink);
+                    Log.e("linkkk", "" + pendingDynamicLinkData);
+                    Log.e("linkkk", "" + deepLink);
+                } else {
+                    Log.d("refferla","called2");
+                }
+            }
+        }).addOnFailureListener(this, new OnFailureListener() {
+
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("refferla","called3");
+                //Toast.makeText(Splash.this, e.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+    }
+
     private void updateVersionApi() {
         String versionName = BuildConfig.VERSION_NAME;
         MainApplication.getApiService().appVersionMethod(versionName).enqueue(new Callback<AppVersionResponse>() {
@@ -214,7 +261,46 @@ public class Splash extends AppCompatActivity {
                                 dialog(true, response.body().getMessage());
                             } else {
 
-                                if (sp.getString("value", "").isEmpty()) {
+                                if (sp.getString("welcome","").equalsIgnoreCase("yes")) {
+                                    if (sp.getString("value","").equalsIgnoreCase("")){
+                                        startActivity(new Intent(Splash.this, SelectionActivity.class));
+                                    }else {
+                                        if (Prefes.getAccessToken(Splash.this).equalsIgnoreCase("")){
+                                            startActivity(new Intent(Splash.this, LoginActivity.class));
+                                        }else {
+                                            if (Prefes.getUserType(Splash.this).equalsIgnoreCase("2")) {
+                                                if (sp.getString("value","").equalsIgnoreCase("Global")){
+                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                }else {
+                                                    startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                }
+                                            } else {
+                                                if (new Prefes(Splash.this).getAskPin().equalsIgnoreCase("yes")) {
+                                                    Intent intent = new Intent(Splash.this, PinActivity.class);
+                                                    intent.putExtra("var", "0000000");
+                                                    intent.putExtra("type", "login");
+                                                    intent.putExtra("accessToken", Prefes.getAccessToken(Splash.this));
+                                                    intent.putExtra("isIndian", Prefes.getisIndian(Splash.this));
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    startActivity(intent);
+                                                    finishAffinity();
+                                                } else {
+                                                    if (sp.getString("value","").equalsIgnoreCase("Global")){
+                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "Global"));
+                                                    }else {
+                                                        startActivity(new Intent(Splash.this, HomeActivity.class).putExtra("Country", "India"));
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }else {
+                                    startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", sp.getString("value","")));
+                                }
+                                finish();
+
+                                //OLD
+                               /* if (sp.getString("value", "").isEmpty()) {
                                     GPSTracker gps = new GPSTracker(Splash.this);
                                     // Check if GPS enabled
                                     if (gps.canGetLocation()) {
@@ -331,7 +417,7 @@ public class Splash extends AppCompatActivity {
                                         startActivity(new Intent(Splash.this, OnboardingActivity.class).putExtra("Country", sp.getString("value", "")));
                                         finish();
                                     }
-                                }
+                                }*/
                                 Log.d("valuevalue",sp.getString("value", ""));
                             }
                         }
@@ -349,6 +435,7 @@ public class Splash extends AppCompatActivity {
                 Log.d("eeError",t.getMessage()!=null ? t.getMessage():"Error");
             }
         });
+
     }
 
     public void dialog(boolean askingForUpdate, String message) {
@@ -383,30 +470,24 @@ public class Splash extends AppCompatActivity {
 
         alertDialog.show();
 
-        noThanksButtonTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                finishAffinity();
-            }
+        noThanksButtonTV.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            finishAffinity();
         });
 
-        updateButtonTV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                if (askingForUpdate) {
-                    final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                    try {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                    } catch (android.content.ActivityNotFoundException anfe) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                    }
-                } else {
-                    finishAffinity();
+        updateButtonTV.setOnClickListener(v -> {
+            alertDialog.dismiss();
+            if (askingForUpdate) {
+                final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                 }
-
+            } else {
+                finishAffinity();
             }
+
         });
 
         if (alertDialog.getWindow() != null) {
@@ -416,7 +497,8 @@ public class Splash extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        updateVersionApi();
+        //updateVersionApi();
         super.onResume();
+        checkPermissions();
     }
 }

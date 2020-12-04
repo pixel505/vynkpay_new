@@ -115,8 +115,8 @@ public class BonusWalletFragment extends AppCompatActivity {
             binding.toolbarLayout.toolbarTitlenew.setText("Cashback");
             binding.bonusHeader.tvWTitle.setText("Cashback");
         } else {
-            binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
-            binding.bonusHeader.tvWTitle.setText("Bonus Wallet");
+            binding.toolbarLayout.toolbarTitlenew.setText("Earning Wallet");
+            binding.bonusHeader.tvWTitle.setText("Earning Wallet");
         }
         //binding.toolbarLayout.toolbarTitlenew.setText("Bonus Wallet");
         //binding.bonusHeader.tvWTitle.setText("Bonus Wallet");
@@ -210,7 +210,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                             countryRecycler.setVisibility(View.GONE);
                         }
                         if (arg0.toString().length() >= 3) {
-                            MainApplication.getApiService().getUser(Prefes.getAccessToken(activity), arg0.toString()).enqueue(new Callback<GetUserResponse>() {
+                            MainApplication.getApiService().getUser(Prefes.getAccessToken(activity), arg0.toString(),"earning").enqueue(new Callback<GetUserResponse>() {
                                 @Override
                                 public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                                     if (response.isSuccessful()) {

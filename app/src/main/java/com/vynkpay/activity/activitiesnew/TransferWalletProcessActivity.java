@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.activity.PinActivity;
 import com.vynkpay.custom.NormalButton;
@@ -76,6 +78,11 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
         submitButton.setOnClickListener(this);
         binding.usernameET.setOnClickListener(this);
         initTextWatchers();
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     void initTextWatchers() {
@@ -178,7 +185,7 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
                         countryRecycler.setVisibility(View.GONE);
                     }
                     if (arg0.toString().length() >= 3) {
-                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferWalletProcessActivity.this), arg0.toString()).enqueue(new Callback<GetUserResponse>() {
+                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferWalletProcessActivity.this), arg0.toString(),"earning").enqueue(new Callback<GetUserResponse>() {
                             @Override
                             public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                                 if (response.isSuccessful()) {
@@ -214,6 +221,7 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
     private void transferMoneyByServer() {
         startActivityForResult(new Intent(TransferWalletProcessActivity.this, PinActivity.class)
                 .putExtra("type", "Wallet")
+                .putExtra("isIndian",Prefes.getisIndian(TransferWalletProcessActivity.this))
                 .putExtra("accessToken", Prefes.getAccessToken(TransferWalletProcessActivity.this)), rcWallet);
     }
 
@@ -233,9 +241,10 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
                                 if (response.isSuccessful()) {
                                     serverDialog.dismiss();
                                     if (response.body() != null) {
+                                        Log.d("transferwallet",new Gson().toJson(response.body()));
                                         if(response.body().isStatus()){
                                             //startActivity(new Intent(TransferWalletProcessActivity.this, RequestSuccess.class).putExtra("msg",response.body().getMessage()).putExtra("typ","Bonus"));
-                                            startActivity(new Intent(TransferWalletProcessActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","Bonus"));
+                                            startActivity(new Intent(TransferWalletProcessActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","Bonus").putExtra("invoice_number",response.body().getInvoice_number()));
                                             TransferWalletProcessActivity.this.finish();
                                         } else {
                                             Toast.makeText(TransferWalletProcessActivity.this, response.body().getMessage()!=null?response.body().getMessage() : "Error", Toast.LENGTH_SHORT).show();

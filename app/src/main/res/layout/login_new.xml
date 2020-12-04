@@ -158,6 +158,22 @@
 
             </LinearLayout>
 
+            <com.vynkpay.custom.NormalTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Change your region to"
+                android:textSize="14sp"
+                android:paddingBottom="16dp"
+                android:id="@+id/tvTextFor"
+                android:paddingEnd="16dp"
+                android:padding="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="6dp"
+                android:paddingStart="16dp"
+                android:background="?android:attr/selectableItemBackground"/>
+
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

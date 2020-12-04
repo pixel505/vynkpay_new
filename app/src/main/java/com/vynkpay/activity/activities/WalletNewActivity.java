@@ -140,14 +140,15 @@ public class WalletNewActivity extends AppCompatActivity {
             binding.transferCard.setVisibility(View.GONE);
             binding.reqstWithdrawalCard.setVisibility(View.VISIBLE);
             binding.transferWallet.setVisibility(View.VISIBLE);
+            binding.reqstCash.setVisibility(View.VISIBLE);
         }
 
         else {
             binding.loadMcash.setVisibility(View.VISIBLE);
             binding.transferCard.setVisibility(View.VISIBLE);
             binding.reqstWithdrawalCard.setVisibility(View.VISIBLE);
-            binding.transferWallet.setVisibility(View.GONE);
-
+            binding.transferWallet.setVisibility(View.VISIBLE);
+            binding.reqstCash.setVisibility(View.GONE);
         }
 
         binding.transferCard.setOnClickListener(new View.OnClickListener() {

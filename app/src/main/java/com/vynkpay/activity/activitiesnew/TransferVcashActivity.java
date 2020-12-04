@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -119,6 +120,11 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
 
         binding.amountET.setOnClickListener(this);
         binding.remarkET.setOnClickListener(this);
+        try {
+            binding.amountET.setFilters(new InputFilter[] {new DecimalDigitsInputFilter(12,2)});
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -168,7 +174,7 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
                         countryRecycler.setVisibility(View.GONE);
                     }
                     if (arg0.toString().length() >= 3) {
-                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferVcashActivity.this), arg0.toString()).enqueue(new Callback<GetUserResponse>() {
+                        MainApplication.getApiService().getUser(Prefes.getAccessToken(TransferVcashActivity.this), arg0.toString(),"vcash").enqueue(new Callback<GetUserResponse>() {
                             @Override
                             public void onResponse(Call<GetUserResponse> call, Response<GetUserResponse> response) {
                                 if (response.isSuccessful()) {
@@ -222,6 +228,7 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
     private void transferMoneyByServer() {
         startActivityForResult(new Intent(TransferVcashActivity.this, PinActivity.class)
                 .putExtra("type", "Wallet")
+                .putExtra("isIndian",Prefes.getisIndian(TransferVcashActivity.this))
                 .putExtra("accessToken", Prefes.getAccessToken(TransferVcashActivity.this)), rcWallet);
     }
 
@@ -243,7 +250,7 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
                                     if (response.isSuccessful()) {
                                         if (response.body() != null) {
                                             if(response.body().isStatus()){
-                                                startActivity(new Intent(TransferVcashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","vCash"));
+                                                startActivity(new Intent(TransferVcashActivity.this, TransferSuccessActivity.class).putExtra("msg",response.body().getMessage()).putExtra("typ","vCash").putExtra("invoice_number",response.body().getInvoice_number()));
                                                 TransferVcashActivity.this.finish();
                                             } else {
                                                 Toast.makeText(TransferVcashActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();

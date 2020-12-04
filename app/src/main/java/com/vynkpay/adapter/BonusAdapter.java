@@ -12,6 +12,8 @@ import com.vynkpay.R;
 import com.vynkpay.activity.ClubBonusActivity;
 import com.vynkpay.activity.ClubBonusListActivity;
 import com.vynkpay.activity.ReferalBonusActivity;
+import com.vynkpay.activity.VyncBonusessActivity;
+import com.vynkpay.activity.WeeklyActivity;
 import com.vynkpay.databinding.BonusItemListBinding;
 import com.vynkpay.models.MyAccount;
 import org.jetbrains.annotations.NotNull;
@@ -55,6 +57,8 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
 
                 if (listdata[position].getDescription().equalsIgnoreCase("First Level Bonus")){
                     context.startActivity(new Intent(context, ReferalBonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","1"));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Referral Bonus")){
+                    context.startActivity(new Intent(context, ReferalBonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","14"));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Generation Bonus")){
                     context.startActivity(new Intent(context, ReferalBonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","2"));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Global Royalty")){
@@ -83,13 +87,17 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                     context.startActivity(new Intent(context, ClubBonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","c2"));
                 } else if (listdata[position].getDescription().equalsIgnoreCase("Club Bonus3")){
                     context.startActivity(new Intent(context, ClubBonusActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","c3"));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("VYNC Bonuses")){
+                    context.startActivity(new Intent(context, VyncBonusessActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","c3"));
+                } else if (listdata[position].getDescription().equalsIgnoreCase("Weekly Bonus")){
+                    context.startActivity(new Intent(context, WeeklyActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("type","c4"));
                 }
 
             }
         });
 
 
-       /* if(position==0){
+        /* if(position==0){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,9 +106,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-
-      /* if(position==1){
+        /* if(position==1){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -108,7 +114,6 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
         /*if(position==2){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,8 +122,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-       /* if(position==3){
+        /* if(position==3){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -126,8 +130,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-      /*  if(position==4){
+        /*  if(position==4){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -135,9 +138,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-
-       /* if(position==5){
+        /* if(position==5){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -145,8 +146,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-       /* if(position==6){
+        /* if(position==6){
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -154,8 +154,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
                 }
             });
         }*/
-
-       /* if (position == 7){
+        /* if (position == 7){
 
             holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -165,6 +164,7 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
             });
 
         }*/
+
     }
 
 
@@ -184,5 +184,3 @@ public class BonusAdapter extends RecyclerView.Adapter<BonusAdapter.ViewHolder> 
     }
 
 }
-
-

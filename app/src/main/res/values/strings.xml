@@ -157,7 +157,7 @@
     <string name="supportchat">Support Chat</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bonusWallet">Bonus Wallet</string> <!--Bonus Wallet-->
+    <string name="bonusWallet">Earning Wallet</string> <!--Bonus Wallet-->
     <string name="requestWithdrawal">Request \nWithdrawal</string>
     <string name="availableAmount">Available Amount</string>
     <string name="transferWallet">Transfer Wallet</string>
@@ -198,9 +198,12 @@
     <string name="canceled">Canceled</string>
     <string name="earning">Earnings</string>
     <string name="oldbonuses">Old Bonuses</string>
+    <string name="vyncbonuses">VYNC Bonuses</string>
     <string name="referalbonus">First Level Bonus</string>
+    <string name="referalbonus1">Referral Bonus</string>
     <string name="generationBonus">Generation Bonus</string>
     <string name="globalpool">Global Royalty</string>
+    <string name="weeklybonus">Weekly Bonus</string>
     <!--<string name="globalpool">Global Pool Bonus</string>--> <!--old-->
     <string name="leaderBonus">Leadership Bonus</string>
     <string name="ambasBonus">Ambassador Bonus</string>
@@ -253,7 +256,7 @@
     <string name="statement">Statement</string>
     <string name="servicecharges">Service Charges</string>
     <string name="totalamount">Total Amount</string>
-    <string name="bonuswalletbalance">Bonus wallet Balance</string><!--Bonus wallet Balance-->
+    <string name="bonuswalletbalance">Earning wallet Balance</string><!--Bonus wallet Balance-->
     <string name="convert">Convert</string>
     <string name="withdrawtype">Withdrawal Type</string>
     <string name="next">Next</string>

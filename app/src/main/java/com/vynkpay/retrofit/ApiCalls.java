@@ -3,6 +3,7 @@ package com.vynkpay.retrofit;
 
 import com.vynkpay.models.EcashModelClass;
 import com.vynkpay.models.GetKycStatusResponse;
+import com.vynkpay.models.IntGeneralBonusResponse;
 import com.vynkpay.models.UpdatebankResponse;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
 import com.vynkpay.retrofit.model.AppVersionResponse;
@@ -276,6 +277,10 @@ public interface ApiCalls {
     Call<ReferalBonusResponse> getreferalBonus(
             @Header("access_token") String access_token);
 
+    @POST("account/api_accounts/profit_roi")
+    Call<ReferalBonusResponse> getWeeklyBonus(
+            @Header("access_token") String access_token);
+
     @POST("account/api_accounts/add_ref_profit")
     Call<GenerationBonusResponse> getGenerationBonus(
             @Header("access_token") String access_token);
@@ -345,7 +350,8 @@ public interface ApiCalls {
     @POST("account/api_accounts/searchusername")
     Call<GetUserResponse> getUser(
             @Header("access_token") String access_token,
-            @Field("username") String username);
+            @Field("username") String username,
+            @Field("type") String type);
 
     @FormUrlEncoded
     @POST("account/api_accounts/TransferMetherCredit_working")
@@ -397,7 +403,6 @@ public interface ApiCalls {
     Call<GetUserPackageResponse> getUserPackage(
             @Header("access_token") String access_token,
             @Field("user_id") String user_id);
-
 
 
     @POST("account/api_accounts/send_wallet_otp")
@@ -566,6 +571,33 @@ public interface ApiCalls {
     Call<VerifyBitResponse> sendPayeerverify(
             @Header("access_token") String access_token,
             @Field("payeer_otp") String payeer_otp);
+
+    /*new Int*/
+
+    @POST("account/api_accounts/ref_profit_token")
+    Call<ReferalBonusResponse> getvyncreferalBonus(
+            @Header("access_token") String access_token);
+
+    @POST("account/api_accounts/volume_bonus_token")
+    Call<IntGeneralBonusResponse> getvyncVolumeBonus(
+            @Header("access_token") String access_token);
+
+    @POST("account/api_accounts/performance_bonus_token")
+    Call<IntGeneralBonusResponse> getvyncPerformanceBonus(
+            @Header("access_token") String access_token);
+
+    /*Vcash Opt*/
+    @POST("account/api_accounts/opt_vcash_add")
+    Call<String> optVCashAdd(@Header("access_token") String access_token);
+
+    /*Dashboard*/
+    @POST("account/api_accounts/dashboard_data")
+    Call<String> getDashboardData(@Header("access_token") String access_token);
+
+    /*Chart*/
+    @FormUrlEncoded
+    @POST("account/api_accounts/chart_data")
+    Call<String> getChartData(@Header("access_token") String access_token,@Field("chart_type") String chart_type);
 
 
 }

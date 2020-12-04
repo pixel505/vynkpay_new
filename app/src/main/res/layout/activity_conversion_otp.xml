@@ -91,6 +91,7 @@
                         android:gravity="center"
                         android:inputType="number"
                         android:id="@+id/otpET"
+                        android:maxLength="6"
                         android:paddingStart="@dimen/_16sdp"
                         android:paddingEnd="@dimen/_16sdp"
                         android:textColor="@color/color_text"

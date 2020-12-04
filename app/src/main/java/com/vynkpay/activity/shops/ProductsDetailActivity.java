@@ -43,6 +43,7 @@ public class ProductsDetailActivity extends AppCompatActivity {
                         .load(dealData.getPath()+dealData.getImage())
                         .into(binding.ivBrandImage);
                 binding.tvDescription.setText(dealData.getDescription());
+                binding.tvTextTC.setText(dealData.getTerms());
             }
 
             binding.tvShopOnline.setOnClickListener(view -> {
@@ -50,7 +51,7 @@ public class ProductsDetailActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(dealData.getUrl()));
                     startActivity(intent);
-                }catch (Exception e){
+                } catch (Exception e){
                     e.printStackTrace();
                 }
             });

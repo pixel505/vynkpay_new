@@ -69,14 +69,13 @@
 
 
                 <com.vynkpay.custom.NormalTextView
-
                     android:layout_width="match_parent"
                     android:textColor="@color/black"
-
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_50sdp"
                     android:gravity="center"
                     android:text="Cashback"
+                    android:id="@+id/tvText"
                     android:textSize="@dimen/_12sdp" />
 
                 <com.vynkpay.custom.NormalBoldTextView
@@ -87,6 +86,17 @@
                     android:text="2135"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp" />
+
+                <com.vynkpay.custom.NormalTextView
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center"
+                    android:text="Weekly"
+                    android:visibility="gone"
+                    android:id="@+id/tvWeekly"
+                    android:textSize="@dimen/_12sdp" />
 
 
                 <com.vynkpay.custom.NormalTextView

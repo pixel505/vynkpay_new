@@ -37,12 +37,13 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_onboarding);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
-        country = getIntent().getStringExtra("Country");
+        country = sp.getString("Country","");
+        /*country = getIntent().getStringExtra("Country");
         if (getIntent().getStringExtra("Country").equals("Global")) {
             Log.d("fgfgfgfg",getIntent().getStringExtra("Country"));
         } else if (getIntent().getStringExtra("Country").equals("India")) {
             Log.d("fgfgfgfg",getIntent().getStringExtra("Country"));
-        }
+        }*/
         loadData();
         NUM_PAGES = slist.size();
 
@@ -96,7 +97,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         if (view == binding.btnNext){
             if (binding.btnNext.getText().toString().equalsIgnoreCase("Login")){
                 sp.edit().putString("welcome","yes").apply();
-                startActivity(new Intent(OnboardingActivity.this, LoginActivity.class).putExtra("Country", country));
+                startActivity(new Intent(OnboardingActivity.this, SelectionActivity.class).putExtra("Country", country));
                 finishAffinity();
 
             } else {
@@ -109,10 +110,13 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         }
 
         if (view == binding.btnSkip){
-            if (currentPage == NUM_PAGES) {
+            /*if (currentPage == NUM_PAGES) {
                 currentPage = 0;
             }
-            binding.viewPager.setCurrentItem(currentPage++, true);
+            binding.viewPager.setCurrentItem(currentPage++, true);*/
+            sp.edit().putString("welcome","yes").apply();
+            startActivity(new Intent(OnboardingActivity.this, SelectionActivity.class).putExtra("Country", country));
+            finishAffinity();
         }
 
     }
@@ -134,6 +138,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 handler.post(Update);
             }
         }, 5000, 5000);
+
     }
 
 

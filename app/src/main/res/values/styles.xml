@@ -21,6 +21,13 @@
         <!--<item name="android:navigationBarColor">@color/colorPrimary</item>-->
     </style>
 
+    <style name="myDialog" parent="Theme.AppCompat.Light.Dialog.MinWidth">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">#00000000</item>
+        <!--<item name="android:navigationBarColor">@color/colorPrimary</item>-->
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Splash.Theme" parent="Theme.AppCompat.Light.NoActionBar">

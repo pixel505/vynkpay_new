@@ -47,7 +47,7 @@ public class AllTransactionsActivity extends AppCompatActivity {
             tabType = intent.getStringExtra("tabType");
 
             if (tabType.equals("bonus")){
-                binding.toolbar.toolbarTitle.setText("Bonus transactions");
+                binding.toolbar.toolbarTitle.setText("Earning transactions");
             }else if (tabType.equals("vCash")){
                 binding.toolbar.toolbarTitle.setText("Vcash transactions");
             }else if (tabType.equals("mCash")){

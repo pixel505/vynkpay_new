@@ -130,14 +130,13 @@ public class ShopFragment extends Fragment {
                 //showSubCategory(title,total);
                 selectedId = id;
                 onFilter(selectedId);
-
                 //getShopList();
             });
         }
 
         tvClear.setOnClickListener(view -> {
              mdialog.dismiss();
-            onSearch("");
+             onSearch("");
         });
 
         mdialog.show();

@@ -3,6 +3,7 @@ package com.vynkpay.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,19 +57,10 @@ public class RePinActivity extends AppCompatActivity {
 
                 if(pinEdt.getText().toString().isEmpty() ){
                     Toast.makeText(RePinActivity.this, "Please Enter Pin", Toast.LENGTH_SHORT).show();
-                }
-
-
-                else if(pinEdt.getText().toString().length()<6){
+                } else if(pinEdt.getText().toString().length()<6){
                     Toast.makeText(RePinActivity.this, "Please Enter Valid Pin", Toast.LENGTH_SHORT).show();
-
-                }
-
-
-                else {
-
+                } else {
                     dialog.show();
-
                     MainApplication.getApiService().verifyPinMethod(accessToken,
                             pinEdt.getText().toString(),"1",
                             SharedPrefManager.getInstance(RePinActivity.this).getDeviceToken())
@@ -76,7 +68,7 @@ public class RePinActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<VerifyPinResponse> call, retrofit2.Response<VerifyPinResponse> response) {
                                     if(response.isSuccessful() && response.body()!=null){
-                                        if(response.body().getSuccess() ){
+                                        if( response.body().getSuccess() ){
                                             dialog.dismiss();
 
                                             String user_id= response.body().getData().getUserId();
@@ -96,9 +88,7 @@ public class RePinActivity extends AppCompatActivity {
                                                 finish();
                                             }
                                             EventBus.getDefault().postSticky(new UpDateUIEvent(true));
-                                        }
-
-                                        else {
+                                        } else {
                                             dialog.dismiss();
                                             EventBus.getDefault().postSticky(new UpDateUIEvent(false));
                                             Toast.makeText(RePinActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -109,6 +99,7 @@ public class RePinActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(Call<VerifyPinResponse> call, Throwable t) {
                                     dialog.dismiss();
+                                    Log.d("errorErr",t.getMessage()!=null ? t.getMessage() : "");
                                 }
                             });
                 }
@@ -138,4 +129,5 @@ public class RePinActivity extends AppCompatActivity {
 
         super.onResume();
     }
+
 }

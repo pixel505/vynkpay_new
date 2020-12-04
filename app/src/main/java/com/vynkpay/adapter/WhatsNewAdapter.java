@@ -93,4 +93,6 @@ public class WhatsNewAdapter extends RecyclerView.Adapter<WhatsNewAdapter.Holder
 
         }
     }
+
+
 }

@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -73,6 +74,7 @@ public class NotificationActivity extends AppCompatActivity {
         serverDialog.show();
 
     }
+
     private void getNotifications() {
         MainApplication.getApiService().getNotifications(Prefes.getAccessToken(NotificationActivity.this)).enqueue(new Callback<NotificationResponse>() {
             @Override
@@ -254,8 +256,8 @@ public class NotificationActivity extends AppCompatActivity {
                             }
                         }
                         @Override
-                        public void onFailure(Call<NotificationReadResponse> call, Throwable throwable) {
-
+                        public void onFailure(Call<NotificationReadResponse> call, Throwable t) {
+                            Log.d("errorStr", t.getMessage()!=null ? t.getMessage() : "Errorr");
                         }
                     });
                 }

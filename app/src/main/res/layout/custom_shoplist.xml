@@ -24,6 +24,7 @@
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:adjustViewBounds="true"
+                android:scaleType="fitXY"
                 android:background="@drawable/bg_image"
                 android:id="@+id/ivBrandImage"/>
 

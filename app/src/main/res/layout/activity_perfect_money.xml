@@ -38,7 +38,7 @@
                         android:layout_height="@dimen/_32sdp"
                         android:textSize="@dimen/_12sdp"
                         android:background="@drawable/custom_rectangle"
-                        android:hint="BTC Address"
+                        android:hint="Prefect Money"
                         android:layout_marginTop="@dimen/_10sdp"/>
 
                     <LinearLayout

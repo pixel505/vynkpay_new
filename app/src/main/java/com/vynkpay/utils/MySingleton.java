@@ -3,6 +3,7 @@ package com.vynkpay.utils;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.util.LruCache;
 
 import com.android.volley.Request;
@@ -71,4 +72,5 @@ public class MySingleton extends Application{
     public ImageLoader getImageLoader() {
         return mImageLoader;
     }
+
 }

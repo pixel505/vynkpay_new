@@ -7,18 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.GenerationBonusDetailActivity;
 import com.vynkpay.databinding.GenerationItemBinding;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class GenerationBonusAdapter extends RecyclerView.Adapter<GenerationBonusAdapter.ViewHolder>  {
     Context context;
@@ -59,9 +58,9 @@ public class GenerationBonusAdapter extends RecyclerView.Adapter<GenerationBonus
         }
 
         try {
-            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
             Date d = f.parse(myListData.getCreatedDate());
-            DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat date = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault());
             holder.binding.datetext.setText(date.format(d));
             System.out.println("Date: " + date.format(d));
         } catch (ParseException e) {
@@ -73,9 +72,9 @@ public class GenerationBonusAdapter extends RecyclerView.Adapter<GenerationBonus
             public void onClick(View v) {
                 if (viewType.equals("GB")){
                     try {
-                        DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                        DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.getDefault());
                         Date d = f.parse(myListData.getCreatedDate());
-                        DateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                        DateFormat date = new SimpleDateFormat("yyyy-MM-dd",Locale.getDefault());
                         String dateForFilter = date.format(d);
                         context.startActivity(new Intent(context, GenerationBonusDetailActivity.class)
                                 .putExtra("dateForView", dateForFilter)
