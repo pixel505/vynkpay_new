@@ -194,7 +194,7 @@ public class PrepaidActivity extends AppCompatActivity {
                     rootLayoutForRadio.setVisibility(View.GONE);
                     layoutToBeVisible.setVisibility(View.GONE);
                 } else if (s.length() == 10) {
-                    makeMobileNumberLookupRequest();
+                    //makeMobileNumberLookupRequest();
                     loadAddCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);

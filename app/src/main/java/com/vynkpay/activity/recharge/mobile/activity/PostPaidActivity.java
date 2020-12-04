@@ -167,7 +167,7 @@ public class PostPaidActivity extends AppCompatActivity {
                     etAmount.setText("");
                     etAmount.setEnabled(false);
                 } else if (s.length() == 10) {
-                    makeMobileNumberLookupRequest();
+                    //makeMobileNumberLookupRequest();
                     loadOperatorCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);

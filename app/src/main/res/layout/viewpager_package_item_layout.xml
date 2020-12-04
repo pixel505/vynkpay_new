@@ -92,6 +92,7 @@
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:text="Weekly"
                     android:visibility="gone"

@@ -854,7 +854,6 @@ public class FragmentHomeGlobal extends Fragment {
                             new PDFFileModel(id, banner_image, path, banner_type, file_recognize, created_date, full_banner_image);
 
                         }
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -865,6 +864,7 @@ public class FragmentHomeGlobal extends Fragment {
             public void onError(String error) {
                 Log.d("Error",error+"");
             }
+
         });
     }
 

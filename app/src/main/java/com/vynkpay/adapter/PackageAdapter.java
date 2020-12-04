@@ -53,11 +53,12 @@ public class PackageAdapter extends PagerAdapter {
         LinearLayout ln=itemView.findViewById(R.id.lnBg);
         ImageView uperImage=itemView.findViewById(R.id.uperIcon);
         uperImage.setVisibility(View.GONE);
+        cashback.setVisibility(View.GONE);
         GetPackageResponse.DataBean.PackagesBean data=sliderItemModelArrayList.get(position);
         if (data.getType().equalsIgnoreCase("1")){
-            tvText.setText("Cashback");
+            tvText.setText("");
             tvWeekly.setVisibility(View.VISIBLE);
-            tvWeekly.setText("Vcash 200% and Global Royality 100%");
+            tvWeekly.setText("Vcash 200%\nGlobal Royality 100%");
         }else {
             tvText.setText("");
             tvWeekly.setVisibility(View.VISIBLE);
@@ -70,6 +71,7 @@ public class PackageAdapter extends PagerAdapter {
         else {
             packageprice.setText(Functions.CURRENCY_SYMBOL +data.getPrice());
         }
+
         cashback.setText(Functions.CURRENCY_SYMBOL+data.getPrice());
         points.setText(data.getPoints());
         if(data.getCurser().equals("allowed")) {
