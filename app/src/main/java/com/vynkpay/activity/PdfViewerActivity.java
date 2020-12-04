@@ -81,6 +81,7 @@ public class PdfViewerActivity extends AppCompatActivity {
     }
 
     public void downloadingFile(){
+        Log.d("uerre",BuildConfig.BASE_URL + "account/"+Prefes.getPDFFile(this)+"==");
         PRDownloader.download(BuildConfig.BASE_URL + "account/"+Prefes.getPDFFile(this), getRootDirPath(), "careerPlan.pdf")
                 .build().setOnStartOrResumeListener(new OnStartOrResumeListener() {
             @Override

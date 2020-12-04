@@ -214,7 +214,7 @@ public class FragmentHomeGlobal extends Fragment {
             linChartt.setVisibility(View.GONE);
             linImportantStats.setVisibility(View.GONE);
         } else {
-            linChartt.setVisibility(View.VISIBLE);
+            linChartt.setVisibility(View.GONE);
             linImportantStats.setVisibility(View.VISIBLE);
         }
 

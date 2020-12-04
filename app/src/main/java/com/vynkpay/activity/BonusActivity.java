@@ -74,8 +74,8 @@ Global Royalty (Before it was Global Pool Bonus, need to change the name only)*/
                         new MyAccount("Performance Bonus", R.drawable.performancebonus3x),
                         new MyAccount("Volume Bonus", R.drawable.volumebonus3x),
                         new MyAccount("Appraisal Bonus", R.drawable.appraisal),
-                        new MyAccount("Shopping Bonus", R.drawable.shoppingbonus3x),
-                        new MyAccount("Global Royalty", R.drawable.globalpoolbonus)
+                        new MyAccount("Shopping Bonus", R.drawable.shoppingbonus3x)
+                        //new MyAccount("Global Royalty", R.drawable.globalpoolbonus)
                 };
             }else {
                 myAccount = new MyAccount[]{
@@ -83,9 +83,9 @@ Global Royalty (Before it was Global Pool Bonus, need to change the name only)*/
                         new MyAccount("Performance Bonus", R.drawable.performancebonus3x),
                         new MyAccount("Volume Bonus", R.drawable.volumebonus3x),
                         new MyAccount("Appraisal Bonus", R.drawable.appraisal),
-                        new MyAccount("Shopping Bonus", R.drawable.shoppingbonus3x),
-                        new MyAccount("Global Royalty", R.drawable.globalpoolbonus),
-                        new MyAccount("VYNC Bonuses",R.drawable.vynccbonus3x)
+                        new MyAccount("Shopping Bonus", R.drawable.shoppingbonus3x)
+                        //new MyAccount("Global Royalty", R.drawable.globalpoolbonus)
+                        //,new MyAccount("VYNC Bonuses",R.drawable.vynccbonus3x)
                 };
             }
 

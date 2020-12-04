@@ -55,8 +55,9 @@ public class PackageAdapter extends PagerAdapter {
         uperImage.setVisibility(View.GONE);
         GetPackageResponse.DataBean.PackagesBean data=sliderItemModelArrayList.get(position);
         if (data.getType().equalsIgnoreCase("1")){
-            tvWeekly.setVisibility(View.GONE);
             tvText.setText("Cashback");
+            tvWeekly.setVisibility(View.VISIBLE);
+            tvWeekly.setText("Vcash 200% and Global Royality 100%");
         }else {
             tvText.setText("");
             tvWeekly.setVisibility(View.VISIBLE);
@@ -77,11 +78,21 @@ public class PackageAdapter extends PagerAdapter {
                 public void onClick(View view) {
                    /* int totalAmount= Integer.parseInt(data.getTotal_amount());
                     int cash= Integer.parseInt(data.getCashback());*/
-                    context.startActivity(new Intent(context, ChoosePaymentActivity.class).putExtra("purchaseprice",data.getPrice())
-                            .putExtra("cashback",data.getCashback())
-                            .putExtra("ids",data.getId())
+                    if(Functions.isIndian){
+                        //packageprice.setText(Functions.CURRENCY_SYMBOL +data.getTotal_amount());
+                        context.startActivity(new Intent(context, ChoosePaymentActivity.class)
+                                .putExtra("purchaseprice",data.getTotal_amount())
+                                .putExtra("cashback",data.getCashback())
+                                .putExtra("ids",data.getId()));
+                    }
+                    else {
+                        //packageprice.setText(Functions.CURRENCY_SYMBOL +data.getPrice());
+                        context.startActivity(new Intent(context, ChoosePaymentActivity.class)
+                                .putExtra("purchaseprice",data.getPrice())
+                                .putExtra("cashback",data.getCashback())
+                                .putExtra("ids",data.getId()));
+                    }
 
-                    );
                 }
             });
         }
@@ -110,6 +121,7 @@ public class PackageAdapter extends PagerAdapter {
             uperImage.setImageResource(R.drawable.threeicon);
 
         }
+
         if(position%8==3){
             ln.setBackgroundResource(R.drawable.fourbg);
             uperImage.setImageResource(R.drawable.fouricon);

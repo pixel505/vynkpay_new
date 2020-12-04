@@ -37,7 +37,7 @@ public class PackageAActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_package_a);
         ac = PackageAActivity.this;
-        getPackageByServer();
+        //getPackageByServer();
         clicks();
 
 
@@ -147,6 +147,7 @@ public class PackageAActivity extends AppCompatActivity {
                     binding.linPackageOption.setVisibility(View.VISIBLE);
                     e.printStackTrace();
                 }
+
             }
 
             @Override
@@ -154,6 +155,7 @@ public class PackageAActivity extends AppCompatActivity {
                 Log.d("settingsresponseM",t.getMessage()!=null?t.getMessage():"Error");
             }
         });
+        getPackageByServer();
     }
 
     private void clicks() {
@@ -177,6 +179,7 @@ public class PackageAActivity extends AppCompatActivity {
                 }
             }
             if (affilateList.size()>0){
+                binding.viewPagerFrame.setVisibility(View.VISIBLE);
                 binding.viewPager.setAdapter(new PackageAdapter(ac, affilateList));
                 //Log.e("data", "" + response.body().getData().getPackages());
                 binding.tabLayout.setViewPager(binding.viewPager);
@@ -186,7 +189,7 @@ public class PackageAActivity extends AppCompatActivity {
                 binding.viewPager.setBorderAnimation(true);
                 binding.viewPager.setScrollDurationFactor(8);
             }else {
-
+                binding.viewPagerFrame.setVisibility(View.GONE);
             }
         }
     }
@@ -201,6 +204,7 @@ public class PackageAActivity extends AppCompatActivity {
                 }
             }
             if (vyncchainList.size()>0){
+                binding.viewPagerFrame.setVisibility(View.VISIBLE);
                 binding.viewPager.setAdapter(new PackageAdapter(ac, vyncchainList));
                 //Log.e("data", "" + response.body().getData().getPackages());
                 binding.tabLayout.setViewPager(binding.viewPager);
@@ -210,7 +214,7 @@ public class PackageAActivity extends AppCompatActivity {
                 binding.viewPager.setBorderAnimation(true);
                 binding.viewPager.setScrollDurationFactor(8);
             }else {
-
+                binding.viewPagerFrame.setVisibility(View.GONE);
             }
         }
     }
