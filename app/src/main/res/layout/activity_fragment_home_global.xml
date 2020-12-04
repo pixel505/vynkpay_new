@@ -311,6 +311,7 @@
                             android:background="@drawable/newmap"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
+                            android:visibility="gone"
                             android:id="@+id/linChartt">
 
                             <LinearLayout

@@ -254,7 +254,7 @@ public class FragmentHome extends Fragment {
             userLayout.setVisibility(View.VISIBLE);
         }
 
-        linChartt.setVisibility(View.GONE);
+        //linChartt.setVisibility(View.GONE);
 
         if (Prefes.getUserType(activity).equalsIgnoreCase("2")) {
             userIdText.setText("");
@@ -1015,7 +1015,7 @@ public class FragmentHome extends Fragment {
                         tvChartTitle.setText(chart_title);
 
                         if (chart_show.equalsIgnoreCase("true")){
-                            linChartt.setVisibility(View.GONE);
+                            linChartt.setVisibility(View.VISIBLE);
                             try {
                                 float percentagee = Float.parseFloat(percentage);
                                 progressView.setProgress((int)percentagee);

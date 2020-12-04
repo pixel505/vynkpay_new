@@ -175,7 +175,7 @@ public class FragmentHomeGlobal extends Fragment {
         getBonusTransaction();
         getVCashTransaction();
         getMCashTransaction();
-        getUserDetail();
+
         rvListImportant.setLayoutManager(new LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false));
 
         lintv.setVisibility(View.GONE);
@@ -217,6 +217,8 @@ public class FragmentHomeGlobal extends Fragment {
             linChartt.setVisibility(View.VISIBLE);
             linImportantStats.setVisibility(View.VISIBLE);
         }
+
+        getUserDetail();
 
         if (Prefes.getUserType(activity).equalsIgnoreCase("2")){
             //crdBouns.setVisibility(View.GONE);

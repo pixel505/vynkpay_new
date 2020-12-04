@@ -557,6 +557,7 @@
             android:layout_height="@dimen/_180sdp"
             android:orientation="vertical"
             android:background="@drawable/newmap"
+            android:visibility="gone"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:id="@+id/linChartt">
