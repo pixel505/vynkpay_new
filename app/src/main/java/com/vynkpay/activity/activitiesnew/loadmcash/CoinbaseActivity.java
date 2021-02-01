@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class CoinbaseActivity extends AppCompatActivity {
+public class CoinbaseActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     Dialog dialog1;
     //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_success?ud=Payment%20verify%20successfully%20and%20added%20to%20Wallet
@@ -28,6 +30,9 @@ public class CoinbaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_coinbase);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
@@ -112,6 +117,19 @@ public class CoinbaseActivity extends AppCompatActivity {
             });
             // Load the webpage
             browser.loadUrl(getIntent().getStringExtra("url"));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(CoinbaseActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(CoinbaseActivity.this,CoinbaseActivity.this::finishAffinity);
         }
     }
 }

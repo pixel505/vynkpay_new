@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.adapter.CloseTicketAdapter;
 import com.vynkpay.adapter.OpenTicketAdapter;
@@ -17,12 +19,14 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetOpenCloseTicket;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SupportTicketActivity extends AppCompatActivity {
+public class SupportTicketActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivitySupportTicketBinding binding;
     SupportTicketActivity ac;
     Dialog dialog1;
@@ -30,7 +34,9 @@ public class SupportTicketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_support_ticket);
         ac = SupportTicketActivity.this;
         dialog1 = M.showDialog(SupportTicketActivity.this, "", false, false);
@@ -252,5 +258,18 @@ public class SupportTicketActivity extends AppCompatActivity {
                 dialog1.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SupportTicketActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SupportTicketActivity.this,SupportTicketActivity.this::finishAffinity);
+        }
     }
 }

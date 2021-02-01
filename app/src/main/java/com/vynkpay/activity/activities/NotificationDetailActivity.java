@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
@@ -16,6 +17,9 @@ import com.vynkpay.retrofit.model.NotificationReadResponse;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -24,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NotificationDetailActivity extends AppCompatActivity {
+public class NotificationDetailActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.bigImage)
     ImageView bigImage;
     @BindView(R.id.title)
@@ -39,6 +43,9 @@ public class NotificationDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_notification_detail_rcg);
         ButterKnife.bind(NotificationDetailActivity.this);
         serverDialog = M.showDialog(NotificationDetailActivity.this, "", false, false);
@@ -87,4 +94,16 @@ public class NotificationDetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(NotificationDetailActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(NotificationDetailActivity.this,NotificationDetailActivity.this::finishAffinity);
+        }
+    }
 }

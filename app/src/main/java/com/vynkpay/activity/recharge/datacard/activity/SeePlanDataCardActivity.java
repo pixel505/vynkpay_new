@@ -14,6 +14,9 @@ import com.android.volley.toolbox.Volley;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.recharge.datacard.fragment.DataCardThreeGFragment;
 import com.vynkpay.activity.recharge.datacard.fragment.DataCardTwoGFragment;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.google.android.material.tabs.TabLayout;
 
@@ -23,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -43,7 +47,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SeePlanDataCardActivity extends AppCompatActivity {
+public class SeePlanDataCardActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbar_title)
@@ -63,6 +67,9 @@ public class SeePlanDataCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_see_plan_rcg);
         ButterKnife.bind(SeePlanDataCardActivity.this);
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
@@ -269,5 +276,18 @@ public class SeePlanDataCardActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SeePlanDataCardActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SeePlanDataCardActivity.this,SeePlanDataCardActivity.this::finishAffinity);
+        }
     }
 }

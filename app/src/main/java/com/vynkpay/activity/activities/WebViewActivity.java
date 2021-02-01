@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,10 +15,13 @@ import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.webView)
     WebView webView;
     @BindView(R.id.toolbarTitle)
@@ -33,6 +37,11 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
         setContentView(R.layout.activity_web_rcg);
 
         ButterKnife.bind(WebViewActivity.this);
@@ -84,5 +93,18 @@ public class WebViewActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, TIME_OUT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WebViewActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WebViewActivity.this,WebViewActivity.this::finishAffinity);
+        }
     }
 }

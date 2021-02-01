@@ -5,16 +5,23 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityCommunityBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class Community extends AppCompatActivity {
+public class Community extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityCommunityBinding binding;
     Community ac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_community);
         ac = Community .this;
         clicks();
@@ -55,4 +62,16 @@ public class Community extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(Community.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(Community.this,Community.this::finishAffinity);
+        }
+    }
 }

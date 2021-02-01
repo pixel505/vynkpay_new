@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -29,13 +30,16 @@ import com.vynkpay.retrofit.model.GetProfileResponse;
 import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PaymentMethodMcashActivity extends AppCompatActivity implements View.OnClickListener, PaymentResultWithDataListener {
+public class PaymentMethodMcashActivity extends AppCompatActivity implements View.OnClickListener, PaymentResultWithDataListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityPaymentMethodMcashBinding binding;
     Toolbar toolbar;
@@ -50,6 +54,9 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_payment_method_mcash);
         ac = PaymentMethodMcashActivity.this;
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -98,6 +105,12 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(PaymentMethodMcashActivity.this).setConnectivityListener(this);
     }
 
     @Override
@@ -298,4 +311,10 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PaymentMethodMcashActivity.this,PaymentMethodMcashActivity.this::finishAffinity);
+        }
+    }
 }

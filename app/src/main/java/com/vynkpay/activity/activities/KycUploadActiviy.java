@@ -14,14 +14,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityKycUploadActiviyBinding;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class KycUploadActiviy extends AppCompatActivity {
+public class KycUploadActiviy extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityKycUploadActiviyBinding binding;
     KycUploadActiviy ac;
     Boolean pan;
@@ -31,6 +34,9 @@ public class KycUploadActiviy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc_upload_activiy);
         ac = KycUploadActiviy.this;
         dialog1 = M.showDialog(KycUploadActiviy.this, "", false, false);
@@ -175,4 +181,16 @@ public class KycUploadActiviy extends AppCompatActivity {
         return Uri.parse(path);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycUploadActiviy.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycUploadActiviy.this,KycUploadActiviy.this::finishAffinity);
+        }
+    }
 }

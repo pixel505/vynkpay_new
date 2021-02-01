@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -25,6 +26,7 @@ import com.vynkpay.models.HelpSupportModel;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 
 import org.json.JSONArray;
@@ -37,7 +39,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HelpAndSupportQuestions extends AppCompatActivity {
+public class HelpAndSupportQuestions extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbarTitle)
@@ -51,6 +53,9 @@ public class HelpAndSupportQuestions extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_help_and_details_rcg);
         ButterKnife.bind(HelpAndSupportQuestions.this);
         dialog1 = M.showDialog(HelpAndSupportQuestions.this, "", false, false);
@@ -136,4 +141,16 @@ public class HelpAndSupportQuestions extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(HelpAndSupportQuestions.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(HelpAndSupportQuestions.this,HelpAndSupportQuestions.this::finishAffinity);
+        }
+    }
 }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -32,6 +33,7 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class VerifyAccountActivity extends AppCompatActivity {
+public class VerifyAccountActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbarTitle;
     @BindView(R.id.toolbar)
@@ -53,6 +55,9 @@ public class VerifyAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding= DataBindingUtil.setContentView(this, R.layout.activity_verify_account);
         ButterKnife.bind(VerifyAccountActivity.this);
         dialog = M.showDialog(VerifyAccountActivity.this, "", false, false);
@@ -265,5 +270,18 @@ public class VerifyAccountActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(VerifyAccountActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(VerifyAccountActivity.this,VerifyAccountActivity.this::finishAffinity);
+        }
     }
 }

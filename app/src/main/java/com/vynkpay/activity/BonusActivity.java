@@ -3,6 +3,8 @@ package com.vynkpay.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,8 +13,11 @@ import com.vynkpay.adapter.BonusAdapter;
 import com.vynkpay.databinding.ActivityBonusBinding;
 import com.vynkpay.models.MyAccount;
 import com.vynkpay.utils.Functions;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class BonusActivity extends AppCompatActivity {
+public class BonusActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityBonusBinding binding;
     BonusActivity ac;
@@ -21,6 +26,9 @@ public class BonusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_bonus);
         ac = BonusActivity.this;
         if (getIntent().hasExtra("from")){
@@ -134,4 +142,16 @@ Global Royalty (Before it was Global Pool Bonus, need to change the name only)*/
         binding.bonusRecycler.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(BonusActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(BonusActivity.this,BonusActivity.this::finishAffinity);
+        }
+    }
 }

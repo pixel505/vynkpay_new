@@ -3,6 +3,7 @@ package com.vynkpay.activity.activities;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +15,10 @@ import com.vynkpay.models.PlanList;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetPackageResponse;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -22,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PackageAActivity extends AppCompatActivity {
+public class PackageAActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityPackageABinding binding;
     PackageAActivity ac;
@@ -35,6 +40,9 @@ public class PackageAActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_package_a);
         ac = PackageAActivity.this;
         //getPackageByServer();
@@ -265,4 +273,16 @@ public class PackageAActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(PackageAActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PackageAActivity.this,PackageAActivity.this::finishAffinity);
+        }
+    }
 }

@@ -16,6 +16,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerateticketResponse;
 import com.vynkpay.retrofit.model.GetTicketDepartment;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GenerateTicketActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class GenerateTicketActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityGenerateTicketBinding binding;
     GenerateTicketActivity ac;
     Dialog dialog1;
@@ -57,6 +60,9 @@ public class GenerateTicketActivity extends AppCompatActivity implements Adapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_generate_ticket);
         ac = GenerateTicketActivity.this;
         dialog1 = M.showDialog(GenerateTicketActivity.this, "", false, false);
@@ -278,5 +284,16 @@ public class GenerateTicketActivity extends AppCompatActivity implements Adapter
         return compressedFile;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(GenerateTicketActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(GenerateTicketActivity.this,GenerateTicketActivity.this::finishAffinity);
+        }
+    }
 }

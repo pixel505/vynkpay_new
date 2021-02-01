@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import com.vynkpay.fcm.SharedPrefManager;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +49,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.continueButton)
     NormalButton continueButton;
     @BindView(R.id.loginText)
@@ -68,6 +70,9 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_signup_rcg);
 
         //FirebaseMessaging.getInstance().subscribeToTopic(ApiParams.GLOBAL_PARAMS);
@@ -258,5 +263,18 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
         errorDialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SignUpActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SignUpActivity.this,SignUpActivity.this::finishAffinity);
+        }
     }
 }

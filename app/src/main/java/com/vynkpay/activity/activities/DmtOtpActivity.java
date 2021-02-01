@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.android.volley.AuthFailureError;
@@ -26,6 +27,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -33,7 +36,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DmtOtpActivity extends AppCompatActivity {
+public class DmtOtpActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     @BindView(R.id.verifyButton)
     NormalButton verifyButton;
@@ -50,6 +53,9 @@ public class DmtOtpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_otp_rcg);
 
         ButterKnife.bind(DmtOtpActivity.this);
@@ -282,5 +288,18 @@ public class DmtOtpActivity extends AppCompatActivity {
             }
         });
         errorDialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(DmtOtpActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            DmtOtpActivity.this.finish();
+        }
     }
 }

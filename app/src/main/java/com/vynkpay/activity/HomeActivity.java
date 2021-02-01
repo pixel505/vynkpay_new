@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,10 @@ import com.vynkpay.fragment.FragmentHome;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.LogoutResponse;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import butterknife.ButterKnife;
@@ -63,7 +68,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     static HomeActivity mInstance;
     CircleImageView profileImage;
@@ -78,6 +83,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         mInstance = HomeActivity.this;
         ButterKnife.bind(this);
@@ -240,8 +248,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     if(Functions.isIndian) {
                         startActivity(new Intent(HomeActivity.this, AllRechargeHistoryActivity.class));
-                    }
-                    else {
+                    } else {
                         startActivity(new Intent(HomeActivity.this, TransactionInternationalActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
 
@@ -493,6 +500,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
 //        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        MySingleton.getInstance(HomeActivity.this).setConnectivityListener(this);
         if (Prefes.getAccessToken(HomeActivity.this).equals("")) {
             Log.d("calledd","calledw");
             binding.sideLayout.loginLinear.setVisibility(View.VISIBLE);
@@ -851,4 +859,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(HomeActivity.this,HomeActivity.this::finishAffinity);
+        }
+    }
 }

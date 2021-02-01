@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.adapter.AccountAdapter;
@@ -13,8 +15,11 @@ import com.vynkpay.databinding.ActivityAccountAccessBinding;
 import com.vynkpay.models.MyAccount;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.CallActivity;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class AccountAccessActivity extends AppCompatActivity {
+public class AccountAccessActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityAccountAccessBinding binding;
     AccountAccessActivity ac;
@@ -22,6 +27,9 @@ public class AccountAccessActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_account_access);
         ac = AccountAccessActivity.this;
         clicks();
@@ -85,4 +93,16 @@ public class AccountAccessActivity extends AppCompatActivity {
         binding.accountrecycler.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AccountAccessActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AccountAccessActivity.this,AccountAccessActivity.this::finishAffinity);
+        }
+    }
 }

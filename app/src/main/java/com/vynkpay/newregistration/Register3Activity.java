@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.R;
@@ -20,11 +21,14 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.OtpVerifyLoginResponse;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register3Activity extends AppCompatActivity implements View.OnClickListener {
+public class Register3Activity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityRegister3Binding binding;
     String which = "",temp_id="",type="",isIndian="";
@@ -34,6 +38,9 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register3);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         dialog = M.showDialog(Register3Activity.this, "", false, false);
@@ -84,6 +91,12 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(Register3Activity.this).setConnectivityListener(this);
+    }
+
     void onVerifyOtpLogin(String otp){
         dialog.show();
         Log.d("loginparams",temp_id+"//"+otp);
@@ -109,16 +122,16 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
 
                         if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         }else {
                             Log.d("elsee","block");
                         }
@@ -166,16 +179,16 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
 
                         if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
                             startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finish();
+                            finishAffinity();
                         }else {
                             Log.d("elsee","block");
                         }
@@ -205,6 +218,12 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(Register3Activity.this,Register3Activity.this::finishAffinity);
+        }
+    }
 
 
     //@Field("country_code") String country_code,@Field("umobile") String u_password

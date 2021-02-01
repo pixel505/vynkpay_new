@@ -15,6 +15,7 @@ import android.os.Build;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import android.text.Editable;
@@ -72,6 +73,7 @@ public class M {
     private static ProgressDialog dialog;
     private static Dialog dialog1;
 
+    public static boolean isScreenshotDisable = true;
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -625,5 +627,46 @@ public class M {
     }
 
     private static boolean isDecision = false;
+
+    public interface OnPopClickListener{
+        void onClick();
+    }
+
+    public static void showUSBPopUp(Context context,OnPopClickListener listener){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setMessage("Please disconnect your device from USB to continue using the application");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (listener !=null){
+                    listener.onClick();
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        try {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context,R.color.colorPrimary));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+       /* AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setCancelable(false);
+        dialog.setMessage("Please disconnect your device from USB to contine using the application");
+        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                if (listener !=null){
+                    listener.onClick();
+                }
+            }
+        }).show();
+        dialog.get.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(neededColor);*/
+    }
 
 }

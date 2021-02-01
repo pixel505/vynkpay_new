@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.UpdateImageResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KycForeignRejectedActiviy extends AppCompatActivity {
+public class KycForeignRejectedActiviy extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityKycForeignRejectedActiviyBinding binding;
     KycForeignRejectedActiviy ac;
     Boolean pan;
@@ -50,7 +53,9 @@ public class KycForeignRejectedActiviy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc_foreign_rejected_activiy);
         ac = KycForeignRejectedActiviy.this;
         dialog1 = M.showDialog(KycForeignRejectedActiviy.this, "", false, false);
@@ -494,5 +499,18 @@ public class KycForeignRejectedActiviy extends AppCompatActivity {
             e.printStackTrace();
         }
         return compressedFile;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycForeignRejectedActiviy.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycForeignRejectedActiviy.this,KycForeignRejectedActiviy.this::finishAffinity);
+        }
     }
 }

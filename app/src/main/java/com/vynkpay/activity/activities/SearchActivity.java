@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.vynkpay.utils.Functions;
@@ -25,11 +26,15 @@ import com.vynkpay.activity.recharge.water.WaterActivity;
 import com.vynkpay.adapter.SearchItemAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.SearchItemModel;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -48,6 +53,9 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_search_rcg);
         ButterKnife.bind(SearchActivity.this);
         dev();
@@ -119,5 +127,18 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SearchActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SearchActivity.this,SearchActivity.this::finishAffinity);
+        }
     }
 }

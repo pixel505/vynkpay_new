@@ -6,14 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.adapter.WalletTransactionAdapter;
 import com.vynkpay.databinding.ActivityAllTransactionsBinding;
 import com.vynkpay.models.WalletTransactionsModel;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.util.ArrayList;
 
-public class AllTransactionsActivity extends AppCompatActivity {
+public class AllTransactionsActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityAllTransactionsBinding binding;
     String tabType;
@@ -22,6 +27,9 @@ public class AllTransactionsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding= DataBindingUtil.setContentView(this, R.layout.activity_all_transactions);
         dev();
     }
@@ -60,5 +68,18 @@ public class AllTransactionsActivity extends AppCompatActivity {
         View view=LayoutInflater.from(AllTransactionsActivity.this).inflate(R.layout.empty_space_layout, null);
         binding.transactionsListView.addHeaderView(view);
         binding.transactionsListView.setAdapter(new WalletTransactionAdapter(AllTransactionsActivity.this, walletTransactionsModelArrayList, true));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AllTransactionsActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AllTransactionsActivity.this,AllTransactionsActivity.this::finishAffinity);
+        }
     }
 }

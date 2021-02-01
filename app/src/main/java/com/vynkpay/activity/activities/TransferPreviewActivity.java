@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TransferPreviewActivity extends AppCompatActivity {
+public class TransferPreviewActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -77,6 +79,9 @@ public class TransferPreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_preview_transfer_rcg);
         dialog = M.showDialog(TransferPreviewActivity.this, "", false, false);
         ButterKnife.bind(TransferPreviewActivity.this);
@@ -310,5 +315,18 @@ public class TransferPreviewActivity extends AppCompatActivity {
             }
         });
         successDialogModel.getSuccessDialog().show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(TransferPreviewActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TransferPreviewActivity.this,TransferPreviewActivity.this::finishAffinity);
+        }
     }
 }

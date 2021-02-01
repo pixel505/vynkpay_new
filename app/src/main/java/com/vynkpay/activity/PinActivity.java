@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -30,7 +31,10 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.VerifyPinResponse;
 import com.vynkpay.utils.KeyboardView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.OnChangeKeys;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +43,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class PinActivity extends AppCompatActivity {
+public class PinActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     @BindView(R.id.addPinBtn)
     NormalButton pinBtn;
@@ -57,6 +61,9 @@ public class PinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_pin);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
@@ -145,6 +152,7 @@ public class PinActivity extends AppCompatActivity {
                                             EventBus.getDefault().postSticky(new UpDateUIEvent(false));
                                             Log.d("pinmessage",response.body().getMessage());
                                             if (response.body().getMessage().equalsIgnoreCase("Access Denied.")){
+                                                Prefes.clear(PinActivity.this);
                                                 startActivity(new Intent(PinActivity.this, LoginActivity.class));
                                                 PinActivity.this.finish();
                                                 Toast.makeText(PinActivity.this, response.body().getMessage()+"Please login again", Toast.LENGTH_SHORT).show();
@@ -185,6 +193,7 @@ public class PinActivity extends AppCompatActivity {
             dialog.dismiss();
         }
         super.onResume();
+        MySingleton.getInstance(PinActivity.this).setConnectivityListener(this);
     }
 
     public void popupWithdrawalAmount() {
@@ -234,6 +243,7 @@ public class PinActivity extends AppCompatActivity {
                             button.setEnabled(true);
                             dialog.dismiss();
                         }
+
                     });
                 }
             }
@@ -244,6 +254,13 @@ public class PinActivity extends AppCompatActivity {
             dialog.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         }
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PinActivity.this,PinActivity.this::finishAffinity);
+        }
     }
 
 }

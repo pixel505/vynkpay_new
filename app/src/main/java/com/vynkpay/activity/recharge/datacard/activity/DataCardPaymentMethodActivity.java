@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -43,6 +44,8 @@ import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 
 
@@ -59,7 +62,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class DataCardPaymentMethodActivity extends AppCompatActivity implements PaymentResultWithDataListener {
+public class DataCardPaymentMethodActivity extends AppCompatActivity implements PaymentResultWithDataListener, PlugInControlReceiver.ConnectivityReceiverListener {
     String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent,points, _LAND_LINE_NUMBER = "",
             _ACCOUNT_NUMBER = "";
     @BindView(R.id.toolbar)
@@ -131,6 +134,9 @@ SharedPreferences sp;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_method_datacard_paymemt_rcg);
         ButterKnife.bind(DataCardPaymentMethodActivity.this);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -697,6 +703,17 @@ SharedPreferences sp;
         // MySingleton.getInstance(DataCardPaymentMethodActivity.this).addToRequestQueue(stringRequest);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(DataCardPaymentMethodActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(DataCardPaymentMethodActivity.this,DataCardPaymentMethodActivity.this::finishAffinity);
+        }
+    }
 }
 

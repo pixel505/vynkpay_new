@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -30,13 +31,16 @@ import com.vynkpay.activity.activities.Dashboard;
 import com.vynkpay.custom.NormalBoldTextView;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
-import com.vynkpay.prefes.Prefes;;
+import com.vynkpay.prefes.Prefes;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;;
 import org.json.JSONException;
 import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     private Handler handler;
     private Runnable runnable;
     Prefes prefs;
@@ -61,6 +65,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Functions.hideStatusBar(SplashActivity.this);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_splash_rcg);
 
         ButterKnife.bind(SplashActivity.this);
@@ -83,6 +90,8 @@ public class SplashActivity extends AppCompatActivity {
 
         exitSplash();
     }
+
+
 
     public void exitSplash() {
         int SPLASH_TIME_OUT = 2500;
@@ -301,6 +310,7 @@ public class SplashActivity extends AppCompatActivity {
                 builder.show();
             }
         }
+        MySingleton.getInstance(SplashActivity.this).setConnectivityListener(this);
     }
     @Override
     protected void onDestroy() {
@@ -376,7 +386,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-
-
-
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SplashActivity.this,SplashActivity.this::finishAffinity);
+        }
+    }
 }

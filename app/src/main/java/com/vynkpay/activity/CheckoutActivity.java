@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,8 @@ import com.vynkpay.retrofit.model.GetWalletResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +55,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class CheckoutActivity extends AppCompatActivity implements PaymentResultWithDataListener {
+public class CheckoutActivity extends AppCompatActivity implements PaymentResultWithDataListener, PlugInControlReceiver.ConnectivityReceiverListener {
     String _AMOUNT = "", _TYPE = "", _OPERATOR_ID = "", _MOBILE_NUMBER = "",percent,points;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -102,6 +105,9 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_method_paymemt_rcg);
         ButterKnife.bind(CheckoutActivity.this);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -607,6 +613,17 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         // MySingleton.getInstance(PaymentMethodActivity.this).addToRequestQueue(stringRequest);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(CheckoutActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(CheckoutActivity.this,CheckoutActivity.this::finishAffinity);
+        }
+    }
 }
 

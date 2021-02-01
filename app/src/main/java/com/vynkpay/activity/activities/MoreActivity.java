@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
@@ -14,11 +15,15 @@ import com.vynkpay.adapter.AllServicesAdapter;
 import com.vynkpay.adapter.CustomPagerAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.ServiceModel;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MoreActivity extends AppCompatActivity {
+public class MoreActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbarTitle;
     @BindView(R.id.toolbar)
@@ -33,6 +38,11 @@ public class MoreActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_rcg);
+
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
         ButterKnife.bind(MoreActivity.this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,5 +92,18 @@ public class MoreActivity extends AppCompatActivity {
         rechargeServiceRecyclerView.setLayoutManager(Functions.layoutManager(MoreActivity.this, Functions.GRID, 4));
         AllServicesAdapter servicesAdapter=new AllServicesAdapter(MoreActivity.this, serviceModelArrayList);
         rechargeServiceRecyclerView.setAdapter(servicesAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(MoreActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(MoreActivity.this,MoreActivity.this::finishAffinity);
+        }
     }
 }

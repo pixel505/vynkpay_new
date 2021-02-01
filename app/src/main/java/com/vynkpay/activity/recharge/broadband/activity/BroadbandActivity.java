@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,7 +58,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
-public class BroadbandActivity extends AppCompatActivity {
+public class BroadbandActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.tvOperatorCircle)
     NormalTextView tvOperatorCircle;
     @BindView(R.id.etMobileNumber)
@@ -118,6 +120,9 @@ public class BroadbandActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_broadband_rcg);
         EventBus.getDefault().register(this);
         dialog = M.showDialog(BroadbandActivity.this, "", false, false);
@@ -420,6 +425,19 @@ public class BroadbandActivity extends AppCompatActivity {
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(BroadbandActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(BroadbandActivity.this,BroadbandActivity.this::finishAffinity);
         }
     }
 }

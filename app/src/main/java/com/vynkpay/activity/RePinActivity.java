@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.vynkpay.R;
@@ -17,14 +18,17 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.VerifyPinResponse;
 import com.vynkpay.utils.KeyboardView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.OnChangeKeys;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class RePinActivity extends AppCompatActivity {
+public class RePinActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     @BindView(R.id.addPinBtn)
     NormalButton pinBtn;
@@ -43,6 +47,9 @@ public class RePinActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_pin);
         ButterKnife.bind(this);
         dialog = M.showDialog(RePinActivity.this, "", false, false);
@@ -128,6 +135,13 @@ public class RePinActivity extends AppCompatActivity {
         }
 
         super.onResume();
+        MySingleton.getInstance(RePinActivity.this).setConnectivityListener(this);
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(RePinActivity.this,RePinActivity.this::finishAffinity);
+        }
+    }
 }

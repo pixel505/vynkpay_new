@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
@@ -22,13 +23,16 @@ import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RequestWithdrawnActivity extends AppCompatActivity implements View.OnClickListener {
+public class RequestWithdrawnActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityRequestWithdrawnBinding binding;
     Toolbar toolbar;
@@ -42,6 +46,9 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_request_withdrawn);
         serverDialog = M.showDialog(RequestWithdrawnActivity.this, "", false, false);
         toolbar = findViewById(R.id.toolbar);
@@ -138,6 +145,12 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(RequestWithdrawnActivity.this).setConnectivityListener(this);
+    }
+
     public void requestForOtp(String amount){
         submitButton.setEnabled(false);
         serverDialog.show();
@@ -169,4 +182,10 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
 
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(RequestWithdrawnActivity.this,RequestWithdrawnActivity.this::finishAffinity);
+        }
+    }
 }

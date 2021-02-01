@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +56,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class AddMoneyActivity extends AppCompatActivity implements PaymentResultWithDataListener {
+public class AddMoneyActivity extends AppCompatActivity implements PaymentResultWithDataListener, PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.etAmount)
     NormalEditText etAmount;
     @BindView(R.id.add100)
@@ -158,6 +160,9 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentResult
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_add_money_rcg);
         ButterKnife.bind(AddMoneyActivity.this);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -452,5 +457,18 @@ public class AddMoneyActivity extends AppCompatActivity implements PaymentResult
     @Override
     public void onPaymentError(int i, String s, PaymentData paymentData) {
         Toast.makeText(this, s+"", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AddMoneyActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AddMoneyActivity.this,AddMoneyActivity.this::finishAffinity);
+        }
     }
 }

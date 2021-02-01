@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -27,6 +28,7 @@ import com.vynkpay.databinding.ActivityReferAndEarnSummaryBinding;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,7 +39,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ReferAndEarnSummary extends AppCompatActivity {
+public class ReferAndEarnSummary extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityReferAndEarnSummaryBinding binding;
     @BindView(R.id.toolbar)
@@ -48,6 +50,9 @@ public class ReferAndEarnSummary extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding= DataBindingUtil.setContentView(this, R.layout.activity_refer_and_earn_summary);
         ButterKnife.bind(ReferAndEarnSummary.this);
         dev();
@@ -144,6 +149,13 @@ public class ReferAndEarnSummary extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ReferAndEarnSummary.this,ReferAndEarnSummary.this::finishAffinity);
+        }
+    }
+
 
     public class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.Holder>{
 
@@ -191,5 +203,11 @@ public class ReferAndEarnSummary extends AppCompatActivity {
                 statusTV = itemView.findViewById(R.id.statusTV);
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ReferAndEarnSummary.this).setConnectivityListener(this);
     }
 }

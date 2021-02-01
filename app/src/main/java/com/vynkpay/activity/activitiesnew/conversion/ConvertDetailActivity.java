@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
@@ -19,6 +20,9 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.text.NumberFormat;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,7 +30,7 @@ import retrofit2.Response;
 
 import static com.vynkpay.activity.activitiesnew.conversion.ConvertBonusMcashActivity.wallet_convert_charges;
 
-public class ConvertDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConvertDetailActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityConvertDetailBinding binding;
     Toolbar toolbar;
@@ -39,6 +43,9 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_convert_detail);
         activity = ConvertDetailActivity.this;
         serverDialog = M.showDialog(ConvertDetailActivity.this, "", false, false);
@@ -80,8 +87,8 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         if (view == binding.submitButton){
-            Log.d("payAmount",payAmount);
-            submit(payAmount);
+            Log.d("payAmount",convertedAmount);
+            submit(convertedAmount);
         }
     }
 
@@ -95,8 +102,7 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ConvertDetailActivity.this,ConversionOtpActivity.class).putExtra("amount",amount));
                     ConvertDetailActivity.this.finish();
-                }
-                else{
+                } else {
                     serverDialog.dismiss();
                     if (response.body() != null) {
                         Toast.makeText(activity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -111,5 +117,18 @@ public class ConvertDetailActivity extends AppCompatActivity implements View.OnC
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ConvertDetailActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ConvertDetailActivity.this,ConvertDetailActivity.this::finishAffinity);
+        }
     }
 }

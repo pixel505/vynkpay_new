@@ -5,17 +5,25 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.adapter.BonusAdapter;
 import com.vynkpay.databinding.ActivityClubBonusListBinding;
 import com.vynkpay.models.MyAccount;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class ClubBonusListActivity extends AppCompatActivity {
+public class ClubBonusListActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityClubBonusListBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_club_bonus_list);
         clicks();
 
@@ -44,4 +52,16 @@ public class ClubBonusListActivity extends AppCompatActivity {
         binding.clubRecycler.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ClubBonusListActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ClubBonusListActivity.this,ClubBonusListActivity.this::finishAffinity);
+        }
+    }
 }

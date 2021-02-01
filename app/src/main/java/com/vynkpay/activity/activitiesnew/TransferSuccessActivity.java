@@ -9,13 +9,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityTransferSuccessBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class TransferSuccessActivity extends AppCompatActivity implements View.OnClickListener {
+public class TransferSuccessActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityTransferSuccessBinding binding;
     Toolbar toolbar;
@@ -26,6 +31,9 @@ public class TransferSuccessActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_transfer_success);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         toolbar = findViewById(R.id.toolbar);
@@ -93,4 +101,16 @@ public class TransferSuccessActivity extends AppCompatActivity implements View.O
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(TransferSuccessActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TransferSuccessActivity.this,TransferSuccessActivity.this::finishAffinity);
+        }
+    }
 }

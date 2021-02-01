@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
@@ -20,6 +21,9 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TranferWalletActivity extends AppCompatActivity implements View.OnClickListener {
+public class TranferWalletActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityTranferWalletBinding binding;
     Toolbar toolbar;
@@ -40,6 +44,9 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_tranfer_wallet);
         serverDialog = M.showDialog(TranferWalletActivity.this, "", false, false);
         toolbar = findViewById(R.id.toolbar);
@@ -65,6 +72,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
         getBonusTransaction();
         getMCashTransaction();
         getVCashTransaction();
+        MySingleton.getInstance(TranferWalletActivity.this).setConnectivityListener(this);
     }
 
     @Override
@@ -238,4 +246,10 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TranferWalletActivity.this,TranferWalletActivity.this::finishAffinity);
+        }
+    }
 }

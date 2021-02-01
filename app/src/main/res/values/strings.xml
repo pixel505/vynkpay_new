@@ -272,7 +272,7 @@
     <string name="enterpdetailbelow">Enter detail below</string>
     <string name="conversion">Conversion</string>
     <string name="enteramontconverted">Enter Amount to be converted</string>
-    <string name="enteramonttobeconverted">Please enter amount for Bonus Wallet convert to mCash Wallet</string>
+    <string name="enteramonttobeconverted">Bonus Wallet convert to Mcash Wallet</string>
     <string name="convertmcash">Convert Mcash successfull</string>
     <string name="convertmcashtext">Convert MCash</string>
     <string name="enteramounttobeadded">Enter amount to added</string>
@@ -288,4 +288,5 @@
     <string name="payeeraddress">Payeer Address</string>
     <string name="perfectmoney">Perfect Money</string>
     <string name="ethaddress">ETH Address</string>
+    <string name="conversionsuccess">Conversion MCash Successfull</string>
 </resources>

@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.vynkpay.R;
 import com.vynkpay.adapter.WalletTransactionAdapter;
@@ -17,6 +18,8 @@ import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class TransactionInternationalActivity extends AppCompatActivity {
+public class TransactionInternationalActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityTransactionInternationalBinding binding;
     TransactionInternationalActivity activity;
@@ -34,6 +37,9 @@ public class TransactionInternationalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_transaction_international);
         activity = TransactionInternationalActivity.this;
         serverDialog = M.showDialog(activity, "", false, false);
@@ -113,5 +119,16 @@ public class TransactionInternationalActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(TransactionInternationalActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TransactionInternationalActivity.this,TransactionInternationalActivity.this::finishAffinity);
+        }
+    }
 }

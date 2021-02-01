@@ -6,12 +6,17 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityLoadMcashSuccessBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class LoadMcashSuccessActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoadMcashSuccessActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityLoadMcashSuccessBinding binding;
     Toolbar toolbar;
@@ -22,6 +27,9 @@ public class LoadMcashSuccessActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_load_mcash_success);
         if (getIntent().hasExtra("message")){
             message = getIntent().getStringExtra("message");
@@ -50,9 +58,22 @@ public class LoadMcashSuccessActivity extends AppCompatActivity implements View.
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(LoadMcashSuccessActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == submitButton){
 
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(LoadMcashSuccessActivity.this,LoadMcashSuccessActivity.this::finishAffinity);
         }
     }
 }

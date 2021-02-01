@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.vynkpay.R;
@@ -18,12 +19,14 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetBitAddressResponse;
 import com.vynkpay.retrofit.model.SendBitResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ETHActivity extends AppCompatActivity {
+public class ETHActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityETHBinding binding;
     ETHActivity ac;
@@ -32,6 +35,9 @@ public class ETHActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_e_t_h);
         ac = ETHActivity.this;
         dialog1 = M.showDialog(ETHActivity.this, "", false, false);
@@ -116,5 +122,18 @@ public class ETHActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ETHActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ETHActivity.this,ETHActivity.this::finishAffinity);
+        }
     }
 }

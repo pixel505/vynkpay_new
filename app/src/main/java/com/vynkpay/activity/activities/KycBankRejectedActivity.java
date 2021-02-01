@@ -10,14 +10,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.bumptech.glide.Glide;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityKycBankRejectedBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class KycBankRejectedActivity extends AppCompatActivity {
+public class KycBankRejectedActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityKycBankRejectedBinding binding;
     KycBankRejectedActivity ac;
     SharedPreferences sp;
@@ -25,6 +30,9 @@ public class KycBankRejectedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc_bank_rejected);
         ac = KycBankRejectedActivity.this;
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -127,5 +135,18 @@ public class KycBankRejectedActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycBankRejectedActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycBankRejectedActivity.this,KycBankRejectedActivity.this::finishAffinity);
+        }
     }
 }

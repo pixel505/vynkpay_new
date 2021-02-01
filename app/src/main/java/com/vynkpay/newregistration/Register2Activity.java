@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,6 +33,9 @@ import com.vynkpay.databinding.ActivityRegister2Binding;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetCountryResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Register2Activity extends AppCompatActivity implements View.OnClickListener {
+public class Register2Activity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityRegister2Binding binding;
     Dialog dialog, serverDialog;
@@ -51,6 +55,9 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_register2);
         serverDialog = M.showDialog(Register2Activity.this, "", false, false);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -140,6 +147,12 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
 
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(Register2Activity.this).setConnectivityListener(this);
     }
 
     //for international phone will replace with email
@@ -331,6 +344,13 @@ public class Register2Activity extends AppCompatActivity implements View.OnClick
             });
         }
 
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(Register2Activity.this,Register2Activity.this::finishAffinity);
+        }
     }
 
     private class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.MyViewHolder> {

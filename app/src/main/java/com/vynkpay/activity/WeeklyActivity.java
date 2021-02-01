@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -22,6 +23,9 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
 import com.vynkpay.utils.Functions;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -34,13 +38,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WeeklyActivity extends AppCompatActivity {
+public class WeeklyActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityWeeklyBinding binding;
     WeeklyActivity ac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_weekly);
         ac = WeeklyActivity.this;
         clicks();
@@ -59,6 +66,11 @@ public class WeeklyActivity extends AppCompatActivity {
         getWeeklyBonus();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WeeklyActivity.this).setConnectivityListener(this);
+    }
 
     void getWeeklyBonus(){
         binding.progressFrame.setVisibility(View.VISIBLE);
@@ -100,6 +112,12 @@ public class WeeklyActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WeeklyActivity.this,WeeklyActivity.this::finishAffinity);
+        }
+    }
 
 
     public static class WeeklyBonusAdapter extends RecyclerView.Adapter<WeeklyBonusAdapter.ViewHolder>  {

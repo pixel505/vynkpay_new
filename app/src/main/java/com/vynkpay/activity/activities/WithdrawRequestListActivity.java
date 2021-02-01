@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.vynkpay.utils.Functions;
@@ -16,12 +17,16 @@ import com.vynkpay.models.WithdrawalRequestModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class WithdrawRequestListActivity extends AppCompatActivity {
+public class WithdrawRequestListActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityWithdrawRequestListBinding binding;
     ArrayList<WithdrawalRequestModel> withdrawalRequestModelArrayList = new ArrayList<>();
@@ -29,6 +34,9 @@ public class WithdrawRequestListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding= DataBindingUtil.setContentView(this, R.layout.activity_withdraw_request_list);
         dev();
     }
@@ -124,5 +132,18 @@ public class WithdrawRequestListActivity extends AppCompatActivity {
                 binding.noLayout.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WithdrawRequestListActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WithdrawRequestListActivity.this,WithdrawRequestListActivity.this::finishAffinity);
+        }
     }
 }

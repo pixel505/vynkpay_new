@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
@@ -19,12 +20,15 @@ import com.vynkpay.fragment.SeeAllBeneficiaryFragment;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddBeneficiaryActivity extends AppCompatActivity {
+public class AddBeneficiaryActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.llAddNewLayout)
     LinearLayout llAddNewLayout;
     @BindView(R.id.llSeeAllBeneficiaryLayout)
@@ -45,6 +49,9 @@ public class AddBeneficiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_add_beneficiary_rcg);
         ButterKnife.bind(AddBeneficiaryActivity.this);
         setListeners();
@@ -122,6 +129,19 @@ public class AddBeneficiaryActivity extends AppCompatActivity {
             llAddNewLayout.setBackgroundDrawable(null);
             addNewTV.setTextColor(ContextCompat.getColor(AddBeneficiaryActivity.this, R.color.white));
             seeAllTV.setTextColor(ContextCompat.getColor(AddBeneficiaryActivity.this, R.color.colorPrimary));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AddBeneficiaryActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AddBeneficiaryActivity.this,AddBeneficiaryActivity.this::finishAffinity);
         }
     }
 }

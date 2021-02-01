@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.google.gson.Gson;
@@ -20,6 +21,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.WithdrawalTypeTesponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class WithdrawTypeActivity extends AppCompatActivity implements View.OnClickListener {
+public class WithdrawTypeActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     Toolbar toolbar;
     NormalTextView toolbarTitle;
@@ -46,6 +49,9 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_withdraw_type);
         serverDialog = M.showDialog(WithdrawTypeActivity.this, "", false, false);
         toolbar = findViewById(R.id.toolbar);
@@ -155,4 +161,16 @@ public class WithdrawTypeActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WithdrawTypeActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WithdrawTypeActivity.this,WithdrawTypeActivity.this::finishAffinity);
+        }
+    }
 }

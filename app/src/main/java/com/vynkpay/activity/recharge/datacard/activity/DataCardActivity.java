@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 
 import org.greenrobot.eventbus.EventBus;
@@ -50,7 +52,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
-public class DataCardActivity extends AppCompatActivity {
+public class DataCardActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.prepaidLayout)
     LinearLayout prepaidLayout;
     @BindView(R.id.postPaidLayout)
@@ -132,6 +134,9 @@ public class DataCardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_datacard_rcg);
         EventBus.getDefault().register(this);
         dialog = M.showDialog(DataCardActivity.this, "", false, false);
@@ -271,6 +276,12 @@ public class DataCardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(DataCardActivity.this).setConnectivityListener(this);
+    }
+
     private void setListeners() {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -388,6 +399,13 @@ public class DataCardActivity extends AppCompatActivity {
             _TALK_TIME = planRechargeBus.getTalkTime();
             _PLAN = Prefes.getPlan(DataCardActivity.this);
 
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(DataCardActivity.this,DataCardActivity.this::finishAffinity);
         }
     }
 }

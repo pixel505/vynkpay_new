@@ -12,6 +12,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.R;
@@ -23,12 +24,15 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ConversionResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConvertBonusMcashActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConvertBonusMcashActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityConvertBonusMcashBinding binding;
     Toolbar toolbar;
@@ -42,6 +46,9 @@ public class ConvertBonusMcashActivity extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_convert_bonus_mcash);
         activity = ConvertBonusMcashActivity.this;
         serverDialog = M.showDialog(ConvertBonusMcashActivity.this, "", false, false);
@@ -158,4 +165,16 @@ public class ConvertBonusMcashActivity extends AppCompatActivity implements View
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ConvertBonusMcashActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ConvertBonusMcashActivity.this,ConvertBonusMcashActivity.this::finishAffinity);
+        }
+    }
 }

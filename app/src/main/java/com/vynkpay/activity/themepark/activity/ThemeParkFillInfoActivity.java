@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -37,6 +38,7 @@ import com.vynkpay.models.SuccessDialogModel;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.json.JSONObject;
 import java.util.HashMap;
@@ -46,7 +48,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ThemeParkFillInfoActivity extends AppCompatActivity {
+public class ThemeParkFillInfoActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     ThemeParkTicketModel themeParkTicketModel;
     ThemeParkCategoryTicketModel themeParkCategoryTicketModel;
@@ -99,6 +101,9 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_ticket_fill_info_rcg);
 
         ButterKnife.bind(ThemeParkFillInfoActivity.this);
@@ -257,6 +262,12 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity {
 
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ThemeParkFillInfoActivity.this).setConnectivityListener(this);
     }
 
     @Override
@@ -667,4 +678,10 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ThemeParkFillInfoActivity.this,ThemeParkFillInfoActivity.this::finishAffinity);
+        }
+    }
 }

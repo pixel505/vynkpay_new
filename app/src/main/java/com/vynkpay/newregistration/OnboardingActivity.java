@@ -10,16 +10,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.adapter.WelComeAdapter;
 import com.vynkpay.databinding.ActivityOnboardingBinding;
 import com.vynkpay.models.Slider;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class OnboardingActivity extends AppCompatActivity implements View.OnClickListener {
+public class OnboardingActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityOnboardingBinding binding;
 
@@ -35,6 +41,9 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_onboarding);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
         country = sp.getString("Country","");
@@ -141,6 +150,16 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(OnboardingActivity.this).setConnectivityListener(this);
+    }
 
-
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(OnboardingActivity.this,OnboardingActivity.this::finishAffinity);
+        }
+    }
 }

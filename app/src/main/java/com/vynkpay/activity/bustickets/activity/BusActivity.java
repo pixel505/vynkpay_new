@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,13 +17,16 @@ import com.vynkpay.activity.bustickets.adapter.DateAdapter;
 import com.vynkpay.activity.bustickets.adapter.RecentTicketsAdapter;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.custom.NormalTextView;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BusActivity extends AppCompatActivity {
+public class BusActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbarTitle)
@@ -47,6 +51,9 @@ public class BusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_bus_rcg);
 
         ButterKnife.bind(BusActivity.this);
@@ -79,5 +86,18 @@ public class BusActivity extends AppCompatActivity {
         recent_recyclerview.setLayoutManager(search_layoutManager);
         search_adapter = new RecentTicketsAdapter(BusActivity.this, recents);
         recent_recyclerview.setAdapter(search_adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(BusActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(BusActivity.this,BusActivity.this::finishAffinity);
+        }
     }
 }

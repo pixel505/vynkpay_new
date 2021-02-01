@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityPerfectMoneyBinding;
@@ -16,11 +17,14 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetBitAddressResponse;
 import com.vynkpay.retrofit.model.SendBitResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PerfectMoneyActivity extends AppCompatActivity {
+public class PerfectMoneyActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityPerfectMoneyBinding binding;
     PerfectMoneyActivity ac;
@@ -29,6 +33,9 @@ public class PerfectMoneyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_perfect_money);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         ac = PerfectMoneyActivity.this;
         dialog1 = M.showDialog(PerfectMoneyActivity.this, "", false, false);
 
@@ -109,5 +116,18 @@ public class PerfectMoneyActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(PerfectMoneyActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PerfectMoneyActivity.this,PerfectMoneyActivity.this::finishAffinity);
+        }
     }
 }

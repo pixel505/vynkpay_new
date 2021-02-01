@@ -17,6 +17,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -51,6 +52,7 @@ import com.vynkpay.retrofit.model.LoginResponse;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,7 +72,7 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
   @BindView(R.id.etLoginText)
   NormalEditText etLoginText;
   @BindView(R.id.etPassword)
@@ -107,6 +109,9 @@ public class LoginActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    if (M.isScreenshotDisable){
+      getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+    }
     setContentView(R.layout.login_new);
     mShraredPref=new UserSharedPreferences(LoginActivity.this);
 
@@ -462,6 +467,7 @@ public class LoginActivity extends AppCompatActivity {
       dialog.dismiss();
     }
     super.onResume();
+    MySingleton.getInstance(LoginActivity.this).setConnectivityListener(this);
   }
 
   public void popupWithdrawalAmount(){
@@ -527,5 +533,10 @@ public class LoginActivity extends AppCompatActivity {
   }
 
 
-
+  @Override
+  public void onNetworkConnectionChanged(boolean isConnected) {
+    if (isConnected){
+      M.showUSBPopUp(LoginActivity.this,LoginActivity.this::finishAffinity);
+    }
+  }
 }

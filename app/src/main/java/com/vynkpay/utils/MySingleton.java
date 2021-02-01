@@ -21,6 +21,10 @@ public class MySingleton extends Application{
 
     }
 
+    public void setConnectivityListener(PlugInControlReceiver.ConnectivityReceiverListener listener) {
+        PlugInControlReceiver.connectivityReceiverListener = listener;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

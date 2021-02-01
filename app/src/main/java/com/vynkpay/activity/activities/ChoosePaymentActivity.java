@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ import com.vynkpay.retrofit.model.PayResponse;
 import com.vynkpay.retrofit.model.ReddemAmountResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChoosePaymentActivity extends AppCompatActivity implements PaymentResultWithDataListener {
+public class ChoosePaymentActivity extends AppCompatActivity implements PaymentResultWithDataListener, PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityChoosePaymentBinding binding;
     ChoosePaymentActivity ac;
     String mBalance, mAmount;
@@ -47,6 +50,9 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_choose_payment);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_choose_payment);
         ac = ChoosePaymentActivity.this;
@@ -338,6 +344,13 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
     protected void onResume() {
         dialog1.dismiss();
         super.onResume();
+        MySingleton.getInstance(ChoosePaymentActivity.this).setConnectivityListener(this);
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ChoosePaymentActivity.this,ChoosePaymentActivity.this::finishAffinity);
+        }
+    }
 }

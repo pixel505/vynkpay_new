@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,6 +21,8 @@ import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -28,7 +31,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutUsActivity extends AppCompatActivity {
+public class AboutUsActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.webView)
     WebView webView;
     @BindView(R.id.toolbarTitle)
@@ -44,6 +47,11 @@ public class AboutUsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
         setContentView(R.layout.activity_web_rcg);
 
         ButterKnife.bind(AboutUsActivity.this);
@@ -90,5 +98,18 @@ public class AboutUsActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(runnable, TIME_OUT);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AboutUsActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AboutUsActivity.this,AboutUsActivity.this::finishAffinity);
+        }
     }
 }

@@ -7,17 +7,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DataRechargeConfirmationActivity extends AppCompatActivity {
+public class DataRechargeConfirmationActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.layProceed)
@@ -55,6 +59,9 @@ public class DataRechargeConfirmationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_datacard_recharge_rcg);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         ButterKnife.bind(DataRechargeConfirmationActivity.this);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,5 +144,18 @@ public class DataRechargeConfirmationActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(DataRechargeConfirmationActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(DataRechargeConfirmationActivity.this,DataRechargeConfirmationActivity.this::finishAffinity);
+        }
     }
 }

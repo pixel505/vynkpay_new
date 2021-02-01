@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -30,6 +31,9 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -39,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbarnew)
     Toolbar toolbar;
     @BindView(R.id.noLayout)
@@ -60,6 +64,9 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_rcg);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         ButterKnife.bind(NotificationActivity.this);
         setSupportActionBar(toolbar);
         serverDialog = M.showDialog(NotificationActivity.this, "", false, false);
@@ -119,7 +126,7 @@ public class NotificationActivity extends AppCompatActivity {
                 handler.postDelayed(runnable, apiDelayed);
             }
         }, apiDelayed); // so basically after your getHeroes(), from next time it will be 5 sec repeated
-
+        MySingleton.getInstance(NotificationActivity.this).setConnectivityListener(this);
 
     }
     @Override
@@ -127,6 +134,14 @@ public class NotificationActivity extends AppCompatActivity {
         super.onPause();
         handler.removeCallbacks(runnable); //stop handler when activity not visible
     }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(NotificationActivity.this,NotificationActivity.this::finishAffinity);
+        }
+    }
+
     class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.MyViewHolder> {
         List<NotificationResponse.DataBean.NotificationBean> notificationListData;
         Context context;

@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,6 +52,8 @@ import com.vynkpay.retrofit.model.PaidItemResponse;
 import com.vynkpay.retrofit.model.SendWaletOtp;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +65,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AffiliateActivity extends AppCompatActivity  {
+public class AffiliateActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityAffiliateBinding binding;
     AffiliateActivity ac;
     Dialog dialog,dialog1;
@@ -78,6 +81,9 @@ public class AffiliateActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_affiliate);
         ac = AffiliateActivity.this;
         dialog1 = M.showDialog(ac, "", false, false);
@@ -471,6 +477,14 @@ public class AffiliateActivity extends AppCompatActivity  {
             }
         });
     }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AffiliateActivity.this,AffiliateActivity.this::finishAffinity);
+        }
+    }
+
     private class UsrAdapter extends RecyclerView.Adapter<AffiliateActivity.UsrAdapter.MyViewHolder> {
         Context context;
         List<GetUserResponse.Datum> mList;
@@ -665,6 +679,7 @@ public class AffiliateActivity extends AppCompatActivity  {
             dialog1.dismiss();
         }
         super.onResume();
+        MySingleton.getInstance(AffiliateActivity.this).setConnectivityListener(this);
     }
 
 }

@@ -9,19 +9,26 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityChoosePaymentDBinding;
 import com.vynkpay.prefes.Prefes;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class ChoosePaymentActivityD extends AppCompatActivity {
+public class ChoosePaymentActivityD extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ChoosePaymentActivityD ac;
     ActivityChoosePaymentDBinding binding;
     SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_choose_payment_d);
         ac = ChoosePaymentActivityD.this;
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -61,5 +68,18 @@ public class ChoosePaymentActivityD extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ChoosePaymentActivityD.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ChoosePaymentActivityD.this,ChoosePaymentActivityD.this::finishAffinity);
+        }
     }
 }

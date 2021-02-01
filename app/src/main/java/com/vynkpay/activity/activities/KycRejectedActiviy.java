@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +29,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.UpdateImageResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KycRejectedActiviy extends AppCompatActivity {
+public class KycRejectedActiviy extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityKycRejectedActiviyBinding binding;
     KycRejectedActiviy ac;
     Boolean pan;
@@ -51,6 +54,9 @@ public class KycRejectedActiviy extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc_rejected_activiy);
         ac = KycRejectedActiviy.this;
         dialog1 = M.showDialog(KycRejectedActiviy.this, "", false, false);
@@ -582,4 +588,16 @@ public class KycRejectedActiviy extends AppCompatActivity {
         return compressedFile;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycRejectedActiviy.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycRejectedActiviy.this,KycRejectedActiviy.this::finishAffinity);
+        }
+    }
 }

@@ -11,6 +11,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.squareup.picasso.Picasso;
 
@@ -51,7 +53,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
-public class GiftCardDetailActivity extends AppCompatActivity {
+public class GiftCardDetailActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbar_title;
@@ -103,6 +105,9 @@ public class GiftCardDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_detail_giftcard_rcg);
         ButterKnife.bind(GiftCardDetailActivity.this);
         EventBus.getDefault().register(this);
@@ -330,4 +335,16 @@ public class GiftCardDetailActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(GiftCardDetailActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(GiftCardDetailActivity.this,GiftCardDetailActivity.this::finishAffinity);
+        }
+    }
 }

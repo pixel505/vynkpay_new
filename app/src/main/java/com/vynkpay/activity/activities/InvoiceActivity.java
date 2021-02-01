@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.adapter.InvoiceAdapter;
@@ -13,6 +14,9 @@ import com.vynkpay.databinding.ActivityInvoiceBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetInvoiceResponse;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +25,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InvoiceActivity extends AppCompatActivity {
+public class InvoiceActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityInvoiceBinding binding;
     InvoiceActivity ac;
     List<GetInvoiceResponse.Data.Listing> dataList, filteredDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice);
         ac = InvoiceActivity.this;
         click();
@@ -107,5 +114,18 @@ public class InvoiceActivity extends AppCompatActivity {
 
         return filteredDataList;
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(InvoiceActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(InvoiceActivity.this,InvoiceActivity.this::finishAffinity);
+        }
     }
 }

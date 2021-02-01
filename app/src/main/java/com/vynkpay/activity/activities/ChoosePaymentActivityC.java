@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.RequestCashResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,7 +43,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChoosePaymentActivityC extends AppCompatActivity {
+public class ChoosePaymentActivityC extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityChoosePaymentCBinding binding;
     ChoosePaymentActivityC ac;
     String cheqeImagepath;
@@ -54,6 +57,9 @@ public class ChoosePaymentActivityC extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_choose_payment_c);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_choose_payment_c);
         ac = ChoosePaymentActivityC.this;
@@ -238,5 +244,18 @@ public class ChoosePaymentActivityC extends AppCompatActivity {
             e.printStackTrace();
         }
         return compressedFile;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ChoosePaymentActivityC.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ChoosePaymentActivityC.this,ChoosePaymentActivityC.this::finishAffinity);
+        }
     }
 }

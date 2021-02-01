@@ -3,6 +3,7 @@ package com.vynkpay.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,11 +22,15 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GenerationBonusResponse;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ReferalBonusActivity extends AppCompatActivity {
+public class ReferalBonusActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityReferalBonusBinding binding;
     ReferalBonusActivity ac;
     String type;
@@ -33,6 +38,9 @@ public class ReferalBonusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_referal_bonus);
         ac = ReferalBonusActivity.this;
         Log.d("access_token",Prefes.getAccessToken(ac));
@@ -603,4 +611,16 @@ public class ReferalBonusActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ReferalBonusActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ReferalBonusActivity.this,ReferalBonusActivity.this::finishAffinity);
+        }
+    }
 }

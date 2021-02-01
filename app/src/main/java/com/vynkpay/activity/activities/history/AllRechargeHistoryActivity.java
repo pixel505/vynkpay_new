@@ -7,13 +7,19 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.history.adapter.HistoryPagerAdapter;
 import com.vynkpay.custom.NormalTextView;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AllRechargeHistoryActivity extends AppCompatActivity {
+public class AllRechargeHistoryActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar_title)
     NormalTextView toolbar_title;
     @BindView(R.id.toolbar)
@@ -28,7 +34,9 @@ public class AllRechargeHistoryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_rcg);
-
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         ButterKnife.bind(AllRechargeHistoryActivity.this);
         setListeners();
         position = getIntent().getIntExtra("pos", 0);
@@ -84,4 +92,16 @@ public class AllRechargeHistoryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AllRechargeHistoryActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AllRechargeHistoryActivity.this,AllRechargeHistoryActivity.this::finishAffinity);
+        }
+    }
 }

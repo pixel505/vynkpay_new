@@ -134,6 +134,7 @@ public class LandLineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landline_rcg);
         EventBus.getDefault().register(this);
+        Log.d("calledd","call");
         dialog = M.showDialog(LandLineActivity.this, "", false, false);
         ButterKnife.bind(LandLineActivity.this);
         setListeners();

@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetCountryResponse;
 import com.vynkpay.retrofit.model.RegisterResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -60,7 +63,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Signupnew extends AppCompatActivity {
+public class Signupnew extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.linMain)
     LinearLayout linMain;
     @BindView(R.id.signLoginText)
@@ -112,6 +115,9 @@ public class Signupnew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.signup_new);
         sp = getSharedPreferences("sp",Context.MODE_PRIVATE);
         sp1 = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -459,6 +465,13 @@ public class Signupnew extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(Signupnew.this,Signupnew.this::finishAffinity);
+        }
+    }
+
     private class StateAdapter extends RecyclerView.Adapter<StateAdapter.SHolder>{
 
         Context context;
@@ -685,4 +698,9 @@ public class Signupnew extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(Signupnew.this).setConnectivityListener(this);
+    }
 }

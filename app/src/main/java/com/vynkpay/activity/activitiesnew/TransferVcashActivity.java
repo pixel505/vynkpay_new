@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,9 @@ import com.vynkpay.retrofit.model.GetUserResponse;
 import com.vynkpay.retrofit.model.TransferMoney;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TransferVcashActivity extends AppCompatActivity implements View.OnClickListener {
+public class TransferVcashActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityTransferVcashBinding binding;
     Dialog dialog, serverDialog;
@@ -62,6 +66,9 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_transfer_vcash);
         serverDialog = M.showDialog(TransferVcashActivity.this, "", false, false);
         toolbar = findViewById(R.id.toolbar);
@@ -274,6 +281,13 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
 
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TransferVcashActivity.this,TransferVcashActivity.this::finishAffinity);
+        }
+    }
+
     public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
         Context context;
@@ -343,6 +357,12 @@ public class TransferVcashActivity extends AppCompatActivity implements View.OnC
             }
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(TransferVcashActivity.this).setConnectivityListener(this);
     }
 
 }

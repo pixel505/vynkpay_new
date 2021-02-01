@@ -2,6 +2,8 @@ package com.vynkpay.onboard;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.WindowManager;
+
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,11 +16,13 @@ import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
 import com.rd.draw.data.Orientation;
 import com.rd.draw.data.RtlMode;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
     @BindView(R.id.pageIndicatorView)
@@ -30,6 +34,9 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_onboard_rcg);
         ButterKnife.bind(WelcomeActivity.this);
         count = Prefes.getAppFirstTime(WelcomeActivity.this);
@@ -75,6 +82,19 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WelcomeActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WelcomeActivity.this,WelcomeActivity.this::finishAffinity);
+        }
     }
 
 }

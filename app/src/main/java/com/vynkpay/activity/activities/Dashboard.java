@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.google.android.material.appbar.AppBarLayout;
 import com.rd.PageIndicatorView;
@@ -59,7 +61,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Dashboard extends AppCompatActivity implements View.OnClickListener {
+public class Dashboard extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.ivUserImage)
     CircleImageView ivUserImage;
     @BindView(R.id.etUserName)
@@ -158,6 +160,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_dashboard_new_rcg);
         ButterKnife.bind(Dashboard.this);
         dev();
@@ -563,6 +568,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         super.onResume();
         updateUIAccordingToUserStatus();
         fetchWalletData();
+        MySingleton.getInstance(Dashboard.this).setConnectivityListener(this);
     }
 
     RequestQueue requestQueue;
@@ -704,4 +710,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(Dashboard.this,Dashboard.this::finishAffinity);
+        }
+    }
 }

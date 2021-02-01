@@ -21,12 +21,15 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.PayResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class WebviewActivityNew extends AppCompatActivity {
+public class WebviewActivityNew extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog1;
     String pID;
     @Override
@@ -34,6 +37,9 @@ public class WebviewActivityNew extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
                 WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_webview_new);
         dialog1 = M.showDialog(WebviewActivityNew.this, "", false, false);
         TextView toolbarTitle = findViewById(R.id.toolbarTitle);
@@ -123,5 +129,18 @@ public class WebviewActivityNew extends AppCompatActivity {
                 dialog1.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WebviewActivityNew.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WebviewActivityNew.this,WebviewActivityNew.this::finishAffinity);
+        }
     }
 }

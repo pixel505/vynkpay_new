@@ -8,17 +8,21 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatsActivity extends AppCompatActivity implements View.OnClickListener {
+public class SeatsActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
     ViewGroup layout;
     String space = "-";
     String seats;
@@ -35,6 +39,9 @@ public class SeatsActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_seats_rcg);
 
         layout = findViewById(R.id.layoutSeat);
@@ -154,6 +161,12 @@ public class SeatsActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SeatsActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
     public void onClick(View view) {
         if ((int) view.getTag() == STATUS_AVAILABLE) {
             if (selectedIds.contains(view.getId() + ",")) {
@@ -167,6 +180,13 @@ public class SeatsActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Seat " + view.getId() + " is Booked", Toast.LENGTH_SHORT).show();
         } else if ((int) view.getTag() == STATUS_RESERVED) {
             Toast.makeText(this, "Seat " + view.getId() + " is Reserved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SeatsActivity.this,SeatsActivity.this::finishAffinity);
         }
     }
 }

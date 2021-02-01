@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -23,12 +24,14 @@ import com.vynkpay.models.GetKycStatusResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class KycActivity extends AppCompatActivity {
+public class KycActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityKycBinding binding;
     KycActivity ac;
     boolean shouldAllowBack;
@@ -39,6 +42,9 @@ public class KycActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc);
         ac = KycActivity.this;
         dialog1 = M.showDialog(KycActivity.this, "", false, false);
@@ -608,5 +614,16 @@ public class KycActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycActivity.this,KycActivity.this::finishAffinity);
+        }
+    }
 }

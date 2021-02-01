@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.activitiesnew.RequestWithdrawnActivity;
 import com.vynkpay.activity.activitiesnew.TranferWalletActivity;
@@ -24,12 +26,15 @@ import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Collections;
 
-public class WalletNewActivity extends AppCompatActivity {
+public class WalletNewActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityWalletNewBinding binding;
     WalletNewActivity ac;
     String bonusBalance,vCashBalance,mCashBalance;
@@ -37,6 +42,9 @@ public class WalletNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_wallet_new);
         ac = WalletNewActivity.this;
         serverDialog = M.showDialog(ac, "", false, false);
@@ -171,7 +179,7 @@ public class WalletNewActivity extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
                          serverDialog.dismiss();
-                        JSONObject dataObject=jsonObject.getJSONObject("data");
+                         JSONObject dataObject=jsonObject.getJSONObject("data");
                          bonusBalance=dataObject.getString("walletBalance");
                          binding.reqwithtext.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
                          binding.bonusAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
@@ -189,10 +197,11 @@ public class WalletNewActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 Log.d("transaction",error);
-                   serverDialog.dismiss();
+                serverDialog.dismiss();
             }
         });
     }
+
     private void getVCashTransaction(){
         serverDialog.show();
         ApiCalls.getVcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
@@ -282,5 +291,13 @@ public class WalletNewActivity extends AppCompatActivity {
             serverDialog.dismiss();
         }
         super.onResume();
+        MySingleton.getInstance(WalletNewActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WalletNewActivity.this,WalletNewActivity.this::finishAffinity);
+        }
     }
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -21,7 +22,9 @@ import com.vynkpay.models.OfferModel;
 import com.vynkpay.models.OffersModel;
 import com.vynkpay.transformer.DepthPageTransformer;
 import com.vynkpay.utils.ApiParams;
+import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import com.rd.PageIndicatorView;
 import com.rd.animation.type.AnimationType;
@@ -43,7 +46,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
-public class OfferActivity extends AppCompatActivity {
+public class OfferActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbarTitle)
@@ -75,6 +78,9 @@ public class OfferActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_offer_rcg);
         ButterKnife.bind(OfferActivity.this);
         //FirebaseMessaging.getInstance().subscribeToTopic(ApiParams.GLOBAL_PARAMS);
@@ -214,6 +220,19 @@ public class OfferActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(OfferActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(OfferActivity.this,OfferActivity.this::finishAffinity);
         }
     }
 }

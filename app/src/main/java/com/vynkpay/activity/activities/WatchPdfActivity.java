@@ -5,17 +5,24 @@ import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityWatchPdfBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class WatchPdfActivity extends AppCompatActivity {
+public class WatchPdfActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityWatchPdfBinding binding;
     String pdfLink;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_watch_pdf);
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,5 +64,18 @@ public class WatchPdfActivity extends AppCompatActivity {
         //find ids of back button
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(WatchPdfActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(WatchPdfActivity.this,WatchPdfActivity.this::finishAffinity);
+        }
     }
 }

@@ -7,12 +7,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +24,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class GiftCardDescription extends AppCompatActivity {
+public class GiftCardDescription extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbar_title;
@@ -45,6 +48,9 @@ public class GiftCardDescription extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_gift_description_rcg);
         ButterKnife.bind(GiftCardDescription.this);
         toolbar_title.setText("Gift Card Description");
@@ -69,6 +75,12 @@ public class GiftCardDescription extends AppCompatActivity {
         fetchDetailOfProduct(dataObject);
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(GiftCardDescription.this).setConnectivityListener(this);
     }
 
     private void fetchDetailOfProduct(JSONObject dataObject) {
@@ -96,6 +108,13 @@ public class GiftCardDescription extends AppCompatActivity {
             tvGiftBrandName.setText(name);
         } catch (Exception e) {
 
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(GiftCardDescription.this,GiftCardDescription.this::finishAffinity);
         }
     }
 }

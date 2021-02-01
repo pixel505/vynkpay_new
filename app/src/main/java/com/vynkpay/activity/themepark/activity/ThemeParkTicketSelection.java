@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -38,6 +39,8 @@ import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 import com.vynkpay.utils.URLS;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -53,7 +56,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ThemeParkTicketSelection extends AppCompatActivity {
+public class ThemeParkTicketSelection extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     Dialog dialog;
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbar_title;
@@ -83,6 +86,9 @@ public class ThemeParkTicketSelection extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_select_ticket_rcg);
         ButterKnife.bind(ThemeParkTicketSelection.this);
         EventBus.getDefault().register(this);
@@ -322,6 +328,19 @@ public class ThemeParkTicketSelection extends AppCompatActivity {
         RequestQueue rQueue = Volley.newRequestQueue(this);
         rQueue.add(stringRequest);
         //MySingleton.getInstance(ThemeParkTicketSelection.this).addToRequestQueue(stringRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ThemeParkTicketSelection.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ThemeParkTicketSelection.this,ThemeParkTicketSelection.this::finishAffinity);
+        }
     }
 }
 

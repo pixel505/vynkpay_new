@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,9 @@ import com.vynkpay.retrofit.model.GetUserResponse;
 import com.vynkpay.retrofit.model.TransferMoney;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -45,7 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TransferWalletProcessActivity extends AppCompatActivity implements View.OnClickListener {
+public class TransferWalletProcessActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityTransferWalletProcessBinding binding;
     Toolbar toolbar;
@@ -61,6 +65,9 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_transfer_wallet_process);
         serverDialog = M.showDialog(TransferWalletProcessActivity.this, "", false, false);
         toolbar = findViewById(R.id.toolbar);
@@ -262,6 +269,19 @@ public class TransferWalletProcessActivity extends AppCompatActivity implements 
                     }
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(TransferWalletProcessActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(TransferWalletProcessActivity.this,TransferWalletProcessActivity.this::finishAffinity);
         }
     }
 

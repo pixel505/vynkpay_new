@@ -9,6 +9,7 @@ import android.content.Intent;;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalTextView;
@@ -18,12 +19,14 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.CheckWaletOtp;
 import com.vynkpay.retrofit.model.SubmitConversionResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ConversionOtpActivity extends AppCompatActivity implements View.OnClickListener {
+public class ConversionOtpActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityConversionOtpBinding binding;
     Toolbar toolbar;
@@ -35,6 +38,9 @@ public class ConversionOtpActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_conversion_otp);
         if (getIntent().hasExtra("amount")){
             amount = getIntent().getStringExtra("amount");
@@ -125,4 +131,16 @@ public class ConversionOtpActivity extends AppCompatActivity implements View.OnC
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ConversionOtpActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ConversionOtpActivity.this,ConversionOtpActivity.this::finishAffinity);
+        }
+    }
 }

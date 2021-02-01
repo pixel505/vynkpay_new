@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
@@ -17,6 +18,9 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetInvoiceDetailResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InvoiceDetailActivity extends AppCompatActivity {
+public class InvoiceDetailActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityInvoiceDetailBinding binding;
     InvoiceDetailActivity ac;
     File imagePath;
@@ -40,6 +44,9 @@ public class InvoiceDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_invoice_detail);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         ac = InvoiceDetailActivity.this;
         dialog = M.showDialog(ac, "", false, false);
         click();
@@ -152,5 +159,18 @@ public class InvoiceDetailActivity extends AppCompatActivity {
                 Toast.makeText(ac, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(InvoiceDetailActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(InvoiceDetailActivity.this,InvoiceDetailActivity.this::finishAffinity);
+        }
     }
 }

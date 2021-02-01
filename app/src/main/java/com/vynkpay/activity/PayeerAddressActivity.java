@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.VerifyBitActivity;
@@ -16,11 +17,14 @@ import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetBitAddressResponse;
 import com.vynkpay.retrofit.model.SendBitResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PayeerAddressActivity extends AppCompatActivity {
+public class PayeerAddressActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityPayeerAddressBinding binding;
     PayeerAddressActivity ac;
@@ -29,6 +33,9 @@ public class PayeerAddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_payeer_address);
         ac = PayeerAddressActivity.this;
         dialog1 = M.showDialog(PayeerAddressActivity.this, "", false, false);
@@ -117,4 +124,16 @@ public class PayeerAddressActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(PayeerAddressActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PayeerAddressActivity.this,PayeerAddressActivity.this::finishAffinity);
+        }
+    }
 }

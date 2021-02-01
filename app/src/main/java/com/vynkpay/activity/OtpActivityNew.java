@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
@@ -15,13 +16,16 @@ import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OtpActivityNew extends AppCompatActivity {
+public class OtpActivityNew extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     @BindView(R.id.verifyLnNew)
     NormalButton verifyLn;
@@ -34,6 +38,9 @@ public class OtpActivityNew extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_otp_new);
         sp = getSharedPreferences("sp", Context.MODE_PRIVATE);
         ButterKnife.bind(this);
@@ -97,5 +104,13 @@ public class OtpActivityNew extends AppCompatActivity {
             dialog.dismiss();
         }
         super.onResume();
+        MySingleton.getInstance(OtpActivityNew.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(OtpActivityNew.this,OtpActivityNew.this::finishAffinity);
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -19,6 +20,9 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ReferalsResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DirectRefralsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class DirectRefralsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityDirectRefralsBinding binding;
     DirectRefralsActivity ac;
@@ -45,6 +49,9 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_direct_refrals);
         ac = DirectRefralsActivity.this;
         dialog1 = M.showDialog(DirectRefralsActivity.this, "", false, false);
@@ -243,4 +250,17 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) { }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(DirectRefralsActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(DirectRefralsActivity.this,DirectRefralsActivity.this::finishAffinity);
+        }
+    }
 }

@@ -90,6 +90,8 @@
                         android:layout_marginLeft="@dimen/_24sdp"
                         android:textSize="@dimen/_12sdp" />
 
+                    <!--@string/enteramonttobeconverted-->
+
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_20sdp"/>

@@ -7,19 +7,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.bumptech.glide.Glide;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityKycSuccessActiviyBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class KycSuccessActiviy extends AppCompatActivity {
+public class KycSuccessActiviy extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
   ActivityKycSuccessActiviyBinding binding;
   KycSuccessActiviy ac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_kyc_success_activiy);
         ac = KycSuccessActiviy.this;
         click();
@@ -145,6 +152,19 @@ public class KycSuccessActiviy extends AppCompatActivity {
 
 
 
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(KycSuccessActiviy.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(KycSuccessActiviy.this,KycSuccessActiviy.this::finishAffinity);
         }
     }
 }

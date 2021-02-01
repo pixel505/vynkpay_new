@@ -5,10 +5,15 @@ import androidx.databinding.DataBindingUtil;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityRequestSuccessBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
-public class RequestSuccess extends AppCompatActivity {
+public class RequestSuccess extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityRequestSuccessBinding binding;
     RequestSuccess ac;
@@ -17,6 +22,9 @@ public class RequestSuccess extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_request_success);
         ac = RequestSuccess.this;
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
@@ -60,5 +68,18 @@ public class RequestSuccess extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(RequestSuccess.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(RequestSuccess.this,RequestSuccess.this::finishAffinity);
+        }
     }
 }

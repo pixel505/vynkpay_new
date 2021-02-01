@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.UpdateImageResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,7 +48,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AddBankDetailActivity extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener{
+        AdapterView.OnItemSelectedListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     AddBankDetailActivity ac;
     ActivityAddBankDetailBinding binding;
@@ -57,6 +60,9 @@ public class AddBankDetailActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_add_bank_detail);
         ac = AddBankDetailActivity.this;
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
@@ -420,4 +426,16 @@ public class AddBankDetailActivity extends AppCompatActivity implements
         return compressedFile;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(AddBankDetailActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(AddBankDetailActivity.this,AddBankDetailActivity.this::finishAffinity);
+        }
+    }
 }

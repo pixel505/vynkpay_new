@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
@@ -30,6 +31,9 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.BottomNavigationViewHelper;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -37,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DashBoardActivity extends AppCompatActivity {
+public class DashBoardActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
     @BindView(R.id.drawer_layout)
@@ -94,6 +98,9 @@ public class DashBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_dashboard_rcg);
 
         ButterKnife.bind(DashBoardActivity.this);
@@ -348,6 +355,7 @@ public class DashBoardActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         navigation.setSelectedItemId(R.id.ic_menu_home);
+        MySingleton.getInstance(DashBoardActivity.this).setConnectivityListener(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -356,6 +364,13 @@ public class DashBoardActivity extends AppCompatActivity {
             if (event.isUpdated()) {
                 updateUIAccordingToUserStatus();
             }
+        }
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(DashBoardActivity.this,DashBoardActivity.this::finishAffinity);
         }
     }
 }

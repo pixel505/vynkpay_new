@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
 import com.downloader.OnProgressListener;
@@ -19,16 +21,23 @@ import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityPdfViewerBinding;
 import com.vynkpay.models.PDFFileModel;
 import com.vynkpay.prefes.Prefes;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.io.File;
 
 
-public class PdfViewerActivity extends AppCompatActivity {
+public class PdfViewerActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityPdfViewerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pdf_viewer);
 
         binding.toolbar.toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
@@ -154,4 +163,16 @@ public class PdfViewerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(PdfViewerActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(PdfViewerActivity.this,PdfViewerActivity.this::finishAffinity);
+        }
+    }
 }

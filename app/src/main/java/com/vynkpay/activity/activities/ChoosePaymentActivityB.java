@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.vynkpay.R;
@@ -13,17 +14,23 @@ import com.vynkpay.databinding.ActivityChoosePaymentBBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetPackageDetailResponse;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChoosePaymentActivityB extends AppCompatActivity {
+public class ChoosePaymentActivityB extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     ActivityChoosePaymentBBinding binding;
     ChoosePaymentActivityB ac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_choose_payment_b);
         ac = ChoosePaymentActivityB.this;
 
@@ -76,5 +83,18 @@ public class ChoosePaymentActivityB extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ChoosePaymentActivityB.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ChoosePaymentActivityB.this,ChoosePaymentActivityB.this::finishAffinity);
+        }
     }
 }

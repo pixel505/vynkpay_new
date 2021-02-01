@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.R;
 import com.vynkpay.activity.activitiesnew.conversion.ConvertBonusMcashActivity;
 import com.vynkpay.activity.activitiesnew.loadmcash.LoadmcashActivity;
@@ -21,12 +23,15 @@ import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Collections;
 
-public class CustomerWalletActivity extends AppCompatActivity {
+public class CustomerWalletActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityCustomerWalletBinding binding;
     CustomerWalletActivity ac;
@@ -37,6 +42,9 @@ public class CustomerWalletActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_customer_wallet);
         ac = CustomerWalletActivity.this;
         serverDialog = M.showDialog(ac, "", false, false);
@@ -276,7 +284,14 @@ public class CustomerWalletActivity extends AppCompatActivity {
             serverDialog.dismiss();
         }
         super.onResume();
+        MySingleton.getInstance(CustomerWalletActivity.this).setConnectivityListener(this);
     }
 
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(CustomerWalletActivity.this,CustomerWalletActivity.this::finishAffinity);
+        }
+    }
 }

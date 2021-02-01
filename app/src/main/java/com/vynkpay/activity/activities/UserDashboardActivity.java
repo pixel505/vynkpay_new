@@ -3,6 +3,7 @@ package com.vynkpay.activity.activities;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.annotation.Nullable;
@@ -20,12 +21,15 @@ import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.HashMap;
 import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserDashboardActivity extends AppCompatActivity {
+public class UserDashboardActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     @BindView(R.id.webView)
     WebView webView;
     @BindView(R.id.toolbarTitle)
@@ -38,6 +42,9 @@ public class UserDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         setContentView(R.layout.activity_web_rcg);
 
         ButterKnife.bind(UserDashboardActivity.this);
@@ -61,6 +68,13 @@ public class UserDashboardActivity extends AppCompatActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
 
         getContent(url);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(UserDashboardActivity.this,UserDashboardActivity.this::finishAffinity);
+        }
     }
 
 
@@ -110,5 +124,11 @@ public class UserDashboardActivity extends AppCompatActivity {
         };
 
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(UserDashboardActivity.this).setConnectivityListener(this);
     }
 }

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.adapter.GenerationBonusDetailAdapter;
@@ -14,18 +16,25 @@ import com.vynkpay.models.GenerationBonusDetailModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class GenerationBonusDetailActivity extends AppCompatActivity {
+public class GenerationBonusDetailActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityGenerationBonusDetailBinding binding;
     String dateForView, title, frontUserID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding= DataBindingUtil.setContentView(this, R.layout.activity_generation_bonus_detail);
         dev();
     }
@@ -115,6 +124,12 @@ public class GenerationBonusDetailActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(GenerationBonusDetailActivity.this).setConnectivityListener(this);
+    }
+
     public void getTeamProfit(){
         generationBonusDetailModelArrayList.clear();
         binding.progress.setVisibility(View.VISIBLE);
@@ -160,5 +175,12 @@ public class GenerationBonusDetailActivity extends AppCompatActivity {
                 binding.progress.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(GenerationBonusDetailActivity.this,GenerationBonusDetailActivity.this::finishAffinity);
+        }
     }
 }

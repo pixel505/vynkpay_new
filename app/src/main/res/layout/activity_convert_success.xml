@@ -35,7 +35,7 @@
                     <com.vynkpay.custom.BoldTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/convertmcash"
+                        android:text="@string/conversionsuccess"
                         android:gravity="center"
                         android:id="@+id/messageText"
                         android:textColor="@color/black"

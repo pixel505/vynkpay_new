@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.vynkpay.R;
 import com.vynkpay.adapter.MessageListAdapter;
@@ -27,6 +28,8 @@ import com.vynkpay.retrofit.model.CloseTicketResponse;
 import com.vynkpay.retrofit.model.GetChatResponse;
 import com.vynkpay.retrofit.model.ReplyChatResponse;
 import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,7 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SupportChatActivity extends AppCompatActivity {
+public class SupportChatActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
     private static final int ACTIVITY_CHOOSE_FILE = 1;
     ActivitySupportChatBinding binding;
     SupportChatActivity ac;
@@ -54,7 +57,9 @@ public class SupportChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_support_chat);
         ac = SupportChatActivity.this;
         dialog1 = M.showDialog(SupportChatActivity.this, "", false, false);
@@ -346,5 +351,18 @@ public class SupportChatActivity extends AppCompatActivity {
         int column_index    = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(SupportChatActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(SupportChatActivity.this,SupportChatActivity.this::finishAffinity);
+        }
     }
 }

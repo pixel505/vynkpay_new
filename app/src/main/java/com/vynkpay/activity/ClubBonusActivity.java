@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 import com.google.gson.Gson;
 import com.vynkpay.R;
@@ -19,6 +20,10 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.Club1Response;
 import com.vynkpay.utils.Functions;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ClubBonusActivity extends AppCompatActivity {
+public class ClubBonusActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityClubBonusBinding binding;
     ClubBonusActivity ac;
@@ -37,6 +42,9 @@ public class ClubBonusActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_club_bonus);
         ac = ClubBonusActivity.this;
         clicks();
@@ -141,7 +149,7 @@ public class ClubBonusActivity extends AppCompatActivity {
                             if (response.body().getStatus().equalsIgnoreCase("true")) {
                                 if ((response.body().getData().getListing()!=null?response.body().getData().getListing().size():0)>0) {
                                     binding.referalbonusRecycler.setAdapter(new ClubBonusAdapter(response.body().getData().getListing()));
-                                }else {
+                                } else {
                                     binding.noLayout.setVisibility(View.VISIBLE);
                                     binding.noMessageTV.setText(response.body().getMessage()+"");
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -160,10 +168,24 @@ public class ClubBonusActivity extends AppCompatActivity {
                     binding.progressFrame.setVisibility(View.GONE);
                     Log.d("club3response",t.getMessage()!=null?t.getMessage():"Error");
                 }
+
             });
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ClubBonusActivity.this).setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ClubBonusActivity.this,ClubBonusActivity.this::finishAffinity);
+        }
     }
 
     class ClubBonusAdapter extends RecyclerView.Adapter<ClubBonusAdapter.Holder>{

@@ -10,14 +10,19 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalEditText;
 import com.vynkpay.databinding.ActivityShopsBinding;
+import com.vynkpay.utils.M;
+import com.vynkpay.utils.MySingleton;
+import com.vynkpay.utils.PlugInControlReceiver;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopsActivity extends AppCompatActivity {
+public class ShopsActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityShopsBinding binding;
     public static ImageView ivFilter;
@@ -26,6 +31,9 @@ public class ShopsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (M.isScreenshotDisable){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
         binding = DataBindingUtil.setContentView(this,R.layout.activity_shops);
         init();
     }
@@ -84,7 +92,18 @@ public class ShopsActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MySingleton.getInstance(ShopsActivity.this).setConnectivityListener(this);
+    }
 
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if (isConnected){
+            M.showUSBPopUp(ShopsActivity.this,ShopsActivity.this::finishAffinity);
+        }
+    }
 
     static class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
