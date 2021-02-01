@@ -5,12 +5,6 @@ import java.util.List;
 public class NotificationResponse {
 
 
-    /**
-     * success : true
-     * data : {"notification":[{"id":"8","user_id":"0","subject":"test","body":"test img","create_date":"2020-08-27 17:31:04","image":"https://www.mlm.pixelsoftwares.com/vynkpay/account/uploads/notification/Not5f47a080a53791598529664.jpg","read_status":"0"},{"id":"6","user_id":"0","subject":"Withdrawal for Indian Affiliates","body":"Dear Affiliates, we have just been informed of a maintenance activity at the NPCI's end, which will begin on Aug 14, 2020 between 02:00 Hrs to 02:45 Hrs. Request you to hold withdrawals  during this timeline. Regret the inconvenience. - Team VynkPay ","create_date":"2020-08-14 02:27:53","image":null,"read_status":"1"}],"unread_count":"1"}
-     * message : Success
-     */
-
     private boolean success;
     private DataBean data;
     private String message;
@@ -40,10 +34,6 @@ public class NotificationResponse {
     }
 
     public static class DataBean {
-        /**
-         * notification : [{"id":"8","user_id":"0","subject":"test","body":"test img","create_date":"2020-08-27 17:31:04","image":"https://www.mlm.pixelsoftwares.com/vynkpay/account/uploads/notification/Not5f47a080a53791598529664.jpg","read_status":"0"},{"id":"6","user_id":"0","subject":"Withdrawal for Indian Affiliates","body":"Dear Affiliates, we have just been informed of a maintenance activity at the NPCI's end, which will begin on Aug 14, 2020 between 02:00 Hrs to 02:45 Hrs. Request you to hold withdrawals  during this timeline. Regret the inconvenience. - Team VynkPay ","create_date":"2020-08-14 02:27:53","image":null,"read_status":"1"}]
-         * unread_count : 1
-         */
 
         private String unread_count;
         private List<NotificationBean> notification;
@@ -65,15 +55,6 @@ public class NotificationResponse {
         }
 
         public static class NotificationBean {
-            /**
-             * id : 8
-             * user_id : 0
-             * subject : test
-             * body : test img
-             * create_date : 2020-08-27 17:31:04
-             * image : https://www.mlm.pixelsoftwares.com/vynkpay/account/uploads/notification/Not5f47a080a53791598529664.jpg
-             * read_status : 0
-             */
 
             private String id;
             private String user_id;

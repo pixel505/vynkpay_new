@@ -3,8 +3,6 @@ package com.vynkpay.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 
 public class AccountNewActivity extends AppCompatActivity {

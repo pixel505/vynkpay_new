@@ -12,8 +12,8 @@ android {
         applicationId "com.vynkpay"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 9
-        versionName "1.7"
+        versionCode 10
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -96,8 +96,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
-    implementation 'com.google.firebase:firebase-core:17.5.0'
-    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-core:18.0.1'
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

@@ -55,6 +55,9 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                     new MyAccount("Invoice",R.drawable.invoice_icon),
                     new MyAccount("Community",R.drawable.mynetwork),
                     new MyAccount("Bonuses", R.drawable.bonuses),
+
+                    new MyAccount("VYNC Bonuses", R.drawable.bonuses),
+
                     //new MyAccount("Old Bonuses", R.drawable.bonuses),
                     new MyAccount("Wallets", R.drawable.wallets),
                     new MyAccount("Withdrawal History", R.drawable.withdrawal),
@@ -75,9 +78,6 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                         new MyAccount("Statement", R.drawable.statement)
                 };
         }
-
-
-
 
 
         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);

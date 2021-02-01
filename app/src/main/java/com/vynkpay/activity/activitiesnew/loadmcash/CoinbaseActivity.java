@@ -24,8 +24,6 @@ import com.vynkpay.utils.PlugInControlReceiver;
 public class CoinbaseActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     Dialog dialog1;
-    //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_success?ud=Payment%20verify%20successfully%20and%20added%20to%20Wallet
-    //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_notFound?ud=You%20have%20paid%20a%20less%20amount%20than%20requested.%20Please%20send%20full%20amount%20or%20contact%20support
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +62,6 @@ public class CoinbaseActivity extends AppCompatActivity implements PlugInControl
                             String _str = url;
                             if (_str.contains("=")) {
                                 String message = _str.substring(_str.indexOf("=")+1,_str.length());
-                                //String _str = "https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_success?ud=Payment%20verify%20successfully%20and%20added%20to%20Wallet";
-                                //String message = _str.substring(_str.indexOf("=")+1,_str.length());
                                 Toast.makeText(CoinbaseActivity.this, message, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(CoinbaseActivity.this,LoadMcashSuccessActivity.class).putExtra("message",message.replace("%20"," ")));
                                 CoinbaseActivity.this.finish();
@@ -74,8 +70,6 @@ public class CoinbaseActivity extends AppCompatActivity implements PlugInControl
                             String _str = url;
                             if (_str.contains("=")) {
                                 String message = _str.substring(_str.indexOf("=")+1,_str.length());
-                                //String _str = "https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_success?ud=Payment%20verify%20successfully%20and%20added%20to%20Wallet";
-                                //String message = _str.substring(_str.indexOf("=")+1,_str.length());
                                 Toast.makeText(CoinbaseActivity.this, message, Toast.LENGTH_SHORT).show();
                             }
                             finish();

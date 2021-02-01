@@ -90,7 +90,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
         binding.packageList.setLayoutManager(M.horizontalRecyclerView(AffiliateActivity.this));
         getMCashTransaction();
 
-      /*  binding.radioGrp.setOnClickListener(new View.OnClickListener() {
+      /*binding.radioGrp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int selectedId=binding.radioGrp.getCheckedRadioButtonId();
@@ -110,8 +110,6 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
         binding.toolbarLayout.toolbarTitlenew.setText("Affiliate Activation");
         clicks();
         getSettings();
-
-
     }
 
     public void getSettings(){
@@ -148,7 +146,40 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                             String defaultStr = jData.getString("default");
                             planList.add(new PlanList(id,title,package_type,display,defaultStr));
                         }
-                        if (Prefes.getisIndian(AffiliateActivity.this).equalsIgnoreCase("YES")){
+
+                        if ((planList != null ? planList.size() : 0) > 0) {
+                            //binding.linPackageOption.setVisibility(View.VISIBLE);
+                            for (int i = 0; i < planList.size(); i++) {
+                                if (planList.get(i).getTitle().equalsIgnoreCase("Affiliate")) {
+                                    if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
+                                        //binding.rAffiliate.setVisibility(View.VISIBLE);
+                                    } else {
+                                        //binding.rAffiliate.setVisibility(View.GONE);
+                                    }
+                                    if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
+                                        //binding.rAffiliate.setChecked(true);
+                                    } else {
+                                       // binding.rAffiliate.setChecked(false);
+                                    }
+                                }
+                                if (planList.get(i).getTitle().equalsIgnoreCase("VYNC Chain")) {
+                                    if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
+                                        //binding.rVyncChain.setVisibility(View.VISIBLE);
+                                    } else {
+                                        //binding.rVyncChain.setVisibility(View.GONE);
+                                    }
+                                    if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
+                                        //binding.rVyncChain.setChecked(true);
+                                    } else {
+                                       // binding.rVyncChain.setChecked(false);
+                                    }
+                                }
+                            }
+                        } else {
+                            //binding.linPackageOption.setVisibility(View.GONE);
+                        }
+
+                        /*if (Prefes.getisIndian(AffiliateActivity.this).equalsIgnoreCase("YES")){
                             binding.linPackageOption.setVisibility(View.GONE);
                         } else {
                             if ((planList != null ? planList.size() : 0) > 0) {
@@ -182,16 +213,16 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                             } else {
                                 binding.linPackageOption.setVisibility(View.GONE);
                             }
-                        }
+                        }*/
 
                     }else {
-                        binding.linPackageOption.setVisibility(View.GONE);
+                        //binding.linPackageOption.setVisibility(View.GONE);
                         if (respData.has("message")){
                             Log.d("settingsresponse",respData.getString("message"));
                         }
                     }
                 }catch (Exception e){
-                    binding.linPackageOption.setVisibility(View.GONE);
+                    //binding.linPackageOption.setVisibility(View.GONE);
                     e.printStackTrace();
                 }
             }
@@ -217,7 +248,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                         JSONObject jsonObject = new JSONObject(result);
                         if (jsonObject.getString("status").equals("true")){
                             JSONObject dataObject=jsonObject.getJSONObject("data");
-                          binding.walletText.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
+                            binding.walletText.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
                         }
 
                     } catch (JSONException e) {
@@ -235,19 +266,18 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
 
         private void clicks() {
 
-            binding.radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+           /* binding.radioGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup group, int checkedId) {
                     int selectedId=group.getCheckedRadioButtonId();
                     radioButton=(RadioButton)findViewById(selectedId);
-                    //Toast.makeText(AffiliateActivity.this,radioButton.getText(),Toast.LENGTH_SHORT).show();
                     if (radioButton.getText().toString().equalsIgnoreCase("Affiliate")){
                         affilateList();
                     }else  if (radioButton.getText().toString().equalsIgnoreCase("VYNC Chain")){
                         vyncChainList();
                     }
                 }
-            });
+            });*/
 
         binding.searchUserEdt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -422,6 +452,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                 }
             }
             if (vyncchainList.size()>0){
+                orgId=vyncchainList.get(0).getId();
                 binding.packageList.setAdapter(new PackageAdapter(vyncchainList));
                 binding.viewPackageList.setAdapter(new PackageViewAdapter(AffiliateActivity.this,vyncchainList));
                 binding.tabLayout.setViewPager(binding.viewPackageList);
@@ -445,6 +476,10 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                         binding.linPackage.setVisibility(View.VISIBLE);
                         if ((response.body().getData() !=null ? response.body().getData().size():0)>0){
                             packageList.addAll(response.body().getData());
+
+                            vyncChainList();
+
+
                             //MyChanges
                             affilateList();
 
@@ -453,7 +488,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                             binding.pointsText.setText("("+response.body().getData().get(0).getPoints()+" "+"points"+")");
 
                         }else {
-                            binding.linPackageOption.setVisibility(View.GONE);
+                            //binding.linPackageOption.setVisibility(View.GONE);
                         }
 
                         // binding.packageList.setAdapter(new PackageAdapter(packageList));
@@ -598,7 +633,6 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                 }
 
                 itemView.setOnClickListener(view -> {
-
                     orgId = packageList.get(position).getId();
                 });
 

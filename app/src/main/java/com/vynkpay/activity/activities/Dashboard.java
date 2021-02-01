@@ -1,5 +1,6 @@
 package com.vynkpay.activity.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -27,6 +28,9 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.activities.history.AllRechargeHistoryActivity;
@@ -227,6 +231,18 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         updateUIAccordingToUserStatus();
         getRecentOffers();
         fetchWalletData();
+
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+
+                        String token = task.getResult();
+
+                        Log.d("tokennnLOGGG", token+"//");
+
+                    }
+                });
     }
 
     @Override

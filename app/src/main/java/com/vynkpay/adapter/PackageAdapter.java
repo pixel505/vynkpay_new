@@ -97,8 +97,7 @@ public class PackageAdapter extends PagerAdapter {
 
                 }
             });
-        }
-        else {
+        } else {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
