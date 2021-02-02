@@ -24,6 +24,10 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
@@ -72,11 +76,11 @@ public class SplashActivity extends AppCompatActivity implements PlugInControlRe
 
         ButterKnife.bind(SplashActivity.this);
         dev();
+
     }
 
     public void dev(){
         prefs=new Prefes(SplashActivity.this);
-
 
         RotateAnimation rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         rotate.setDuration(2000);
@@ -90,8 +94,6 @@ public class SplashActivity extends AppCompatActivity implements PlugInControlRe
 
         exitSplash();
     }
-
-
 
     public void exitSplash() {
         int SPLASH_TIME_OUT = 2500;

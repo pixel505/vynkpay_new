@@ -51,7 +51,8 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
-            tools:ignore="LockedOrientationActivity"></activity>
+            tools:ignore="LockedOrientationActivity"/>
+
         <!-- android:authorities="${applicationId}.provider" -->
         <provider
             android:name="androidx.core.content.FileProvider"

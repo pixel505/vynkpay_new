@@ -166,7 +166,6 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
                     .setCategory(Notification.CATEGORY_PROMO).build();
 
             notification.flags |= Notification.FLAG_AUTO_CANCEL;
-            notification.defaults |= Notification.DEFAULT_SOUND;
             notification.defaults |= Notification.DEFAULT_VIBRATE;
             notification.defaults |= Notification.DEFAULT_LIGHTS;
             notificationManager.notify((int) SystemClock.currentThreadTimeMillis(), notification);
@@ -192,7 +191,7 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
 
             }
 
-            if (sp.getString("isSound","").equalsIgnoreCase("0")){
+            if (sp.getString("isSound","0").equalsIgnoreCase("0")){
                 Notification notification = new NotificationCompat.Builder(context,"app_name")
                         .setContentTitle(title)
                         .setContentText(message)
@@ -205,7 +204,6 @@ public class  MyFireBaseMessagingService extends FirebaseMessagingService {
                         .build();
 
                 notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                notification.defaults |= Notification.DEFAULT_SOUND;
                 notification.defaults |= Notification.DEFAULT_VIBRATE;
                 notification.defaults |= Notification.DEFAULT_LIGHTS;
                 notificationManager.notify((int) SystemClock.currentThreadTimeMillis(), notification);

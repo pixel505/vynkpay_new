@@ -28,6 +28,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.activities.StatementActivity;
@@ -155,6 +156,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("loginas","a");
         }*/
 
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+
+                String token = task.getResult();
+
+            }
+        });
     }
 
     public static synchronized HomeActivity getInstance(){

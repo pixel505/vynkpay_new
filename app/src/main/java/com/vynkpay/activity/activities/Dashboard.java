@@ -232,6 +232,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         getRecentOffers();
         fetchWalletData();
 
+        Log.d("tokennnLOGGG", "gdjgfgdgfd//");
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
