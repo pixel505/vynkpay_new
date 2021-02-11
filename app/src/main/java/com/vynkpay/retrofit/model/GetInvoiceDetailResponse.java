@@ -109,6 +109,31 @@ public class GetInvoiceDetailResponse {
         @Expose
         private String mobile;
 
+        @SerializedName("pp_type")
+        @Expose
+        private String pp_type;
+
+        @SerializedName("type")
+        @Expose
+        private String type;
+
+
+        public String getPp_type() {
+            return pp_type;
+        }
+
+        public void setPp_type(String pp_type) {
+            this.pp_type = pp_type;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
         public String getId() {
             return id;
         }

@@ -716,7 +716,8 @@ public class FragmentHomeGlobal extends Fragment {
                         tvChartTitle.setText(chart_title);
 
                         if (chart_show.equalsIgnoreCase("true")){
-                            linChartt.setVisibility(View.VISIBLE);
+                          //  linChartt.setVisibility(View.VISIBLE);
+                            linChartt.setVisibility(View.GONE);
                             try {
                                 float percentagee = Float.parseFloat(percentage);
                                 progressView.setProgress((int)percentagee);

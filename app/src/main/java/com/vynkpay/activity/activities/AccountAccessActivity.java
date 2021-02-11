@@ -54,7 +54,7 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                     new MyAccount("Purchase",R.drawable.packages),
                     new MyAccount("Invoice",R.drawable.invoice_icon),
                     new MyAccount("Community",R.drawable.mynetwork),
-                    new MyAccount("Bonuses", R.drawable.bonuses),
+                   // new MyAccount("Bonuses", R.drawable.bonuses),
 
                     new MyAccount("VYNC Bonuses", R.drawable.bonuses),
 
@@ -70,7 +70,7 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                         new MyAccount("Purchase",R.drawable.packages),
                         new MyAccount("Invoice",R.drawable.invoice_icon),
                         new MyAccount("Community",R.drawable.mynetwork),
-                        new MyAccount("Bonuses", R.drawable.bonuses),
+                       // new MyAccount("Bonuses", R.drawable.bonuses),
                         new MyAccount("VYNC Bonuses", R.drawable.bonuses),
                         new MyAccount("Wallets", R.drawable.wallets),
                         new MyAccount("Withdrawal History", R.drawable.withdrawal),

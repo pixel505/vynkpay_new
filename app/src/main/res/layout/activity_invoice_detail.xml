@@ -87,7 +87,6 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:gravity="center"
-                                                android:text="hvhv"
                                                 android:textColor="@color/black"
                                                 android:textSize="@dimen/_10sdp" />
 
@@ -151,7 +150,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="match_parent"
                                                 android:gravity="center"
-                                                android:text="(NEO VORIEOS LIFE OPC PVT LTD)"
+
                                                 android:textSize="@dimen/_10sdp" />
 
                                         </LinearLayout>
@@ -204,7 +203,6 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:gravity="center"
-                                                android:text="Hyderabad,Telangana,India"
                                                 android:textSize="@dimen/_10sdp" />
 
 
@@ -266,7 +264,6 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:gravity="center"
-                                                android:text="www.vynkpay.app"
                                                 android:textSize="@dimen/_10sdp" />
 
 
@@ -476,14 +473,16 @@
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="@dimen/_20sdp"
+                                        android:paddingStart="@dimen/_16sdp"
+                                        android:paddingEnd="@dimen/_16sdp"
                                         android:orientation="horizontal"
-                                        android:weightSum="4">
+                                        android:weightSum="2">
 
                                         <com.vynkpay.custom.NormalTextView
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:gravity="center"
+                                            android:gravity="center_vertical"
                                             android:text="Description"
                                             android:textSize="@dimen/_8sdp" />
 
@@ -491,25 +490,8 @@
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/_8sdp" />
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/_8sdp" />
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:text=""
-                                            android:textColor="@color/black"
+                                            android:text="@string/packageType"
+                                            android:gravity="center|end"
                                             android:textSize="@dimen/_8sdp" />
 
 
@@ -519,16 +501,17 @@
                                         android:layout_marginBottom="@dimen/_20sdp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:paddingStart="@dimen/_16sdp"
+                                        android:paddingEnd="@dimen/_16sdp"
                                         android:orientation="horizontal"
-                                        android:weightSum="4">
+                                        android:weightSum="2">
 
                                         <com.vynkpay.custom.NormalTextView
                                             android:id="@+id/paymetmethod"
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:text="Description"
+                                            android:gravity="center_vertical"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_8sdp" />
 
@@ -536,24 +519,8 @@
                                             android:layout_width="0dp"
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/_8sdp" />
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/_8sdp" />
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:layout_width="0dp"
-                                            android:layout_height="match_parent"
-                                            android:layout_weight="1"
-                                            android:gravity="center"
-                                            android:text=""
+                                            android:gravity="center|end"
+                                            android:id="@+id/packageTypeTV"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_8sdp" />
 

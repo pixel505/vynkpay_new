@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -31,7 +30,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -55,7 +53,6 @@ import com.vynkpay.models.SuccessDialogModel;
 import com.vynkpay.prefes.Prefes;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -73,7 +70,7 @@ public class M {
     private static ProgressDialog dialog;
     private static Dialog dialog1;
 
-    public static boolean isScreenshotDisable = true;
+    public static boolean isScreenshotDisable = false;
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);

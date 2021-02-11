@@ -319,8 +319,6 @@ public interface ApiCalls {
 
     );
 
-
-
     @POST("account/api_accounts/add_investment")
     Call<GetPackageResponse> getPackage(
             @Header("access_token") String access_token);

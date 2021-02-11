@@ -273,7 +273,7 @@
     <string name="conversion">Conversion</string>
     <string name="enteramontconverted">Enter Amount to be converted</string>
     <string name="enteramonttobeconverted">Bonus Wallet convert to Mcash Wallet</string>
-    <string name="convertmcash">Convert Mcash successfull</string>
+    <string name="convertmcash">Convert Mcash successful</string>
     <string name="convertmcashtext">Convert MCash</string>
     <string name="enteramounttobeadded">Enter amount to added</string>
     <string name="razorpay">Razorpay</string>
@@ -288,5 +288,7 @@
     <string name="payeeraddress">Payeer Address</string>
     <string name="perfectmoney">Perfect Money</string>
     <string name="ethaddress">ETH Address</string>
-    <string name="conversionsuccess">Conversion MCash Successfull</string>
+    <string name="conversionsuccess">Conversion MCash Successful</string>
+    <string name="vynkPackages">VYNC Packages</string>
+    <string name="packageType">Package type</string>
 </resources>

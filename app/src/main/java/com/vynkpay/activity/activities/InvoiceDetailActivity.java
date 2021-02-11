@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -111,7 +113,9 @@ public class InvoiceDetailActivity extends AppCompatActivity implements PlugInCo
         MainApplication.getApiService().getInvoiceDetail(Prefes.getAccessToken(ac),id).enqueue(new Callback<GetInvoiceDetailResponse>() {
             @Override
             public void onResponse(Call<GetInvoiceDetailResponse> call, Response<GetInvoiceDetailResponse> response) {
+
                 if(response.isSuccessful() && response.body()!=null){
+                    Log.d("invoiceDetailloOFF", new Gson().toJson(response.body().getData())+"//");
                     if(response.body().getStatus().equals("true")){
                         binding.invoice.setText(response.body().getData().getInvoiceNumber());
                         try {
@@ -135,6 +139,7 @@ public class InvoiceDetailActivity extends AppCompatActivity implements PlugInCo
                         binding.subTotal.setText(response.body().getData().getPpPrice());
                         binding.tax.setText(response.body().getData().getPpGst());
                         binding.taxtotal.setText(response.body().getData().getPpTotalPrice());
+                        binding.packageTypeTV.setText(response.body().getData().getPp_type());
                         if(response.body().getData().getPaymentVia().equals("0")){
                             binding.paymetmethod.setText("Wallet");
                         }

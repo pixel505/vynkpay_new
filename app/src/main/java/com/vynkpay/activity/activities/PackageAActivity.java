@@ -193,7 +193,7 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         //binding.toolbarLayout.toolbarTitlenew.setText(R.string.packagetext);
-        binding.toolbarLayout.toolbarTitlenew.setText(R.string.purchase);
+        binding.toolbarLayout.toolbarTitlenew.setText(R.string.vynkPackages);
     }
 
     public void affilateList(){
