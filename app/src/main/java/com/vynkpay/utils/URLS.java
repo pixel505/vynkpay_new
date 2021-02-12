@@ -17,7 +17,7 @@ public class URLS {
     public static final String readNotification = "notification";
     public static final String transactionHistory = "transaction";
     public static final String transferAmount = "wallet/transfer_money";
-    public static final String mobileLookup = "recharge/mobile_number_lookup";
+
     public static final String circle = "circle";
     public static final String operator = "operator";
     public static final String rechargePlans = "recharge/plan";

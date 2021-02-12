@@ -194,7 +194,6 @@ public class PrepaidActivity extends AppCompatActivity {
                     rootLayoutForRadio.setVisibility(View.GONE);
                     layoutToBeVisible.setVisibility(View.GONE);
                 } else if (s.length() == 10) {
-                    //makeMobileNumberLookupRequest();
                     loadAddCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);
@@ -557,64 +556,6 @@ public class PrepaidActivity extends AppCompatActivity {
         Intent intent = new Intent(PrepaidActivity.this, SelectOperatorActivity.class);
         intent.putExtra(ApiParams.type, type);
         startActivity(intent);
-    }
-
-    private void makeMobileNumberLookupRequest() {
-        dialog.show();
-        String url =  BuildConfig.APP_BASE_URL + URLS.mobileLookup;// + "?" + ApiParams.mobile_number + "=" + etMobileNumber.getText().toString();
-        String SURL=url.replace(" ","%20");
-
-        Log.d("SURLLLOG", SURL);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            dialog.dismiss();
-                            JSONObject jsonObject = new JSONObject(response);
-                            Log.d("makrresp",jsonObject.toString());
-                            mSuccess = jsonObject.getString(ApiParams.success);
-                            mMessage = jsonObject.getString(ApiParams.message);
-                            if (mSuccess.equalsIgnoreCase("true")) {
-                                JSONObject j = jsonObject.getJSONObject(ApiParams.data);
-                                String operator = j.getString(ApiParams.operator);
-                                String circle = j.getString(ApiParams.circle);
-                                tvOperatorCircle.setText(operator + "-" + circle);
-                                operatorName = operator;
-                                circleName = circle;
-                                makeRadioButton(operatorName);
-                            } else {
-                                M.dialogOk(PrepaidActivity.this, mMessage, "Try again");
-                                Log.d("SURLLLOG", mMessage);
-                            }
-                        } catch (Exception e) {
-                            Log.i(">>exception", "onResponse: " + e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dialog.dismiss();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(ApiParams.mobile_number,etMobileNumber.getText().toString());
-                params.put(ApiParams.type,"1");
-                Log.d("SURLLLOG",etMobileNumber.getText().toString());
-                return params;
-            }
-
-        };
-        MySingleton.getInstance(PrepaidActivity.this).addToRequestQueue(stringRequest);
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     String _SPECIAL_OR_TOP_UP = "";

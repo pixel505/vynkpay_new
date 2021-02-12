@@ -108,6 +108,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbarLayout.toolbarTitlenew.setText("Affiliate Activation");
+
         clicks();
         getSettings();
     }
@@ -342,6 +343,9 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
         binding.getotp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                orgId = packageList.get(binding.viewPackageList.getCurrentItem()).getId();
+                Log.d("packageIIDDDLOGGG", packageList.get(binding.viewPackageList.getCurrentItem()).getId()+"//");
+
                 if (binding.searchUserEdt.getText().toString().isEmpty()) {
                     Toast.makeText(ac, "Please Select User", Toast.LENGTH_SHORT).show();
                 }
@@ -352,8 +356,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                 }*/
                 else if(TextUtils.isEmpty(orgId)){
                     Toast.makeText(ac, "No Package Found Select another User", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else{
                       dialog1.show();
                       MainApplication.getApiService().getWalletOtp(Prefes.getAccessToken(ac)).enqueue(new Callback<SendWaletOtp>() {
                         @Override
@@ -430,6 +433,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
             for (int i=0;i<packageList.size();i++){
                 if (packageList.get(i).getType().equalsIgnoreCase("1")){
                     affilateList.add(packageList.get(i));
+                    Log.d("afflilateLOGGGDD", new Gson().toJson(affilateList));
                 }
             }
             if (affilateList.size()>0){
@@ -478,7 +482,6 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                             packageList.addAll(response.body().getData());
 
                             vyncChainList();
-
 
                             //MyChanges
                             affilateList();
@@ -634,6 +637,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
 
                 itemView.setOnClickListener(view -> {
                     orgId = packageList.get(position).getId();
+                    Log.d("selecrdslkjdljld", packageList.get(position).getId());
                 });
 
             }catch (Exception e){
@@ -680,6 +684,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                 }
                 holder.itemView.setOnClickListener(view -> {
                     orgId = packageList.get(position).getId();
+                    Log.d("selecrdslkjdljld", packageList.get(position).getId());
                 });
             }catch (Exception e){
                 e.printStackTrace();

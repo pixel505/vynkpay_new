@@ -167,7 +167,6 @@ public class PostPaidActivity extends AppCompatActivity {
                     etAmount.setText("");
                     etAmount.setEnabled(false);
                 } else if (s.length() == 10) {
-                    //makeMobileNumberLookupRequest();
                     loadOperatorCircle();
                     tvOperatorCircle.setAlpha(1f);
                     tvOperatorCircle.setEnabled(true);
@@ -561,77 +560,6 @@ public class PostPaidActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-    }
-
-    private void makeMobileNumberLookupRequest() {
-        dialog.show();
-        String url = BuildConfig.APP_BASE_URL + URLS.mobileLookup;// + "?" + ApiParams.mobile_number + "=" + etMobileNumber.getText().toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            dialog.dismiss();
-                            JSONObject jsonObject = new JSONObject(response);
-                            Log.i(">>numberFetch", "onResponse: " + jsonObject.toString());
-                            mSuccess = jsonObject.optString(ApiParams.success);
-                            mMessage = jsonObject.optString(ApiParams.message);
-                            if (mSuccess.equalsIgnoreCase("true")) {
-                                JSONObject j = jsonObject.getJSONObject(ApiParams.data);
-                                String operator = j.getString(ApiParams.operator);
-                                String circle = j.getString(ApiParams.circle);
-                                tvOperatorCircle.setText(operator + "-" + circle);
-                                operatorName = operator;
-                                circleName = circle;
-                                makeRadioButton(operatorName);
-                            } else {
-                                if (jsonObject.getString(ApiParams.error_code).equalsIgnoreCase(ApiParams.ErrorCodeArray._ERROR_CODE_400)) {
-                                    Iterator<?> keys = jsonObject.getJSONObject(ApiParams.errors).keys();
-                                    while (keys.hasNext()) {
-                                        String key = (String) keys.next();
-                                        if (jsonObject.getJSONObject(ApiParams.errors).get(key) instanceof String) {
-                                            String message = jsonObject.getJSONObject(ApiParams.errors).get(key).toString();
-                                            M.dialogOk(PostPaidActivity.this, message, "Try again");
-                                        }
-                                    }
-                                }
-
-                            }
-                        } catch (Exception e) {
-                            Log.i(">>exception", "onResponse: " + e.getMessage());
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dialog.dismiss();
-                    }
-                }) {
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(ApiParams.mobile_number,etMobileNumber.getText().toString());
-                params.put(ApiParams.type,"1");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put(ApiParams.accept, ApiParams.application_json);
-                return params;
-            }
-
-        };
-
-        MySingleton.getInstance(PostPaidActivity.this).addToRequestQueue(stringRequest);
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
     }
 
     String _SPECIAL_OR_TOP_UP = "";

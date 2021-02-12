@@ -639,28 +639,50 @@ public class Signupnew extends AppCompatActivity implements PlugInControlReceive
 
     public void getDynamicLink() {
         Log.d("refferla","called");
-        FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent()).addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
-            @Override
-            public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-                // Get deep link from result (may be null if no link is found)
-                Log.d("refferla","called1");
-                Uri deepLink = null;
-                if (pendingDynamicLinkData != null) {
-                    deepLink = pendingDynamicLinkData.getLink();
-                    String referLink = deepLink.toString();
-                    referLink = referLink.substring(referLink.lastIndexOf("=") + 1);
-                    referalCode = referLink;
-                    sp.edit().putString("referalCode",referalCode).apply();
-                    referIdEdt.setText(referalCode);
-                    referIdEdt.setFocusableInTouchMode(false);
-                    referIdEdt.setFocusable(false);
-                    referIdEdt.setClickable(false);
 
-                    Log.e("linkkk", "" + referalCode);
-                    Log.e("linkkk", "" + referLink);
-                    Log.e("linkkk", "" + pendingDynamicLinkData);
-                    Log.e("linkkk", "" + deepLink);
-                } else {
+        //if(getCallingActivity().getPackageName().equalsIgnoreCase("com.vynkpay")){
+            FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent()).addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                @Override
+                public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                    // Get deep link from result (may be null if no link is found)
+                    Log.d("refferla","called1");
+                    Uri deepLink = null;
+                    if (pendingDynamicLinkData != null) {
+                        deepLink = pendingDynamicLinkData.getLink();
+                        String referLink = deepLink.toString();
+                        referLink = referLink.substring(referLink.lastIndexOf("=") + 1);
+                        referalCode = referLink;
+                        sp.edit().putString("referalCode",referalCode).apply();
+                        referIdEdt.setText(referalCode);
+                        referIdEdt.setFocusableInTouchMode(false);
+                        referIdEdt.setFocusable(false);
+                        referIdEdt.setClickable(false);
+
+                        Log.e("linkkk", "" + referalCode);
+                        Log.e("linkkk", "" + referLink);
+                        Log.e("linkkk", "" + pendingDynamicLinkData);
+                        Log.e("linkkk", "" + deepLink);
+                    } else {
+                        if (!sp.getString("referalCode","").equalsIgnoreCase("")){
+                            referalCode = sp.getString("referalCode","");
+                            referIdEdt.setText(referalCode);
+                            referIdEdt.setFocusableInTouchMode(false);
+                            referIdEdt.setFocusable(false);
+                            referIdEdt.setClickable(false);
+                        }else {
+                            Log.d("refferla","calledF");
+                            referIdEdt.setFocusableInTouchMode(true);
+                            referIdEdt.setFocusable(true);
+                            referIdEdt.setClickable(true);
+                        }
+                    }
+                }
+            }).addOnFailureListener(this, new OnFailureListener() {
+
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("refferla","called2");
+                    Toast.makeText(Signupnew.this, e.toString(), Toast.LENGTH_SHORT).show();
                     if (!sp.getString("referalCode","").equalsIgnoreCase("")){
                         referalCode = sp.getString("referalCode","");
                         referIdEdt.setText(referalCode);
@@ -668,34 +690,14 @@ public class Signupnew extends AppCompatActivity implements PlugInControlReceive
                         referIdEdt.setFocusable(false);
                         referIdEdt.setClickable(false);
                     }else {
-                        Log.d("refferla","calledF");
                         referIdEdt.setFocusableInTouchMode(true);
                         referIdEdt.setFocusable(true);
                         referIdEdt.setClickable(true);
                     }
                 }
-            }
-        }).addOnFailureListener(this, new OnFailureListener() {
 
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d("refferla","called2");
-                Toast.makeText(Signupnew.this, e.toString(), Toast.LENGTH_SHORT).show();
-                if (!sp.getString("referalCode","").equalsIgnoreCase("")){
-                    referalCode = sp.getString("referalCode","");
-                    referIdEdt.setText(referalCode);
-                    referIdEdt.setFocusableInTouchMode(false);
-                    referIdEdt.setFocusable(false);
-                    referIdEdt.setClickable(false);
-                }else {
-                    referIdEdt.setFocusableInTouchMode(true);
-                    referIdEdt.setFocusable(true);
-                    referIdEdt.setClickable(true);
-                }
-            }
-
-        });
-
+            });
+       // }
     }
 
     @Override
