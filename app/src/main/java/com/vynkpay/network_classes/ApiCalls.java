@@ -178,7 +178,8 @@ public class ApiCalls {
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("blnc", amount);
-        hashMap.put("action", action);
+        hashMap.put("action", "wr");
+        hashMap.put("type", action);
 
         volleyNetworkClass.makeRequest(URLS.withdrawal_request_URL, token, hashMap);
     }

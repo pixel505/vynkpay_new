@@ -554,7 +554,8 @@ public class BonusWalletFragment extends AppCompatActivity {
 
         String action = "wr";
         if (Functions.isIndian) {
-            action = "wr";
+           // action = "wr";
+            action = "";
         }else {
             action = withdrawType;
         }
@@ -655,7 +656,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 button.setEnabled(false);
 
-                ApiCalls.withdrawalRequest(activity, Prefes.getAccessToken(activity), amount, "wr", new VolleyResponse() {
+                ApiCalls.withdrawalRequest(activity, Prefes.getAccessToken(activity), amount, "", new VolleyResponse() {
                     @Override
                     public void onResult(String result, String status, String message) {
                         progressBar.setVisibility(View.GONE);

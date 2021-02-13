@@ -123,7 +123,8 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
 
         String action = "wr";
         if (Functions.isIndian) {
-            action = "wr";
+            //action = "wr";
+            action = "";
         } else {
             action = WithdrawTypeActivity.withdrawType;
         }

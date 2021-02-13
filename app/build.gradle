@@ -12,8 +12,8 @@ android {
         applicationId "com.vynkpay"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 11
-        versionName "1.9"
+        versionCode 12
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -114,7 +114,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'gun0912.ted:tedbottompicker:1.0.3'
     implementation 'gun0912.ted:tedpermission:2.1.0'
-    implementation 'com.razorpay:checkout:1.6.3'
+
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
     implementation 'com.github.pzienowicz:androidx-auto-scroll-view-pager:1.1.0'
     implementation 'com.budiyev.android:image-loader:2.5.6'
@@ -126,6 +126,8 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.github.appersiano:imageprogressview:-SNAPSHOT'
    // implementation 'com.google.firebase:firebase-analytics:17.5.0'
+
+    implementation 'com.razorpay:checkout:1.6.5'
 }
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
