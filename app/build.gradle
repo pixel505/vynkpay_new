@@ -12,8 +12,8 @@ android {
         applicationId "com.vynkpay"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 12
-        versionName "2.0"
+        versionCode 13
+        versionName "2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -23,16 +23,14 @@ android {
         release {
             // Enables code shrinking, obfuscation, and optimization for only
             // your project's release build type.
-            minifyEnabled true
+            minifyEnabled false
             // Enables resource shrinking, which is performed by the
             // Android Gradle plugin.
-            shrinkResources true
+            shrinkResources false
             // Includes the default ProGuard rules files that are packaged with
             // the Android Gradle plugin. To learn more, go to the section about
             // R8 configuration files.
-            proguardFiles getDefaultProguardFile(
-                    'proguard-android.txt'),
-                    'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
        /* release {
@@ -41,8 +39,8 @@ android {
         }*/
     }
 
-    buildFeatures{
-        dataBinding true
+    dataBinding {
+        enabled true
     }
    /* dataBinding {
         enabled true
