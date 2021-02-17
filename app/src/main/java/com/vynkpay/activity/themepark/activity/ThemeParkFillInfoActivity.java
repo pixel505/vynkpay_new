@@ -130,7 +130,7 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
         Log.i(">>values", "onCreate: " + themeParkTicketModel.getId() + "\n" +
                 themeParkTicketModel.getTitle() + "\n" + calculatedPrice + quantity);
 
-        etAmount.setText("Total Amount : " + Functions.CURRENCY_SYMBOL + "" + calculatedPrice);
+        etAmount.setText("Total Amount : " + Functions.CURRENCY_SYMBOL_USER + "" + calculatedPrice);
         themeParkTitle.setText("Theme Park : " + themeParkTicketModel.getTitle());
         noOfTickets.setText("No of tickets : " + quantity);
         etDateOfTour.setText("Tour Date : " + M.changeDateFormat(themeParkTicketModel.getVisitDate() + " 12:12:45"));
@@ -167,18 +167,18 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                     Toast.makeText(ThemeParkFillInfoActivity.this, getString(R.string.valid_payment_method), Toast.LENGTH_SHORT).show();
                 } else {
                     if (!payUCheck.isChecked() && orendaCheck.isChecked()) {
-                        orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                        orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                         payu = 0;
                         AMOUNT_FOR_ORENDA = payu + orenda;
                         bookTicket(calculatedPrice);
                     } else {
                         if (payUCheck.isChecked()) {
-                            payu = Float.parseFloat(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                            payu = Float.parseFloat(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                         } else {
                             payu = 0;
                         }
                         if (orendaCheck.isChecked()) {
-                            orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                            orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                         } else {
                             orenda = 0;
                         }
@@ -466,7 +466,7 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
         successDialogModel = M.makeSuccessDialog(ThemeParkFillInfoActivity.this);
         successDialogModel.getTvMobileNumber().setText(name);
         double temp_planAmount = Double.parseDouble(amount);
-        successDialogModel.getTvAmount().setText(Functions.CURRENCY_SYMBOL + " " + temp_planAmount + "");
+        successDialogModel.getTvAmount().setText(Functions.CURRENCY_SYMBOL_USER + " " + temp_planAmount + "");
         successDialogModel.getForWhatPaid().setText("Theme Park");
         successDialogModel.getTvTransactionId().setText(txnId.equals("") || txnId.equalsIgnoreCase("null") ? "" : txnId);
         successDialogModel.getTvDateTime().setText(M.changeDateTimeFormat(dateTime));
@@ -515,15 +515,15 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                 String balance = jsonObject1.getString(ApiParams.balance);
                                 WALLET_BALANCE = Double.parseDouble(balance);
                                 walletBalance.setVisibility(View.VISIBLE);
-                                walletBalance.setText("Wallet Balance : " + Functions.CURRENCY_SYMBOL + " " + WALLET_BALANCE + "");
+                                walletBalance.setText("Wallet Balance : " + Functions.CURRENCY_SYMBOL_USER + " " + WALLET_BALANCE + "");
 
                                 PLAIN_AMOUNT = Double.parseDouble(calculatedPrice);
 
                                 if (WALLET_BALANCE == 0) {
                                     orendaCheck.setEnabled(false);
                                     orendaWalletLayout.setAlpha(.5f);
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + 0 + "");
-                                    payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + 0 + "");
+                                    payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + "");
                                     payUCheck.setChecked(true);
                                     orendaCheck.setChecked(false);
 
@@ -533,22 +533,22 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
 
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });
 
 
                                 } else if (WALLET_BALANCE < PLAIN_AMOUNT) {
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + WALLET_BALANCE + "");
-                                    payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + WALLET_BALANCE + "");
+                                    payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
                                     payUCheck.setChecked(true);
                                     orendaCheck.setChecked(true);
 
@@ -558,8 +558,8 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
                                                 bookButton.setEnabled(true);
                                                 bookButton.setAlpha(1.0f);
 
@@ -567,8 +567,8 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                                 if (orendaCheck.isChecked()) {
                                                     payUCheck.setChecked(false);
                                                     orendaCheck.setChecked(true);
-                                                    orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                    payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                    orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                    payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                                     bookButton.setEnabled(false);
                                                     bookButton.setAlpha(.5f);
 
@@ -585,21 +585,21 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + WALLET_BALANCE + "");
-                                                payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
+                                                orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + WALLET_BALANCE + "");
+                                                payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (PLAIN_AMOUNT - WALLET_BALANCE) + "");
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });
 
 
                                 } else if (WALLET_BALANCE >= PLAIN_AMOUNT) {
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + "");
-                                    payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0) + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + "");
+                                    payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0) + "");
                                     payUCheck.setChecked(false);
                                     orendaCheck.setChecked(true);
 
@@ -609,13 +609,13 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             } else {
                                                 payUCheck.setChecked(false);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                             }
                                         }
                                     });
@@ -625,13 +625,13 @@ public class ThemeParkFillInfoActivity extends AppCompatActivity implements Plug
                                             if (isChecked) {
                                                 payUCheck.setChecked(false);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });

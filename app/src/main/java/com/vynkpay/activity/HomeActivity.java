@@ -531,6 +531,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                             JSONObject data = jsonObject.getJSONObject("data");
 
                             Functions.CURRENCY_SYMBOL = data.getString("currency_symbol");
+                            Functions.CURRENCY_SYMBOL_USER = data.optString("currency_symbol_user");
                             Log.e("curr",""+Functions.CURRENCY_SYMBOL);
                             Log.e("curr",""+data.getString("is_indian"));
 

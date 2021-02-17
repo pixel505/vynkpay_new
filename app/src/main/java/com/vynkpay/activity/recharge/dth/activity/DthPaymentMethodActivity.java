@@ -148,18 +148,18 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                 walletBalance.setText("Available Balance "+" "+WALLET_BALANCE);
 
 
-                                txtConnectAmount.setText(Functions.CURRENCY_SYMBOL + " " + balance);
+                                txtConnectAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + balance);
 
                                 PLAIN_AMOUNT = Double.parseDouble(_AMOUNT);
-                                txtBalance.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT);
-                                txtRechargeAmount.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT);
+                                txtBalance.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT);
+                                txtRechargeAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT);
 
 
                                 if (WALLET_BALANCE == 0) {
                                     orendaCheck.setEnabled(false);
                                     orendaWalletLayout.setAlpha(.5f);
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + 0 + "");
-                                    payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + 0 + "");
+                                    payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + "");
                                     payUCheck.setChecked(true);
                                     orendaCheck.setChecked(false);
 
@@ -169,22 +169,22 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
 
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });
 
 
                                 } else if (WALLET_BALANCE < PLAIN_AMOUNT) {
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + WALLET_BALANCE + "");
-                                    payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + WALLET_BALANCE + "");
+                                    payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
                                     payUCheck.setChecked(true);
                                     orendaCheck.setChecked(true);
 
@@ -194,16 +194,16 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
                                                 makepaymentButton.setEnabled(true);
                                                 makepaymentButton.setAlpha(1.0f);
                                             } else {
                                                 if (orendaCheck.isChecked()) {
                                                     payUCheck.setChecked(false);
                                                     orendaCheck.setChecked(true);
-                                                    orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                    payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                    orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                    payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                                     makepaymentButton.setEnabled(false);
                                                     makepaymentButton.setAlpha(.5f);
                                                 } else {
@@ -219,21 +219,21 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + WALLET_BALANCE + "");
-                                                payUPaid.setText(Functions.CURRENCY_SYMBOL + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
+                                                orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + WALLET_BALANCE + "");
+                                                payUPaid.setText(Functions.CURRENCY_SYMBOL_USER + " " + (String.format("%.2f", PLAIN_AMOUNT - WALLET_BALANCE)) + "");
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });
 
 
                                 } else if (WALLET_BALANCE >= PLAIN_AMOUNT) {
-                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + "");
-                                    payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0) + "");
+                                    orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + "");
+                                    payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0) + "");
                                     payUCheck.setChecked(false);
                                     orendaCheck.setChecked(true);
 
@@ -243,13 +243,13 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                             if (isChecked) {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             } else {
                                                 payUCheck.setChecked(false);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                             }
                                         }
                                     });
@@ -259,13 +259,13 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
                                             if (isChecked) {
                                                 payUCheck.setChecked(false);
                                                 orendaCheck.setChecked(true);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
                                             } else {
                                                 payUCheck.setChecked(true);
                                                 orendaCheck.setChecked(false);
-                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL + " " + 0 + ""));
-                                                payUPaid.setText((Functions.CURRENCY_SYMBOL + " " + PLAIN_AMOUNT + ""));
+                                                orendaWalletAmount.setText((Functions.CURRENCY_SYMBOL_USER + " " + 0 + ""));
+                                                payUPaid.setText((Functions.CURRENCY_SYMBOL_USER + " " + PLAIN_AMOUNT + ""));
                                             }
                                         }
                                     });
@@ -317,19 +317,19 @@ public class DthPaymentMethodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!payUCheck.isChecked() && orendaCheck.isChecked()) {
-                    orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                    orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                     payu = 0;
                     AMOUNT_FOR_ORENDA = payu + orenda;
                     //Log.i(">>hello", "onClick: "+String.format(Locale.US, "%.2f", 1.2975118));
                     makeRechargeRequest(AMOUNT_FOR_ORENDA);
                 } else {
                     if (payUCheck.isChecked()) {
-                        payu = Float.parseFloat(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                        payu = Float.parseFloat(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                     } else {
                         payu = 0;
                     }
                     if (orendaCheck.isChecked()) {
-                        orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL + " ", ""));
+                        orenda = Float.parseFloat(orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER + " ", ""));
                     } else {
                         orenda = 0;
                     }

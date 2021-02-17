@@ -2,13 +2,6 @@ package com.vynkpay.retrofit.model;
 
 public class GetPackageDetailResponse {
 
-
-    /**
-     * status : true
-     * data : {"image":"assets/images/phone-pe.png","name":"Send Phone Pe & Google Pay to","value":"9985061414","name2":"Send UPI to","value2":"vynkpay@upi","b_image":"assets/images/pnb.png","b_name":"Punjab National Bank","b_name_2":"Neu Vorieos LIfe (OPC) Pvt Ltd","account":"3972002100006352","IFSC":"PUNB0397200","address":"Saifabad, City : Hyderabad"}
-     * message : Request payment Information.
-     */
-
     private String status;
     private DataBean data;
     private String message;
@@ -38,19 +31,6 @@ public class GetPackageDetailResponse {
     }
 
     public static class DataBean {
-        /**
-         * image : assets/images/phone-pe.png
-         * name : Send Phone Pe & Google Pay to
-         * value : 9985061414
-         * name2 : Send UPI to
-         * value2 : vynkpay@upi
-         * b_image : assets/images/pnb.png
-         * b_name : Punjab National Bank
-         * b_name_2 : Neu Vorieos LIfe (OPC) Pvt Ltd
-         * account : 3972002100006352
-         * IFSC : PUNB0397200
-         * address : Saifabad, City : Hyderabad
-         */
 
         private String image;
         private String name;
@@ -63,6 +43,80 @@ public class GetPackageDetailResponse {
         private String account;
         private String IFSC;
         private String address;
+
+        private String wallet_enable;
+        private String bank_enable;
+        private String trx_address_enable;
+        private String trx_address_image;
+        private String trx_address;
+        private String payer_enable;
+        private String payer_image;
+        private String payer_account;
+
+
+        public String getWallet_enable() {
+            return wallet_enable;
+        }
+
+        public void setWallet_enable(String wallet_enable) {
+            this.wallet_enable = wallet_enable;
+        }
+
+        public String getBank_enable() {
+            return bank_enable;
+        }
+
+        public void setBank_enable(String bank_enable) {
+            this.bank_enable = bank_enable;
+        }
+
+        public String getTrx_address_enable() {
+            return trx_address_enable;
+        }
+
+        public void setTrx_address_enable(String trx_address_enable) {
+            this.trx_address_enable = trx_address_enable;
+        }
+
+        public String getTrx_address_image() {
+            return trx_address_image;
+        }
+
+        public void setTrx_address_image(String trx_address_image) {
+            this.trx_address_image = trx_address_image;
+        }
+
+        public String getTrx_address() {
+            return trx_address;
+        }
+
+        public void setTrx_address(String trx_address) {
+            this.trx_address = trx_address;
+        }
+
+        public String getPayer_enable() {
+            return payer_enable;
+        }
+
+        public void setPayer_enable(String payer_enable) {
+            this.payer_enable = payer_enable;
+        }
+
+        public String getPayer_image() {
+            return payer_image;
+        }
+
+        public void setPayer_image(String payer_image) {
+            this.payer_image = payer_image;
+        }
+
+        public String getPayer_account() {
+            return payer_account;
+        }
+
+        public void setPayer_account(String payer_account) {
+            this.payer_account = payer_account;
+        }
 
         public String getImage() {
             return image;

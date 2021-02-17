@@ -21,8 +21,12 @@ import com.razorpay.PaymentResultWithDataListener;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
+import com.vynkpay.activity.activities.AffiliateActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.databinding.ActivityPaymentMethodMcashBinding;
+import com.vynkpay.models.PlanList;
+import com.vynkpay.network_classes.ApiCalls;
+import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.AddMoneyRazorResponse;
@@ -33,6 +37,7 @@ import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import retrofit2.Call;
@@ -76,13 +81,56 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
         });
         binding.submitButton.setOnClickListener(this);
         initListner();
-        if (Functions.isIndian){
+      /*  if (Functions.isIndian){
             binding.linIndian.setVisibility(View.VISIBLE);
             binding.linInternationl.setVisibility(View.GONE);
         }else {
             binding.linIndian.setVisibility(View.GONE);
             binding.linInternationl.setVisibility(View.VISIBLE);
-        }
+        }*/
+
+
+        ApiCalls.settings(PaymentMethodMcashActivity.this, Prefes.getAccessToken(PaymentMethodMcashActivity.this), new VolleyResponse() {
+            @Override
+            public void onResult(String result, String status, String message) {
+                Log.d("nowCheckkloggg", result);
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    JSONObject data = jsonObject.getJSONObject("data");
+                     boolean add_wallet_enable_razorpay = data.optBoolean("add_wallet_enable_razorpay");
+                     boolean add_wallet_enable_coinbase = data.optBoolean("add_wallet_enable_coinbase");
+                     boolean add_wallet_enable_payeer  = data.optBoolean("add_wallet_enable_payeer");
+
+                     if (add_wallet_enable_razorpay){
+                         binding.linIndian.setVisibility(View.VISIBLE);
+                     }else {
+                         binding.linIndian.setVisibility(View.GONE);
+                     }
+
+                    if (add_wallet_enable_coinbase){
+                        binding.lineCoinBase.setVisibility(View.VISIBLE);
+                    }else {
+                        binding.lineCoinBase.setVisibility(View.GONE);
+                    }
+
+                    if (add_wallet_enable_payeer){
+                        binding.linPayeer.setVisibility(View.VISIBLE);
+                    }else {
+                        binding.linPayeer.setVisibility(View.GONE);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
+
+
         fetchWalletData();
     }
 
@@ -117,12 +165,24 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         if (view == binding.submitButton){
             if(Functions.isIndian){
-                if (!binding.btnRozarpay.isChecked()){
+                if (!binding.btnRozarpay.isChecked() && !binding.btnCoinbase.isChecked() && !binding.btnPayeer.isChecked()){
                     Toast.makeText(PaymentMethodMcashActivity.this, "Please select payment method", Toast.LENGTH_SHORT).show();
                 }else {
                     binding.submitButton.setClickable(false);
-                    payUsingRozarPay(amount);
-                    //startActivity(new Intent(PaymentMethodMcashActivity.this,LoadMcashSuccessActivity.class));
+                    if (binding.btnRozarpay.isChecked()){
+                        payUsingRozarPay(amount);
+                    }else if (binding.btnCoinbase.isChecked()){
+                        binding.submitButton.setClickable(false);
+                        //url
+                        //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token=618f375122156a6df9ea873d57d71e66a7c0c10d577d9d643b8617403629e2471598446930&investValue=125&type=wallet
+                        String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
+                        startActivity(new Intent(PaymentMethodMcashActivity.this,CoinbaseActivity.class).putExtra("url",url));
+                        binding.submitButton.setClickable(true);
+                        PaymentMethodMcashActivity.this.finish();
+                    }else if (binding.btnPayeer.isChecked()){
+                        Toast.makeText(ac, "Coming soon!!", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }else {
                 if (binding.btnCoinbase.isChecked() || binding.btnPayeer.isChecked()){
@@ -230,7 +290,7 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onPaymentError(int i, String s, PaymentData paymentData) {
-        Toast.makeText(PaymentMethodMcashActivity.this, s, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(PaymentMethodMcashActivity.this, s, Toast.LENGTH_SHORT).show();
     }
 
      void fetchWalletData() {

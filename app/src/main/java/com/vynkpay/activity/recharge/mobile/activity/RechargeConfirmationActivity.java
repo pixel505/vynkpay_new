@@ -85,10 +85,10 @@ public class RechargeConfirmationActivity extends AppCompatActivity {
         }
 
         if (_TALKTIME.equals("")) {
-            txtAmount.setText(Functions.CURRENCY_SYMBOL + _TALKTIME);
+            txtAmount.setText(Functions.CURRENCY_SYMBOL_USER + _TALKTIME);
             layTalkTime.setVisibility(View.GONE);
         } else {
-            txtAmount.setText(Functions.CURRENCY_SYMBOL + _TALKTIME);
+            txtAmount.setText(Functions.CURRENCY_SYMBOL_USER + _TALKTIME);
             layTalkTime.setVisibility(View.VISIBLE);
         }
 
@@ -104,10 +104,10 @@ public class RechargeConfirmationActivity extends AppCompatActivity {
         double promoAmount = Double.parseDouble("0");
 
 
-        txtPromoCode.setText(Functions.CURRENCY_SYMBOL + promoAmount);
-        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL + planAmount);
+        txtPromoCode.setText(Functions.CURRENCY_SYMBOL_USER + promoAmount);
+        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount);
 
-        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL + planAmount + "");
+        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount + "");
 
     }
 

@@ -49,7 +49,7 @@ public class ECashAdapter extends BaseAdapter{
         dateTV.setText(Functions.changeDateFormat(ecashModelClassArrayList.get(position).getModifiedDate(), "yyyy-MM-dd hh:mm:ss", "dd-MMM-yyyy hh:mm aa"));
         transactionTV.setText("#"+ecashModelClassArrayList.get(position).getTxnNo());
         remarkTV.setText(ecashModelClassArrayList.get(position).getRemarks());
-        amountTV.setText(ecashModelClassArrayList.get(position).getAmount());
+        amountTV.setText(Functions.CURRENCY_SYMBOL+ecashModelClassArrayList.get(position).getAmount());
         return convertView;
     }
 }

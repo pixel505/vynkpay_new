@@ -155,13 +155,13 @@ public class LandlineRechargeConfirmationActivity extends AppCompatActivity {
         String mPromoValue = "0";
         double promoAmount = Double.parseDouble("0");
         double planAmount = Double.parseDouble(_AMOUNT);
-        txtPromoCode.setText(Functions.CURRENCY_SYMBOL + promoAmount);
-        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL + planAmount);
-        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL + planAmount + "");
+        txtPromoCode.setText(Functions.CURRENCY_SYMBOL_USER + promoAmount);
+        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount);
+        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount + "");
         txtOperatorName.setText(_OPERATOR_NAME);
         tvLandlineNumber.setText(_LANDLINE_NUMBER);
         tvAccountNumber.setText(_ACCOUNT_NUMBER);
-        tvAmount.setText(Functions.CURRENCY_SYMBOL + planAmount);
+        tvAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount);
         tvDueDate.setText(_DUE_DATE);
     }
 

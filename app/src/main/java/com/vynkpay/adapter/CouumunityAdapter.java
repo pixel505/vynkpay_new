@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vynkpay.R;
 import com.vynkpay.databinding.CommunityItemListBinding;
 import com.vynkpay.retrofit.model.TeamSummaryResponse;
+import com.vynkpay.utils.Functions;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,8 +74,7 @@ public class CouumunityAdapter extends RecyclerView.Adapter<CouumunityAdapter.Vi
             e.printStackTrace();
         }
 
-
-        holder.binding.paidDateText.setText(myListData.getPackagePrice());
+        holder.binding.paidDateText.setText(Functions.CURRENCY_SYMBOL+myListData.getPackagePrice());
 
 
     }

@@ -196,7 +196,7 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
         Log.e("operatorDetailid1",""+Prefes.getAccessToken(LandlinePaymentMethodActivity.this));
 
 
-        txtRechargeAmount.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
+        txtRechargeAmount.setText(Functions.CURRENCY_SYMBOL_USER+" "+_AMOUNT);
 
     }
 
@@ -412,7 +412,7 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
             public void onResponse(Call<GetWalletResponse> call, retrofit2.Response<GetWalletResponse> response) {
 
                 if(response.body().getSuccess()){
-                    vCashBalance.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getWalletRedeem());
+                    vCashBalance.setText(Functions.CURRENCY_SYMBOL_USER+" "+response.body().getData().getWalletRedeem());
                     razorpaykey=response.body().getData().getRazorpikey();
                     walletBalance.setText("Available Balance "+" "+response.body().getData().getBalance());
                     walletBalane=response.body().getData().getBalance();
@@ -427,12 +427,12 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
                                     if(response.body().getData().getRedeemShow()==1){
 
                                         vCashPercent.setText("("+response.body().getData().getPointsRedeemed()+")");
-                                        vCashAmount.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getPointsAmount());
+                                        vCashAmount.setText(Functions.CURRENCY_SYMBOL_USER+" "+response.body().getData().getPointsAmount());
 
-                                        payAmountPayText.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
+                                        payAmountPayText.setText(Functions.CURRENCY_SYMBOL_USER+" "+response.body().getData().getTotalAmount());
 
-                                        orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
-                                        payUPaid.setText(Functions.CURRENCY_SYMBOL+" "+response.body().getData().getTotalAmount());
+                                        orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER+" "+response.body().getData().getTotalAmount());
+                                        payUPaid.setText(Functions.CURRENCY_SYMBOL_USER+" "+response.body().getData().getTotalAmount());
 
 
                                         percent=response.body().getData().getPointsRedeemed();
@@ -446,10 +446,10 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
                                         setListeners(_AMOUNT);
                                         percent="";
                                         points="";
-                                        payAmountPayText.setText("Total Amount "+" "+Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
+                                        payAmountPayText.setText("Total Amount "+" "+Functions.CURRENCY_SYMBOL_USER+" "+_AMOUNT);
 
-                                        orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
-                                        payUPaid.setText(Functions.CURRENCY_SYMBOL+" "+_AMOUNT);
+                                        orendaWalletAmount.setText(Functions.CURRENCY_SYMBOL_USER+" "+_AMOUNT);
+                                        payUPaid.setText(Functions.CURRENCY_SYMBOL_USER+" "+_AMOUNT);
 
                                     }
                                 }
@@ -577,14 +577,14 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
             Log.e("razorpay_payment_id", "razorpay_payment_id" + paymentData.getData().getString("razorpay_payment_id"));
             MainApplication.getApiService().addMoneyRazorMethod(Prefes.getAccessToken(LandlinePaymentMethodActivity.this),
                     paymentData.getData().getString("razorpay_payment_id"),
-                    payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL, ""))
+                    payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER, ""))
                     .enqueue(new Callback<AddMoneyRazorResponse>() {
                         @Override
                         public void onResponse(Call<AddMoneyRazorResponse> call, retrofit2.Response<AddMoneyRazorResponse> response) {
                             loader.dismiss();
                             if(response.isSuccessful()){
 
-                                makeRechargeRequest(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL, ""));
+                                makeRechargeRequest(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER, ""));
 
 
                             }
@@ -606,7 +606,7 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
 
     @Override
     public void onPaymentError(int i, String s, PaymentData paymentData) {
-        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     private void makeRechargeRequest(final String AMOUNT_FOR_ORENDA) {
@@ -702,7 +702,7 @@ public class LandlinePaymentMethodActivity extends AppCompatActivity implements 
                 params.put("actual_recharge_amount",_AMOUNT);
                 params.put("pointsAmount", points);
                 params.put("pointsRedeemed",percent);
-                params.put("payable_amount",orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL, ""));
+                params.put("payable_amount",orendaWalletAmount.getText().toString().replace(Functions.CURRENCY_SYMBOL_USER, ""));
                 params.put("operator_detail_id",_OPERATOR_ID );
 
                 _LAND_LINE_NUMBER = getIntent().getStringExtra("landlineNumber");

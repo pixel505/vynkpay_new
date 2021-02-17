@@ -60,11 +60,11 @@ public class FullTalkTimeAdapter extends RecyclerView.Adapter<FullTalkTimeAdapte
         } else if (operatorList.get(position).getRecharge_talktime().equals("")) {
             holder.talkTimeTextView.setText("N.A");
         } else {
-            holder.talkTimeTextView.setText(Functions.CURRENCY_SYMBOL + operatorList.get(position).getRecharge_talktime());
+            holder.talkTimeTextView.setText(Functions.CURRENCY_SYMBOL_USER + operatorList.get(position).getRecharge_talktime());
         }
         holder.validityTextView.setText(operatorList.get(position).getRecharge_validity());
         holder.plainDescTextView.setText(operatorList.get(position).getRecharge_long_desc());
-        holder.plainAmount.setText(Functions.CURRENCY_SYMBOL + Double.parseDouble(operatorList.get(position).getRecharge_amount()));
+        holder.plainAmount.setText(Functions.CURRENCY_SYMBOL_USER + Double.parseDouble(operatorList.get(position).getRecharge_amount()));
 
         type = Prefes.getType(context);
         Log.i(">>amount", "onBindViewHolder: " + type);

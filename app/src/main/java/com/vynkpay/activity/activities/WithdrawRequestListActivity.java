@@ -51,7 +51,7 @@ public class WithdrawRequestListActivity extends AppCompatActivity implements Pl
             }
         });
 
-        binding.toolbar.toolbarTitle.setText(getString(R.string.withdrawalRequest));
+        binding.toolbar.toolbarTitle.setText(getString(R.string.withdrawalHistory));
 
         getRequestsList();
 
@@ -100,7 +100,8 @@ public class WithdrawRequestListActivity extends AppCompatActivity implements Pl
                             String branch_address = object.getString("branch_address");
                             String account_number = object.getString("account_number");
                             String ifsc_code = object.getString("ifsc_code");
-                            String mode = object.getString("mode");
+                            //String mode = object.getString("mode");
+                            String mode = object.optString("mode_name");
                             String bit_address = object.getString("bit_address");
                             String created_date = object.getString("created_date");
                             String isactive = object.getString("isactive");

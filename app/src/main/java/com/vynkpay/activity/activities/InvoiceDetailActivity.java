@@ -19,6 +19,7 @@ import com.vynkpay.databinding.ActivityInvoiceDetailBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetInvoiceDetailResponse;
+import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
@@ -134,11 +135,11 @@ public class InvoiceDetailActivity extends AppCompatActivity implements PlugInCo
                         binding.email.setText(response.body().getData().getEmail());
                         binding.desc.setText(response.body().getData().getPTitle());
                         binding.qty.setText(response.body().getData().getMode());
-                        binding.price.setText(response.body().getData().getPpPrice());
-                        binding.total.setText(response.body().getData().getAmount());
-                        binding.subTotal.setText(response.body().getData().getPpPrice());
+                        binding.price.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getPpPrice());
+                        binding.total.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getAmount());
+                        binding.subTotal.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getPpPrice());
                         binding.tax.setText(response.body().getData().getPpGst());
-                        binding.taxtotal.setText(response.body().getData().getPpTotalPrice());
+                        binding.taxtotal.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getPpTotalPrice());
                         binding.packageTypeTV.setText(response.body().getData().getPp_type());
                         if(response.body().getData().getPaymentVia().equals("0")){
                             binding.paymetmethod.setText("Wallet");

@@ -206,8 +206,6 @@ public class FragmentHomeGlobal extends Fragment {
                 String imagepath = BuildConfig.BASE_URL + Prefes.getImage(activity);
                 Log.e("imageeeeeeeeeeeeeeee", "" + imagepath);
             }
-
-
         }
 
         if (Prefes.getUserType(activity).equalsIgnoreCase("2")) {
@@ -466,6 +464,7 @@ public class FragmentHomeGlobal extends Fragment {
                         JSONObject data = jsonObject.getJSONObject("data");
 
                         Functions.CURRENCY_SYMBOL = data.getString("currency_symbol");
+                        Functions.CURRENCY_SYMBOL_USER = data.getString("currency_symbol_user");
                         Log.e("curr", "" + Functions.CURRENCY_SYMBOL);
                         Log.e("curr", "" + data.getString("is_indian"));
 
@@ -759,16 +758,15 @@ public class FragmentHomeGlobal extends Fragment {
             public void onResponse(Call<GetNonWalletResponse> call, retrofit2.Response<GetNonWalletResponse> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getStatus().equals("true")) {
-                        bonusWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getBonusWallet());
-                        vCashWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getMcashWallet());
+                        bonusWalletText.setText(Functions.CURRENCY_SYMBOL_USER + response.body().getData().getBonusWallet());
+                        vCashWalletText.setText(Functions.CURRENCY_SYMBOL_USER + response.body().getData().getMcashWallet());
                         Prefes.saveCash(response.body().getData().getMcashWallet(),activity);
-                        mCashWalletText.setText(Functions.CURRENCY_SYMBOL + response.body().getData().getVCashWallet());
+                        mCashWalletText.setText(Functions.CURRENCY_SYMBOL_USER + response.body().getData().getVCashWallet());
                         mCashBalance=response.body().getData().getVCashWallet();
                         vCashBalance=response.body().getData().getMcashWallet();
                         bonusBalance=response.body().getData().getBonusWallet();
 
                     }
-                }else {
                 }
             }
             @Override

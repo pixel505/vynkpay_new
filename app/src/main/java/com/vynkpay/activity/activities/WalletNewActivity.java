@@ -71,8 +71,8 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
             getMCashTransaction();
         }*/
         getBonusTransaction();
-        getVCashTransaction();
-        getMCashTransaction();
+
+
 
        /* if (Prefes.getUserType(WalletNewActivity.this).equalsIgnoreCase("2")){
             binding.tvWTitle.setText("Cashback");
@@ -128,7 +128,12 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
             public void onClick(View view) {
                 if (Functions.isIndian) {
                     //popupWithdrawalAmount();
-                    startActivity(new Intent(WalletNewActivity.this, RequestWithdrawnActivity.class));
+                    if (Functions.CURRENCY_SYMBOL.equalsIgnoreCase("₹")){
+                        startActivity(new Intent(WalletNewActivity.this, RequestWithdrawnActivity.class));
+                    }else {
+                        startActivity(new Intent(WalletNewActivity.this, WithdrawTypeActivity.class));
+                    }
+
                 }else {
                     //popupWithdrawalAmountIntern();
                     startActivity(new Intent(WalletNewActivity.this, WithdrawTypeActivity.class));
@@ -192,6 +197,8 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                getVCashTransaction();
             }
 
             @Override
@@ -203,7 +210,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
     }
 
     private void getVCashTransaction(){
-        serverDialog.show();
+        //serverDialog.show();
         ApiCalls.getVcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -211,7 +218,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")) {
-                        serverDialog.dismiss();
+                        //serverDialog.dismiss();
                         JSONObject dataObject = jsonObject.getJSONObject("data");
                         vCashBalance=dataObject.getString("walletBalance");
                         binding.vCashAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
@@ -247,11 +254,13 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                getMCashTransaction();
             }
 
             @Override
             public void onError(String error) {
-                serverDialog.dismiss();
+                //serverDialog.dismiss();
                 Log.d("transactionZ",error);
             }
 
@@ -259,7 +268,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
     }
 
     private void getMCashTransaction(){
-        serverDialog.show();
+       // serverDialog.show();
         ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -267,7 +276,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
-                        serverDialog.dismiss();
+                        //serverDialog.dismiss();
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                         mCashBalance=dataObject.getString("walletBalance");
                         binding.mCashAvail.setText("Available Balance"+":"+ Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
@@ -279,7 +288,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
 
             @Override
             public void onError(String error) {
-                serverDialog.dismiss();
+               // serverDialog.dismiss();
                 Log.d("tmacashh",error);
             }
         });

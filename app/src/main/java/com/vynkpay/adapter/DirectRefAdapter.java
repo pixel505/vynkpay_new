@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vynkpay.R;
 import com.vynkpay.databinding.DirectRefItemListBinding;
 import com.vynkpay.retrofit.model.ReferalsResponse;
+import com.vynkpay.utils.Functions;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,7 +73,7 @@ public class DirectRefAdapter extends RecyclerView.Adapter<DirectRefAdapter.View
             holder.binding.paidDateLinear.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.purchaseamountText.setText(myListData.getPackagePrice());
+        holder.binding.purchaseamountText.setText(Functions.CURRENCY_SYMBOL+myListData.getPackagePrice());
 
 
         if(myListData.getPurchaseCreateDate()!=null) {

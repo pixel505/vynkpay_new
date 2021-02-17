@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
+
+import com.google.gson.Gson;
 import com.vynkpay.R;
 import com.vynkpay.custom.NormalButton;
 import com.vynkpay.custom.NormalEditText;
@@ -21,6 +23,8 @@ import com.vynkpay.models.WalletTransactionsModel;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
 import com.vynkpay.prefes.Prefes;
+import com.vynkpay.retrofit.MainApplication;
+import com.vynkpay.retrofit.model.GetNonWalletResponse;
 import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
@@ -32,6 +36,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class RequestWithdrawnActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityRequestWithdrawnBinding binding;
@@ -41,7 +48,8 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
     NormalButton submitButton;
     public static String availableBalance= "0";
     Dialog serverDialog;
-    public static ArrayList<WalletTransactionsModel> walletTransactionsModelArrayList = new ArrayList<>();
+    String withdrawType;
+    //public static ArrayList<WalletTransactionsModel> walletTransactionsModelArrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +78,18 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        Intent intent = getIntent();
+        if (intent!=null){
+            if (intent.hasExtra("withdrawType")){
+                withdrawType = intent.getStringExtra("withdrawType");
+            }
+        }
     }
 
     public void getBonusTransaction(){
         serverDialog.show();
-        ApiCalls.getBonusTransactions(RequestWithdrawnActivity.this, Prefes.getAccessToken(RequestWithdrawnActivity.this), new VolleyResponse() {
+        /*ApiCalls.getBonusTransactions(RequestWithdrawnActivity.this, Prefes.getAccessToken(RequestWithdrawnActivity.this), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("bonusTransaction", result+"//");
@@ -85,7 +100,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                         availableBalance=dataObject.getString("walletBalance");
                         binding.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
-                        JSONArray listingArray = dataObject.getJSONArray("listing");
+                      *//*  JSONArray listingArray = dataObject.getJSONArray("listing");
                         for (int i=0; i<listingArray.length(); i++){
                             JSONObject object=listingArray.getJSONObject(i);
                             String id = object.getString("id");
@@ -111,7 +126,7 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
                                     email,  phone,  name,  paid_status,  balance, frontusername));
                         }
 
-                        Collections.reverse(walletTransactionsModelArrayList);
+                        Collections.reverse(walletTransactionsModelArrayList);*//*
 
                     } else {
                         serverDialog.dismiss();
@@ -125,6 +140,23 @@ public class RequestWithdrawnActivity extends AppCompatActivity implements View.
 
             @Override
             public void onError(String error) {
+                serverDialog.dismiss();
+            }
+        });*/
+
+        MainApplication.getApiService().noindianWallet(Prefes.getAccessToken(RequestWithdrawnActivity.this)).enqueue(new Callback<GetNonWalletResponse>() {
+            @Override
+            public void onResponse(Call<GetNonWalletResponse> call, retrofit2.Response<GetNonWalletResponse> response) {
+                serverDialog.dismiss();
+                if (response.isSuccessful()) {
+                    if (response.body().getStatus().equals("true")) {
+                        availableBalance=response.body().getData().getBonusWallet();
+                        binding.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+availableBalance);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<GetNonWalletResponse> call, Throwable t) {
                 serverDialog.dismiss();
             }
         });

@@ -39,7 +39,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:id="@+id/dateTV"
                     android:textColor="@color/color_text"
-                    android:text="18 June 2020"/>
+                    android:text=""/>
 
 
             </LinearLayout>
@@ -69,7 +69,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:id="@+id/amountTV"
                     android:textColor="@color/color_text"
-                    android:text="240.00"/>
+                    android:text="0.00"/>
 
 
             </LinearLayout>
@@ -99,7 +99,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:id="@+id/balanceTV"
                     android:textColor="@color/color_text"
-                    android:text="450.00"/>
+                    android:text="0.00"/>
 
 
             </LinearLayout>
@@ -137,7 +137,7 @@
                     android:id="@+id/descriptionTV"
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/color_text"
-                    android:text="Generation Bonus"/>
+                    android:text=""/>
 
             </LinearLayout>
 

@@ -68,5 +68,6 @@ public class URLS {
     public static String ResetPINLink_URL = "api/auth/pin_forget_mail_send";
     public static String USER_URL = "api/user";
     public static String SHOP_URL = "account/api_accounts/cashback/";
+    public static String SETTING_URL = "account/api_accounts/settings";
 }
 

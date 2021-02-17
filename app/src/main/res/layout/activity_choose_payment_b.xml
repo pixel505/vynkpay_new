@@ -14,7 +14,7 @@
             android:id="@+id/toolbarLayout"
             layout="@layout/toolbar_new" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -36,20 +36,157 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_280sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:cardBackgroundColor="#f8f8f8">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:weightSum="4">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:id="@+id/txnLinear">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_10sdp"
+                                android:weightSum="5">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="TRON Address"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:textStyle="bold" />
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:id="@+id/txnAddress"
+                                        android:textColor="@color/color_red"
+                                        android:textSize="@dimen/_10sdp" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:gravity="end">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_60sdp"
+                                        android:layout_height="@dimen/_60sdp"
+                                        android:layout_gravity="center"
+                                        android:id="@+id/txnIV"
+                                        android:layout_marginRight="@dimen/_5sdp" />
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/payeerLinear"
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="#BCB9B9" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/_10sdp"
+                                android:weightSum="5">
+
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3.5"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Payer Account"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:textStyle="bold" />
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:id="@+id/payerAccountTV"
+                                        android:textColor="@color/color_red"
+                                        android:textSize="@dimen/_10sdp" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.5"
+                                    android:gravity="end">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_60sdp"
+                                        android:layout_height="@dimen/_60sdp"
+                                        android:layout_gravity="center"
+                                        android:id="@+id/payerIV"
+                                        android:layout_marginRight="@dimen/_5sdp" />
+
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/upiLinear"
+                            android:visibility="gone"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="#BCB9B9" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -70,12 +207,30 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:text="Send Phone Pe  Google Pay"
+                                        android:id="@+id/firstTitle"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_12sdp"
                                         android:textStyle="bold" />
 
                                     <com.vynkpay.custom.NormalTextView
                                         android:id="@+id/mobino"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_5sdp"
+                                        android:textColor="@color/color_red"
+                                        android:textSize="@dimen/_10sdp" />
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Send UPI"
+                                        android:id="@+id/secondTitle"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:textStyle="bold" />
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:id="@+id/mailid"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/_5sdp"
@@ -92,16 +247,17 @@
                                     android:gravity="end">
 
                                     <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
+                                        android:layout_width="@dimen/_60sdp"
+                                        android:layout_height="@dimen/_60sdp"
                                         android:layout_gravity="center"
-                                        android:layout_marginRight="@dimen/_5sdp"
-                                        android:src="@drawable/phonepe" />
+                                        android:id="@+id/payIV"
+                                        android:layout_marginRight="@dimen/_5sdp" />
 
                                     <ImageView
                                         android:layout_width="@dimen/_30sdp"
                                         android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
+                                        android:visibility="gone"
                                         android:src="@drawable/googlepaylogoicon" />
 
                                 </LinearLayout>
@@ -112,93 +268,19 @@
 
                         </LinearLayout>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="#BCB9B9" />
-
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
+                            android:id="@+id/bankLinear"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
 
-                            <LinearLayout
+
+                            <View
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:weightSum="5">
-
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:padding="@dimen/_10sdp"
-                                    android:weightSum="5">
-
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="3"
-                                        android:gravity="center"
-                                        android:orientation="vertical">
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:text="Send UPI"
-                                            android:textColor="@color/black"
-                                            android:textSize="@dimen/_12sdp"
-                                            android:textStyle="bold" />
-
-                                        <com.vynkpay.custom.NormalTextView
-                                            android:id="@+id/mailid"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/_5sdp"
-                                            android:textColor="@color/color_red"
-                                            android:textSize="@dimen/_10sdp" />
-
-
-                                    </LinearLayout>
-
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="match_parent"
-                                        android:layout_weight="2"
-                                        android:gravity="end">
-
-                                        <ImageView
-                                            android:layout_width="@dimen/_30sdp"
-                                            android:layout_height="@dimen/_30sdp"
-                                            android:layout_gravity="center"
-                                            android:layout_marginStart="@dimen/_10sdp"
-                                            android:src="@drawable/upi1" />
-
-
-                                    </LinearLayout>
-
-
-                                </LinearLayout>
-
-
-                            </LinearLayout>
-
-
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:background="#BCB9B9" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="2">
+                                android:layout_height="1dp"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:background="#BCB9B9" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -225,6 +307,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:text="Bank Transfer"
+                                            android:id="@+id/thirdTitle"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_12sdp"
                                             android:textStyle="bold" />
@@ -275,10 +358,9 @@
                                         android:gravity="end">
 
                                         <ImageView
-                                            android:layout_width="@dimen/_30sdp"
-                                            android:layout_height="@dimen/_30sdp"
-                                            android:src="@drawable/rbl_banklogo" />
-
+                                            android:layout_width="@dimen/_60sdp"
+                                            android:layout_height="@dimen/_60sdp"
+                                            android:id="@+id/bankIV"/>
 
                                     </LinearLayout>
 
@@ -291,13 +373,11 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <com.vynkpay.custom.NormalButton
-
                     android:id="@+id/enterpaymentdetails"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_32sdp"
@@ -311,7 +391,6 @@
 
             </LinearLayout>
 
-
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

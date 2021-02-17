@@ -106,7 +106,6 @@
                                 android:id="@+id/availableBalanceTV"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/rs"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="@dimen/_16sdp" />
 

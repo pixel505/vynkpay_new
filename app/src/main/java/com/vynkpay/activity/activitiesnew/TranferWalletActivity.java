@@ -69,9 +69,9 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
     protected void onResume() {
         super.onResume();
         getSettings();
-        getBonusTransaction();
-        getMCashTransaction();
-        getVCashTransaction();
+
+
+
         MySingleton.getInstance(TranferWalletActivity.this).setConnectivityListener(this);
     }
 
@@ -127,6 +127,8 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                 }catch (Exception e){
                     e.printStackTrace();
                 }
+
+                getBonusTransaction();
             }
 
             @Override
@@ -156,6 +158,8 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                getMCashTransaction();
             }
 
             @Override
@@ -166,12 +170,12 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
         });
     }
     private void getVCashTransaction(){
-        serverDialog.show();
+        //serverDialog.show();
         ApiCalls.getVcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("vtransactionZLog", result + "//");
-                serverDialog.dismiss();
+               // serverDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")) {
@@ -213,18 +217,18 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onError(String error) {
-                serverDialog.dismiss();
+               // serverDialog.dismiss();
             }
 
         });
     }
 
     private void getMCashTransaction(){
-        serverDialog.show();
+        //serverDialog.show();
         ApiCalls.getMcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
-                serverDialog.dismiss();
+                //serverDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
@@ -235,11 +239,13 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                getVCashTransaction();
             }
 
             @Override
             public void onError(String error) {
-                serverDialog.dismiss();
+               // serverDialog.dismiss();
             }
 
         });

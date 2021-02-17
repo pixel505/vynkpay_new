@@ -35,8 +35,17 @@ public class WalletRequestAdapter extends RecyclerView.Adapter<WalletRequestAdap
         holder.dateTV.setText(Functions.changeDateFormat(withdrawalRequestModelArrayList.get(position).getCreated_date(),
                 "yyyy-MM-dd hh:mm:ss", "dd MMMM yyyy"));
 
-        holder.amountTV.setText(withdrawalRequestModelArrayList.get(position).getAmount());
+        holder.amountTV.setText(Functions.CURRENCY_SYMBOL+withdrawalRequestModelArrayList.get(position).getAmount());
         holder.idTV.setText("#"+withdrawalRequestModelArrayList.get(position).getInvoice_number());
+        if (withdrawalRequestModelArrayList.get(position).getAccount_number().equals("null") || withdrawalRequestModelArrayList.get(position).getAccount_number().isEmpty()){
+            holder.addressInfoLinear.setVisibility(View.VISIBLE);
+            holder.bankInfoLinear.setVisibility(View.GONE);
+        }else {
+            holder.addressInfoLinear.setVisibility(View.GONE);
+            holder.bankInfoLinear.setVisibility(View.VISIBLE);
+        }
+
+        holder.bitAddressTV.setText(withdrawalRequestModelArrayList.get(position).getBit_address());
 
         if (withdrawalRequestModelArrayList.get(position).getIsactive().equals("1")){
             holder.statusTV.setText(context.getString(R.string.requested));
@@ -49,13 +58,7 @@ public class WalletRequestAdapter extends RecyclerView.Adapter<WalletRequestAdap
             holder.statusTV.setTextColor(ContextCompat.getColor(context, R.color.buttonOffer));
         }
 
-        if (withdrawalRequestModelArrayList.get(position).getMode().equals("0")){
-            holder.modeTV.setText("IMPS");
-        }else if (withdrawalRequestModelArrayList.get(position).getMode().equals("1")){
-            holder.modeTV.setText("NEFT");
-        }else if (withdrawalRequestModelArrayList.get(position).getMode().equals("2")){
-            holder.modeTV.setText("BTC");
-        }
+        holder.modeTV.setText(withdrawalRequestModelArrayList.get(position).getMode());
 
         holder.bankTV.setText(withdrawalRequestModelArrayList.get(position).getBank_name());
         holder.nameTV.setText(withdrawalRequestModelArrayList.get(position).getName_in_bank());
@@ -113,10 +116,16 @@ public class WalletRequestAdapter extends RecyclerView.Adapter<WalletRequestAdap
         TextView serviceFeesTV;
         TextView tdsFeesTV;
         TextView impsFeesTV;
+        TextView bitAddressTV;
         LinearLayout detailLinear;
+        LinearLayout addressInfoLinear;
+        LinearLayout bankInfoLinear;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
+             bankInfoLinear = itemView.findViewById(R.id.bankInfoLinear);
+             addressInfoLinear = itemView.findViewById(R.id.addressInfoLinear);
+             bitAddressTV = itemView.findViewById(R.id.bitAddressTV);
              dateTV = itemView.findViewById(R.id.dateTV);
              amountTV = itemView.findViewById(R.id.amountTV);
              idTV = itemView.findViewById(R.id.idTV);

@@ -35,6 +35,7 @@ public class Functions {
     public static final int MONEYTRANSFER=12;
 
     public static String CURRENCY_SYMBOL="₹";
+    public static String CURRENCY_SYMBOL_USER="₹";
     public static boolean isIndian=true;
 
     public static final int DTH=4;

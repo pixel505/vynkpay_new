@@ -291,4 +291,6 @@
     <string name="conversionsuccess">Conversion MCash Successful</string>
     <string name="vynkPackages">VYNC Packages</string>
     <string name="packageType">Package type</string>
+    <string name="withdrawalHistory">Withdrawal History</string>
+    <string name="bitAddress">Bit Address</string>
 </resources>

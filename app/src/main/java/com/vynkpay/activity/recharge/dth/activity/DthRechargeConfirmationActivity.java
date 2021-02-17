@@ -112,9 +112,9 @@ public class DthRechargeConfirmationActivity extends AppCompatActivity {
         double promoAmount = Double.parseDouble("0");
         double planAmount = Double.parseDouble(_AMOUNT);
 
-        txtPromoCode.setText(Functions.CURRENCY_SYMBOL + promoAmount);
-        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL + planAmount);
-        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL + planAmount + "");
+        txtPromoCode.setText(Functions.CURRENCY_SYMBOL_USER + promoAmount);
+        txtSummaryAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount);
+        txtTotalConfirmAmount.setText(Functions.CURRENCY_SYMBOL_USER + planAmount + "");
 
     }
 

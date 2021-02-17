@@ -554,11 +554,15 @@ public class BonusWalletFragment extends AppCompatActivity {
 
         String action = "wr";
         if (Functions.isIndian) {
-           // action = "wr";
-            action = "";
+            if (Functions.CURRENCY_SYMBOL.equalsIgnoreCase("₹")){
+                action = "";
+            }else {
+                action = withdrawType;
+            }
         }else {
             action = withdrawType;
         }
+
 
         ApiCalls.withdrawalRequest(activity, Prefes.getAccessToken(activity), amount, action, new VolleyResponse() {
             @Override
@@ -830,7 +834,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                     if (jsonObject.getString("status").equals("true")){
                         serverDialog.dismiss();
                         JSONObject dataObject=jsonObject.getJSONObject("data");
-                          availableBalance=dataObject.getString("walletBalance");
+                        availableBalance=dataObject.getString("walletBalance");
                         binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
                         JSONArray listingArray = dataObject.getJSONArray("listing");
                         for (int i=0; i<listingArray.length(); i++){

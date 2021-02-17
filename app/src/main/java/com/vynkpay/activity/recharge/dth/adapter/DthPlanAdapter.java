@@ -57,7 +57,7 @@ public class DthPlanAdapter extends RecyclerView.Adapter<DthPlanAdapter.MyViewHo
         }
         holder.validityTextView.setText(operatorList.get(position).getRecharge_validity());
         holder.plainDescTextView.setText(operatorList.get(position).getRecharge_long_desc());
-        holder.plainAmount.setText(Functions.CURRENCY_SYMBOL + Double.parseDouble(operatorList.get(position).getRecharge_amount()));
+        holder.plainAmount.setText(Functions.CURRENCY_SYMBOL_USER + Double.parseDouble(operatorList.get(position).getRecharge_amount()));
         type = Prefes.getType(context);
         Log.i(">>amount", "onBindViewHolder: " + type);
         holder.tap.setOnClickListener(new View.OnClickListener() {

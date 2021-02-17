@@ -5,15 +5,19 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
 import com.vynkpay.databinding.ActivityChoosePaymentBBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.GetPackageDetailResponse;
+import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
@@ -53,7 +57,14 @@ public class ChoosePaymentActivityB extends AppCompatActivity implements PlugInC
             @Override
             public void onResponse(Call<GetPackageDetailResponse> call, Response<GetPackageDetailResponse> response) {
                 if(response.isSuccessful() && response.body()!=null){
+
+                    Log.d("walletResposeLOG", new Gson().toJson(response.body().getData())+"//");
+
                     if(response.body().getStatus().equals("true")){
+                        binding.txnAddress.setText(response.body().getData().getTrx_address());
+                        binding.payerAccountTV.setText(response.body().getData().getPayer_account());
+                        binding.firstTitle.setText(response.body().getData().getName());
+                        binding.secondTitle.setText(response.body().getData().getName2());
                         binding.mobino.setText("To :"+" "+response.body().getData().getValue());
                         binding.mailid.setText(response.body().getData().getValue2());
                         binding.pnbname.setText(response.body().getData().getB_name());
@@ -61,6 +72,40 @@ public class ChoosePaymentActivityB extends AppCompatActivity implements PlugInC
                         binding.acountno.setText("A/c No :"+" "+response.body().getData().getAccount());
                         binding.ifsccode.setText("IFSC :"+" "+response.body().getData().getIFSC());
                         binding.branch.setText("Branch :"+" "+response.body().getData().getAddress());
+
+                        String payUrl= BuildConfig.BASE_URL+"account/"+response.body().getData().getImage();
+                        String bankUrl= BuildConfig.BASE_URL+"account/"+response.body().getData().getB_image();
+                        String payeerUrl=response.body().getData().getPayer_image();
+                        String txnUrl= response.body().getData().getTrx_address_image();
+
+                        Functions.loadImageCall(ChoosePaymentActivityB.this, payUrl, binding.payIV);
+                        Functions.loadImageCall(ChoosePaymentActivityB.this, bankUrl, binding.bankIV);
+                        Functions.loadImageCall(ChoosePaymentActivityB.this, txnUrl, binding.txnIV);
+                        Functions.loadImageCall(ChoosePaymentActivityB.this, payeerUrl, binding.payerIV);
+
+                        if (response.body().getData().getBank_enable().equalsIgnoreCase("true")){
+                            binding.bankLinear.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.bankLinear.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().getData().getPayer_enable().equalsIgnoreCase("true")){
+                            binding.payeerLinear.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.payeerLinear.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().getData().getTrx_address_enable().equalsIgnoreCase("true")){
+                            binding.txnLinear.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.txnLinear.setVisibility(View.GONE);
+                        }
+
+                        if (response.body().getData().getWallet_enable().equalsIgnoreCase("true")){
+                            binding.upiLinear.setVisibility(View.VISIBLE);
+                        }else {
+                            binding.upiLinear.setVisibility(View.GONE);
+                        }
 
 
                         binding.enterpaymentdetails.setOnClickListener(new View.OnClickListener() {

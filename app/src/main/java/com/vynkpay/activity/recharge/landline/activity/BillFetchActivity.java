@@ -117,7 +117,7 @@ public class BillFetchActivity extends AppCompatActivity {
                 break;
         }
 
-        tvAmount.setText(Functions.CURRENCY_SYMBOL + _AMOUNT);
+        tvAmount.setText(Functions.CURRENCY_SYMBOL_USER + _AMOUNT);
         tvName.setText(_CONSUMER_NAME);
         tvOperatorName.setText(_OPERATOR_NAME);
         tvDate.setText((_BILL_DATE.equalsIgnoreCase("NA") ||

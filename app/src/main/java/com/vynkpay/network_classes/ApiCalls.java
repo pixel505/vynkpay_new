@@ -343,4 +343,22 @@ public class ApiCalls {
         volleyNetworkClass.makeRequest(URLS.SHOP_URL+id, "");
     }
 
+    public static void settings(Context context,String token, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        volleyNetworkClass.makeRequest(URLS.SETTING_URL, token);
+    }
+
 }

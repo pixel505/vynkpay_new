@@ -518,6 +518,7 @@ public class FragmentHome extends Fragment {
                     JSONObject data = jsonObject.getJSONObject("data");
 
                     Functions.CURRENCY_SYMBOL = data.getString("currency_symbol");
+                    Functions.CURRENCY_SYMBOL_USER = data.getString("currency_symbol_user");
                     Log.e("curr", "" + Functions.CURRENCY_SYMBOL);
                     Log.e("curr", "" + data.getString("is_indian"));
 
@@ -1070,11 +1071,11 @@ public class FragmentHome extends Fragment {
                     if (response.isSuccessful()) {
                         if (response.body().getSuccess()) {
 
-                            bonusWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getEarningBalance());
-                            vCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getBalance());
+                            bonusWalletText.setText(Functions.CURRENCY_SYMBOL_USER+response.body().getData().getEarningBalance());
+                            vCashWalletText.setText(Functions.CURRENCY_SYMBOL_USER+response.body().getData().getBalance());
 
                             Prefes.saveCash(response.body().getData().getBalance(), activity);
-                            mCashWalletText.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getWalletRedeem());
+                            mCashWalletText.setText(Functions.CURRENCY_SYMBOL_USER+response.body().getData().getWalletRedeem());
 
                         } else {
 

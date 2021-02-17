@@ -11,6 +11,8 @@ import com.vynkpay.R;
 import com.vynkpay.activity.activities.InvoiceDetailActivity;
 import com.vynkpay.databinding.InvoiceItemBinding;
 import com.vynkpay.retrofit.model.GetInvoiceResponse;
+import com.vynkpay.utils.Functions;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,7 +47,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         GetInvoiceResponse.Data.Listing  myListData = listdata.get(position);
         holder.binding.nameText.setText(myListData.getName());
         holder.binding.nameryttext.setText(myListData.getUsername());
-        holder.binding.payment.setText(myListData.getAmount());
+        holder.binding.payment.setText(Functions.CURRENCY_SYMBOL+myListData.getAmount());
         holder.binding.invoiceNumber.setText(myListData.getInvoiceNumber());
 
         try {

@@ -124,7 +124,11 @@ public class RequestWithdrawOtpActivity extends AppCompatActivity implements Vie
         String action = "wr";
         if (Functions.isIndian) {
             //action = "wr";
-            action = "";
+            if (Functions.CURRENCY_SYMBOL.equalsIgnoreCase("₹")){
+                action = "";
+            }else {
+                action = WithdrawTypeActivity.withdrawType;
+            }
         } else {
             action = WithdrawTypeActivity.withdrawType;
         }

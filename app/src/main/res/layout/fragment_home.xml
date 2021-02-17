@@ -439,12 +439,7 @@
                         android:textSize="@dimen/_15sdp"
                         android:text="0"/>
 
-
-
                 </LinearLayout>
-
-
-
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView

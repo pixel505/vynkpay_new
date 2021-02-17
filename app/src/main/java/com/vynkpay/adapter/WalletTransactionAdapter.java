@@ -61,8 +61,8 @@ public class WalletTransactionAdapter extends BaseAdapter {
 
         dateTV.setText(Functions.changeDateFormat(walletTransactionsModelArrayList.get(position).getCreated_date(),
                 "yyyy-MM-dd hh:mm:ss", "dd MMMM yyyy"));
-        amountTV.setText(walletTransactionsModelArrayList.get(position).getP_amount());
-        balanceTV.setText(walletTransactionsModelArrayList.get(position).getBalance());
+        amountTV.setText(Functions.CURRENCY_SYMBOL+walletTransactionsModelArrayList.get(position).getP_amount());
+        balanceTV.setText(Functions.CURRENCY_SYMBOL+walletTransactionsModelArrayList.get(position).getBalance());
 
 
         Log.d("tmcashtrrr", walletTransactionsModelArrayList.get(position).getStatus()+"//");

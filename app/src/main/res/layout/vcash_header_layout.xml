@@ -70,6 +70,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_width="@dimen/_100sdp"
                             android:layout_height="@dimen/_20sdp"
+                            android:visibility="gone"
                             android:background="@drawable/buttonbg">
 
                             <com.vynkpay.custom.NormalTextView
