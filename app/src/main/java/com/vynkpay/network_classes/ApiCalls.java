@@ -361,4 +361,60 @@ public class ApiCalls {
         volleyNetworkClass.makeRequest(URLS.SETTING_URL, token);
     }
 
+    public static void getChainTransactions(Context context,String token, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        volleyNetworkClass.makeRequest(URLS.CHAIN_TNS_URL, token);
+    }
+
+    public static void getChainHistoryTransactions(Context context,String token, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        volleyNetworkClass.makeRequest(URLS.CHAIN_HIST_TNS_URL, token);
+    }
+
+    public static void transferToken(Context context,String token, String trx_address, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("trx_address", trx_address);
+
+        volleyNetworkClass.makeRequest(URLS.ADD_TOKEN_URL, token, hashMap);
+    }
 }

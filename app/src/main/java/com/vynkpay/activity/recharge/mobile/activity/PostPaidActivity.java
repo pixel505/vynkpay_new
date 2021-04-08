@@ -346,6 +346,8 @@ public class PostPaidActivity extends AppCompatActivity {
         intent.putExtra("operator", tvOperatorCircle.getText().toString());
         intent.putExtra("mobile", etMobileNumber.getText().toString());
         intent.putExtra("amount", etAmount.getText().toString());
+
+
         intent.putExtra("type", type);
         intent.putExtra("operator_id", operatorID);
         Log.e("operatorID",""+operatorID);
@@ -355,6 +357,9 @@ public class PostPaidActivity extends AppCompatActivity {
         Prefes.saveOperatorID(_SPECIAL_OR_TOP_UP,PostPaidActivity.this);
         Prefes.saveCircle(circleName,PostPaidActivity.this);
         Prefes.saveOperatorDID(operatorDetail,PostPaidActivity.this);
+
+
+        Log.d("cgejdsData", type+"=type\n"+operatorID+"=operatorID\n"+opUrl+"=opUrl\n"+_SPECIAL_OR_TOP_UP+"=_SPECIAL_OR_TOP_UP\n"+operatorDetail+"=operatorDetail");
 
         startActivity(intent);
     }

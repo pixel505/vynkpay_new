@@ -356,17 +356,13 @@ public class PaymentMethodActivity extends AppCompatActivity implements PaymentR
             options.put("name", Prefes.getEmail(PaymentMethodActivity.this));
             options.put("description", "Pay to VynkPay");
             options.put("theme",new JSONObject("{color: '#B10D25'}"));
-            //You can omit the image option to fetch the image from dashboard
-            //  options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            // options.put("order_id",orderid);
+
             options.put("currency", "INR");
             String payment = toString;
             double total = Double.parseDouble(payment);
             total = total * 100;
 
-
             options.put("amount", String.format("%.2f", total));
-            //  options.put("order_id",iD );
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", email);

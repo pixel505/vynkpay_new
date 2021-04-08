@@ -62,6 +62,7 @@ import com.highsoft.highcharts.core.HIChartView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.activities.AboutUsActivity;
+import com.vynkpay.activity.activities.ChainTransactionActivity;
 import com.vynkpay.adapter.ImportantAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.CartHighResponse;
@@ -189,6 +190,9 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.designationText)
     NormalTextView designationText;
 
+    @BindView(R.id.tokenBalnceText)
+    NormalTextView tokenBalnceText;
+
     @BindView(R.id.ivDImage)
     ImageView ivDImage;
 
@@ -215,6 +219,9 @@ public class FragmentHome extends Fragment {
 
     @BindView(R.id.tvChartTitle)
     NormalTextView tvChartTitle;
+
+    @BindView(R.id.tokenBlncLayout)
+    LinearLayout tokenBlncLayout;
 
 
     String bonusBalance, mCashBalance, vCashBalance;
@@ -502,6 +509,14 @@ public class FragmentHome extends Fragment {
         //progressView.setProgress(18);
         //progressView.invalidate();
         //setData(5, 90);
+
+
+        tokenBlncLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, ChainTransactionActivity.class));
+            }
+        });
 
         return view;
 
@@ -1000,9 +1015,17 @@ public class FragmentHome extends Fragment {
                         String purchase_date = statistics.getString("purchase_date");
                         String purchase_amount = statistics.getString("purchase_amount");
                         String total_earning = statistics.getString("total_earning");
+
+                        String tokenName = statistics.getString("tokenName");
+                        String tokenBalance = statistics.getString("tokenBalance");
+                        String tokenIcon = statistics.getString("tokenIcon");
+
+                        tokenBalnceText.setText(tokenBalance);
+
                         designationText.setText("Designation: "+des_title);
                         loadImageFromUrl(des_img);
-                        StatiaticsResponse statiaticsResponse = new StatiaticsResponse(des_title,des_img,next_des_title,next_des_img,token_des_title,token_des_img,next_token_des_title,next_token_des_img,purchase_date,purchase_amount,total_earning);
+                        StatiaticsResponse statiaticsResponse = new StatiaticsResponse(tokenName, tokenBalance, tokenIcon, des_title, des_img, next_des_title, next_des_img,
+                                token_des_title, token_des_img, next_token_des_title, next_token_des_img, purchase_date, purchase_amount, total_earning);
                         rvListImportant.setAdapter(new ImportantAdapter(activity,statiaticsResponse));
 
                         JSONObject vyncchartObject = data.getJSONObject("vync_chart");
@@ -1070,6 +1093,8 @@ public class FragmentHome extends Fragment {
 
                     if (response.isSuccessful()) {
                         if (response.body().getSuccess()) {
+
+                            Log.d("walletLOFDFFD", new Gson().toJson(response.body().getData()));
 
                             bonusWalletText.setText(Functions.CURRENCY_SYMBOL_USER+response.body().getData().getEarningBalance());
                             vCashWalletText.setText(Functions.CURRENCY_SYMBOL_USER+response.body().getData().getBalance());

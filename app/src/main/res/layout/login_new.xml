@@ -27,8 +27,8 @@
                    android:layout_width="@dimen/_40sdp"
                    android:layout_height="@dimen/_40sdp"
                    android:src="@drawable/logo"/>
-                <com.vynkpay.custom.NormalTextView
 
+                <com.vynkpay.custom.NormalTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/login"
@@ -37,6 +37,7 @@
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:textColor="@color/black"/>
+
                 <com.vynkpay.custom.NormalTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,8 +56,6 @@
                     android:background="@drawable/custom_rectangle"
                     android:hint="Enter your Username"
                     android:layout_marginTop="@dimen/_15sdp"/>
-
-
 
                 <FrameLayout
                     android:id="@+id/passwordLayout"
@@ -82,9 +81,8 @@
                             android:hint="Password"
                             android:textSize="@dimen/_12sdp"
                             android:id="@+id/etPassword"
-                            android:layout_marginRight="@dimen/_40sdp"
+                            android:layout_marginRight="@dimen/_40sdp" />
 
-                          />
                     </LinearLayout>
 
                     <LinearLayout
@@ -104,9 +102,7 @@
 
                 </FrameLayout>
 
-
                 <LinearLayout
-
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_32sdp"
                     android:layout_marginTop="@dimen/_20sdp"

@@ -237,6 +237,7 @@
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_70sdp"
+                                android:visibility="gone"
                                 android:layout_weight="2"
                                 app:cardElevation="0dp">
 
@@ -266,6 +267,47 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="0"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_15sdp"
+                                        android:textStyle="bold" />
+
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_70sdp"
+                                android:layout_weight="2"
+                                app:cardElevation="0dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/vwallet"
+                                    android:id="@+id/tokenBlncLayout"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Token Balance"
+                                        android:textSize="@dimen/_8sdp"
+                                        android:textStyle="bold" />
+
+                                    <View
+                                        android:layout_width="@dimen/_10sdp"
+                                        android:layout_height="@dimen/_2sdp"
+                                        android:layout_marginTop="@dimen/_3sdp"
+                                        android:background="@color/colorBlack"/>
+
+                                    <com.vynkpay.custom.NormalTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="0"
+                                        android:id="@+id/tokenBalnceText"
                                         android:textColor="@color/black"
                                         android:textSize="@dimen/_15sdp"
                                         android:textStyle="bold" />

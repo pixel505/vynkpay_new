@@ -172,7 +172,6 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
                                 dialog1.show();
                                 String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id="
                                         + getIntent().getStringExtra("ids") + "&alien=1&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
-                                Log.e("ids", "" + url);
                                 startActivity(new Intent(ChoosePaymentActivity.this, WebviewActivityNew.class)
                                         .putExtra("url", url)
                                         .putExtra("packageID", getIntent().getStringExtra("ids")));

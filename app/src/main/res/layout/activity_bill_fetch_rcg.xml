@@ -15,6 +15,7 @@
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar_home_rcg" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -183,7 +184,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center|end"
-                                    android:text="sdjsgdgasd sjgdsagdgasgg"
+                                    android:text="biller name"
                                     android:textColor="@color/color_text"
                                     android:textSize="14dp" />
                             </LinearLayout>
@@ -219,7 +220,7 @@
                                     android:id="@+id/tvDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=""
+                                    android:text="dd/mm/yyyy"
                                     android:gravity="center|end"
                                     android:textColor="@color/color_text"
                                     android:textSize="14dp" />
@@ -255,17 +256,14 @@
                                     android:id="@+id/tvDueDate"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=""
+                                    android:text="dd/mm/yyyy"
                                     android:gravity="center|end"
                                     android:textColor="@color/color_text"
                                     android:textSize="14dp" />
                             </LinearLayout>
                         </LinearLayout>
-
-
                     </LinearLayout>
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/llAmountLayout"

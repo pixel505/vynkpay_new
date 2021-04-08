@@ -464,12 +464,6 @@
                                     </FrameLayout>
                                 </LinearLayout>
 
-
-
-
-
-
-
                             </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
@@ -480,7 +474,6 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center_horizontal">
 
-
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/imageView"
                             android:layout_width="90dp"
@@ -489,7 +482,6 @@
                             android:src="@drawable/dummy"
                             app:civ_border_color="@color/white"
                             app:civ_border_width="1dp" />
-
 
                         <ImageView
                             android:id="@+id/editImage"
@@ -500,7 +492,6 @@
                             android:padding="8dp"
                             android:src="@drawable/ic_edit_white"
                             android:visibility="gone" />
-
 
                     </FrameLayout>
                 </FrameLayout>

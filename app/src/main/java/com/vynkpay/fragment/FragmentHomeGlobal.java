@@ -58,6 +58,7 @@ import com.squareup.picasso.Picasso;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
+import com.vynkpay.activity.activities.ChainTransactionActivity;
 import com.vynkpay.activity.activities.LoginActivity;
 import com.vynkpay.adapter.ImageAdapter;
 import com.vynkpay.adapter.ImportantAdapter;
@@ -118,48 +119,38 @@ public class FragmentHomeGlobal extends Fragment {
     NormalBoldTextView globalUserName;
     @BindView(R.id.globalEmail)
     NormalLightTextView globalEmail;
-
     @BindView(R.id.tvBCash)
     NormalTextView tvBCash;
-
     @BindView(R.id.linImportantStats)
     LinearLayout linImportantStats;
-
     @BindView(R.id.crdBouns)
     CardView crdBouns;
-
     @BindView(R.id.rvListImportant)
     RecyclerView rvListImportant;
-
     @BindView(R.id.linChartt)
     RelativeLayout linChartt;
-
     @BindView(R.id.hiChart)
     HIChartView hiChart;
-
     @BindView(R.id.tvEarning)
     NormalTextView tvEarning;
-
     @BindView(R.id.frmFilter)
     FrameLayout frmFilter;
-
     @BindView(R.id.filterRange)
     NormalTextView filterRange;
-
     @BindView(R.id.chart1)
     LineChart chart;
-
     @BindView(R.id.lintv)
     LinearLayout lintv;
-
     @BindView(R.id.tvProgressTV)
     NormalTextView tvProgressTV;
-
     @BindView(R.id.progressView)
     ProgressImage progressView;
-
     @BindView(R.id.tvChartTitle)
     NormalTextView tvChartTitle;
+    @BindView(R.id.tokenBlncLayout)
+    NormalTextView tokenBlncLayout;
+    @BindView(R.id.tokenBalnceText)
+    NormalTextView tokenBalnceText;
 
     String bonusBalance,vCashBalance,mCashBalance;
     Activity activity;
@@ -297,6 +288,13 @@ public class FragmentHomeGlobal extends Fragment {
         getBanners();
 
         setChart();
+
+        tokenBlncLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(activity, ChainTransactionActivity.class));
+            }
+        });
 
         return view;
     }
@@ -669,13 +667,8 @@ public class FragmentHomeGlobal extends Fragment {
         //hiChart.addView(hiChartView);
         Log.d("setSeries","calledd");
         /*});*/
-
         //return hiOptions;
-
     }
-
-
-
 
 
     private void getDashboardData(){
@@ -701,7 +694,14 @@ public class FragmentHomeGlobal extends Fragment {
                         String purchase_date = statistics.getString("purchase_date");
                         String purchase_amount = statistics.getString("purchase_amount");
                         String total_earning = statistics.getString("total_earning");
-                        StatiaticsResponse statiaticsResponse = new StatiaticsResponse(des_title,des_img,next_des_title,next_des_img,token_des_title,token_des_img,next_token_des_title,next_token_des_img,purchase_date,purchase_amount,total_earning);
+
+                        String tokenName = statistics.getString("tokenName");
+                        String tokenBalance = statistics.getString("tokenBalance");
+                        String tokenIcon = statistics.getString("tokenIcon");
+
+                        tokenBalnceText.setText(tokenBalance);
+
+                        StatiaticsResponse statiaticsResponse = new StatiaticsResponse(tokenName, tokenBalance, tokenIcon, des_title,des_img,next_des_title,next_des_img,token_des_title,token_des_img,next_token_des_title,next_token_des_img,purchase_date,purchase_amount,total_earning);
                         rvListImportant.setAdapter(new ImportantAdapter(activity,statiaticsResponse));
 
                         JSONObject vyncchartObject = data.getJSONObject("vync_chart");

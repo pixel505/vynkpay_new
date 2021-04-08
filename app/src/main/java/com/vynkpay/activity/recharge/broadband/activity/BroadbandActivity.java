@@ -293,12 +293,6 @@ public class BroadbandActivity extends AppCompatActivity implements PlugInContro
                 params.put(ApiParams.type, type);
                 params.put("bill_fetch", "1");
 
-
-
-
-
-
-
                 return params;
             }
 

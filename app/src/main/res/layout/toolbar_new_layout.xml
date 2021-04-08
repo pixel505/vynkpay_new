@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:local="http://schemas.android.com/apk/res-auto">
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
     <androidx.appcompat.widget.Toolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:layout_centerVertical="true"
             android:id="@+id/notifyIcon"
             android:layout_marginEnd="@dimen/_14sdp"
-            android:tint="@color/white"
+            app:tint="@color/white"
             android:src="@drawable/notificationnew"/>
 
     </RelativeLayout>

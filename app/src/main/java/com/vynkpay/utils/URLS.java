@@ -69,5 +69,8 @@ public class URLS {
     public static String USER_URL = "api/user";
     public static String SHOP_URL = "account/api_accounts/cashback/";
     public static String SETTING_URL = "account/api_accounts/settings";
+    public static String CHAIN_TNS_URL = "account/api_accounts/vync_chain_transaction";
+    public static String ADD_TOKEN_URL = "account/api_accounts/vync_chain_add_transfer_tokens";
+    public static String CHAIN_HIST_TNS_URL = "account/api_accounts/vync_chain_transfer_history";
 }
 

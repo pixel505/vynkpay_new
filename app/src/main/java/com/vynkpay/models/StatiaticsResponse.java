@@ -40,7 +40,25 @@ public class StatiaticsResponse {
     private String totalEarning;
 
 
-    public StatiaticsResponse(String desTitle, String desImg, String nextDesTitle, String nextDesImg, String tokenDesTitle, String tokenDesImg, String nextTokenDesTitle, String nextTokenDesImg, String purchaseDate, String purchaseAmount, String totalEarning) {
+    @SerializedName("tokenName")
+    @Expose
+    private String tokenName;
+
+    @SerializedName("tokenBalance")
+    @Expose
+    private String tokenBalance;
+
+    @SerializedName("tokenIcon")
+    @Expose
+    private String tokenIcon;
+
+
+
+    public StatiaticsResponse(String tokenName, String tokenBalance, String tokenIcon, String desTitle, String desImg, String nextDesTitle, String nextDesImg, String tokenDesTitle, String tokenDesImg, String nextTokenDesTitle, String nextTokenDesImg, String purchaseDate, String purchaseAmount, String totalEarning) {
+        this.tokenName = tokenName;
+        this.tokenBalance = tokenBalance;
+        this.tokenIcon = tokenIcon;
+
         this.desTitle = desTitle;
         this.desImg = desImg;
         this.nextDesTitle = nextDesTitle;
@@ -52,6 +70,30 @@ public class StatiaticsResponse {
         this.purchaseDate = purchaseDate;
         this.purchaseAmount = purchaseAmount;
         this.totalEarning = totalEarning;
+    }
+
+    public String getTokenName() {
+        return tokenName;
+    }
+
+    public void setTokenName(String tokenName) {
+        this.tokenName = tokenName;
+    }
+
+    public String getTokenBalance() {
+        return tokenBalance;
+    }
+
+    public void setTokenBalance(String tokenBalance) {
+        this.tokenBalance = tokenBalance;
+    }
+
+    public String getTokenIcon() {
+        return tokenIcon;
+    }
+
+    public void setTokenIcon(String tokenIcon) {
+        this.tokenIcon = tokenIcon;
     }
 
     public String getDesTitle() {

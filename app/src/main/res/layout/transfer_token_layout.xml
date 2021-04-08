@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/_20sdp">
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/semi_black"
+            android:text="Transfer Details"/>
+
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/semi_black"
+            android:gravity="center"
+            android:id="@+id/transferToken"
+            android:padding="@dimen/_10sdp"
+            android:text="Transfer Tokens:...."/>
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/semi_black"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:text="Enter TRX(Tron) Address of the User to Transfer Tokens"/>
+
+
+        <com.vynkpay.custom.NormalEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/square_shape_white"
+            android:paddingStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_8sdp"
+            android:textColor="@color/blue"
+            android:id="@+id/addressTV"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:digits="1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASFGHJKLZXCVBNM"
+            android:textSize="@dimen/_12sdp"
+            android:hint="Enter/Paste Tron address"
+            android:paddingTop="@dimen/_8sdp"/>
+
+        <com.vynkpay.custom.NormalTextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_30sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_25sdp"
+            android:paddingStart="@dimen/_25sdp"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:id="@+id/transferTV"
+            android:text="Transfer Tokens"
+            android:background="#1B52CD"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:id="@+id/progress"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+</FrameLayout>

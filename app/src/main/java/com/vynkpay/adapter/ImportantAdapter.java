@@ -2,6 +2,7 @@ package com.vynkpay.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,20 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
+import com.vynkpay.activity.activities.ChainTransactionActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.StatiaticsResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.utils.Functions;
-
 import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -140,8 +139,17 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
             holder.tvPurchaseDate.setText(statiaticsResponse.getPurchaseDate());
             holder.tvTotalEarning.setText(Functions.CURRENCY_SYMBOL+""+statiaticsResponse.getTotalEarning());
 
+            holder.vyncTokenBlnc.setText(statiaticsResponse.getTokenBalance());
+            holder.vyncTokenName.setText(statiaticsResponse.getTokenName());
+            Functions.loadImageCall(context, statiaticsResponse.getTokenIcon(), holder.vyncTokenIcon);
 
 
+            holder.vyncTXN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context, ChainTransactionActivity.class));
+                }
+            });
 
         } catch (Exception e){
             e.printStackTrace();
@@ -233,6 +241,8 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
 
         NormalTextView tvVynccPresentD;
         NormalTextView tvVynccNextD;
+        NormalTextView vyncTokenName;
+        NormalTextView vyncTokenBlnc;
 
         ImageView ivPresentD;
         ImageView ivPresentN;
@@ -242,15 +252,19 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
 
         ImageView ivVynccPresentD;
         ImageView ivVynccPresentN;
+        ImageView vyncTokenIcon;
 
         LinearLayout linPresent;
         LinearLayout linNext;
         LinearLayout linVcash;
 
+        CardView vyncTXN;
+
 
 
         public Holder(@NonNull View itemView) {
             super(itemView);
+            vyncTXN = itemView.findViewById(R.id.vyncTXN);
             tvOptVcash = itemView.findViewById(R.id.tvOptVcash);
             tvPresentD = itemView.findViewById(R.id.tvPresentD);
             tvNextD = itemView.findViewById(R.id.tvNextD);
@@ -273,6 +287,10 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
             linPresent = itemView.findViewById(R.id.linPresent);
             linNext = itemView.findViewById(R.id.linNext);
             linVcash = itemView.findViewById(R.id.linVcash);
+
+            vyncTokenBlnc = itemView.findViewById(R.id.vyncTokenBlnc);
+            vyncTokenIcon = itemView.findViewById(R.id.vyncTokenIcon);
+            vyncTokenName = itemView.findViewById(R.id.vyncTokenName);
 
         }
     }

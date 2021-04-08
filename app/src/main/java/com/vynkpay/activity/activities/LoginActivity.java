@@ -87,10 +87,8 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
   TextView forgotPasswordTV;
   @BindView(R.id.loginascustomer)
   TextView loginascustomer;
-
   @BindView(R.id.showHideImage)
   ImageView showHideImage;
-
   @BindView(R.id.tvTextFor)
   TextView tvTextFor;
 
@@ -98,7 +96,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
   /*@BindView(R.id.forgotPassWordText)
   NormalTextView forgotPassWordText;*/
   String var = "";
-
 
   String regex = "^[0-9]*$";
   Dialog dialog;
@@ -155,7 +152,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
 
     Log.i(">>token", "onCreate:" + SharedPrefManager.getInstance(LoginActivity.this).getDeviceToken());
     dialog = M.showDialog(LoginActivity.this, "", false, false);
-
 
     if (getIntent() != null) {
       etLoginText.setText(getIntent().getStringExtra("takeData"));
@@ -505,7 +501,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
               dialog.dismiss();
 
               try {
-
                 JSONObject jsonObject=new JSONObject(result);
                 Toast.makeText(LoginActivity.this, jsonObject.getString("message")+"", Toast.LENGTH_LONG).show();
 

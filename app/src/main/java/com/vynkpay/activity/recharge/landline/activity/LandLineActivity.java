@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,7 +35,6 @@ import com.vynkpay.utils.ApiParams;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.URLS;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -44,13 +42,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.reactivestreams.Publisher;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Flowable;
@@ -74,7 +70,6 @@ public class LandLineActivity extends AppCompatActivity {
     @BindView(R.id.etPartialAmount)
     NormalEditText etPartialAmount;
     Dialog dialog;
-
     @BindView(R.id.toolbarTitle)
     NormalTextView toolbarTitle;
     @BindView(R.id.toolbar)
@@ -249,10 +244,6 @@ public class LandLineActivity extends AppCompatActivity {
 
 
 
-
-
-
-
         startActivity(intent);
     }
 
@@ -326,7 +317,6 @@ public class LandLineActivity extends AppCompatActivity {
                                 intent.putExtra("landLineNumber", etLandlineNumber.getText().toString());
                                 intent.putExtra("accountNumber", etAccountNumber.getText().toString());
                                 intent.putExtra("operatorName", operatorName);
-
 
                                 intent.putExtra("operatorId", _SPECIAL_OR_TOP_UP);
                                 intent.putExtra("operatorDetail", operatorDetail);

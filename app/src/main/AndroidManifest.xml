@@ -8,8 +8,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!--
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -34,7 +36,23 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-
+        <activity android:name=".activity.activities.TransferToken"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.TokenTrnsfrHistory"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.ChainTransactionActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
 
         <receiver android:name=".utils.PlugInControlReceiver">
             <intent-filter>
@@ -46,12 +64,10 @@
 
         <activity
             android:name=".activity.activitiesnew.TransactionInternationalActivity"
-             android:launchMode="singleTop"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
-            tools:ignore="LockedOrientationActivity"/>
-
-        <!-- android:authorities="${applicationId}.provider" -->
+            tools:ignore="LockedOrientationActivity" /> <!-- android:authorities="${applicationId}.provider" -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.FileProvider"
@@ -66,539 +82,539 @@
 
         <activity
             android:name=".activity.VyncBonusessActivity"
+            android:exported="false"
             android:launchMode="singleTop"
-android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.WeeklyActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".newregistration.SelectionActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.PayeerAddressActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.PerfectMoneyActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ETHActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activitiesnew.CustomerWalletActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.shops.AddBankDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.shops.ProductsDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.shops.ShopsActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.ClubBonusListActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.ClubBonusActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.TransferVcashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.CoinbaseActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activitiesnew.conversion.ConversionOtpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.LoadMcashSuccessActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.PaymentMethodMcashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.loadmcash.LoadmcashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.conversion.ConvertSuccessActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.conversion.ConvertDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.conversion.ConvertBonusMcashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.conversion.ConvertMCashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.TransferWalletMCashActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.TransferSuccessActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.WithdrawTypeActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.EnterPinNewActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.TransferWalletProcessActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.TranferWalletActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.WithdrawnSubmitedActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.RequestWithdrawOtpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".activity.activitiesnew.RequestWithdrawnActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme" />
         <activity
             android:name=".newregistration.OnboardingActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newregistration.Register4Activity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newregistration.Register3Activity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newregistration.Register2Activity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".newregistration.Register1Activity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.activities.ConversionActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.StatementActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.CommunityDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".activity.Demo" />
         <activity
             android:name=".activity.activities.RequestSuccess"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WalletNewActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.InvoiceDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".fragment.BonusWalletFragment"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".fragment.VCashWalletFragment"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".fragment.MCashWalletFragment"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".fragment.ECashWalletFragment"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AffiliateActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WebviewActivityNew"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ChoosePaymentActivityC"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.PackageAActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ChoosePaymentActivityB"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ChoosePaymentActivityD"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ChoosePaymentActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.InvoiceActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.PdfViewerActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.GenerationBonusDetailActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WithdrawRequestListActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AllTransactionsActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WatchPdfActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WatchFileActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.SupportChatActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.GenerateTicketActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.SupportTicketActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.VerifyBitActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycForeignSuccessActiviy"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycForeignRejectedActiviy"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.BtcActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycForeignBankActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycForignUploadActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycSuccessActiviy"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycBankRejectedActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycRejectedActiviy"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.CommunitySummaryActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.DirectRefralsActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.Community"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AccountAccessActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycBankActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycUploadActiviy"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.KycActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.PinActivity"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.RechargeSuccess"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.OtpActivityNew"
-            android:launchMode="singleTop"
             android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -607,29 +623,29 @@ android:exported="false"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.Signupnew"
-             android:launchMode="singleTop"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="vynkpay.page.link"
                     android:scheme="https" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activity.MoreActivityNew"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.Splash"
-             android:launchMode="singleTop"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
@@ -640,9 +656,9 @@ android:exported="false"
         </activity>
         <activity
             android:name=".activity.activities.VerifyAccountActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -653,33 +669,33 @@ android:exported="false"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ReferAndEarnSummary"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ReferAndEarnActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.CashbackRewardActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.SearchActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
@@ -690,15 +706,15 @@ android:exported="false"
 
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeDark2"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.Dashboard"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme"
             tools:ignore="LockedOrientationActivity" />
@@ -709,532 +725,532 @@ android:exported="false"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.MainActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.NotificationDetailActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AddMoneyActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.SignUpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.OtpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.DmtBeneficiaryDeleteOtpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.HelpAndSupportQuestions"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.HelpAndSupportActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WebViewActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.NotificationActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.TransferPreviewActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.OfferActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.electricity.activity.ElectricityActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.electricity.activity.SelectElectricityOperator"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.DashBoardActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AddBeneficiaryActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.DmtOtpActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.PayActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.WalletActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.MoreActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.history.AllRechargeHistoryActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AccountActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.LoginActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.MoneyTransferActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.PrepaidActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.PostPaidActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.RechargeConfirmationActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.SeePlanActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.SelectOperatorActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.PaymentMethodActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.datacard.activity.DataCardActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.mobile.activity.SelectCircleActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.datacard.activity.DataCardPaymentMethodActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.datacard.activity.DataRechargeConfirmationActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.datacard.activity.SeePlanDataCardActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.dth.activity.DthActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.dth.activity.SelectDthOperatorActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.dth.activity.SeeDthPlansActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.dth.activity.DthRechargeConfirmationActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.dth.activity.DthPaymentMethodActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.landline.activity.LandLineActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.landline.activity.SelectLandLineOperatorActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.landline.activity.BillFetchActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.landline.activity.LandlineRechargeConfirmationActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.landline.activity.LandlinePaymentMethodActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.broadband.activity.BroadbandActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.water.WaterActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.insurance.InsuranceActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.history.HistoryDetailActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.recharge.gas.GasActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ForgotPasswordActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.giftcards.activity.GiftCardActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.giftcards.activity.SingleGiftCardActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.giftcards.activity.GiftCardDetailActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.giftcards.activity.GiftCardDescription"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.giftcards.activity.GiftCardPayConfirmation"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.themepark.activity.ThemeParkCategoryActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.themepark.activity.ThemeParkSingleActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.themepark.activity.ThemeParkDetailActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.themepark.activity.ThemeParkTicketSelection"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.themepark.activity.ThemeParkFillInfoActivity"
+            android:exported="false"
             android:label=""
-             android:launchMode="singleTop"
- android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -1272,60 +1288,60 @@ android:exported="false"
 
         <activity
             android:name=".activity.bustickets.activity.BusActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:exported="false"
             android:name=".activity.bustickets.activity.TicketSearchActivity"
-             android:launchMode="singleTop"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             android:windowSoftInputMode="stateAlwaysHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.bustickets.activity.SeatsActivity"
-             android:launchMode="singleTop"
- android:exported="false" />
+            android:exported="false"
+            android:launchMode="singleTop" />
         <activity
             android:name=".activity.activities.DmtCustVerifiOtpActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.CheckoutActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.RePinActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.AboutUsActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.BonusActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.ReferalBonusActivity"
-             android:launchMode="singleTop"
- android:exported="false"
+            android:exported="false"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />

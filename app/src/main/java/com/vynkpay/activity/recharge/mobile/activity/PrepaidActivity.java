@@ -274,9 +274,6 @@ public class PrepaidActivity extends AppCompatActivity {
         intent.putExtra("operator_id", _SPECIAL_OR_TOP_UP);
 
 
-
-
-
         Prefes.saveType(type,PrepaidActivity.this);
         Prefes.saveOperatorUrl(opUrl,PrepaidActivity.this);
         Prefes.savePhoneNumber(etMobileNumber.getText().toString(),PrepaidActivity.this);
@@ -284,8 +281,7 @@ public class PrepaidActivity extends AppCompatActivity {
         Prefes.saveCircle(circleName,PrepaidActivity.this);
         Prefes.saveOperatorDID(operatorDetail,PrepaidActivity.this);
 
-
-
+        Log.d("cgejdsData", type+"=type\n"+opUrl+"=opUrl\n"+_SPECIAL_OR_TOP_UP+"=_SPECIAL_OR_TOP_UP\n"+operatorDetail+"=operatorDetail");
 
         startActivity(intent);
     }
