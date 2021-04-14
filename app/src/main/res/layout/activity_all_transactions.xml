@@ -12,12 +12,24 @@
     <include layout="@layout/toolbar_new_layout"
         android:id="@+id/toolbar"/>
 
-    <ListView
+   <!-- <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@android:color/transparent"
         android:divider="@android:color/transparent"
-        android:id="@+id/transactionsListView"/>
+        android:id="@+id/transactionsListView"/>-->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerView"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
 

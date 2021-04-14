@@ -140,7 +140,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
 
     public void getBonusTransaction(){
         serverDialog.show();
-        ApiCalls.getBonusTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 serverDialog.dismiss();
@@ -171,7 +171,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
     }
     private void getVCashTransaction(){
         //serverDialog.show();
-        ApiCalls.getVcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
+        ApiCalls.getVcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("vtransactionZLog", result + "//");
@@ -225,7 +225,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
 
     private void getMCashTransaction(){
         //serverDialog.show();
-        ApiCalls.getMcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(TranferWalletActivity.this, Prefes.getAccessToken(TranferWalletActivity.this), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 //serverDialog.dismiss();

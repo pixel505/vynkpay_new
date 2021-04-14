@@ -442,7 +442,7 @@ public class MCashWalletFragment extends AppCompatActivity {
     }
     private void getMCashTransaction(){
         serverDialog.show();
-        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 //  Log.d("tmcashtrrr", result+"//");
@@ -497,7 +497,7 @@ public class MCashWalletFragment extends AppCompatActivity {
                             binding.mheader.viewAll.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
+                                    //AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
                                     startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "mCash"));
                                 }
                             });

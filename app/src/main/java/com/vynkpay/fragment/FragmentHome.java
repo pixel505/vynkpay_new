@@ -223,7 +223,6 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.tokenBlncLayout)
     LinearLayout tokenBlncLayout;
 
-
     String bonusBalance, mCashBalance, vCashBalance;
 
     SharedPreferences popupSP;
@@ -349,6 +348,7 @@ public class FragmentHome extends Fragment {
                             startActivity(new Intent(activity, PrepaidActivity.class).putExtra("type", "1"));
                         }
                     });
+
                     alertDialog.show();
 
                     if (alertDialog.getWindow() != null) {
@@ -1204,7 +1204,7 @@ public class FragmentHome extends Fragment {
     }
 
     public void getBonusTransaction(){
-        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result+"//");
@@ -1260,7 +1260,7 @@ public class FragmentHome extends Fragment {
     }
 
     private void getVCashTransaction(){
-        ApiCalls.getVcashTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getVcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
 
             @Override
             public void onResult(String result, String status, String message) {
@@ -1315,7 +1315,7 @@ public class FragmentHome extends Fragment {
     }
 
     private void getMCashTransaction(){
-        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
 
             @Override
             public void onResult(String result, String status, String message) {

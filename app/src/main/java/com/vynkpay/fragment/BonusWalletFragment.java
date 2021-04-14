@@ -825,7 +825,7 @@ public class BonusWalletFragment extends AppCompatActivity {
 
     public void getBonusTransaction(){
         serverDialog.show();
-        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result+"//");
@@ -877,7 +877,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                             binding.bonusHeader.viewAll.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
+                                    //AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
                                     startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "bonus"));
                                 }
                             });

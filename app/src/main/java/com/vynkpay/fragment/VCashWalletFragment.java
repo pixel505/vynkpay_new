@@ -72,16 +72,17 @@ public class VCashWalletFragment extends AppCompatActivity {
     }
 
     private void dev() {
+
         if(getIntent()!=null){
             binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+getIntent().getStringExtra("balancWalletV"));
         }
-       binding.bonusHeader.filterLinear.setOnClickListener(new View.OnClickListener() {
+
+        binding.bonusHeader.filterLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(activity, "Coming soon", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
         binding.transactionsListView.setAdapter(new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false));
@@ -101,7 +102,7 @@ public class VCashWalletFragment extends AppCompatActivity {
         binding.bonusHeader.viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
+                //AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
                 startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "vCash"));
             }
         });

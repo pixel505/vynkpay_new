@@ -240,7 +240,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
 
         dialog1.show();
             MCashWalletFragment.walletTransactionsModelArrayList.clear();
-            ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
+            ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), "1", new VolleyResponse() {
                 @Override
                 public void onResult(String result, String status, String message) {
                     //  Log.d("tmcashtrrr", result+"//");

@@ -46,7 +46,7 @@ public class ApiCalls {
         volleyNetworkClass.makeGetRequest(URLS.VERSION_CHECK_URL, "","");
     }
 
-    public static void getBonusTransactions(Context context, String  token, VolleyResponse volleyResponse){
+    public static void getBonusTransactions(Context context, String  token, String per_page, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -59,10 +59,10 @@ public class ApiCalls {
             }
         });
 
-        volleyNetworkClass.makeRequest(URLS.bonus_transaction_URL, token);
+        volleyNetworkClass.makeRequest(URLS.bonus_transaction_URL+"?per_page="+per_page, token);
     }
 
-    public static void getMcashTransactions(Context context, String  token, VolleyResponse volleyResponse){
+    public static void getMcashTransactions(Context context, String  token, String per_page, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -75,7 +75,7 @@ public class ApiCalls {
             }
         });
 
-        volleyNetworkClass.makeRequest(URLS.mCash_transaction_URL, token);
+        volleyNetworkClass.makeRequest(URLS.mCash_transaction_URL+"?per_page="+per_page, token);
     }
 
 
@@ -95,7 +95,7 @@ public class ApiCalls {
         volleyNetworkClass.makeRequest(URLS.eCash_transaction_URL, token);
     }
 
-    public static void getVcashTransactions(Context context, String  token, VolleyResponse volleyResponse){
+    public static void getVcashTransactions(Context context, String  token, String per_page, VolleyResponse volleyResponse){
         VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
@@ -108,7 +108,8 @@ public class ApiCalls {
             }
         });
 
-        volleyNetworkClass.makeRequest(URLS.vCash_transaction_URL, token);
+
+        volleyNetworkClass.makeRequest(URLS.vCash_transaction_URL+"?per_page="+per_page, token);
     }
 
     public static void getBanners(Context context,String token, VolleyResponse volleyResponse){

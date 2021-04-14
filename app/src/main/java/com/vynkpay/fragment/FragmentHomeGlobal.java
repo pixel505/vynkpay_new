@@ -148,7 +148,7 @@ public class FragmentHomeGlobal extends Fragment {
     @BindView(R.id.tvChartTitle)
     NormalTextView tvChartTitle;
     @BindView(R.id.tokenBlncLayout)
-    NormalTextView tokenBlncLayout;
+    LinearLayout tokenBlncLayout;
     @BindView(R.id.tokenBalnceText)
     NormalTextView tokenBalnceText;
 
@@ -866,7 +866,7 @@ public class FragmentHomeGlobal extends Fragment {
     }
 
     public void getBonusTransaction(){
-        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result+"//");
@@ -921,7 +921,7 @@ public class FragmentHomeGlobal extends Fragment {
     }
 
     private void getVCashTransaction(){
-        ApiCalls.getVcashTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getVcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result + "//");
@@ -973,7 +973,7 @@ public class FragmentHomeGlobal extends Fragment {
     }
 
     private void getMCashTransaction(){
-        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 //  Log.d("tmcashtrrr", result+"//");

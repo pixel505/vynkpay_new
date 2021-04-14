@@ -14,6 +14,7 @@
         <include
             android:id="@+id/toolbarLayout"
             layout="@layout/toolbar_new" />
+
         <include layout="@layout/vcash_header_layout"
             android:id="@+id/bonusHeader"/>
 

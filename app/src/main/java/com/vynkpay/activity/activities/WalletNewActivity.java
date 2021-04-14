@@ -176,7 +176,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
     }
     public void getBonusTransaction(){
         serverDialog.show();
-        ApiCalls.getBonusTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(ac, Prefes.getAccessToken(ac), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result+"//");
@@ -211,7 +211,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
 
     private void getVCashTransaction(){
         //serverDialog.show();
-        ApiCalls.getVcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
+        ApiCalls.getVcashTransactions(ac, Prefes.getAccessToken(ac), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("transactionZLog", result + "//");
@@ -269,7 +269,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
 
     private void getMCashTransaction(){
        // serverDialog.show();
-        ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(ac, Prefes.getAccessToken(ac), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 //  Log.d("tmcashtrrr", result+"//");

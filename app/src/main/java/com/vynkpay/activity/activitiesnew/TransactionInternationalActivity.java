@@ -63,7 +63,7 @@ public class TransactionInternationalActivity extends AppCompatActivity implemen
     public void getBonusTransaction(){
         serverDialog.show();
         walletTransactionsModelArrayList.clear();
-        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), new VolleyResponse() {
+        ApiCalls.getBonusTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 Log.d("inttransactionZLog", result+"//");

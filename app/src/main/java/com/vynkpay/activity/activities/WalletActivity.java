@@ -118,7 +118,7 @@ public class WalletActivity extends AppCompatActivity implements PlugInControlRe
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
+                //AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
                 startActivity(new Intent(WalletActivity.this, AllTransactionsActivity.class).putExtra("tabType", "mCash"));
             }
         });
@@ -192,7 +192,7 @@ public class WalletActivity extends AppCompatActivity implements PlugInControlRe
     public static ArrayList<WalletTransactionsModel> walletTransactionsModelArrayList = new ArrayList<>();
     public void getTransactionsHistory(LinearLayout viewAll){
         walletTransactionsModelArrayList.clear();
-        ApiCalls.getMcashTransactions(WalletActivity.this, Prefes.getAccessToken(WalletActivity.this), new VolleyResponse() {
+        ApiCalls.getMcashTransactions(WalletActivity.this, Prefes.getAccessToken(WalletActivity.this), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
                 try {
