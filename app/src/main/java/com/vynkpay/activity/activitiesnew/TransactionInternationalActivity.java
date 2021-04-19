@@ -98,7 +98,7 @@ public class TransactionInternationalActivity extends AppCompatActivity implemen
                                     email,  phone,  name,  paid_status,  balance, frontusername));
                         }
 
-                        Collections.reverse(walletTransactionsModelArrayList);
+                        //Collections.reverse(walletTransactionsModelArrayList);
                         WalletTransactionAdapter adapter = new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false);
                         binding.rvTransList.setAdapter(adapter);
 

@@ -504,7 +504,7 @@ public class MCashWalletFragment extends AppCompatActivity {
 
                         }
 
-                        Collections.reverse(MCashWalletFragment.walletTransactionsModelArrayList);
+                        //Collections.reverse(MCashWalletFragment.walletTransactionsModelArrayList);
                     }
 
                 } catch (JSONException e) {

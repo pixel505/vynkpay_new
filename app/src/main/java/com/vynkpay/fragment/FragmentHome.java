@@ -1239,7 +1239,7 @@ public class FragmentHome extends Fragment {
                                     email,  phone,  name,  paid_status,  balance, frontusername));
                         }
 
-                        Collections.reverse(BonusWalletFragment.walletTransactionsModelArrayList);
+                        //Collections.reverse(BonusWalletFragment.walletTransactionsModelArrayList);
 
                     } else {
                         Log.d("errorrr","false");
@@ -1297,7 +1297,7 @@ public class FragmentHome extends Fragment {
                                     email, phone, name, paid_status, balance, frontusername));
                         }
 
-                        Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
+                        //Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
 
                     }
                 } catch (JSONException e) {
@@ -1352,7 +1352,7 @@ public class FragmentHome extends Fragment {
                                     email,  phone,  name,  paid_status,  balance, frontusername));
                         }
 
-                        Collections.reverse(MCashWalletFragment.walletTransactionsModelArrayList);
+                        //Collections.reverse(MCashWalletFragment.walletTransactionsModelArrayList);
                     }
 
                 } catch (Exception e) {

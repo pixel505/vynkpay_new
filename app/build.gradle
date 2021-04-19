@@ -12,8 +12,8 @@ android {
         applicationId "com.vynkpay"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 14
-        versionName "2.2"
+        versionCode 15
+        versionName "2.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -93,16 +93,16 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.romandanylyk:pageindicatorview:1.0.3@aar'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
-    implementation 'com.google.firebase:firebase-core:18.0.2'
-    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    implementation 'com.google.firebase:firebase-core:18.0.3'
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
     implementation 'me.dm7.barcodescanner:zxing:1.7.2'
     implementation 'in.hourglass.mathrender:katexmathview:1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.android.volley:volley:1.1.1'
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.4.1'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.squareup.okhttp3:okhttp:4.8.1'
     implementation 'androidx.multidex:multidex:2.0.1'

@@ -896,7 +896,7 @@ public class BonusWalletFragment extends AppCompatActivity {
                             });
                         }
 
-                        Collections.reverse(walletTransactionsModelArrayList);
+                        //Collections.reverse(walletTransactionsModelArrayList);
 
                     } else {
                         serverDialog.dismiss();

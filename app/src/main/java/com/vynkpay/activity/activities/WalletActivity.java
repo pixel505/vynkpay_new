@@ -226,7 +226,7 @@ public class WalletActivity extends AppCompatActivity implements PlugInControlRe
                                     email,  phone,  name,  paid_status,  balance, frontusername));
                         }
 
-                        Collections.reverse(walletTransactionsModelArrayList);
+                       // Collections.reverse(walletTransactionsModelArrayList);
 
                         transactionsListView.setAdapter(new WalletTransactionAdapter(WalletActivity.this, walletTransactionsModelArrayList, false));
                     }

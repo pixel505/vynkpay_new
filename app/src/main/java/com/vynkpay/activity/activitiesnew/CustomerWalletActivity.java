@@ -232,7 +232,7 @@ public class CustomerWalletActivity extends AppCompatActivity implements PlugInC
                                     email, phone, name, paid_status, balance, frontusername));
 
                         }
-                        Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
+                       // Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

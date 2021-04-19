@@ -208,7 +208,7 @@ public class TranferWalletActivity extends AppCompatActivity implements View.OnC
                                     email, phone, name, paid_status, balance, frontusername));
 
                         }
-                        Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
+                        //Collections.reverse(VCashWalletFragment.walletTransactionsModelArrayList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

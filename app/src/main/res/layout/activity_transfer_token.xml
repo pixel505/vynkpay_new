@@ -25,7 +25,6 @@
                 android:layout_width="match_parent"
                 android:singleLine="true"
                 android:maxLines="1"
-                android:layout_toStartOf="@+id/transfertoken"
                 android:ellipsize="end"
                 android:layout_toEndOf="@+id/backIV"
                 android:gravity="center_vertical"

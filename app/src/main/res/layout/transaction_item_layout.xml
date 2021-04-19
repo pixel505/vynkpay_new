@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:weightSum="0.9"
+            android:weightSum="0.6"
             android:padding="@dimen/_8sdp"
             android:layout_height="wrap_content">
 
@@ -53,7 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
                 android:orientation="vertical"
-                android:gravity="center"
+                android:gravity="center|end"
                 android:layout_height="wrap_content">
 
                 <com.vynkpay.custom.NormalLightTextView
@@ -76,6 +76,7 @@
 
             <View
                 android:layout_width="0.5dp"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:background="@color/color_text"/>
 
@@ -83,6 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.3"
                 android:orientation="vertical"
+                android:visibility="gone"
                 android:gravity="end"
                 android:layout_height="wrap_content">
 
