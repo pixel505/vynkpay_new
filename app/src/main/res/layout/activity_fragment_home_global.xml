@@ -52,12 +52,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="xfbxbfb"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12sdp" />
 
                     <com.vynkpay.custom.NormalTextView
-                        android:text="xfbxbfb"
                         android:id="@+id/globalUserId"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -67,7 +65,6 @@
 
 
                     <com.vynkpay.custom.NormalLightTextView
-                        android:text="xfbxbfb"
                         android:id="@+id/globalEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

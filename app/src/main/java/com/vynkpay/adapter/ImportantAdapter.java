@@ -60,10 +60,15 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
                             String v_wallet_transfer_enable = data.getString("v_wallet_transfer_enable");
                             String earning_wallet_transfer_enable = data.getString("earning_wallet_transfer_enable");
                             String opt_vcash_enable = data.getString("opt_vcash_enable");
+
                             if (opt_vcash_enable.equalsIgnoreCase("true")){
                                 holder.linVcash.setVisibility(View.VISIBLE);
+                                holder.vyncTXN2.setVisibility(View.GONE);
+                                holder.vyncTXN.setVisibility(View.VISIBLE);
                             } else {
                                 holder.linVcash.setVisibility(View.GONE);
+                                holder.vyncTXN2.setVisibility(View.VISIBLE);
+                                holder.vyncTXN.setVisibility(View.GONE);
                             }
                             if (respData.has("message")){
                                 Log.d("settingsresponse",respData.getString("message"));
@@ -103,7 +108,7 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
-                            callVcashOptOut(holder.linVcash);
+                            callVcashOptOut(holder.linVcash, holder.vyncTXN2, holder.vyncTXN);
                         }
                     });
                     dialog.show();
@@ -144,7 +149,19 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
             Functions.loadImageCall(context, statiaticsResponse.getTokenIcon(), holder.vyncTokenIcon);
 
 
+            holder.vyncTokenBlnc2.setText(statiaticsResponse.getTokenBalance());
+            holder.vyncTokenName2.setText(statiaticsResponse.getTokenName());
+            Functions.loadImageCall(context, statiaticsResponse.getTokenIcon(), holder.vyncTokenIcon2);
+
+
             holder.vyncTXN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context, ChainTransactionActivity.class));
+                }
+            });
+
+            holder.vyncTXN2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     context.startActivity(new Intent(context, ChainTransactionActivity.class));
@@ -158,7 +175,7 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
     }
 
 
-    public void callVcashOptOut(LinearLayout linVcash){
+    public void callVcashOptOut(LinearLayout linVcash, LinearLayout vyncTXN2, CardView vyncTXN){
         MainApplication.getApiService().optVCashAdd(Prefes.getAccessToken(context)).enqueue(new Callback<String>() {
 
             @Override
@@ -185,8 +202,12 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
                                             String opt_vcash_enable = data.getString("opt_vcash_enable");
                                             if (opt_vcash_enable.equalsIgnoreCase("true")){
                                                 linVcash.setVisibility(View.VISIBLE);
+                                                vyncTXN2.setVisibility(View.GONE);
+                                                vyncTXN.setVisibility(View.VISIBLE);
                                             } else {
                                                 linVcash.setVisibility(View.GONE);
+                                                vyncTXN2.setVisibility(View.VISIBLE);
+                                                vyncTXN.setVisibility(View.GONE);
                                             }
                                             if (respData.has("message")){
                                                 Log.d("settingsresponse",respData.getString("message"));
@@ -242,7 +263,9 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
         NormalTextView tvVynccPresentD;
         NormalTextView tvVynccNextD;
         NormalTextView vyncTokenName;
+        NormalTextView vyncTokenName2;
         NormalTextView vyncTokenBlnc;
+        NormalTextView vyncTokenBlnc2;
 
         ImageView ivPresentD;
         ImageView ivPresentN;
@@ -253,11 +276,13 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
         ImageView ivVynccPresentD;
         ImageView ivVynccPresentN;
         ImageView vyncTokenIcon;
+        ImageView vyncTokenIcon2;
 
         LinearLayout linPresent;
         LinearLayout linNext;
         LinearLayout linVcash;
 
+        LinearLayout vyncTXN2;
         CardView vyncTXN;
 
 
@@ -289,8 +314,13 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
             linVcash = itemView.findViewById(R.id.linVcash);
 
             vyncTokenBlnc = itemView.findViewById(R.id.vyncTokenBlnc);
+            vyncTokenBlnc2 = itemView.findViewById(R.id.vyncTokenBlnc2);
             vyncTokenIcon = itemView.findViewById(R.id.vyncTokenIcon);
+            vyncTokenIcon2 = itemView.findViewById(R.id.vyncTokenIcon2);
             vyncTokenName = itemView.findViewById(R.id.vyncTokenName);
+
+            vyncTokenName2 = itemView.findViewById(R.id.vyncTokenName2);
+            vyncTXN2 = itemView.findViewById(R.id.vyncTXN2);
 
         }
     }

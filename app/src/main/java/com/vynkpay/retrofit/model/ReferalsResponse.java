@@ -88,6 +88,24 @@ public class ReferalsResponse {
         @Expose
         private String mobileCode;
 
+        public Datum(String id, String phone, String paidStatus, String level, String username, String leg, String email, String createdDate, String name, String designation, String amount, String purchaseCreateDate, String packagePrice, String countryCode, String mobileCode) {
+            this.id = id;
+            this.phone = phone;
+            this.paidStatus = paidStatus;
+            this.level = level;
+            this.username = username;
+            this.leg = leg;
+            this.email = email;
+            this.createdDate = createdDate;
+            this.name = name;
+            this.designation = designation;
+            this.amount = amount;
+            this.purchaseCreateDate = purchaseCreateDate;
+            this.packagePrice = packagePrice;
+            this.countryCode = countryCode;
+            this.mobileCode = mobileCode;
+        }
+
         public String getId() {
             return id;
         }

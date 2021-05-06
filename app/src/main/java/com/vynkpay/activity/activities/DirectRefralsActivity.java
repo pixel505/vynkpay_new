@@ -7,12 +7,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.vynkpay.R;
 import com.vynkpay.adapter.DirectRefAdapter;
 import com.vynkpay.databinding.ActivityDirectRefralsBinding;
@@ -22,6 +27,10 @@ import com.vynkpay.retrofit.model.ReferalsResponse;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +67,7 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
         clicks();
     }
 
+    ArrayAdapter aa;
     private void clicks() {
         // toolbar
         yyyy = calendar.get(Calendar.YEAR);
@@ -66,14 +76,22 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-
+                if (isDateFilter){
+                    binding.tvStartDate.setText("");
+                    binding.tvEndDate.setText("");
+                    parmType= "";
+                    isDateFilter = false;
+                    binding.linFilterView.setVisibility(View.GONE);
+                    getReferals();
+                }else {
+                    finish();
+                }
             }
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbarLayout.toolbarTitlenew.setText(R.string.directre);
         getReferals();
-        ArrayAdapter aa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, country);
+        aa = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, country);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         binding.spinPaidStatus.setAdapter(aa);
@@ -100,6 +118,7 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
 
     }
 
+    boolean isDateFilter = false;
     void showDateDialog(){
         DatePickerDialog dialog = new DatePickerDialog(DirectRefralsActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -112,6 +131,7 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
                 }else {
                     binding.tvEndDate.setText(date);
                     parmType= "";
+                    isDateFilter = true;
                     getReferralsFilter();
                 }
             }
@@ -189,8 +209,43 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
                 if (response.isSuccessful() && response.body() != null) {
                     dialog1.dismiss();
 
+                    Log.d("getLOGSDSDSDS", new Gson().toJson(response.body())+"//parmType="+parmType);
+                    Log.d("getLOGSDSDSDS", "//parmType="+parmType);
+
                     if (response.body().getStatus().equals("true")){
                         binding.noLayout.setVisibility(View.GONE);
+
+                       /* try {
+                            JSONObject jsonObject= new JSONObject(new Gson().toJson(response.body()));
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            List<ReferalsResponse.Datum> listdata = new ArrayList<>();
+                            for (int i=0; i<jsonArray.length();i++){
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                if (object.optString("paid_status").equals(parmType)){
+                                    String id = object.optString("id");
+                                    String phone = object.optString("phone");
+                                    String paidStatus = object.optString("paidStatus");
+                                    String level = object.optString("level");
+                                    String username = object.optString("username");
+                                    String leg = object.optString("leg");
+                                    String email = object.optString("email");
+                                    String createdDate = object.optString("createdDate");
+                                    String name = object.optString("name");
+                                    String designation = object.optString("designation");
+                                    String amount = object.optString("amount");
+                                    String purchaseCreateDate = object.optString("purchaseCreateDate");
+                                    String packagePrice = object.optString("packagePrice");
+                                    String countryCode = object.optString("countryCode");
+                                    String mobileCode = object.optString("mobileCode");
+
+                                    listdata.add(new ReferalsResponse.Datum(id, phone, paidStatus, level, username, leg, email, createdDate, name, designation, amount,
+                                            purchaseCreateDate, packagePrice, countryCode, mobileCode));
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }*/
+
                         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
                         adapter = new DirectRefAdapter(getApplicationContext(), response.body().getData());
                         binding.directrecycler.setLayoutManager(manager);

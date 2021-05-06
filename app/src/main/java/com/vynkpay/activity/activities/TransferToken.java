@@ -92,7 +92,8 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
                                     cal.add(Calendar.DATE, 30);
                                     Date againTransferDate = cal.getTime();
                                     String dateString = Functions.changeDateFormat(againTransferDate.toString(), "EEE MMM dd HH:mm:ss ZZZZZ yyyy" , "MMM dd, yyyy");
-                                    binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" tokens in every "+days+" days , and You already did a transfer. Comeback on "+dateString);
+                                   // binding.messageTV.setText("You are allowed to transfer only 100 VYNC in every 30 days.");
+                                    binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" in every "+days+" days. The next you can transfer on "+dateString);
 
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -108,7 +109,7 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
 
 
                         if (newTransfer){
-                            binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" tokens in every "+days+" days ");
+                            binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" in every "+days+" days.");
                             binding.timeLeftTV.setVisibility(View.GONE);
                             binding.agreeLayout.setVisibility(View.VISIBLE);
                         }
@@ -231,13 +232,17 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
         View view = LayoutInflater.from(this).inflate(R.layout.transfer_token_layout, null);
         builder.setView(view);
 
+        /*VYNC Transfer Details
+To be transferred = 100 VYNC
+Enter your TRX (TRON) address to get the tokens*/
+
         TextView transferToken = view.findViewById(R.id.transferToken);
         EditText addressTV = view.findViewById(R.id.addressTV);
         TextView transferTV = view.findViewById(R.id.transferTV);
         ProgressBar progressBar = view.findViewById(R.id.progress);
 
         transferTV.setVisibility(View.VISIBLE);
-        transferToken.setText("Transfer Tokens: "+tokensTransferTitle);
+        transferToken.setText("To be transferred = "+tokensTransferTitle);
 
         transferTV.setOnClickListener(new View.OnClickListener() {
             @Override

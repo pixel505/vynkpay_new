@@ -93,14 +93,14 @@
             android:visibility="gone"
             android:id="@+id/timeLeftTV"
             android:layout_margin="@dimen/_10sdp"
-            android:background="#1B52CD"/>
+            android:background="@drawable/buttonbg"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
             android:id="@+id/agreeLayout"
-            android:visibility="gone"
+
             android:orientation="horizontal">
 
             <com.vynkpay.custom.NormalTextView
@@ -114,7 +114,7 @@
                 android:textAllCaps="true"
                 android:id="@+id/agreeTV"
                 android:text="Agree"
-                android:background="#1B52CD"/>
+                android:background="@color/colorAccent"/>
 
             <com.vynkpay.custom.NormalTextView
                 android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
                 android:text="Cancel"
                 android:id="@+id/cancelTV"
                 android:textAllCaps="true"
-                android:background="@color/color_red"/>
+                android:background="@color/hintColortr"/>
 
         </LinearLayout>
 
