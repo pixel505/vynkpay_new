@@ -78,7 +78,6 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
         MainApplication.getApiService().getTransferSettings(Prefes.getAccessToken(PackageAActivity.this)).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.d("hhdhksdsdsdsd", response.body());
                 try {
                     JSONObject respData = new JSONObject(response.body());
                     if (respData.getString("status").equalsIgnoreCase("true")){
@@ -109,7 +108,7 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
                                         binding.ivAffiliate.setImageBitmap(null);
                                     }
                                 }
-                                if (planList.get(i).getTitle().equalsIgnoreCase("VYNC Chain")) {
+                                if (planList.get(i).getTitle().equalsIgnoreCase("VYNK Chain")) {
                                     if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
                                         //binding.linPVynkChain.setVisibility(View.VISIBLE);
                                     } else {
@@ -127,42 +126,6 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
 
                         }
 
-                      /*  if (Prefes.getisIndian(PackageAActivity.this).equalsIgnoreCase("YES")){
-                            binding.linPackageOption.setVisibility(View.GONE);
-                        }else {
-                            if ((planList != null ? planList.size() : 0) > 0) {
-                                binding.linPackageOption.setVisibility(View.VISIBLE);
-                                for (int i = 0; i < planList.size(); i++) {
-                                    if (planList.get(i).getTitle().equalsIgnoreCase("Affiliate")) {
-                                        if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
-                                            binding.linPAffiliate.setVisibility(View.VISIBLE);
-                                        } else {
-                                            binding.linPAffiliate.setVisibility(View.GONE);
-                                        }
-                                        if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
-                                            binding.ivAffiliate.setImageResource(R.drawable.checkwalleticon);
-                                        } else {
-                                            binding.ivAffiliate.setImageBitmap(null);
-                                        }
-                                    }
-                                    if (planList.get(i).getTitle().equalsIgnoreCase("VYNC Chain")) {
-                                        if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
-                                            binding.linPVynkChain.setVisibility(View.VISIBLE);
-                                        } else {
-                                            binding.linPVynkChain.setVisibility(View.GONE);
-                                        }
-                                        if (planList.get(i).getDefault().equalsIgnoreCase("1")) {
-                                            binding.ivVynkChain.setImageResource(R.drawable.checkwalleticon);
-                                        } else {
-                                            binding.ivVynkChain.setImageBitmap(null);
-                                        }
-                                    }
-                                }
-                            } else {
-                                binding.linPackageOption.setVisibility(View.GONE);
-                            }
-                        }
-*/
                     }else {
                         binding.linPackageOption.setVisibility(View.GONE);
                         if (respData.has("message")){
@@ -260,16 +223,7 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
                             Log.d("investmentData","ifcalled");
                             binding.tvMessage.setVisibility(View.GONE);
                             packageList.addAll(response.body().getData().getPackages());
-                            //MyComment
                             affilateList();
-                           /* binding.viewPager.setAdapter(new PackageAdapter(ac, response.body().getData().getPackages()));
-                            //Log.e("data", "" + response.body().getData().getPackages());
-                            binding.tabLayout.setViewPager(binding.viewPager);
-                            binding.viewPager.startAutoScroll();
-                            binding.viewPager.setInterval(5000);
-                            binding.viewPager.setStopScrollWhenTouch(true);
-                            binding.viewPager.setBorderAnimation(true);
-                            binding.viewPager.setScrollDurationFactor(8);*/
                         }else {
                             Log.d("investmentData","elsecalled");
                             binding.linPackageOption.setVisibility(View.GONE);
@@ -277,7 +231,10 @@ public class PackageAActivity extends AppCompatActivity implements PlugInControl
                             binding.tvMessage.setText(response.body().getMessage()!=null?response.body().getMessage():"");
                         }
                     } else {
-                        Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        binding.linPackageOption.setVisibility(View.GONE);
+                        binding.tvMessage.setVisibility(View.VISIBLE);
+                        binding.tvMessage.setText(response.body().getMessage());
+                       //Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     vyncChainList();

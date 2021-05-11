@@ -10,7 +10,6 @@
 
         <include
             android:id="@+id/toolbarLayout"
-
             layout="@layout/toolbar_new" />
 
         <LinearLayout
@@ -35,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="Parchase Sucessfull Thank you"
+                android:text="@string/purchageSuccess"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp" />
 
@@ -43,10 +42,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/subTitleTV"
                 android:gravity="center"
                 android:text="@string/kyctext"
                 android:textSize="@dimen/_9sdp" />
-
 
             <LinearLayout
                 android:layout_width="match_parent"

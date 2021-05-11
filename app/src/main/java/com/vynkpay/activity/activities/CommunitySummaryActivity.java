@@ -49,7 +49,7 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
     String type = "",paidType="";
     Calendar calendar = Calendar.getInstance();
     int dd=0,mm=0,yyyy=0;
-    String[] country = {"Select", "Paid", "UnPaid"};
+    String[] country = {"Select", "All", "Paid"};
     String startDate = "",endDate="";
     String parmType ="";
 
@@ -75,7 +75,21 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
         binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (isDateFilter){
+                    isDateFilter = false;
+                    binding.linFilterView.setVisibility(View.GONE);
+                    binding.tvEndDate.setText("");
+                    binding.tvStartDate.setText("");
+                    binding.commurecycler.setAdapter(null);
+                    dataList.clear();
+                    adapter = new CouumunityAdapter(CommunitySummaryActivity.this, dataList);
+                    binding.commurecycler.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                    parmType="";
+                    getTeamFilter("1");
+                }else {
+                    finish();
+                }
 
             }
         });
@@ -86,7 +100,8 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
 
         adapter = new CouumunityAdapter(getApplicationContext(), dataList);
         binding.commurecycler.setAdapter(adapter);
-        getTeamFilter(String.valueOf(perPage));
+        getTeamFilter("1");
+
         binding.commurecycler.addOnScrollListener(new EndlessOnScrollListener() {
             @Override
             public void onScrolledToEnd() {
@@ -94,7 +109,6 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
                 if (isLoading) {
                     isLoading = false;
                     getTeamFilter(String.valueOf(perPage));
-                    //getTeam(String.valueOf(perPage));
                 }
             }
         });
@@ -126,6 +140,7 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
 
     }
 
+    boolean isDateFilter = false;
     void showDateDialog(){
         DatePickerDialog dialog = new DatePickerDialog(CommunitySummaryActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -136,6 +151,7 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
                 if (type.equalsIgnoreCase("start")) {
                     binding.tvStartDate.setText(date);
                 }else {
+                    isDateFilter = true;
                     binding.tvEndDate.setText(date);
                     parmType= "";
                     perPage = 1;
@@ -227,7 +243,7 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        if (position>0) {
+        if (position>0){
             paidType = country[position];
             if (paidType.equalsIgnoreCase("Paid")) {
                 perPage = 1;
@@ -238,6 +254,7 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
                 dataList.clear();
                 adapter = new CouumunityAdapter(CommunitySummaryActivity.this, dataList);
                 binding.commurecycler.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 getTeamFilter(String.valueOf(perPage));
             } else if (paidType.equalsIgnoreCase("UnPaid")) {
                 perPage = 1;
@@ -248,16 +265,23 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
                 dataList.clear();
                 adapter = new CouumunityAdapter(CommunitySummaryActivity.this, dataList);
                 binding.commurecycler.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 getTeamFilter(String.valueOf(perPage));
-            } /*else if (paidType.equalsIgnoreCase("All")) {
-                perPage = 1;
+            } else {
+                Log.d("sdgsacpageChecn", "all");
+                binding.tvEndDate.setText("");
+                binding.tvStartDate.setText("");
                 binding.commurecycler.setAdapter(null);
                 dataList.clear();
+
                 adapter = new CouumunityAdapter(CommunitySummaryActivity.this, dataList);
                 binding.commurecycler.setAdapter(adapter);
-                getTeamFilter(String.valueOf(perPage));
-            }*/
+                adapter.notifyDataSetChanged();
+                parmType="";
+                getTeamFilter("1");
+            }
         }
+
 
         /*}*/
     }
@@ -270,7 +294,11 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
         if (previousPage == 0) {
             dialog1.show();
         }
-        MainApplication.getApiService().getTeamFilter(Prefes.getAccessToken(ac),binding.tvStartDate.getText().toString(),binding.tvEndDate.getText().toString(),parmType,per_page).enqueue(new Callback<TeamSummaryResponse>() {
+        MainApplication.getApiService().getTeamFilter(Prefes.getAccessToken(ac),
+                binding.tvStartDate.getText().toString(),
+                binding.tvEndDate.getText().toString(),
+                parmType,
+                per_page).enqueue(new Callback<TeamSummaryResponse>() {
             @Override
             public void onResponse(Call<TeamSummaryResponse> call, Response<TeamSummaryResponse> response) {
 
@@ -278,12 +306,9 @@ public class CommunitySummaryActivity extends AppCompatActivity implements Adapt
                 if (response.isSuccessful()) {
                     if (response.body()!=null){
                         if (response.body().getStatus().equals("true")){
-                            Log.d("commmmynn", new Gson().toJson(response.body()));
                             isLoading = true;
-                            Log.d("commmmynn", new Gson().toJson(response.body().getData()));
                             binding.noLayout.setVisibility(View.GONE);
                             dataList.addAll(response.body().getData());
-                            Log.d("commmmynnList",dataList.size()+"//p"+per_page);
                             adapter.notifyItemRangeInserted(previousPage,dataList.size());
                             binding.searchView.setQueryHint("Search Here");
                             binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

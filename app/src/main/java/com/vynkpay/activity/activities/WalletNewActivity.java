@@ -94,7 +94,7 @@ public class WalletNewActivity extends AppCompatActivity implements PlugInContro
 
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ac,VCashWalletFragment.class).putExtra("balancWalletV",vCashBalance));
+                startActivity(new Intent(ac,VCashWalletFragment.class).putExtra("balancWalletV", vCashBalance));
             }
 
         });

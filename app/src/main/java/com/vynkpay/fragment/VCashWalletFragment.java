@@ -73,9 +73,20 @@ public class VCashWalletFragment extends AppCompatActivity {
 
     private void dev() {
 
-        if(getIntent()!=null){
-            binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+getIntent().getStringExtra("balancWalletV"));
+        Intent intent= getIntent();
+        if (intent!=null){
+            if (intent.hasExtra("balancWalletV")){
+                if (intent.getStringExtra("balancWalletV")==null){
+                    binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+"0");
+                }else {
+                    binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+intent.getStringExtra("balancWalletV"));
+                }
+            }else {
+                binding.bonusHeader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+"0");
+            }
+
         }
+
 
         binding.bonusHeader.filterLinear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,7 +193,7 @@ public class VCashWalletFragment extends AppCompatActivity {
                 serverDialog.dismiss();
                 try {
                     if (response.isSuccessful() && response.body()!=null){
-                        Log.d("vcashresponse",response.body());
+                        //Log.d("vcashresponse",response.body());
                         JSONObject jsonObject = new JSONObject(response.body());
                         if (jsonObject.getString("status").equalsIgnoreCase("true")){
                             String message = jsonObject.getString("message");

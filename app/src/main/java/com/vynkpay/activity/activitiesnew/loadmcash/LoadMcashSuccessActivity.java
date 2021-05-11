@@ -16,12 +16,11 @@ import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
 
-public class LoadMcashSuccessActivity extends AppCompatActivity implements View.OnClickListener, PlugInControlReceiver.ConnectivityReceiverListener {
+public class LoadMcashSuccessActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
 
     ActivityLoadMcashSuccessBinding binding;
     Toolbar toolbar;
     NormalTextView toolbarTitle;
-    NormalButton submitButton;
     String message = "";
 
     @Override
@@ -44,7 +43,7 @@ public class LoadMcashSuccessActivity extends AppCompatActivity implements View.
         }
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = findViewById(R.id.toolbarTitle);
-        submitButton = findViewById(R.id.submitButton);
+
         toolbarTitle.setText("Load MCash");
         toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -53,7 +52,13 @@ public class LoadMcashSuccessActivity extends AppCompatActivity implements View.
                 finish();
             }
         });
-        submitButton.setOnClickListener(this);
+
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
     }
 
@@ -61,13 +66,6 @@ public class LoadMcashSuccessActivity extends AppCompatActivity implements View.
     protected void onResume() {
         super.onResume();
         MySingleton.getInstance(LoadMcashSuccessActivity.this).setConnectivityListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view == submitButton){
-
-        }
     }
 
     @Override

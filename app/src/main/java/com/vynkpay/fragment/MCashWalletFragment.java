@@ -115,7 +115,12 @@ public class MCashWalletFragment extends AppCompatActivity {
       //  View header = LayoutInflater.from(activity).inflate(R.layout.mcash_header_layout, null);
         serverDialog = M.showDialog(activity, "", false, false);
         if(getIntent()!=null){
-            binding.mheader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+getIntent().getStringExtra("balancWalletM"));
+            if (getIntent().getStringExtra("balancWalletM")==null){
+                binding.mheader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+"0");
+            }else {
+                binding.mheader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+getIntent().getStringExtra("balancWalletM"));
+            }
+
         }
 
        /* if(Functions.isIndian){
@@ -445,14 +450,14 @@ public class MCashWalletFragment extends AppCompatActivity {
         ApiCalls.getMcashTransactions(activity, Prefes.getAccessToken(activity), "1", new VolleyResponse() {
             @Override
             public void onResult(String result, String status, String message) {
-                //  Log.d("tmcashtrrr", result+"//");
+                 Log.d("tmcashtrrr", result+"//");
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if (jsonObject.getString("status").equals("true")){
                         serverDialog.dismiss();
                         JSONObject dataObject=jsonObject.getJSONObject("data");
                         binding.mheader.availableBalanceTV.setText(Functions.CURRENCY_SYMBOL+dataObject.getString("walletBalance"));
-
+                        walletTransactionsModelArrayList.clear();
                         JSONArray listingArray = dataObject.getJSONArray("listing");
                         for (int i=0; i<listingArray.length(); i++){
                             JSONObject object=listingArray.getJSONObject(i);
@@ -474,37 +479,34 @@ public class MCashWalletFragment extends AppCompatActivity {
                             String balance  = object.getString("balance");
                             String frontusername = object.getString("frontusername");
 
-                           walletTransactionsModelArrayList.add(new WalletTransactionsModel( id,  front_user_id,  user_id,  type,
+                            walletTransactionsModelArrayList.add(new WalletTransactionsModel( id,  front_user_id,  user_id,  type,
                                     payment_via, p_amount,  profit_type,  mode,  transactionStatus,  created_date,  username,
                                     email,  phone,  name,  paid_status,  balance, frontusername));
 
-
-
-                            binding.transactionsListView.setAdapter(new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false));
-
-                            if (walletTransactionsModelArrayList.size() > 5) {
-                                binding.mheader.viewAll.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.mheader.viewAll.setVisibility(View.GONE);
-                            }
-
-                            if (walletTransactionsModelArrayList.size() > 0) {
-                                binding.noLayout.setVisibility(View.GONE);
-                            } else {
-                                binding.noLayout.setVisibility(View.VISIBLE);
-                            }
-
-                            binding.mheader.viewAll.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    //AllTransactionsActivity.walletTransactionsModelArrayList = walletTransactionsModelArrayList;
-                                    startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "mCash"));
-                                }
-                            });
-
                         }
 
-                        //Collections.reverse(MCashWalletFragment.walletTransactionsModelArrayList);
+                        binding.transactionsListView.setAdapter(new WalletTransactionAdapter(activity, walletTransactionsModelArrayList, false));
+
+                        if (walletTransactionsModelArrayList.size() > 5) {
+                            binding.mheader.viewAll.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.mheader.viewAll.setVisibility(View.GONE);
+                        }
+
+                        if (walletTransactionsModelArrayList.size() > 0) {
+                            binding.noLayout.setVisibility(View.GONE);
+                        } else {
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                        }
+
+
+                        binding.mheader.viewAll.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(activity, AllTransactionsActivity.class).putExtra("tabType", "mCash"));
+                            }
+                        });
+
                     }
 
                 } catch (JSONException e) {

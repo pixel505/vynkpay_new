@@ -33,14 +33,10 @@ public class ChoosePaymentActivityD extends AppCompatActivity implements PlugInC
         ac = ChoosePaymentActivityD.this;
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
 
-        binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
+
+        binding.subTitleTV.setVisibility(View.GONE);
         binding.toolbarLayout.toolbarTitlenew.setText(R.string.purchase);
+
         binding.home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,20 +44,13 @@ public class ChoosePaymentActivityD extends AppCompatActivity implements PlugInC
                 if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("NO")){
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("YES")){
+                }else if(sp.getString("value","").equals("Global") && Prefes.getisIndian(ac).equals("YES")){
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
                     finish();
-                }
-
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("YES")){
+                }else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("YES")){
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "India"));
                     finish();
-                }
-
-                else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("NO")){
+                }else if(sp.getString("value","").equals("India") && Prefes.getisIndian(ac).equals("NO")){
                     startActivity(new Intent(ac, HomeActivity.class).putExtra("Country", "Global"));
                     finish();
                 }

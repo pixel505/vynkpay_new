@@ -168,36 +168,30 @@ public class PaymentMethodMcashActivity extends AppCompatActivity implements Vie
                 if (!binding.btnRozarpay.isChecked() && !binding.btnCoinbase.isChecked() && !binding.btnPayeer.isChecked()){
                     Toast.makeText(PaymentMethodMcashActivity.this, "Please select payment method", Toast.LENGTH_SHORT).show();
                 }else {
-                    binding.submitButton.setClickable(false);
                     if (binding.btnRozarpay.isChecked()){
                         payUsingRozarPay(amount);
-                    }else if (binding.btnCoinbase.isChecked()){
                         binding.submitButton.setClickable(false);
-                        //url
-                        //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token=618f375122156a6df9ea873d57d71e66a7c0c10d577d9d643b8617403629e2471598446930&investValue=125&type=wallet
-                        String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
+                    }else if (binding.btnCoinbase.isChecked()){
+                        String alien = Prefes.getAlien(this);
+                        String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&alien="+alien+"&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
                         startActivity(new Intent(PaymentMethodMcashActivity.this,CoinbaseActivity.class).putExtra("url",url));
                         binding.submitButton.setClickable(true);
                         PaymentMethodMcashActivity.this.finish();
                     }else if (binding.btnPayeer.isChecked()){
                         Toast.makeText(ac, "Coming soon!!", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }else {
                 if (binding.btnCoinbase.isChecked() || binding.btnPayeer.isChecked()){
                     if (binding.btnCoinbase.isChecked()){
-                        binding.submitButton.setClickable(false);
-                        //url
-                        //https://www.mlm.pixelsoftwares.com/vynkpay/account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token=618f375122156a6df9ea873d57d71e66a7c0c10d577d9d643b8617403629e2471598446930&investValue=125&type=wallet
-                        String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
-                        startActivity(new Intent(PaymentMethodMcashActivity.this,CoinbaseActivity.class).putExtra("url",url));
+                        String alien = Prefes.getAlien(this);
+                        String  url = BuildConfig.BASE_URL+ "account/coinBaseAppWebView/app_choose_payment?package_id=0&plan=1&alien="+alien+"&app_request=request_app&access_token="+Prefes.getAccessToken(ac)+"&investValue="+amount+"&type=wallet";
+                        startActivity(new Intent(PaymentMethodMcashActivity.this, CoinbaseActivity.class).putExtra("url",url));
                         binding.submitButton.setClickable(true);
                         PaymentMethodMcashActivity.this.finish();
                     }else if (binding.btnPayeer.isChecked()){
                         Toast.makeText(ac, "Coming soon!!", Toast.LENGTH_SHORT).show();
                     }
-                    //startActivity(new Intent(PaymentMethodMcashActivity.this,LoadMcashSuccessActivity.class));
                 }else {
                     Toast.makeText(PaymentMethodMcashActivity.this, "Please select payment method", Toast.LENGTH_SHORT).show();
                 }

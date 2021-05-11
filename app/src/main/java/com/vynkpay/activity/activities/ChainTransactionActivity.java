@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ChainTransactionActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChainTransactionActivity extends AppCompatActivity {
     ActivityChainTransactionBinding binding;
     ArrayList<ChainTransactionModel> chainTransactionModels = new ArrayList<>();
     TokenTransAdapter tokenTransAdapter;
@@ -41,19 +41,19 @@ public class ChainTransactionActivity extends AppCompatActivity implements View.
     }
 
     private void clicks() {
-        binding.backIV.setOnClickListener(new View.OnClickListener() {
+        binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        binding.toolbarTitle.setText("Transactions");
+        binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
+        binding.toolbarLayout.toolbarTitlenew.setText(R.string.transactions);
     }
 
 
     private void dev() {
-        binding.transfertoken.setOnClickListener(this);
         binding.chainRV.setLayoutManager(Functions.layoutManager(this, Functions.VERTICAL, 0));
         tokenTransAdapter = new TokenTransAdapter(chainTransactionModels, this);
         binding.chainRV.setAdapter(tokenTransAdapter);
@@ -104,11 +104,4 @@ public class ChainTransactionActivity extends AppCompatActivity implements View.
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v == binding.transfertoken){
-            startActivity(new Intent(this, TransferToken.class));
-            //startActivity(new Intent(this, TokenTrnsfrHistory.class));
-        }
-    }
 }

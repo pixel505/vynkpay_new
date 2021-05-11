@@ -34,7 +34,7 @@
                 android:paddingLeft="@dimen/_8sdp"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:text="Are you sure\nTo add VCash for Opt"
+                android:text="Are you Sure ?\nfor Opt the VCash"
                 android:paddingRight="@dimen/_8sdp"/>
 
 

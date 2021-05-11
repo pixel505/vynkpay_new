@@ -47,6 +47,7 @@ public class CoinbaseActivity extends AppCompatActivity implements PlugInControl
         toolbarTitle.setText("Payment");
         Intent intent=getIntent();
         if (getIntent().getStringExtra("url") != null) {
+            //Log.d("scheckURL", getIntent().getStringExtra("url"));
             WebView browser = findViewById(R.id.webView);
             browser.getSettings().setJavaScriptEnabled(true);
             // Set WebView client
@@ -62,15 +63,15 @@ public class CoinbaseActivity extends AppCompatActivity implements PlugInControl
                             String _str = url;
                             if (_str.contains("=")) {
                                 String message = _str.substring(_str.indexOf("=")+1,_str.length());
-                                Toast.makeText(CoinbaseActivity.this, message, Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(CoinbaseActivity.this,LoadMcashSuccessActivity.class).putExtra("message",message.replace("%20"," ")));
+                                Toast.makeText(CoinbaseActivity.this, message.replace("%20", " "), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(CoinbaseActivity.this,LoadMcashSuccessActivity.class).putExtra("message", message.replace("%20"," ")));
                                 CoinbaseActivity.this.finish();
                             }
                         }else if (url.contains("app_notFound")){
                             String _str = url;
                             if (_str.contains("=")) {
                                 String message = _str.substring(_str.indexOf("=")+1,_str.length());
-                                Toast.makeText(CoinbaseActivity.this, message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CoinbaseActivity.this, message.replace("%20", " "), Toast.LENGTH_SHORT).show();
                             }
                             finish();
                         }else {

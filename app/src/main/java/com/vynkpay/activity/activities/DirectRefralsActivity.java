@@ -24,6 +24,7 @@ import com.vynkpay.databinding.ActivityDirectRefralsBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ReferalsResponse;
+import com.vynkpay.utils.EndlessOnScrollListener;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
@@ -46,14 +47,14 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
     DirectRefralsActivity ac;
     Dialog dialog1;
     DirectRefAdapter adapter;
-    List<ReferalsResponse.Datum> dataList, filteredDataList;
+    List<ReferalsResponse.Datum> filteredDataList;
     String type = "",paidType="";
     String parmType ="";
     Calendar calendar = Calendar.getInstance();
     int dd=0,mm=0,yyyy=0;
-    String[] country = {"All", "Paid", "UnPaid"};
+    String[] country = {"All", "Paid"};
     String startDate = "",endDate="";
-
+    int perPage =1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +116,18 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
         });
 
 
+        binding.directrecycler.addOnScrollListener(new EndlessOnScrollListener() {
+            @Override
+            public void onScrolledToEnd() {
+                perPage = perPage+1;
+                if (perPage>1){
+                    getReferralsFilter(String.valueOf(perPage), false);
+                }else {
+                    getReferralsFilter(String.valueOf(perPage), true);
+                }
+
+            }
+        });
 
     }
 
@@ -132,7 +145,8 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
                     binding.tvEndDate.setText(date);
                     parmType= "";
                     isDateFilter = true;
-                    getReferralsFilter();
+                    datumList.clear();
+                    getReferralsFilter("1", true);
                 }
             }
         },yyyy,mm,dd);
@@ -149,12 +163,13 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
 
                     if (response.body().getStatus().equals("true")){
                         binding.noLayout.setVisibility(View.GONE);
+                        datumList.addAll(response.body().getData());
                         GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
-                        adapter = new DirectRefAdapter(getApplicationContext(), response.body().getData());
+                        adapter = new DirectRefAdapter(getApplicationContext(), datumList);
                         binding.directrecycler.setLayoutManager(manager);
                         binding.directrecycler.setAdapter(adapter);
 
-                        dataList=response.body().getData();
+                       // dataList=response.body().getData();
                         binding.searchView.setQueryHint("Search Here");
                         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                             @Override
@@ -163,7 +178,7 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
                             }
                             @Override
                             public boolean onQueryTextChange(String newText) {
-                                filteredDataList = filter(dataList, newText);
+                                filteredDataList = filter(datumList, newText);
 
                                 adapter.setFilter(filteredDataList);
                                 return false;
@@ -201,73 +216,57 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
 
     }
 
-    private void getReferralsFilter() {
-        dialog1.show();
-        MainApplication.getApiService().getReferralsFilter(Prefes.getAccessToken(ac),binding.tvStartDate.getText().toString(),binding.tvEndDate.getText().toString(),parmType).enqueue(new Callback<ReferalsResponse>() {
+    List<ReferalsResponse.Datum> datumList = new ArrayList<>();
+    private void getReferralsFilter(String pageNumber, boolean showLoader) {
+        if (showLoader){
+            dialog1.show();
+        }
+
+        MainApplication.getApiService().getReferralsFilter(Prefes.getAccessToken(ac),binding.tvStartDate.getText().toString(),binding.tvEndDate.getText().toString(),parmType, pageNumber).enqueue(new Callback<ReferalsResponse>() {
             @Override
             public void onResponse(Call<ReferalsResponse> call, Response<ReferalsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    dialog1.dismiss();
+                    if (showLoader){
+                        dialog1.dismiss();
+                    }
 
-                    Log.d("getLOGSDSDSDS", new Gson().toJson(response.body())+"//parmType="+parmType);
+
                     Log.d("getLOGSDSDSDS", "//parmType="+parmType);
 
                     if (response.body().getStatus().equals("true")){
                         binding.noLayout.setVisibility(View.GONE);
 
-                       /* try {
-                            JSONObject jsonObject= new JSONObject(new Gson().toJson(response.body()));
-                            JSONArray jsonArray = jsonObject.getJSONArray("data");
-                            List<ReferalsResponse.Datum> listdata = new ArrayList<>();
-                            for (int i=0; i<jsonArray.length();i++){
-                                JSONObject object = jsonArray.getJSONObject(i);
-                                if (object.optString("paid_status").equals(parmType)){
-                                    String id = object.optString("id");
-                                    String phone = object.optString("phone");
-                                    String paidStatus = object.optString("paidStatus");
-                                    String level = object.optString("level");
-                                    String username = object.optString("username");
-                                    String leg = object.optString("leg");
-                                    String email = object.optString("email");
-                                    String createdDate = object.optString("createdDate");
-                                    String name = object.optString("name");
-                                    String designation = object.optString("designation");
-                                    String amount = object.optString("amount");
-                                    String purchaseCreateDate = object.optString("purchaseCreateDate");
-                                    String packagePrice = object.optString("packagePrice");
-                                    String countryCode = object.optString("countryCode");
-                                    String mobileCode = object.optString("mobileCode");
+                        if (response.body().getData().size()>0){
+                            datumList.addAll(response.body().getData());
+                            GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
+                            adapter = new DirectRefAdapter(getApplicationContext(), datumList);
+                            binding.directrecycler.setLayoutManager(manager);
+                            binding.directrecycler.setAdapter(adapter);
 
-                                    listdata.add(new ReferalsResponse.Datum(id, phone, paidStatus, level, username, leg, email, createdDate, name, designation, amount,
-                                            purchaseCreateDate, packagePrice, countryCode, mobileCode));
+                            binding.searchView.setQueryHint("Search Here");
+                            binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String query) {
+                                    return false;
                                 }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
+                                @Override
+                                public boolean onQueryTextChange(String newText) {
+                                    filteredDataList = filter(datumList, newText);
 
-                        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 1, GridLayoutManager.VERTICAL, false);
-                        adapter = new DirectRefAdapter(getApplicationContext(), response.body().getData());
-                        binding.directrecycler.setLayoutManager(manager);
-                        binding.directrecycler.setAdapter(adapter);
-
-                        dataList=response.body().getData();
-                        binding.searchView.setQueryHint("Search Here");
-                        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                            @Override
-                            public boolean onQueryTextSubmit(String query) {
-                                return false;
+                                    adapter.setFilter(filteredDataList);
+                                    return false;
+                                }
+                            });
+                        }else {
+                            if (Integer.parseInt(pageNumber)==1){
+                                binding.noLayout.setVisibility(View.VISIBLE);
                             }
-                            @Override
-                            public boolean onQueryTextChange(String newText) {
-                                filteredDataList = filter(dataList, newText);
+                        }
 
-                                adapter.setFilter(filteredDataList);
-                                return false;
-                            }
-                        });
                     }else {
-                        binding.noLayout.setVisibility(View.VISIBLE);
+                        if (Integer.parseInt(pageNumber)==1){
+                            binding.noLayout.setVisibility(View.VISIBLE);
+                        }
                     }
 
                 }
@@ -275,7 +274,9 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
 
             @Override
             public void onFailure(Call<ReferalsResponse> call, Throwable t) {
-                dialog1.dismiss();
+                if (showLoader){
+                    dialog1.dismiss();
+                }
                 Toast.makeText(ac, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
@@ -290,12 +291,14 @@ public class DirectRefralsActivity extends AppCompatActivity implements AdapterV
                 parmType="1";
                 binding.tvEndDate.setText("");
                 binding.tvStartDate.setText("");
-                getReferralsFilter();
+                datumList.clear();
+                getReferralsFilter("1", true);
             }else if (paidType.equalsIgnoreCase("UnPaid")){
                 binding.tvEndDate.setText("");
                 binding.tvStartDate.setText("");
                 parmType="0";
-                getReferralsFilter();
+                datumList.clear();
+                getReferralsFilter("1", true);
             } else {
                 getReferals();
             }

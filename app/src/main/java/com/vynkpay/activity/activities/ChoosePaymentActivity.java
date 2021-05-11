@@ -57,7 +57,9 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
         binding = DataBindingUtil.setContentView(this, R.layout.activity_choose_payment);
         ac = ChoosePaymentActivity.this;
         dialog1 = M.showDialog(ac, "", false, false);
-        if (Functions.isIndian) {
+        String alien = Prefes.getAlien(ChoosePaymentActivity.this);
+        if (alien.equalsIgnoreCase("0")) {
+
         } else {
             binding.payOnline.setText("Bitcoin");
             binding.card1.setVisibility(View.GONE);
@@ -82,7 +84,8 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
         });
         binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
         binding.toolbarLayout.toolbarTitlenew.setText(R.string.choosepay);
-        if(Functions.isIndian){
+        String alien = Prefes.getAlien(ChoosePaymentActivity.this);
+        if(alien.equalsIgnoreCase("0")){
             binding.requestMCash.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -159,22 +162,18 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
                         @Override
                         public void onClick(View view) {
 
-                            if(Functions.isIndian){
-                               /* String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id="
-                                        + getIntent().getStringExtra("ids") + "&alien=1&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
-                                Log.e("ids", "" + url);
-                                startActivity(new Intent(ChoosePaymentActivity.this, WebviewActivityNew.class)
-                                        .putExtra("url", url)
-                                        .putExtra("packageID", getIntent().getStringExtra("ids")));*/
-                                //Toast.makeText(ac, "Clicked"+totalAmount, Toast.LENGTH_SHORT).show();
+                            String alien = Prefes.getAlien(ChoosePaymentActivity.this);
+                            if (alien.equalsIgnoreCase("0")){
                                 payNow(String.valueOf(totalAmount));
-                            } else {
+                            }else {
                                 dialog1.show();
-                                String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id="
-                                        + getIntent().getStringExtra("ids") + "&alien=1&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
+                                String url = BuildConfig.BASE_URL+"account/coinBaseAppWebView/app_choose_payment?package_id=" + getIntent().getStringExtra("ids") + "&alien="+alien+"&app_request=request_app&access_token=" + Prefes.getAccessToken(ac);
+
+                                Log.d("sdkjhPintre", url);
                                 startActivity(new Intent(ChoosePaymentActivity.this, WebviewActivityNew.class)
                                         .putExtra("url", url)
                                         .putExtra("packageID", getIntent().getStringExtra("ids")));
+                                finish();
                             }
                         }
 
@@ -252,9 +251,6 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
             options.put("name", Prefes.getEmail(ChoosePaymentActivity.this));
             options.put("description", "Pay to VynkPay");
             options.put("theme",new JSONObject("{color: '#B10D25'}"));
-            //You can omit the image option to fetch the image from dashboard
-            //  options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            // options.put("order_id",orderid);
             options.put("currency", "INR");
             String payment = toString;
             double total = Double.parseDouble(payment);
@@ -280,7 +276,6 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
     public void onPaymentSuccess(String s, PaymentData paymentData) {
 
         try {
-            //Dialog loader=M.showDialog(ChoosePaymentActivity.this, "", false, false);
             dialog1.show();
             Log.e("razorpay_payment_id", "razorpay_payment_id" + paymentData.getData().getString("razorpay_payment_id"));
             MainApplication.getApiService().addMoneyRazorMethod(Prefes.getAccessToken(ChoosePaymentActivity.this),
@@ -294,7 +289,6 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
                             dialog1.dismiss();
                             if(response.isSuccessful()){
                                 payForPackage();
-                                //makeRechargeRequest(payUPaid.getText().toString().replace(Functions.CURRENCY_SYMBOL, ""));
                             }
                         }
 
@@ -330,7 +324,6 @@ public class ChoosePaymentActivity extends AppCompatActivity implements PaymentR
                 dialog1.dismiss();
                 Log.d("payresponse", t.getMessage() != null ? t.getMessage() : "Error");
             }
-
         });
     }
 

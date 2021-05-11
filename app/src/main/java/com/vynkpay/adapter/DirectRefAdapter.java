@@ -1,6 +1,7 @@
 package com.vynkpay.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,6 @@ public class DirectRefAdapter extends RecyclerView.Adapter<DirectRefAdapter.View
 
         holder.binding.codeText.setText("+"+myListData.getMobileCode());
         holder.binding.numbertext.setText(myListData.getPhone());
-
 
         try {
             holder.binding.nameryttext.setText("("+myListData.getUsername()+")");

@@ -62,7 +62,7 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                     new MyAccount("Wallets", R.drawable.wallets),
                     new MyAccount("Withdrawal History", R.drawable.withdrawal),
                     //new MyAccount("Community Details", R.drawable.communitydetail),
-                    new MyAccount("Statement", R.drawable.statement)
+                   // new MyAccount("Statement", R.drawable.statement)
             };
         }else {
                 myAccount = new MyAccount[] {
@@ -75,7 +75,7 @@ public class AccountAccessActivity extends AppCompatActivity implements PlugInCo
                         new MyAccount("Wallets", R.drawable.wallets),
                         new MyAccount("Withdrawal History", R.drawable.withdrawal),
                         //new MyAccount("Community Details", R.drawable.communitydetail),
-                        new MyAccount("Statement", R.drawable.statement)
+                     //new MyAccount("Statement", R.drawable.statement)
                 };
         }
 

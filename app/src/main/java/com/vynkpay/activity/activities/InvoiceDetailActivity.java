@@ -134,7 +134,7 @@ public class InvoiceDetailActivity extends AppCompatActivity implements PlugInCo
                         binding.mobile.setText("+"+response.body().getData().getMobileCode()+" "+response.body().getData().getMobile());
                         binding.email.setText(response.body().getData().getEmail());
                         binding.desc.setText(response.body().getData().getPTitle());
-                        binding.qty.setText(response.body().getData().getMode());
+                        binding.qty.setText(response.body().getData().getTotal_coin());
                         binding.price.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getPpPrice());
                         binding.total.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getAmount());
                         binding.subTotal.setText(Functions.CURRENCY_SYMBOL+response.body().getData().getPpPrice());

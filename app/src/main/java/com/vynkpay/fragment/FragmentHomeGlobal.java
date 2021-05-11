@@ -58,8 +58,8 @@ import com.squareup.picasso.Picasso;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.ChainTransactionActivity;
 import com.vynkpay.activity.activities.LoginActivity;
+import com.vynkpay.activity.activities.TransferOptionListActivity;
 import com.vynkpay.adapter.ImageAdapter;
 import com.vynkpay.adapter.ImportantAdapter;
 import com.vynkpay.custom.NormalBoldTextView;
@@ -292,7 +292,7 @@ public class FragmentHomeGlobal extends Fragment {
         tokenBlncLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity, ChainTransactionActivity.class));
+                startActivity(new Intent(activity, TransferOptionListActivity.class));
             }
         });
 
@@ -698,6 +698,9 @@ public class FragmentHomeGlobal extends Fragment {
                         String tokenName = statistics.getString("tokenName");
                         String tokenBalance = statistics.getString("tokenBalance");
                         String tokenIcon = statistics.getString("tokenIcon");
+
+                        String alien = data.optString("alien");
+                        Prefes.saveAlien(alien, activity);
 
                         tokenBalnceText.setText(tokenBalance);
 

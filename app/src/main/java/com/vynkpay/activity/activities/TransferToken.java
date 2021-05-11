@@ -55,7 +55,15 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_transfer_token);
 
-        binding.transferHistory.setOnClickListener(this);
+        binding.toolbarLayout.toolbarnew.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        binding.toolbarLayout.toolbarnew.setNavigationIcon(R.drawable.ic_back_arrow);
+        binding.toolbarLayout.toolbarTitlenew.setText(R.string.transferToken);
 
         binding.agreeTV.setOnClickListener(this);
         binding.cancelTV.setOnClickListener(this);
@@ -81,19 +89,18 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
                         for (int i=0; i<listing.length(); i++){
                             JSONObject object = listing.getJSONObject(i);
                             String statusString = object.optString("status");
-                            String created_at = object.optString("created_at");
+                            String updated_at = object.optString("updated_at");
                             if (statusString.equals("3")){
                                 newTransfer = false;
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                                 try {
-                                    Date matchDate = format.parse(created_at);
+                                    Date matchDate = format.parse(updated_at);
                                     Calendar cal = GregorianCalendar.getInstance();
                                     cal.setTime(matchDate);
                                     cal.add(Calendar.DATE, 30);
                                     Date againTransferDate = cal.getTime();
                                     String dateString = Functions.changeDateFormat(againTransferDate.toString(), "EEE MMM dd HH:mm:ss ZZZZZ yyyy" , "MMM dd, yyyy");
-                                   // binding.messageTV.setText("You are allowed to transfer only 100 VYNC in every 30 days.");
-                                    binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" in every "+days+" days. The next you can transfer on "+dateString);
+                                    binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" Tokens in every "+days+" days. The next you can transfer on "+dateString);
 
                                 } catch (ParseException e) {
                                     e.printStackTrace();
@@ -102,14 +109,14 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
 
                                 Date currentTime = Calendar.getInstance().getTime();
                                 String todayTime = Functions.changeDateFormat(currentTime.toString(), "EEE MMM dd HH:mm:ss Z yyyy", "yyyy-MM-dd HH:mm:ss");
-                                countDown(todayTime, created_at, days, tokensTransferTitle);
+                                countDown(todayTime, updated_at, days, tokensTransferTitle);
                                 break;
                             }
                         }
 
 
                         if (newTransfer){
-                            binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" in every "+days+" days.");
+                            binding.messageTV.setText("You're allowed to transfer only "+tokensTransferTitle+" Tokens in every "+days+" days.");
                             binding.timeLeftTV.setVisibility(View.GONE);
                             binding.agreeLayout.setVisibility(View.VISIBLE);
                         }
@@ -126,18 +133,6 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        clicks();
-    }
-
-    private void clicks() {
-        binding.backIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        binding.toolbarTitle.setText("Transfer Token");
     }
 
     public void countDown(String todayTime, String matchStartTime, String time, String token){
@@ -217,9 +212,7 @@ public class TransferToken extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == binding.transferHistory){
-            startActivity(new Intent(this, TokenTrnsfrHistory.class));
-        }else if (v == binding.agreeTV){
+        if (v == binding.agreeTV){
             transferDialog();
         }else if (v == binding.cancelTV){
             finish();

@@ -52,6 +52,18 @@ public class Prefes {
         return preferences.getString(BuildConfig.ACCESS_TOKEN, "");
     }
 
+    public static void saveAlien(String value, Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("alien", value);
+        editor.apply();
+    }
+
+    public static String getAlien(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);
+        return preferences.getString("alien", "");
+    }
+
 
     public static void savePDFPath(String value, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(APP_KEY, Activity.MODE_PRIVATE);

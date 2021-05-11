@@ -117,6 +117,17 @@ public class GetInvoiceDetailResponse {
         @Expose
         private String type;
 
+        @SerializedName("total_coin")
+        @Expose
+        private String total_coin;
+
+        public String getTotal_coin() {
+            return total_coin;
+        }
+
+        public void setTotal_coin(String total_coin) {
+            this.total_coin = total_coin;
+        }
 
         public String getPp_type() {
             return pp_type;

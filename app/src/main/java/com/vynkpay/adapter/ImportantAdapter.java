@@ -15,7 +15,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.R;
-import com.vynkpay.activity.activities.ChainTransactionActivity;
+import com.vynkpay.activity.activities.TransferOptionListActivity;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.StatiaticsResponse;
 import com.vynkpay.prefes.Prefes;
@@ -30,6 +30,13 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
 
     Context context;
     StatiaticsResponse statiaticsResponse;
+
+    /*
+        Flow of transfer VYNC
+
+        lekin jab tak admin approve nahi karta to waha ek Cancel ka button rehta hai wo nahi a raha hai pending list mein
+        Aur admin se approve hone ke bad waha pe ek timer start hona hai 30 days ka jo abhi maine check nahi kiya karunga abhi
+        Ek bar transfer request karne ke bad ye agree aur cancel wali screen nahi ayegi*/
 
     public ImportantAdapter(Context context,StatiaticsResponse statiaticsResponse) {
         this.context = context;
@@ -73,6 +80,151 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
                             if (respData.has("message")){
                                 Log.d("settingsresponse",respData.getString("message"));
                             }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         }else {
                             if (respData.has("message")){
                                 Log.d("settingsresponse",respData.getString("message"));
@@ -157,14 +309,14 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
             holder.vyncTXN.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context, ChainTransactionActivity.class));
+                     context.startActivity(new Intent(context, TransferOptionListActivity.class));
                 }
             });
 
             holder.vyncTXN2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    context.startActivity(new Intent(context, ChainTransactionActivity.class));
+                    context.startActivity(new Intent(context, TransferOptionListActivity.class));
                 }
             });
 
@@ -173,7 +325,6 @@ public class ImportantAdapter extends RecyclerView.Adapter<ImportantAdapter.Hold
         }
 
     }
-
 
     public void callVcashOptOut(LinearLayout linVcash, LinearLayout vyncTXN2, CardView vyncTXN){
         MainApplication.getApiService().optVCashAdd(Prefes.getAccessToken(context)).enqueue(new Callback<String>() {

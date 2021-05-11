@@ -163,7 +163,7 @@ public class AffiliateActivity extends AppCompatActivity implements PlugInContro
                                        // binding.rAffiliate.setChecked(false);
                                     }
                                 }
-                                if (planList.get(i).getTitle().equalsIgnoreCase("VYNC Chain")) {
+                                if (planList.get(i).getTitle().equalsIgnoreCase("VYNK Chain")) {
                                     if (planList.get(i).getDisplay().equalsIgnoreCase("1")) {
                                         //binding.rVyncChain.setVisibility(View.VISIBLE);
                                     } else {

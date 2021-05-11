@@ -259,6 +259,7 @@
                         android:id="@+id/filterLinear"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -294,6 +295,7 @@
 
                         <View
                             android:layout_width="1dp"
+                            android:visibility="gone"
                             android:layout_height="match_parent"
                             android:background="@color/black" />
 

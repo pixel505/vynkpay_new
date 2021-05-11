@@ -36,7 +36,13 @@
         android:theme="@style/WhiteTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup,android:usesCleartextTraffic">
-        <activity android:name=".activity.activities.TransferToken"
+        <activity android:name=".activity.activities.TransferOptionListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".activity.activities.TransferToken"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"

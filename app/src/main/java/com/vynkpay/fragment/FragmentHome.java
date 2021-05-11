@@ -62,7 +62,7 @@ import com.highsoft.highcharts.core.HIChartView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.activities.AboutUsActivity;
-import com.vynkpay.activity.activities.ChainTransactionActivity;
+import com.vynkpay.activity.activities.TransferOptionListActivity;
 import com.vynkpay.adapter.ImportantAdapter;
 import com.vynkpay.custom.NormalTextView;
 import com.vynkpay.models.CartHighResponse;
@@ -514,7 +514,7 @@ public class FragmentHome extends Fragment {
         tokenBlncLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(activity, ChainTransactionActivity.class));
+                startActivity(new Intent(activity, TransferOptionListActivity.class));
             }
         });
 
@@ -523,7 +523,7 @@ public class FragmentHome extends Fragment {
     }
 
     public void  getUserDetail() {
-        ApiCalls.getUserDetails(activity,Prefes.getAccessToken(getActivity()),new VolleyResponse() {
+        ApiCalls.getUserDetails(activity,Prefes.getAccessToken(activity),new VolleyResponse() {
         @Override
         public void onResult (String result, String status, String message){
             Log.d("userDwetailssssa", result);
@@ -1019,6 +1019,8 @@ public class FragmentHome extends Fragment {
                         String tokenName = statistics.getString("tokenName");
                         String tokenBalance = statistics.getString("tokenBalance");
                         String tokenIcon = statistics.getString("tokenIcon");
+                        String alien = data.optString("alien");
+                        Prefes.saveAlien(alien, activity);
 
                         tokenBalnceText.setText(tokenBalance);
 

@@ -418,4 +418,25 @@ public class ApiCalls {
 
         volleyNetworkClass.makeRequest(URLS.ADD_TOKEN_URL, token, hashMap);
     }
+
+    public static void cancelTransferToken(Context context,String token, String id, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("id", id);
+
+        volleyNetworkClass.makeRequest(URLS.CANCEL_TNS_URL, token, hashMap);
+    }
 }

@@ -88,9 +88,26 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_red"
                 android:textSize="@dimen/_10sdp"
-                android:gravity="center_vertical"
+                android:gravity="center|end"
+                android:layout_gravity="end"
                 android:id="@+id/statusTV"
                 android:text="@string/status"/>
+
+            <com.vynkpay.custom.BoldButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/round_corner_red"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:gravity="center"
+                android:id="@+id/cancelButton"
+                android:visibility="gone"
+                android:textAllCaps="false"
+                android:layout_gravity="end"
+                android:text="@string/cancel"/>
 
         </LinearLayout>
 

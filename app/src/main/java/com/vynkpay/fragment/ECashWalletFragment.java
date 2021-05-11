@@ -77,7 +77,11 @@ public class ECashWalletFragment extends AppCompatActivity {
                                     binding.newMcashReq1.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            startActivity(new Intent(ECashWalletFragment.this, ChoosePaymentActivityB.class).putExtra("balancWalletM", getIntent().getStringExtra("purchaseprice")));
+                                            String purchaseprice="0";
+                                            if (getIntent().hasExtra("purchaseprice")){
+                                                purchaseprice= getIntent().getStringExtra("purchaseprice");
+                                            }
+                                            startActivity(new Intent(ECashWalletFragment.this, ChoosePaymentActivityB.class).putExtra("balancWalletM", purchaseprice));
 
                                         }
                                     });
@@ -88,7 +92,11 @@ public class ECashWalletFragment extends AppCompatActivity {
                                     binding.newMcashReq.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            startActivity(new Intent(ECashWalletFragment.this, ChoosePaymentActivityB.class).putExtra("balancWalletM", getIntent().getStringExtra("purchaseprice")));
+                                            String purchaseprice="0";
+                                            if (getIntent().hasExtra("purchaseprice")){
+                                                purchaseprice= getIntent().getStringExtra("purchaseprice");
+                                            }
+                                            startActivity(new Intent(ECashWalletFragment.this, ChoosePaymentActivityB.class).putExtra("balancWalletM", purchaseprice));
 
                                         }
                                     });

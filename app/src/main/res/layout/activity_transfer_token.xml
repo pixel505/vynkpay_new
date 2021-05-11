@@ -8,51 +8,8 @@
         android:orientation="vertical"
         tools:context=".activity.activities.TransferToken">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:background="@color/colorPrimary"
-            android:padding="@dimen/_10sdp"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/backIV"
-                android:src="@drawable/ic_back_arrow"/>
-
-            <com.vynkpay.custom.NormalTextView
-                android:id="@+id/toolbarTitle"
-                android:layout_width="match_parent"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:layout_toEndOf="@+id/backIV"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:textColor="@color/white" />
-
-            <com.vynkpay.custom.NormalTextView
-                android:layout_width="wrap_content"
-                android:singleLine="true"
-                android:maxLines="1"
-                android:textSize="@dimen/_12sdp"
-                android:text="Transfer History"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:ellipsize="end"
-                android:gravity="center"
-                android:id="@+id/transferHistory"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:textAppearance="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
-                android:textColor="@color/white" />
-
-        </RelativeLayout>
-
+        <include layout="@layout/toolbar_new"
+            android:id="@+id/toolbarLayout"/>
 
         <Space
             android:layout_width="match_parent"
@@ -100,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
             android:id="@+id/agreeLayout"
-
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <com.vynkpay.custom.NormalTextView

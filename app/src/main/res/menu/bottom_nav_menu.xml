@@ -32,7 +32,7 @@
         android:id="@+id/action_team"
         android:enabled="true"
         android:icon="@drawable/vynkstore"
-        android:title="Vynk Store"
+        android:title="Vync Store"
         app:showAsAction="ifRoom" />
 
 </menu>

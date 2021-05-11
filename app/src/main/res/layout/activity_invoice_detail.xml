@@ -294,7 +294,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
                                             android:gravity="center"
-                                            android:text="Qty"
+                                            android:text="TOKENS"
                                             android:textColor="@color/white"
                                             android:textSize="@dimen/_8sdp" />
 
@@ -341,7 +341,7 @@
                                             android:layout_height="match_parent"
                                             android:layout_weight="1"
                                             android:gravity="center"
-                                            android:text="Qty"
+                                            android:text="0"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_8sdp" />
 

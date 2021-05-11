@@ -29,7 +29,6 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
@@ -69,8 +68,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements PlugInControlReceiver.ConnectivityReceiverListener {
   @BindView(R.id.etLoginText)
@@ -113,7 +114,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
     mShraredPref=new UserSharedPreferences(LoginActivity.this);
 
     ButterKnife.bind(LoginActivity.this);
-    //FirebaseMessaging.getInstance().subscribeToTopic(ApiParams.GLOBAL_PARAMS);
     setListeners();
 
     if (getIntent() != null) {
@@ -191,10 +191,7 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
     signUpText.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        //Intent intent = new Intent(LoginActivity.this, Signupnew.class);
         Intent intent = new Intent(LoginActivity.this, Register1Activity.class);
-               /* intent.putExtra("url", "register");
-                intent.putExtra("title", "");*/
         startActivity(intent);
       }
     });
@@ -230,41 +227,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
 
     });
 
-     /*   forgotPassWordText.setOnCl   ickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(LoginActivity.this, WebViewActivity.class);
-                intent.putExtra("url", "forget-password");
-                intent.putExtra("title", "Reset Password");
-                startActivity(intent);
-
-                *//*dialog1 = M.inflateDialog(LoginActivity.this, R.layout.dialog_forgot);
-                okButton = dialog1.findViewById(R.id.okButton);
-                cancelButton = dialog1.findViewById(R.id.cancelButton);
-                etEmail1 = dialog1.findViewById(R.id.etEmail);
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog1.dismiss();
-                    }
-                });
-                okButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (etEmail1.getText().length() == 0 || etEmail1.getText().toString().trim().length() == 0) {
-                            Toast.makeText(LoginActivity.this, getString(R.string.please_email), Toast.LENGTH_SHORT).show();
-                        } else if (!M.validateEmail(etEmail1.getText().toString().trim())) {
-                            Toast.makeText(LoginActivity.this, getString(R.string.valid_email), Toast.LENGTH_SHORT).show();
-                        } else {
-                            dialog1.dismiss();
-                            makeResetPasswordRequest();
-                        }
-                    }
-                });
-                dialog1.show();*//*
-            }
-        });*/
     loginascustomer.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -321,140 +283,6 @@ public class LoginActivity extends AppCompatActivity implements PlugInControlRec
     });
 
   }
-
-  /*{
-        dialog.show();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.APP_BASE_URL + "auth/login",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            dialog.dismiss();
-                            JSONObject jsonObject = new JSONObject(response);
-                            Log.i(">>LoginResponse", "onResponse: " + jsonObject.toString());
-                            mSuccess = jsonObject.optString(ApiParams.success);
-                            mMessage = jsonObject.optString(ApiParams.message);
-
-                            *//* {"success":true,"data":{"id":"2","user_id":"10",
-                            "access_token":"af13eb84f0125f873b344c940cd0104bca9a06bd5644267832615d4dc510be651583237377",
-                            "login_status":"1","fcm_token":null,"device_info":"Dalvik\/2.1.0 (Linux; U; Android 10; SM-M205F Build\/QP1A.190711.020)","email":"esamparkindia@esamparkindia.com","mobile_number":"9381983198","full_name":"eSampark India","remitter_id":"","balance":"0","imageurl":""},"message":"Logged in successfully."}
-                             *//*
-
-                            if (jsonObject.getString(ApiParams.success).equals("true")) {
-                                JSONObject data=jsonObject.getJSONObject("data");
-                                String user_id= data.getString("user_id");
-                                Prefes.saveUserID(user_id, LoginActivity.this);
-                                Prefes.saveUserData(jsonObject.getJSONObject(ApiParams.data).toString(), LoginActivity.this);
-
-                                String token=data.getString("access_token");
-
-                                *//*if (var.equals("1")) {
-                                    finish();
-                                } else {
-                                    Intent intent = new Intent(LoginActivity.this, Dashboard.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                                EventBus.getDefault().postSticky(new UpDateUIEvent(true));*//*
-
-                                remitter_details(token, user_id);
-
-                            } else {
-                                EventBus.getDefault().postSticky(new UpDateUIEvent(false));
-                                M.dialogOk(LoginActivity.this, mMessage, "Error");
-                            }
-                        } catch (Exception e) {
-                            Log.i(">>exception", "onResponse: " + e.getMessage());
-                            e.printStackTrace();
-                            EventBus.getDefault().postSticky(new UpDateUIEvent(false));
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        dialog.dismiss();
-                        EventBus.getDefault().postSticky(new UpDateUIEvent(false));
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put(ApiParams.email, etLoginText.getText().toString());
-                map.put(ApiParams.password, etPassword.getText().toString());
-                map.put(ApiParams.device_type, "1");
-                map.put(ApiParams.device_id, "123");
-                map.put(ApiParams.device_info, "1");
-                map.put(ApiParams.fcm_token, SharedPrefManager.getInstance(LoginActivity.this).getDeviceToken());
-                return map;
-            }
-        };
-        MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-    }*/
-
-  private void remitter_details(String token, String id) {
-    dialog.show();
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, BuildConfig.APP_BASE_URL + URLS.remitter_details_URL,
-            new Response.Listener<String>() {
-              @Override
-              public void onResponse(String response) {
-                Log.d("sdsadasdasdasdasd", response);
-
-                       /* {"status":true,"data":{"id":"7","exter_user_id":"503","remitter_id":"6860230","client_id":"7","fname":"Sukhdev",
-                       "lname":"Singh","pin":"152124","mobile":"9463639564","status":"1",
-                       "created_on":"2020-05-29 11:50:59","modified_on":"2020-05-29 17:00:39"}}
-                        */
-
-                try {
-                  JSONObject jsonObject=new JSONObject(response);
-                  if (jsonObject.getString("status").equals("true")){
-                    JSONObject data=jsonObject.getJSONObject("data");
-                    String remitter_id_string=data.optString("remitter_id");
-                    M.upDateUserTrivialInfo(LoginActivity.this, ApiParams.remitter_id, remitter_id_string);
-                  }
-
-
-                  EventBus.getDefault().postSticky(new UpDateUIEvent(true));
-
-                } catch (JSONException e) {
-                  e.printStackTrace();
-                }
-
-              }
-            },
-            new Response.ErrorListener() {
-              @Override
-              public void onErrorResponse(VolleyError error) {
-                dialog.dismiss();
-              }
-            }) {
-
-      @Override
-      public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(ApiParams.access_token, token);
-        return params;
-      }
-
-      @Override
-      protected Map<String, String> getParams() throws AuthFailureError {
-        Map<String, String> params = new HashMap<String, String>();
-        params.put(ApiParams.user_id, id);
-        return params;
-      }
-    };
-
-    MySingleton.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
-    stringRequest.setRetryPolicy(new DefaultRetryPolicy(500000,
-            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-  }
-
 
   @Override
   protected void onResume() {

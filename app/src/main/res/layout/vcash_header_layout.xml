@@ -135,6 +135,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:id="@+id/filterLinear"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical">
 
@@ -170,6 +171,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:background="@color/black"/>
 
                     <Space

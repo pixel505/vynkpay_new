@@ -57,6 +57,7 @@ import com.vynkpay.retrofit.model.WithdrawalTypeTesponse;
 import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -83,7 +84,6 @@ public interface ApiCalls {
             @Field("password") String password,
             @Field("device_type") String device_type,
             @Field("device_id") String device_id);
-
 
     @POST("api/auth/logout")
     Call<LogoutResponse> logoutMethod(
@@ -520,11 +520,11 @@ public interface ApiCalls {
     @FormUrlEncoded
     @POST("account/api_accounts/referrals")
     //startdate, enddate, search_by
-    Call<ReferalsResponse> getReferralsFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by);
+    Call<ReferalsResponse> getReferralsFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by, @Field("per_page") String per_page);
 
     @FormUrlEncoded
     @POST("account/api_accounts/teamsummary")
-    Call<TeamSummaryResponse> getTeamFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by,@Field("per_page") String per_page);
+    Call<TeamSummaryResponse> getTeamFilter(@Header("access_token") String access_token, @Field("startdate") String startdate,@Field("enddate") String enddate,@Field("search_by") String search_by, @Field("per_page") String per_page);
 
     /*ETH*/
 
