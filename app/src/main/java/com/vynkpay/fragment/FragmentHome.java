@@ -660,6 +660,13 @@ public class FragmentHome extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+
+    }
+
+    @Override
+    public void onAttachFragment(@NonNull Fragment childFragment) {
+        super.onAttachFragment(childFragment);
         try {
             if (getView()!=null) {
                 getView().post(() -> setupGradient(chart));
@@ -667,9 +674,7 @@ public class FragmentHome extends Fragment {
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
-
 
     private void setupGradient(LineChart mChart) {
         Paint paint = mChart.getRenderer().getPaintRender();

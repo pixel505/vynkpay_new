@@ -239,10 +239,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                  public void onClick(View view) {
                      if (isIndian){
                          fragment = new FragmentHome(services_enable);
-                         switchFragment(fragment, "home");
+                         replaceFragment(fragment, "home");
                      }else {
                          fragment = new FragmentHomeGlobal();
-                         switchFragment(fragment, "home");
+                         replaceFragment(fragment, "home");
                      }
                      /*if (getIntent().getStringExtra("Country") != null) {
                          if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
@@ -696,10 +696,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             drawer.closeDrawer(GravityCompat.START);
             if (isIndian){
                 fragment = new FragmentHome(services_enable);
-                switchFragment(fragment, "home");
+                replaceFragment(fragment, "home");
             }else {
                 fragment = new FragmentHomeGlobal();
-                switchFragment(fragment, "home");
+                replaceFragment(fragment, "home");
             }
 
            /* if (getIntent().getStringExtra("Country") != null) {

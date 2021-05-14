@@ -135,6 +135,89 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                 if (response.isSuccessful() && response.body() != null) {
                     try {
                         if (response.body().getStatus().equalsIgnoreCase("true")) {
+
+                            if (show_btc){
+                                binding.bitAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.bitAddress.setVisibility(View.GONE);
+                            }
+
+                            if (show_eth){
+                                binding.ethAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.ethAddress.setVisibility(View.GONE);
+                            }
+
+                            if (show_trx){
+                                binding.trxAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.trxAddress.setVisibility(View.GONE);
+                            }
+
+
+                            if (show_payPal){
+                                binding.pplAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.pplAddress.setVisibility(View.GONE);
+                            }
+
+
+                            if (show_pm){
+                                binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.prefectMoneyAddress.setVisibility(View.GONE);
+                            }
+
+
+                            if (show_payeer){
+                                binding.PayeerAddress.setVisibility(View.VISIBLE);
+                            }else {
+                                binding.PayeerAddress.setVisibility(View.GONE);
+                            }
+
+
+
+                            binding.bitAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                }
+                            });
+
+                            binding.trxAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, TrxActivity.class).putExtra("trx", response.body().getData().getUserdata().getTrx_address()));
+                                }
+                            });
+
+                            binding.pplAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, PPLActivity.class).putExtra("ppl", response.body().getData().getUserdata().getPplAddress()));
+                                }
+                            });
+
+                            binding.ethAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, ETHActivity.class).putExtra("eth", response.body().getData().getUserdata().getEthAddress()));
+                                }
+                            });
+                            binding.prefectMoneyAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, PerfectMoneyActivity.class).putExtra("perfect", response.body().getData().getUserdata().getPemAddress()));
+                                }
+                            });
+                            binding.PayeerAddress.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
+                                }
+                            });
+
+
                             Log.d("kycc",new Gson().toJson(response.body().getData().getUserdata()));
                             if (response.body().getData().getUserdata().getCountryCode().equals("91")) {
 
@@ -463,7 +546,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         }
                                     });
 
-                                    if (show_btc){
+                                   /* if (show_btc){
                                         binding.bitAddress.setVisibility(View.VISIBLE);
                                     }else {
                                         binding.bitAddress.setVisibility(View.GONE);
@@ -542,7 +625,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
-                                    });
+                                    });*/
 
                                 }    //pending from admin
 
@@ -570,7 +653,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         }
                                     });
 
-                                    if (show_btc){
+                                   /* if (show_btc){
                                         binding.bitAddress.setVisibility(View.VISIBLE);
                                     }else {
                                         binding.bitAddress.setVisibility(View.GONE);
@@ -651,7 +734,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
-                                    });
+                                    });*/
 
                                 }     // approved   done
 
@@ -680,7 +763,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
                                     });
 
-                                    if (show_btc){
+                                   /* if (show_btc){
                                         binding.bitAddress.setVisibility(View.VISIBLE);
                                     }else {
                                         binding.bitAddress.setVisibility(View.GONE);
@@ -760,7 +843,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, PayeerAddressActivity.class).putExtra("payeer", response.body().getData().getUserdata().getPayeerAccount()));
                                         }
-                                    });
+                                    });*/
 
                                 }   // Rejected
                             }   // not indian

@@ -28,7 +28,7 @@
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_90sdp"
                     android:src="@drawable/withdrawarequestsubmitd"
-                    android:layout_marginBottom="@dimen/_20sdp"/>
+                    android:layout_marginBottom="@dimen/_10sdp"/>
 
                 <com.vynkpay.custom.BoldTextView
                     android:layout_width="match_parent"
@@ -46,6 +46,7 @@
                     android:text="@string/ontime"
                     android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:layout_marginRight="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_24sdp"
                     android:textSize="@dimen/_12sdp" />
@@ -63,11 +64,6 @@
                     android:text="@string/done"
                     android:textSize="@dimen/_12sdp"
                     android:textColor="@color/white" />
-
-
-
-
-
 
             </LinearLayout>
 
