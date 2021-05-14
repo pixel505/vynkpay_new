@@ -223,6 +223,9 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.tokenBlncLayout)
     LinearLayout tokenBlncLayout;
 
+    @BindView(R.id.servicesLiearNew)
+    LinearLayout servicesLiearNew;
+
     String bonusBalance, mCashBalance, vCashBalance;
 
     SharedPreferences popupSP;
@@ -230,6 +233,12 @@ public class FragmentHome extends Fragment {
     Activity activity;
     String imageURL = "";
     boolean status = true;
+    boolean services_enable=true;
+    public FragmentHome(boolean  services_enable){
+        this.services_enable = services_enable;
+    }
+
+    public FragmentHome(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -517,6 +526,13 @@ public class FragmentHome extends Fragment {
                 startActivity(new Intent(activity, TransferOptionListActivity.class));
             }
         });
+
+
+        if (services_enable){
+            servicesLiearNew.setVisibility(View.VISIBLE);
+        }else {
+            servicesLiearNew.setVisibility(View.GONE);
+        }
 
         return view;
 

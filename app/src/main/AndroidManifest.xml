@@ -100,6 +100,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/Splash.Theme"
             tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".activity.WeeklyDetailActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+
         <activity
             android:name=".newregistration.SelectionActivity"
             android:exported="false"
@@ -122,6 +131,21 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".activity.activities.ETHActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
+            android:name=".activity.activities.PPLActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/Splash.Theme"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
+            android:name=".activity.activities.TrxActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

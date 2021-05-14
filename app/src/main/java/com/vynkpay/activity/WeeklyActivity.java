@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.vynkpay.R;
 import com.vynkpay.adapter.ReferalBonusAdapter;
 import com.vynkpay.databinding.ActivityWeeklyBinding;
 import com.vynkpay.databinding.ReferralBonusItemBinding;
+import com.vynkpay.databinding.WeeklyBonusItemBinding;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.ReferalBonusResponse;
@@ -120,7 +122,7 @@ public class WeeklyActivity extends AppCompatActivity implements PlugInControlRe
     }
 
 
-    public static class WeeklyBonusAdapter extends RecyclerView.Adapter<WeeklyBonusAdapter.ViewHolder>  {
+    public class WeeklyBonusAdapter extends RecyclerView.Adapter<WeeklyBonusAdapter.ViewHolder>  {
         Context context;
         List<ReferalBonusResponse.Datum> listdata;
 
@@ -131,7 +133,7 @@ public class WeeklyActivity extends AppCompatActivity implements PlugInControlRe
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            ReferralBonusItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.referral_bonus_item, parent, false);
+            WeeklyBonusItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.weekly_bonus_item, parent, false);
             ViewHolder viewHolder = new ViewHolder(binding);
             return viewHolder;
         }
@@ -141,7 +143,7 @@ public class WeeklyActivity extends AppCompatActivity implements PlugInControlRe
             ReferalBonusResponse.Datum  myListData = listdata.get(position);
             holder.binding.nameText.setText(myListData.getName());
             holder.binding.nameryttext.setText("("+myListData.getUsername()+")");
-            holder.binding.paidDateText.setText(Functions.CURRENCY_SYMBOL+" "+myListData.getAmountOf());
+           // holder.binding.paidDateText.setText(Functions.CURRENCY_SYMBOL+" "+myListData.getAmountOf());
             holder.binding.bonusAmountTV.setText(Functions.CURRENCY_SYMBOL+" "+myListData.getPAmount());
             if(myListData.getStatus().equals("0")){
                 holder.binding.purchaseamountText.setText("Confirmed");
@@ -151,6 +153,15 @@ public class WeeklyActivity extends AppCompatActivity implements PlugInControlRe
                 holder.binding.purchaseamountText.setText("On Hold");
 
             }
+
+            holder.binding.viewDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(WeeklyActivity.this, WeeklyDetailActivity.class);
+                    intent.putExtra("dateString", myListData.getCreatedDate());
+                    startActivity(intent);
+                }
+            });
 
             try {
                 DateFormat f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault());
@@ -168,9 +179,9 @@ public class WeeklyActivity extends AppCompatActivity implements PlugInControlRe
         public int getItemCount() {
             return listdata.size();
         }
-        static class ViewHolder extends RecyclerView.ViewHolder {
-            final ReferralBonusItemBinding binding;
-            ViewHolder(final ReferralBonusItemBinding itemBinding) {
+         class ViewHolder extends RecyclerView.ViewHolder {
+            final WeeklyBonusItemBinding binding;
+            ViewHolder(final WeeklyBonusItemBinding itemBinding) {
                 super(itemBinding.getRoot());
                 this.binding = itemBinding;
             }

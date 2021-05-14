@@ -439,4 +439,25 @@ public class ApiCalls {
 
         volleyNetworkClass.makeRequest(URLS.CANCEL_TNS_URL, token, hashMap);
     }
+
+    public static void getROIDetails(Context context,String token, String date, VolleyResponse volleyResponse){
+        VolleyNetworkClass volleyNetworkClass=new VolleyNetworkClass(context, new VolleyResponse() {
+
+            @Override
+            public void onResult(String result, String status, String message) {
+                volleyResponse.onResult(result, status, message);
+            }
+
+            @Override
+            public void onError(String error) {
+                volleyResponse.onError(error);
+            }
+
+        });
+
+       /* HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("view", date);*/
+
+        volleyNetworkClass.makeRequest(URLS.ROIDETAIL_URL+"?view="+date, token);
+    }
 }

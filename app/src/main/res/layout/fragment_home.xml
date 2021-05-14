@@ -362,9 +362,8 @@
                         android:textSize="@dimen/_10sdp" />
                 </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
-
-
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

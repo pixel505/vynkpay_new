@@ -1,9 +1,11 @@
 package com.vynkpay.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Half;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,10 +39,13 @@ import com.vynkpay.activity.activitiesnew.CustomerWalletActivity;
 import com.vynkpay.activity.activitiesnew.TransactionInternationalActivity;
 import com.vynkpay.activity.shops.AddBankDetailActivity;
 import com.vynkpay.activity.shops.ShopsActivity;
+import com.vynkpay.adapter.ImportantAdapter;
 import com.vynkpay.databinding.ActivityHomeBindingImpl;
 import com.vynkpay.fragment.FragmentHomeGlobal;
+import com.vynkpay.models.StatiaticsResponse;
 import com.vynkpay.network_classes.ApiCalls;
 import com.vynkpay.network_classes.VolleyResponse;
+import com.vynkpay.newregistration.Register3Activity;
 import com.vynkpay.retrofit.model.NotificationResponse;
 import com.vynkpay.retrofit.model.ReferLinkResponse;
 import com.vynkpay.utils.Functions;
@@ -80,6 +85,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawer;
     ActivityHomeBindingImpl binding;
     String referralLink="";
+    boolean isIndian = false;
+    boolean services_enable = false;
+    Dialog dialog1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +96,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
+        dialog1 = M.showDialog(HomeActivity.this, "", false, false);
+
         mInstance = HomeActivity.this;
         ButterKnife.bind(this);
 
+        checkUSerType();
 
-        if (Prefes.getisIndian(HomeActivity.this).equals("")) {
+        /*if (Prefes.getisIndian(HomeActivity.this).equals("")) {
 
             if (getIntent().getStringExtra("Country").equals("Global")) {
                 fragment = new FragmentHomeGlobal();
@@ -124,8 +136,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
 
-        }
-
+        }*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,7 +156,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         binding.sideLayout.headerLayout.userNameText.setText("Vynkpay");
         binding.sideLayout.headerLayout.imageView.setImageResource(R.drawable.dummy);
 
-        setNavigationClicks();
+
 
         Log.d("getUserType",Prefes.getUserType(HomeActivity.this)+"//");
         /*if (Prefes.getUserType(HomeActivity.this).equalsIgnoreCase("2")){
@@ -161,6 +172,49 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 String token = task.getResult();
 
             }
+        });
+    }
+
+
+    private void checkUSerType() {
+        dialog1.show();
+        MainApplication.getApiService().getDashboardData(Prefes.getAccessToken(this)).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                dialog1.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body());
+                    Log.d("dashboardData",jsonObject.toString());
+                    if (jsonObject.getString("status").equalsIgnoreCase("true")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        isIndian = data.optBoolean("isIndian");
+                        services_enable = data.optBoolean("services_enable");
+
+                        if (isIndian){
+                            Prefes.saveisIndian("YES", HomeActivity.this);
+                            fragment = new FragmentHome(services_enable);
+                            switchFragment(fragment, "home");
+                            Functions.isIndian = true;
+                        }else {
+                            Prefes.saveisIndian("NO", HomeActivity.this);
+                            fragment = new FragmentHomeGlobal();
+                            switchFragment(fragment, "home");
+                            Functions.isIndian = false;
+                        }
+
+                        setNavigationClicks();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                dialog1.dismiss();
+            }
+
         });
     }
 
@@ -183,8 +237,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
              homeLinear.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     if (getIntent().getStringExtra("Country") != null) {
-
+                     if (isIndian){
+                         fragment = new FragmentHome(services_enable);
+                         switchFragment(fragment, "home");
+                     }else {
+                         fragment = new FragmentHomeGlobal();
+                         switchFragment(fragment, "home");
+                     }
+                     /*if (getIntent().getStringExtra("Country") != null) {
                          if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equalsIgnoreCase("NO")) {
                              fragment = new FragmentHomeGlobal();
                              replaceFragment(fragment, "home");
@@ -213,7 +273,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                              replaceFragment(fragment, "home");
 
                          }
-                     }
+                     }*/
                  }
              });
 
@@ -304,7 +364,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                                     sendIntent.setType("text/plain");
                                                     startActivity(Intent.createChooser(sendIntent, "VYNKPAY Refer To Friend"));
                                                 }
-
                                             }
                                         }
                                     });
@@ -387,7 +446,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             binding.sideLayout.addBankDetailLinear.setVisibility(View.GONE);
 
         }
-
 
         binding.drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -599,13 +657,52 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             });
         }
+
+        MainApplication.getApiService().getDashboardData(Prefes.getAccessToken(this)).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body());
+                    Log.d("dashboardData",jsonObject.toString());
+                    if (jsonObject.getString("status").equalsIgnoreCase("true")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+                        isIndian = data.optBoolean("isIndian");
+                        services_enable = data.optBoolean("services_enable");
+                        if (isIndian){
+                            Functions.isIndian = true;
+                            Prefes.saveisIndian("YES", HomeActivity.this);
+                        }else {
+                            Prefes.saveisIndian("NO",HomeActivity.this);
+                            Functions.isIndian = false;
+                        }
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+
+        });
     }
 
     @Override
     public void onClick(View v) {
         if (v == binding.sideLayout.homeLinear) {
             drawer.closeDrawer(GravityCompat.START);
-            if (getIntent().getStringExtra("Country") != null) {
+            if (isIndian){
+                fragment = new FragmentHome(services_enable);
+                switchFragment(fragment, "home");
+            }else {
+                fragment = new FragmentHomeGlobal();
+                switchFragment(fragment, "home");
+            }
+
+           /* if (getIntent().getStringExtra("Country") != null) {
                 if (getIntent().getStringExtra("Country").equals("Global") && Prefes.getisIndian(getApplicationContext()).equals("NO")) {
                     fragment = new FragmentHomeGlobal();
                     replaceFragment(fragment, "home");
@@ -632,8 +729,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     replaceFragment(fragment, "home");
 
                 }
-            }
-
+            }*/
 
         } else if (v == binding.sideLayout.legalitiesLinear) {
             drawer.closeDrawer(GravityCompat.START);

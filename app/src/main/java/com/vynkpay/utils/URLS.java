@@ -73,5 +73,6 @@ public class URLS {
     public static String ADD_TOKEN_URL = "account/api_accounts/vync_chain_add_transfer_tokens";
     public static String CHAIN_HIST_TNS_URL = "account/api_accounts/vync_chain_transfer_history";
     public static String CANCEL_TNS_URL = "account/api_accounts/vync_chain_cancel_transfer_tokens";
+    public static String ROIDETAIL_URL = "account/api_accounts/profit_roi_detail";
 }
 

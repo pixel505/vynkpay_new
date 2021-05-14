@@ -63,17 +63,17 @@ public class BtcActivity extends AppCompatActivity implements PlugInControlRecei
                         MainApplication.getApiService().bitAddress(Prefes.getAccessToken(BtcActivity.this), binding.benifiName.getText().toString()).enqueue(new Callback<GetBitAddressResponse>() {
                             @Override
                             public void onResponse(Call<GetBitAddressResponse> call, Response<GetBitAddressResponse> response) {
+                                dialog1.dismiss();
                                 if (response.isSuccessful()) {
-                                    dialog1.dismiss();
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    //startActivity(new Intent(BtcActivity.this, HomeActivity.class));
-                                    //finish();
+                                    finish();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<GetBitAddressResponse> call, Throwable t) {
                                 Log.d("Error",t.getMessage()!=null?t.getMessage():"Error");
+                                dialog1.dismiss();
                             }
                         });
                     }

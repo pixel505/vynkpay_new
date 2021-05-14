@@ -164,6 +164,61 @@ public class VerifyBitActivity extends AppCompatActivity implements PlugInContro
 
                             });
                         }
+                        /*ppl*/
+                        else if (getIntent().getStringExtra("from").equalsIgnoreCase("ppl")){
+                            Log.d("called","ppl");
+                            dialog1.show();
+                            MainApplication.getApiService().sendPplverify(Prefes.getAccessToken(VerifyBitActivity.this), binding.otpEdt.getText().toString()).enqueue(new Callback<VerifyBitResponse>() {
+                                @Override
+                                public void onResponse(Call<VerifyBitResponse> call, Response<VerifyBitResponse> response) {
+                                    dialog1.dismiss();
+                                    if (response.isSuccessful()) {
+                                        Log.d("pplAddress", new Gson().toJson(response.body()));
+                                        if(response.body().getStatus().equals("true")){
+                                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(VerifyBitActivity.this, PPLActivity.class).putExtra("success", "yes"));
+                                            finish();
+                                        } else if(response.body().getStatus().equals("false")){
+                                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<VerifyBitResponse> call, Throwable t) {
+                                    dialog1.dismiss();
+                                }
+
+                            });
+                        }
+                        /*trx*/
+                        else if (getIntent().getStringExtra("from").equalsIgnoreCase("trx")){
+                            Log.d("called","trx");
+                            dialog1.show();
+                            MainApplication.getApiService().sendTrxverify(Prefes.getAccessToken(VerifyBitActivity.this), binding.otpEdt.getText().toString()).enqueue(new Callback<VerifyBitResponse>() {
+                                @Override
+                                public void onResponse(Call<VerifyBitResponse> call, Response<VerifyBitResponse> response) {
+                                    dialog1.dismiss();
+                                    if (response.isSuccessful()) {
+                                        Log.d("pplAddress", new Gson().toJson(response.body()));
+                                        if(response.body().getStatus().equals("true")){
+                                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(VerifyBitActivity.this, TrxActivity.class).putExtra("success", "yes"));
+                                            finish();
+                                        } else if(response.body().getStatus().equals("false")){
+                                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<VerifyBitResponse> call, Throwable t) {
+                                    dialog1.dismiss();
+                                }
+
+                            });
+                        }
                     }
                 }
 

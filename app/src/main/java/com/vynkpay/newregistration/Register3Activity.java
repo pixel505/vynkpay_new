@@ -20,9 +20,12 @@ import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
 import com.vynkpay.retrofit.model.OtpVerifyLoginResponse;
 import com.vynkpay.retrofit.model.OtpVerifyResponse;
+import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -120,22 +123,53 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
                         Prefes.saveUserType(response.body().getUserType(),Register3Activity.this);
                         Log.d("userType",Prefes.getUserType(Register3Activity.this));
 
-                        if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        }else {
-                            Log.d("elsee","block");
-                        }
-                        Toast.makeText(Register3Activity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        String messageToshow =  response.body().getMessage();
+
+                        MainApplication.getApiService().getDashboardData(Prefes.getAccessToken(Register3Activity.this)).enqueue(new Callback<String>() {
+
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response.body());
+                                    Log.d("dashboardData",jsonObject.toString());
+                                    if (jsonObject.getString("status").equalsIgnoreCase("true")){
+                                        JSONObject data = jsonObject.getJSONObject("data");
+
+                                        if (data.optBoolean("isIndian")){
+                                            Prefes.saveUserType("2",Register3Activity.this);
+                                        }else {
+                                            Prefes.saveUserType("1",Register3Activity.this);
+                                        }
+
+                                        if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        }else {
+                                            Log.d("elsee","block");
+                                        }
+                                        Toast.makeText(Register3Activity.this, messageToshow, Toast.LENGTH_SHORT).show();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+
+                        });
+
 
                     } else {
                         dialog.dismiss();
@@ -174,30 +208,54 @@ public class Register3Activity extends AppCompatActivity implements View.OnClick
                         isIndian = response.body().getData().getIsindian();
                         Prefes.saveisIndian(isIndian,Register3Activity.this);
                         Log.e("Pin",""+sp.getString("value","")+"//from"+isIndian);
-                        Prefes.saveUserType(response.body().getData().getUserType(),Register3Activity.this);
-                        Log.d("userType",Prefes.getUserType(Register3Activity.this));
 
-                        if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
-                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                            finishAffinity();
-                        }else {
-                            Log.d("elsee","block");
-                        }
-                        Toast.makeText(Register3Activity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        String messageToshow =  response.body().getMessage();
 
-                        /*Intent intent=new Intent(Register3Activity.this, RechargeSuccess.class).putExtra("which",which);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finishAffinity();*/
+                        MainApplication.getApiService().getDashboardData(Prefes.getAccessToken(Register3Activity.this)).enqueue(new Callback<String>() {
+
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response.body());
+                                    Log.d("dashboardData",jsonObject.toString());
+                                    if (jsonObject.getString("status").equalsIgnoreCase("true")){
+                                        JSONObject data = jsonObject.getJSONObject("data");
+
+                                        if (data.optBoolean("isIndian")){
+                                            Prefes.saveUserType("2",Register3Activity.this);
+                                        }else {
+                                            Prefes.saveUserType("1",Register3Activity.this);
+                                        }
+
+                                        if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("NO")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("Global") && isIndian.equalsIgnoreCase("YES")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("YES")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "India").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        } else if(sp.getString("value","").equals("India") && isIndian.equalsIgnoreCase("NO")){
+                                            startActivity(new Intent(Register3Activity.this, HomeActivity.class).putExtra("Country", "Global").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                            finishAffinity();
+                                        }else {
+                                            Log.d("elsee","block");
+                                        }
+                                        Toast.makeText(Register3Activity.this, messageToshow, Toast.LENGTH_SHORT).show();
+                                    }
+                                }catch (Exception e){
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+
+                        });
+
 
                     } else {
                         dialog.dismiss();

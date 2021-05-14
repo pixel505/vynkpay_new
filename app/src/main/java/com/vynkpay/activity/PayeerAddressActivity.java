@@ -70,7 +70,7 @@ public class PayeerAddressActivity extends AppCompatActivity implements PlugInCo
                                 dialog1.dismiss();
                                 if (response.isSuccessful()) {
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    //finish();
+                                    finish();
                                     //startActivity(new Intent(PayeerAddressActivity.this, HomeActivity.class));
                                 }
                             }

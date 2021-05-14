@@ -71,7 +71,7 @@ public class ETHActivity extends AppCompatActivity implements PlugInControlRecei
                                 dialog1.dismiss();
                                 if (response.isSuccessful()) {
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    //finish();
+                                     finish();
                                     //startActivity(new Intent(ETHActivity.this, HomeActivity.class));
                                 }
                             }

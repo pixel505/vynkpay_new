@@ -67,7 +67,7 @@ public class PerfectMoneyActivity extends AppCompatActivity implements PlugInCon
                                 dialog1.dismiss();
                                 if (response.isSuccessful()) {
                                     Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    //finish();
+                                    finish();
                                     //startActivity(new Intent(PerfectMoneyActivity.this, HomeActivity.class));
                                 }
                             }

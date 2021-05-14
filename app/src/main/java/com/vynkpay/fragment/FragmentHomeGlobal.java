@@ -156,6 +156,7 @@ public class FragmentHomeGlobal extends Fragment {
     Activity activity;
     String imageURL="";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -452,7 +453,7 @@ public class FragmentHomeGlobal extends Fragment {
 
 
     public void getUserDetail() {
-        ApiCalls.getUserDetails(activity,Prefes.getAccessToken(getActivity()),new VolleyResponse() {
+        ApiCalls.getUserDetails(activity,Prefes.getAccessToken(activity),new VolleyResponse() {
             @Override
             public void onResult (String result, String status, String message){
                 Log.d("userDwetailssssa", result);

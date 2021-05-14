@@ -567,12 +567,28 @@ public class GetKycStatusResponse {
             @SerializedName("pem_otp")
             @Expose
             private String pemOtp;
+
+
             @SerializedName("ppl_address")
             @Expose
             private String pplAddress;
+
+
             @SerializedName("ppl_address_status")
             @Expose
             private String pplAddressStatus;
+
+
+            @SerializedName("trx_address")
+            @Expose
+            private String trx_address;
+
+
+            @SerializedName("trx_address_status")
+            @Expose
+            private String trx_address_status;
+
+
             @SerializedName("ppl_otp")
             @Expose
             private String pplOtp;
@@ -708,6 +724,23 @@ public class GetKycStatusResponse {
             @SerializedName("nationalid_path")
             @Expose
             private String nationalidPath;
+
+
+            public String getTrx_address() {
+                return trx_address;
+            }
+
+            public void setTrx_address(String trx_address) {
+                this.trx_address = trx_address;
+            }
+
+            public String getTrx_address_status() {
+                return trx_address_status;
+            }
+
+            public void setTrx_address_status(String trx_address_status) {
+                this.trx_address_status = trx_address_status;
+            }
 
             public String getId() {
                 return id;

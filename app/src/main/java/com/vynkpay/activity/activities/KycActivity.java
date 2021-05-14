@@ -2,7 +2,6 @@ package com.vynkpay.activity.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,19 +12,22 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.vynkpay.activity.PayeerAddressActivity;
-import com.vynkpay.utils.Functions;
 import com.vynkpay.R;
 import com.vynkpay.activity.HomeActivity;
 import com.vynkpay.databinding.ActivityKycBinding;
+import com.vynkpay.fragment.FragmentHome;
+import com.vynkpay.fragment.FragmentHomeGlobal;
 import com.vynkpay.models.GetKycStatusResponse;
 import com.vynkpay.prefes.Prefes;
 import com.vynkpay.retrofit.MainApplication;
+import com.vynkpay.utils.Functions;
 import com.vynkpay.utils.M;
 import com.vynkpay.utils.MySingleton;
 import com.vynkpay.utils.PlugInControlReceiver;
+
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +40,13 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
     Dialog dialog1;
     SharedPreferences sp;
 
+    boolean show_btc = false;
+    boolean show_eth = false;
+    boolean show_trx = false;
+    boolean show_pm = false;
+    boolean show_payPal = false;
+    boolean show_payeer = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +58,39 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
         ac = KycActivity.this;
         dialog1 = M.showDialog(KycActivity.this, "", false, false);
         sp = getSharedPreferences("PREFS_APP_CHECK", Context.MODE_PRIVATE);
-
         clicks();
-        getKyc();
-        getKycStatus();
+
+        MainApplication.getApiService().getDashboardData(Prefes.getAccessToken(this)).enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body());
+                    if (jsonObject.getString("status").equalsIgnoreCase("true")){
+                        JSONObject data = jsonObject.getJSONObject("data");
+
+                        show_btc = data.optBoolean("show_btc");
+                        show_eth = data.optBoolean("show_eth");
+                        show_trx = data.optBoolean("show_trx");
+                        show_pm = data.optBoolean("show_pm");
+                        show_payPal = data.optBoolean("show_payPal");
+                        show_payeer = data.optBoolean("show_payeer");
+
+
+                        getKyc(true);
+                        getKycStatus();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+
+        });
     }
 
     private void getKycStatus() {
@@ -83,14 +121,18 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
         }
     }
 
-    private void getKyc() {
-        dialog1.show();
+    private void getKyc(boolean showLoader) {
+        if (showLoader){
+            dialog1.show();
+        }
+
         MainApplication.getApiService().kycStatusMethod(Prefes.getAccessToken(KycActivity.this)).enqueue(new Callback<GetKycStatusResponse>() {
             @Override
             public void onResponse(Call<GetKycStatusResponse> call, Response<GetKycStatusResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (dialog1.isShowing()){
                     dialog1.dismiss();
-
+                }
+                if (response.isSuccessful() && response.body() != null) {
                     try {
                         if (response.body().getStatus().equalsIgnoreCase("true")) {
                             Log.d("kycc",new Gson().toJson(response.body().getData().getUserdata()));
@@ -98,6 +140,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
                                 GetKycStatusResponse.Data.KycStatus getKycStatus = response.body().getData().getKycStatus();
                                 GetKycStatusResponse.Data.BankDetails getBankDetails = response.body().getData().getBankDetails();
+                                Log.d("bankDetailLOGGD",new Gson().toJson(getKycStatus));
                                 Log.d("bankDetail",new Gson().toJson(getBankDetails));
 
 
@@ -321,12 +364,9 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                                         .putExtra("BankName", BankName)
                                                         .putExtra("BranchAddress", BranchAddress)
                                                         .putExtra("ChequeReceipt", ChequeReceipt)
-                                                        .putExtra("status", getBankDetails.getIsactive())
-
-                                                );
+                                                        .putExtra("status", getBankDetails.getIsactive()));
 
                                                 finish();
-
                                             }
                                         });
                                     } else {
@@ -423,16 +463,68 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         }
                                     });
 
-                                    binding.bitAddress.setVisibility(View.VISIBLE);
-                                    binding.ethAddress.setVisibility(View.VISIBLE);
-                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
-                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    if (show_btc){
+                                        binding.bitAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.bitAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_eth){
+                                        binding.ethAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.ethAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_trx){
+                                        binding.trxAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.trxAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payPal){
+                                        binding.pplAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.pplAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_pm){
+                                        binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.prefectMoneyAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payeer){
+                                        binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.PayeerAddress.setVisibility(View.GONE);
+                                    }
+
+
+
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
                                         }
                                     });
+
+                                    binding.trxAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, TrxActivity.class).putExtra("trx", response.body().getData().getUserdata().getTrx_address()));
+                                        }
+                                    });
+
+                                    binding.pplAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PPLActivity.class).putExtra("ppl", response.body().getData().getUserdata().getPplAddress()));
+                                        }
+                                    });
+
                                     binding.ethAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
@@ -478,10 +570,44 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         }
                                     });
 
-                                    binding.bitAddress.setVisibility(View.VISIBLE);
-                                    binding.ethAddress.setVisibility(View.VISIBLE);
-                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
-                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    if (show_btc){
+                                        binding.bitAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.bitAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_eth){
+                                        binding.ethAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.ethAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_trx){
+                                        binding.trxAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.trxAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payPal){
+                                        binding.pplAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.pplAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_pm){
+                                        binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.prefectMoneyAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payeer){
+                                        binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.PayeerAddress.setVisibility(View.GONE);
+                                    }
 
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -489,6 +615,22 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                             startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
                                         }
                                     });
+
+                                    binding.pplAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PPLActivity.class).putExtra("ppl", response.body().getData().getUserdata().getPplAddress()));
+                                        }
+                                    });
+
+                                    binding.trxAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, TrxActivity.class).putExtra("trx", response.body().getData().getUserdata().getTrx_address()));
+                                        }
+                                    });
+
+
 
                                     binding.ethAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -538,18 +680,66 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
                                     });
 
-                                    binding.bitAddress.setVisibility(View.VISIBLE);
-                                    binding.ethAddress.setVisibility(View.VISIBLE);
-                                    binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
-                                    binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    if (show_btc){
+                                        binding.bitAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.bitAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_eth){
+                                        binding.ethAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.ethAddress.setVisibility(View.GONE);
+                                    }
+
+                                    if (show_trx){
+                                        binding.trxAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.trxAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payPal){
+                                        binding.pplAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.pplAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_pm){
+                                        binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.prefectMoneyAddress.setVisibility(View.GONE);
+                                    }
+
+
+                                    if (show_payeer){
+                                        binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                    }else {
+                                        binding.PayeerAddress.setVisibility(View.GONE);
+                                    }
 
                                     binding.bitAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
-                                            startActivity(new Intent(KycActivity.this, BtcActivity.class).
-                                                    putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
+                                            startActivity(new Intent(KycActivity.this, BtcActivity.class).putExtra("bit", response.body().getData().getUserdata().getBitAddress()));
                                         }
                                     });
+
+                                    binding.pplAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, PPLActivity.class).putExtra("ppl", response.body().getData().getUserdata().getPplAddress()));
+                                        }
+                                    });
+
+                                    binding.trxAddress.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            startActivity(new Intent(KycActivity.this, TrxActivity.class).putExtra("trx", response.body().getData().getUserdata().getTrx_address()));
+                                        }
+                                    });
+
 
                                     binding.ethAddress.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -585,7 +775,9 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
             @Override
             public void onFailure(Call<GetKycStatusResponse> call, Throwable t) {
-                dialog1.dismiss();
+                if (dialog1.isShowing()){
+                    dialog1.dismiss();
+                }
             }
 
         });
@@ -618,6 +810,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
     protected void onResume() {
         super.onResume();
         MySingleton.getInstance(KycActivity.this).setConnectivityListener(this);
+        getKyc(false);
     }
 
     @Override

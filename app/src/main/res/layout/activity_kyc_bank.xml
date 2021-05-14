@@ -9,7 +9,6 @@
 
         <include
             android:id="@+id/toolbarLayout"
-
             layout="@layout/toolbar_new" />
 
         <ScrollView

@@ -281,6 +281,12 @@ public interface ApiCalls {
     Call<ReferalBonusResponse> getWeeklyBonus(
             @Header("access_token") String access_token);
 
+    //}/account/api_accounts/profit_roi_detail?view=2021-05-27
+    @FormUrlEncoded
+    @POST("account/api_accounts/profit_roi_detail")
+    Call<ReferalBonusResponse> getWeeklyBonusDetail(
+            @Header("access_token") String access_token, @Field("view") String view);
+
     @POST("account/api_accounts/add_ref_profit")
     Call<GenerationBonusResponse> getGenerationBonus(
             @Header("access_token") String access_token);
@@ -540,6 +546,41 @@ public interface ApiCalls {
     Call<VerifyBitResponse> sendETHverify(
             @Header("access_token") String access_token,
             @Field("eth_otp") String eth_otp);
+
+
+
+    //ppl
+    @FormUrlEncoded
+    @POST("account/api_accounts/ppladress")
+    Call<GetBitAddressResponse> addPPLAddress(@Header("access_token") String access_token,@Field("ppl_address") String ppl_address);
+
+    @POST("account/api_accounts/send_ppl_otp")
+    Call<SendBitResponse> sendPPLOtp(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/verify_ppl_otp")
+    Call<VerifyBitResponse> sendPplverify(
+            @Header("access_token") String access_token,
+            @Field("ppl_otp") String ppl_otp);
+
+
+
+
+    //trx
+    @FormUrlEncoded
+    @POST("account/api_accounts/trxadress")
+    Call<GetBitAddressResponse> addTrxAddress(@Header("access_token") String access_token,@Field("trx_address") String trx_address);
+
+    @POST("account/api_accounts/send_trx_otp")
+    Call<SendBitResponse> sendTrxOtp(@Header("access_token") String access_token);
+
+    @FormUrlEncoded
+    @POST("account/api_accounts/verify_trx_otp")
+    Call<VerifyBitResponse> sendTrxverify(
+            @Header("access_token") String access_token,
+            @Field("trx_otp") String trx_otp);
+
+
 
     /*Perfect money*/
     @FormUrlEncoded

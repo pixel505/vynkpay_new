@@ -289,11 +289,12 @@
     <string name="perfectmoney">Perfect Money</string>
     <string name="ethaddress">ETH Address</string>
     <string name="conversionsuccess">Conversion MCash Successful</string>
-    <string name="vynkPackages">VYNK Packages</string>
+    <string name="vynkPackages">VYNC Packages</string>
     <string name="packageType">Package type</string>
     <string name="withdrawalHistory">Withdrawal History</string>
     <string name="bitAddress">Bit Address</string>
     <string name="vynkToken">VYNC Token</string>
     <string name="transferToken">Transfer Token</string>
     <string name="purchageSuccess">Purchase Successful Thank you</string>
+    <string name="weeklybonusDetail">Weekly bonus detail</string>
 </resources>
