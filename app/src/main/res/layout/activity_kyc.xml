@@ -71,104 +71,233 @@
 
                 </LinearLayout>
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/bitAddress"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="BTC Address"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp"
-                    android:visibility="gone" />
-
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/ethAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="ETH Address"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:id="@+id/bankdetailsBtnnLinear"
                     android:visibility="gone"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp" />
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:orientation="horizontal">
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/trxAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="TRX Address"
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/bankIV"
+                        android:src="@drawable/bank_v"/>
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bankdetailsBtnn"
+                        android:layout_gravity="end"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:text="Bank Details"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_red"
+                        android:textSize="@dimen/_14sdp" />
+
+                </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:visibility="gone"
+                        android:id="@+id/bitAddressLinear"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/BTCIV"
+                        android:src="@drawable/bitcoin_v"/>
+
+                        <com.vynkpay.custom.NormalTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:background="@android:color/transparent"
+                            android:text="BTC Address"
+                            android:id="@+id/bitAddress"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:textAllCaps="false"
+                            android:textColor="@color/color_red"
+                            android:textSize="@dimen/_14sdp"
+                            />
+
+                    </LinearLayout>
+
+
+                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                         android:id="@+id/ethAddressLinear"
+                         android:visibility="gone"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/ethIV"
+                        android:src="@drawable/ethereum_v"/>
+
+                     <com.vynkpay.custom.NormalTextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/ethAddress"
+                         android:layout_gravity="end"
+                         android:background="@android:color/transparent"
+                         android:layout_marginStart="@dimen/_10sdp"
+                         android:gravity="center_vertical"
+                         android:text="ETH Address"
+                         android:textAllCaps="false"
+                         android:textColor="@color/color_red"
+                         android:textSize="@dimen/_14sdp" />
+
+                 </LinearLayout>
+
+
+                  <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                      android:id="@+id/trxAddressLinear"
+                      android:visibility="gone"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/trxIV"
+                        android:src="@drawable/tron_v"/>
+
+                      <com.vynkpay.custom.NormalTextView
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_gravity="end"
+                          android:id="@+id/trxAddress"
+                          android:background="@android:color/transparent"
+                          android:layout_marginStart="@dimen/_10sdp"
+                          android:gravity="center_vertical"
+                          android:text="TRX Address"
+
+                          android:textAllCaps="false"
+                          android:textColor="@color/color_red"
+                          android:textSize="@dimen/_14sdp" />
+
+                  </LinearLayout>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                    android:id="@+id/pplAddressLinear"
                     android:visibility="gone"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp" />
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="horizontal">
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/pplAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/paypalIV"
+                        android:src="@drawable/paypal_v"/>
+
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pplAddress"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:text="Paypal Address"
+                        android:textAllCaps="false"
+                        android:textColor="@color/color_red"
+                        android:textSize="@dimen/_14sdp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                    android:id="@+id/prefectMoneyAddressLinear"
                     android:visibility="gone"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="Paypal Address"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp" />
+                        android:orientation="horizontal">
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/prefectMoneyAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="Perfect Money Address"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp"
-                    android:visibility="gone" />
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/perfectIV"
+                        android:src="@drawable/perfect_v"/>
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/PayeerAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="Payeer Account Number"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp"
-                    android:visibility="gone" />
+                    <com.vynkpay.custom.NormalTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:id="@+id/prefectMoneyAddress"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center_vertical"
+                        android:text="Perfect Money"
+                        android:textAllCaps="false"
+
+                        android:textColor="@color/color_red"
+                        android:textSize="@dimen/_14sdp"/>
+
+                </LinearLayout>
 
 
-                <com.vynkpay.custom.NormalTextView
-                    android:id="@+id/bankdetailsBtnn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@android:color/transparent"
-                    android:gravity="center"
-                    android:text="Bank Details"
-                    android:textAllCaps="false"
-                    android:textColor="@color/color_red"
-                    android:textSize="@dimen/_14sdp"
-                    android:visibility="gone" />
+                 <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                         android:id="@+id/PayeerAddressLinear"
+                         android:visibility="gone"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:id="@+id/payeerIV"
+                        android:src="@drawable/payeer_v"/>
+
+                     <com.vynkpay.custom.NormalTextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="end"
+                         android:id="@+id/PayeerAddress"
+                         android:background="@android:color/transparent"
+                         android:layout_marginStart="@dimen/_10sdp"
+                         android:gravity="center_vertical"
+                         android:text="Payeer Account"
+                         android:textAllCaps="false"
+
+                         android:textColor="@color/color_red"
+                         android:textSize="@dimen/_14sdp" />
+
+
+                 </LinearLayout>
 
 
             </LinearLayout>

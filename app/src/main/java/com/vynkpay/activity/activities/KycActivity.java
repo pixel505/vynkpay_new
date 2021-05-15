@@ -137,42 +137,42 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                         if (response.body().getStatus().equalsIgnoreCase("true")) {
 
                             if (show_btc){
-                                binding.bitAddress.setVisibility(View.VISIBLE);
+                                binding.bitAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.bitAddress.setVisibility(View.GONE);
+                                binding.bitAddressLinear.setVisibility(View.GONE);
                             }
 
                             if (show_eth){
-                                binding.ethAddress.setVisibility(View.VISIBLE);
+                                binding.ethAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.ethAddress.setVisibility(View.GONE);
+                                binding.ethAddressLinear.setVisibility(View.GONE);
                             }
 
                             if (show_trx){
-                                binding.trxAddress.setVisibility(View.VISIBLE);
+                                binding.trxAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.trxAddress.setVisibility(View.GONE);
+                                binding.trxAddressLinear.setVisibility(View.GONE);
                             }
 
 
                             if (show_payPal){
-                                binding.pplAddress.setVisibility(View.VISIBLE);
+                                binding.pplAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.pplAddress.setVisibility(View.GONE);
+                                binding.pplAddressLinear.setVisibility(View.GONE);
                             }
 
 
                             if (show_pm){
-                                binding.prefectMoneyAddress.setVisibility(View.VISIBLE);
+                                binding.prefectMoneyAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.prefectMoneyAddress.setVisibility(View.GONE);
+                                binding.prefectMoneyAddressLinear.setVisibility(View.GONE);
                             }
 
 
                             if (show_payeer){
-                                binding.PayeerAddress.setVisibility(View.VISIBLE);
+                                binding.PayeerAddressLinear.setVisibility(View.VISIBLE);
                             }else {
-                                binding.PayeerAddress.setVisibility(View.GONE);
+                                binding.PayeerAddressLinear.setVisibility(View.GONE);
                             }
 
 
@@ -237,11 +237,11 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                     if (getBankDetails != null) {
 
                                         if (getBankDetails.getIsactive().equals("1")) {
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                             binding.bankdetailsBtnn.setText("Bank Details Pending");
                                         }
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
 
 
                                         String AccountType = response.body().getData().getBankDetails().getAccountType();
@@ -271,7 +271,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                             }
                                         });
                                     } else {
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         binding.bankdetailsBtnn.setText("Bank Details Rejected");
 
                                         binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
@@ -365,13 +365,13 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                         }
                                     });
                                     if (getBankDetails != null) {
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         if (getBankDetails.getIsactive().equals("1")) {
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                             binding.bankdetailsBtnn.setText("Bank Details Pending");
                                         }
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         String AccountType = response.body().getData().getBankDetails().getAccountType();
                                         String NameInBank = response.body().getData().getBankDetails().getNameInBank();
                                         String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
@@ -402,7 +402,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
                                     } else {
                                         binding.bankdetailsBtnn.setText("Bank Details Rejected");
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
@@ -422,13 +422,13 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
 
 
                                     if (data1 != null) {
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         if (getBankDetails.getIsactive().equals("1")) {
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
-                                            binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
+                                            binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                             binding.bankdetailsBtnn.setText("Bank Details Pending");
                                         }
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         String AccountType = response.body().getData().getBankDetails().getAccountType();
                                         String NameInBank = response.body().getData().getBankDetails().getNameInBank();
                                         String AccountNumber = response.body().getData().getBankDetails().getAccountNumber();
@@ -453,7 +453,7 @@ public class KycActivity extends AppCompatActivity implements PlugInControlRecei
                                             }
                                         });
                                     } else {
-                                        binding.bankdetailsBtnn.setVisibility(View.VISIBLE);
+                                        binding.bankdetailsBtnnLinear.setVisibility(View.VISIBLE);
                                         binding.bankdetailsBtnn.setText("Bank Details Rejected");
 
                                         binding.bankdetailsBtnn.setOnClickListener(new View.OnClickListener() {
