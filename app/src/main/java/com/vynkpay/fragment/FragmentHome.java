@@ -43,7 +43,7 @@ import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
-import com.highsoft.highcharts.common.HIColor;
+/*import com.highsoft.highcharts.common.HIColor;
 import com.highsoft.highcharts.common.hichartsclasses.HIArea;
 import com.highsoft.highcharts.common.hichartsclasses.HICSSObject;
 import com.highsoft.highcharts.common.hichartsclasses.HIChart;
@@ -58,7 +58,7 @@ import com.highsoft.highcharts.common.hichartsclasses.HITitle;
 import com.highsoft.highcharts.common.hichartsclasses.HITooltip;
 import com.highsoft.highcharts.common.hichartsclasses.HIXAxis;
 import com.highsoft.highcharts.common.hichartsclasses.HIYAxis;
-import com.highsoft.highcharts.core.HIChartView;
+import com.highsoft.highcharts.core.HIChartView;*/
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
 import com.vynkpay.activity.activities.AboutUsActivity;
@@ -175,8 +175,8 @@ public class FragmentHome extends Fragment {
     @BindView(R.id.linChartt)
     RelativeLayout linChartt;
 
-    @BindView(R.id.hiChart)
-    HIChartView hiChart;
+  /*  @BindView(R.id.hiChart)
+    HIChartView hiChart;*/
 
     @BindView(R.id.tvEarning)
     NormalTextView tvEarning;
@@ -755,7 +755,7 @@ public class FragmentHome extends Fragment {
 
 
 
-    public void loadChart(CartHighResponse data){
+   /* public void loadChart(CartHighResponse data){
 
         HIOptions options = new HIOptions();
 
@@ -784,13 +784,13 @@ public class FragmentHome extends Fragment {
         hiChart.setOptions(options);
         //HIOptions options1 = provideOptionsForChartType(options,series,type);
         //hiChart.setOptions(options1);
-    }
+    }*/
 
 
-    public void provideOptionsForChartType(CartHighResponse data){
+  /*  public void provideOptionsForChartType(CartHighResponse data){
         //HIChartView chartView = (HIChartView) findViewById(R.id.hc);
         Log.d("setSeries",new Gson().toJson(data));
-        /*activity.runOnUiThread(() -> {*/
+        *//*activity.runOnUiThread(() -> {*//*
 
             //HIChartView hiChart = view.findViewById(R.id.hiChart);
 
@@ -818,7 +818,7 @@ public class FragmentHome extends Fragment {
             hiOptions.setTitle(title);
 
 
-          /*HIOptions hiOptions = new HIOptions();
+          *//*HIOptions hiOptions = new HIOptions();
 
             HIChart chart = new HIChart();
 
@@ -842,7 +842,7 @@ public class FragmentHome extends Fragment {
             theme.setFill(HIColor.initWithRGBA(0,0,0,0));
             navigation.getButtonOptions().setTheme(theme);
             hiOptions.setNavigation(navigation);
-*/
+*//*
             HIArea area = new HIArea();
             area.setFillOpacity(0.7);
             HIPlotOptions plotOptions = new HIPlotOptions();
@@ -859,7 +859,7 @@ public class FragmentHome extends Fragment {
             credits.setStyle(creditsStyle);
             hiOptions.setCredits(credits);
 
-            /*HITitle title = new HITitle();
+            *//*HITitle title = new HITitle();
             title.setText(options.get("title"));
             title.setAlign("left");
             HICSSObject titleStyle = new HICSSObject();
@@ -868,9 +868,9 @@ public class FragmentHome extends Fragment {
             titleStyle.setColor("rgba(255, 255, 255, 0.6)");
             title.setStyle(titleStyle);
             title.setY(16);
-            hiOptions.setTitle(title);*/
+            hiOptions.setTitle(title);*//*
 
-           /* HISubtitle subtitle = new HISubtitle();
+           *//* HISubtitle subtitle = new HISubtitle();
             subtitle.setText(options.get("subtitle"));
             if (subtitle.getText().length() > 0) {
                 subtitle.setText(subtitle.getText() + " total");
@@ -882,7 +882,7 @@ public class FragmentHome extends Fragment {
             subtitleStyle.setColor("rgba(0, 0, 0, 0.6)");
             subtitle.setStyle(subtitleStyle);
             subtitle.setY(28);
-            hiOptions.setSubtitle(subtitle);*/
+            hiOptions.setSubtitle(subtitle);*//*
 
         String[] categories = new String[]{"Jan-2020", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
@@ -958,7 +958,7 @@ public class FragmentHome extends Fragment {
 
             //hiChart.addView(hiChartView);
             Log.d("setSeries","calledd");
-        /*});*/
+        *//*});*//*
 
             //return hiOptions;
 
@@ -974,7 +974,7 @@ public class FragmentHome extends Fragment {
                 });
             }
         },1000);
-    }
+    }*/
 
 
     public void getLineChart(String chart_type){
@@ -990,7 +990,7 @@ public class FragmentHome extends Fragment {
                     if (data.getStatus().equalsIgnoreCase("true")){
                         Log.d("chartDataResp1",new Gson().toJson(data));
                         //loadChart(cartHighResponse);
-                         provideOptionsForChartType(data);
+                         //provideOptionsForChartType(data);
                          setData(0,0,data);
                          Log.d("setSeries",new Gson().toJson(data));
                         /*activity.runOnUiThread(() -> {*/

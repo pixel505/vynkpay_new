@@ -38,7 +38,7 @@ import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.gson.Gson;
-import com.highsoft.highcharts.common.HIColor;
+/*import com.highsoft.highcharts.common.HIColor;
 import com.highsoft.highcharts.common.hichartsclasses.HIArea;
 import com.highsoft.highcharts.common.hichartsclasses.HICSSObject;
 import com.highsoft.highcharts.common.hichartsclasses.HIChart;
@@ -53,7 +53,7 @@ import com.highsoft.highcharts.common.hichartsclasses.HITitle;
 import com.highsoft.highcharts.common.hichartsclasses.HITooltip;
 import com.highsoft.highcharts.common.hichartsclasses.HIXAxis;
 import com.highsoft.highcharts.common.hichartsclasses.HIYAxis;
-import com.highsoft.highcharts.core.HIChartView;
+import com.highsoft.highcharts.core.HIChartView;*/
 import com.squareup.picasso.Picasso;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vynkpay.BuildConfig;
@@ -129,8 +129,8 @@ public class FragmentHomeGlobal extends Fragment {
     RecyclerView rvListImportant;
     @BindView(R.id.linChartt)
     RelativeLayout linChartt;
-    @BindView(R.id.hiChart)
-    HIChartView hiChart;
+  /*  @BindView(R.id.hiChart)
+    HIChartView hiChart;*/
     @BindView(R.id.tvEarning)
     NormalTextView tvEarning;
     @BindView(R.id.frmFilter)
@@ -531,7 +531,7 @@ public class FragmentHomeGlobal extends Fragment {
                     if (data.getStatus().equalsIgnoreCase("true")){
                         Log.d("chartDataResp1",new Gson().toJson(data));
                         //loadChart(cartHighResponse);
-                        provideOptionsForChartType(data);
+                        //provideOptionsForChartType(data);
                         setData(0,0,data);
                         Log.d("setSeries",new Gson().toJson(data));
                         /*activity.runOnUiThread(() -> {*/
@@ -554,10 +554,10 @@ public class FragmentHomeGlobal extends Fragment {
     }
 
 
-    public void provideOptionsForChartType(CartHighResponse data){
+/*    public void provideOptionsForChartType(CartHighResponse data){
         //HIChartView chartView = (HIChartView) findViewById(R.id.hc);
         Log.d("setSeries",new Gson().toJson(data));
-        /*activity.runOnUiThread(() -> {*/
+        *//*activity.runOnUiThread(() -> {*//*
         Double step = 1.0;
 
         Map<String, String> options = new HashMap<>();
@@ -670,9 +670,9 @@ public class FragmentHomeGlobal extends Fragment {
 
         //hiChart.addView(hiChartView);
         Log.d("setSeries","calledd");
-        /*});*/
+        *//*});*//*
         //return hiOptions;
-    }
+    }*/
 
 
     private void getDashboardData(){

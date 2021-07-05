@@ -640,13 +640,13 @@
             </LinearLayout>
 
 
-            <com.highsoft.highcharts.core.HIChartView
+        <!--    <com.highsoft.highcharts.core.HIChartView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="true"
                 android:visibility="gone"
                 android:orientation="vertical"
-                android:id="@+id/hiChart"/>
+                android:id="@+id/hiChart"/>-->
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart1"
